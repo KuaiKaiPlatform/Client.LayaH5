@@ -2,8 +2,9 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":2,
-    "props":{"sceneWidth":600,"sceneHeight":400,"sceneColor":"#000000","sceneBg":"laya/views/Mahjong/Desk.png"},
+    "selecteID":16,
+    "referenceLines":null,
+    "props":{"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/views/Mahjong/Desk.png"},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -14,29 +15,69 @@
     "child":[
         {
             "x":15,
-            "type":"Image",
-            "props":{"y":528,"x":56,"skin":"Desk/Player/icon_bg.png"},
+            "type":"Box",
+            "selectedBox":1,
+            "selecteID":1,
+            "props":{"presetID":1,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"selfPlayerBasicInfo","left":50,"bottom":100},
             "nodeParent":1,
-            "label":"Image",
-            "isDirectory":false,
+            "label":"Box(selfPlayerBasicInfo)",
+            "isOpen":true,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
-            "compId":2,
+            "hasChild":true,
+            "compId":16,
             "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "props":{"y":540,"x":68,"skin":"Desk/Player/icon.png"},
-            "nodeParent":1,
-            "label":"Image",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":3,
-            "child":[
-                ]
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"presetID":2,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"bg"},
+                    "nodeParent":16,
+                    "label":"Image(bg)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":2,
+                    "child":[
+                        ],
+                    "$LOCKED":false
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"presetID":3,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"headImg"},
+                    "nodeParent":16,
+                    "label":"Image(headImg)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":3,
+                    "child":[
+                        ],
+                    "$LOCKED":false
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"presetID":4,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"jiaoBiao"},
+                    "nodeParent":16,
+                    "label":"Image(jiaoBiao)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":4,
+                    "child":[
+                        ]
+                }],
+            "animations":[
+                {
+                    "nodes":[
+                        ],
+                    "name":"ani1",
+                    "id":1,
+                    "frameRate":24,
+                    "action":0
+                }],
+            "$LOCKED":false
         }],
     "animations":[
         {
@@ -46,5 +87,6 @@
             "id":1,
             "frameRate":24,
             "action":0
-        }]
+        }],
+    "$LOCKED":false
 }
