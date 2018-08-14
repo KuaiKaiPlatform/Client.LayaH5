@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":16,
+    "selectedBox":27,
+    "selecteID":38,
     "referenceLines":null,
-    "props":{"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/views/Mahjong/Desk.png"},
+    "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/views/Mahjong/Desk.png","name":"view_mahjong_desk"},
     "nodeParent":-1,
-    "label":"View",
+    "label":"View(view_mahjong_desk)",
     "isOpen":true,
     "isDirectory":true,
     "isAniNode":true,
@@ -15,69 +15,139 @@
     "child":[
         {
             "x":15,
-            "type":"Box",
-            "selectedBox":1,
-            "selecteID":1,
-            "props":{"presetID":1,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"selfPlayerBasicInfo","left":50,"bottom":100},
+            "type":"View",
+            "props":{"top":0,"right":0,"name":"layer_player","left":0,"bottom":0},
             "nodeParent":1,
-            "label":"Box(selfPlayerBasicInfo)",
+            "label":"View(layer_player)",
             "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "compId":16,
+            "compId":27,
             "child":[
                 {
                     "x":30,
-                    "type":"Image",
-                    "props":{"presetID":2,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"bg"},
-                    "nodeParent":16,
-                    "label":"Image(bg)",
+                    "type":"UIView",
+                    "source":"Mahjong/player_basic_info.ui",
+                    "props":{"runtime":"Mahjong.Player","name":"view_player_self","left":40,"bottom":120},
+                    "nodeParent":27,
+                    "label":"UIView(view_player_self)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":2,
+                    "compId":38,
                     "child":[
-                        ],
-                    "$LOCKED":false
+                        ]
                 },
                 {
                     "x":30,
-                    "type":"Image",
-                    "props":{"presetID":3,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"headImg"},
-                    "nodeParent":16,
-                    "label":"Image(headImg)",
+                    "type":"UIView",
+                    "source":"Mahjong/player_basic_info.ui",
+                    "props":{"top":300,"runtime":"Mahjong.Player","right":10,"name":"view_player_next"},
+                    "nodeParent":27,
+                    "label":"UIView(view_player_next)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":3,
+                    "compId":42,
                     "child":[
-                        ],
-                    "$LOCKED":false
+                        ]
                 },
                 {
                     "x":30,
-                    "type":"Image",
-                    "props":{"presetID":4,"preset":"laya/assets/Desk/Player/PlayerBasicInfo.prefab","name":"jiaoBiao"},
-                    "nodeParent":16,
-                    "label":"Image(jiaoBiao)",
+                    "type":"UIView",
+                    "source":"Mahjong/player_basic_info.ui",
+                    "props":{"top":300,"runtime":"Mahjong.Player","name":"view_player_pre","left":10},
+                    "nodeParent":27,
+                    "label":"UIView(view_player_pre)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":4,
+                    "compId":43,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"UIView",
+                    "source":"Mahjong/player_basic_info.ui",
+                    "props":{"top":40,"runtime":"Mahjong.Player","right":120,"name":"view_player_opposite"},
+                    "nodeParent":27,
+                    "label":"UIView(view_player_opposite)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":44,
                     "child":[
                         ]
                 }],
-            "animations":[
-                {
-                    "nodes":[
-                        ],
-                    "name":"ani1",
-                    "id":1,
-                    "frameRate":24,
-                    "action":0
-                }],
+            "$LOCKED":true
+        },
+        {
+            "x":15,
+            "type":"View",
+            "props":{"top":0,"right":0,"name":"layer_summary","left":0,"bottom":0},
+            "nodeParent":1,
+            "label":"View(layer_summary)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":45,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"View",
+            "props":{"top":0,"right":0,"name":"layer_menu","left":0,"bottom":0},
+            "nodeParent":1,
+            "label":"View(layer_menu)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":46,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"View",
+            "props":{"top":0,"right":0,"name":"layer_system","left":0,"bottom":0},
+            "nodeParent":1,
+            "label":"View(layer_system)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":47,
+            "child":[
+                ],
             "$LOCKED":false
+        },
+        {
+            "x":15,
+            "type":"View",
+            "props":{"top":0,"right":0,"name":"layer_ready","left":0,"bottom":0},
+            "nodeParent":1,
+            "label":"View(layer_ready)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":48,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"View",
+            "props":{"name":"layer_game"},
+            "nodeParent":1,
+            "label":"View(layer_game)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":49,
+            "child":[
+                ]
         }],
     "animations":[
         {

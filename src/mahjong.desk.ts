@@ -1,5 +1,5 @@
 //创建舞台，默认背景色是黑色的
-Laya.init(600, 300); 
+Laya.init(1334, 750); 
 var txt = new Laya.Text(); 
 //设置文本内容
 txt.text = "Hello Layabox";  
@@ -15,6 +15,15 @@ txt.bold = true;
 //设置文本的显示起点位置X,Y
 txt.pos(60,100);  
 //设置舞台背景色
-Laya.stage.bgColor  = '#23238E';  
+//Laya.stage.bgColor  = '#23238E';  
 //将文本内容添加到舞台 
-Laya.stage.addChild(txt);
+//Laya.stage.addChild(txt);
+
+// 创建牌桌
+var deskView = Laya.View.createComp("Mahjong/desk.ui");
+var desk = Laya.View.createComp(deskView);
+
+//创建舞台，默认背景色是黑色的
+Laya.init(1334, 750);
+//将牌桌添加到舞台 
+Laya.stage.addChild(desk);
