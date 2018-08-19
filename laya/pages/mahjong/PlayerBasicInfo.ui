@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":1,
+    "selecteID":6,
     "props":{"width":86,"sceneColor":"#000000","height":122},
     "nodeParent":-1,
     "label":"View",
@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":0,"x":0,"skin":"Desk/Player/icon_bg.png","presetID":2,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_bg"},
+            "props":{"y":0,"x":0,"skin":"Player/icon_bg.png","presetID":2,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_bg"},
             "nodeParent":1,
             "label":"Image(img_player_bg)",
             "isDirectory":false,
@@ -29,7 +29,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":12,"x":12,"skin":"Desk/Player/icon.png","presetID":3,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_head"},
+            "props":{"y":12,"x":12,"skin":"Player/icon.png","presetID":3,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_head"},
             "nodeParent":1,
             "label":"Image(img_player_head)",
             "isDirectory":false,
@@ -43,7 +43,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":0,"x":0,"skin":"Desk/Player/banker.png","presetID":4,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_jiao"},
+            "props":{"y":0,"x":0,"skin":"Player/banker.png","presetID":4,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_jiao"},
             "nodeParent":1,
             "label":"Image(img_player_jiao)",
             "isDirectory":false,

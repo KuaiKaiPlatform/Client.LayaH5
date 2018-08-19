@@ -1,4 +1,5 @@
 <res>
    <item name="Desk/Player" type="" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
    <item name="Desk/bg.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="player" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>
