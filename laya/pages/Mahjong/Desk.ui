@@ -4,7 +4,7 @@
     "selectedBox":1,
     "selecteID":27,
     "referenceLines":null,
-    "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/assets/Desk/bg.png","name":"view_mahjong_desk"},
+    "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/assets/mahjong/desk/bg.png","name":"view_mahjong_desk"},
     "nodeParent":-1,
     "label":"View(view_mahjong_desk)",
     "isOpen":true,
