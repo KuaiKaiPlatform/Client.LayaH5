@@ -43,7 +43,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":0,"x":0,"skin":"player/banker.png","presetID":4,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_jiao"},
+            "props":{"y":0,"x":0,"visible":false,"skin":"player/banker.png","presetID":4,"preset":"laya/assets/Desk/Player/box_player_basic_info.prefab","name":"img_player_jiao"},
             "nodeParent":1,
             "label":"Image(img_player_jiao)",
             "isDirectory":false,
@@ -51,7 +51,9 @@
             "hasChild":false,
             "compId":4,
             "child":[
-                ]
+                ],
+            "$LOCKED":false,
+            "$HIDDEN":false
         },
         {
             "x":15,

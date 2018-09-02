@@ -8,7 +8,10 @@ module common.play {
         protected deskController: DeskController;
 
         // 玩家基本信息显示
-        protected playerBasicView: common.view.PlayerBasicView = new common.view.PlayerBasicView();
+        protected playerBasicView: common.view.PlayerBasicView;
+
+        // 玩家准备状态显示
+        protected playerReadyView: common.view.PlayerReadyView;
 
         constructor(deskController) {
             this.deskController = deskController;
@@ -18,24 +21,33 @@ module common.play {
             return this.playerBasicView;
         }
 
+        public getPlayerReadyView() {
+            return this.playerReadyView;
+        }
+
         public show(): void {
             // 设置背景
             this.setBg();
 
             // 显示玩家基本信息
-            this.showPlayerBasicView();
+            this.playerBasicView.showAll();
+
+            // 显示玩家准备状态
+            this.playerReadyView.showAll();
         }
 
         // 设置背景
         public setBg(): void {
         }
 
-        // 显示所有玩家基本信息
-        public showPlayerBasicView(): void {
+        public onPlayerEnter(basicInfo): void {
+            this.playerBasicView.show(basicInfo);
+            this.playerReadyView.show(basicInfo);
         }
 
-        // 显示一名玩家基本信息
-        public showSinglePlayerBasicView(basicInfo): void {
+        public onPlayerExit(uid): void {
+            this.playerBasicView.removeSingle(uid);
+            this.playerReadyView.removeSingle(uid);
         }
 
     }

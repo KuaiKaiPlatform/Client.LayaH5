@@ -35,7 +35,7 @@ module common.play {
             return this.playerBasicInfo;
         }
 
-        // 服务器返回加入牌桌消息
+        // 服务器返回自己加入牌桌消息
         public onEnterRes(enterRes): void {
             this.enterRes = enterRes;
             this.playerBasicInfo = new common.model.PlayerBasicInfo(enterRes.basicInfos);
@@ -49,12 +49,26 @@ module common.play {
 
         public onPlayerEnter(basicInfo): void {
             this.playerBasicInfo.add(basicInfo);
-            this.deskView.showSinglePlayerBasicView(basicInfo);
+            this.deskView.onPlayerEnter(basicInfo);
         }
 
-        // 根据玩家方位找到位置
+        public onPlayerExit(exitRes): void {
+            this.deskView.onPlayerExit(exitRes.uid);
+            this.playerBasicInfo.removeByUid(exitRes.uid);
+        }
+
+        /**
+         * 根据玩家方位找到位置
+         */
         public findPosition(direction): number {
             return 0;
+        }
+
+        /**
+         * 检查是否是自己
+         */
+        public isSelf(basicInfo): boolean {
+            return true;
         }
 
     }

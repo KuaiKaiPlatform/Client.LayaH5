@@ -30,6 +30,10 @@ module common.model {
             this.basicInfos[basicInfo.uid.toString()] = basicInfo;
         }
 
+        public removeByUid(uid) { // 增加一名玩家的基本信息
+            delete this.basicInfos[uid.toString()];
+        }
+
         public getAll() {
             return this.basicInfos;
         }
