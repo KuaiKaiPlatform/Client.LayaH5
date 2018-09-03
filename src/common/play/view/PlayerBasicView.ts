@@ -32,19 +32,18 @@ module common.view {
         }
 
         public show(basicInfo) {
-            let coordinate = this.getCoordinate(basicInfo);
             //预加载图集资源
             Laya.loader.load([
                 "res/atlas/player.atlas"
             ], Handler.create(this, () => {
-                this.showSingle(basicInfo, coordinate);
+                this.showSingle(basicInfo);
             }));
         }
 
         protected abstract getCoordinate(basicInfo);
 
         // 显示指定坐标的一名玩家基本信息
-        public showSingle(basicInfo, coordinate): void {
+        public showSingle(basicInfo): void {
             // 玩家基本信息显示
             let basicInfoUI = this.getUI(basicInfo.uid.toString());
 
@@ -63,11 +62,11 @@ module common.view {
             // jiaoBiao.visible = false;
 
             // 设置坐标
+            let coordinate = this.getCoordinate(basicInfo);
             if(coordinate) {
-                if(coordinate.left) basicInfoUI.left = coordinate.left;
-                if(coordinate.right) basicInfoUI.right = coordinate.right;
-                if(coordinate.top) basicInfoUI.top = coordinate.top;
-                if(coordinate.bottom) basicInfoUI.bottom = coordinate.bottom;
+                Object.keys(coordinate).forEach(key => {
+                    basicInfoUI[key] = coordinate[key];
+                });
             }
 
             //添加到stage

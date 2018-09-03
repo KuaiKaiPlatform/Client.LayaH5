@@ -23,6 +23,10 @@ module common.play {
             return this.selfId;
         }
 
+        public getEnterRes() {
+            return this.enterRes;
+        }
+
         public getDeskView(): DeskView {
             return this.deskView;
         }

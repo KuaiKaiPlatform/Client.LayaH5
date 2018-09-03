@@ -26,7 +26,8 @@ class GameMain {
                 head: "http://",
                 state: 1,
                 points: [-88]
-            }]
+            }],
+            rule: 61007
         });
 
         setTimeout(() => deskCtrl.onPlayerEnter({

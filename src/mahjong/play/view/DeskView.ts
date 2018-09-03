@@ -9,6 +9,7 @@ module mahjong.play {
             super(deskController);
             this.playerBasicView = new mahjong.play.PlayerBasicView(deskController);
             this.playerReadyView = new mahjong.play.PlayerReadyView(deskController);
+            this.gameSummaryView = new mahjong.play.GameSummaryView(deskController);
         }
 
         // 设置背景

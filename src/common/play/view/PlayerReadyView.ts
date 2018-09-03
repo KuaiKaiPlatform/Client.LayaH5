@@ -51,24 +51,24 @@ module common.view {
         }
 
         public show(basicInfo) {
-            let coordinate = this.getCoordinate(basicInfo);
             //预加载图集资源
             Laya.loader.load([
                 "res/atlas/mahjong/desk.atlas"
             ], Handler.create(this, () => {
-                this.showSingle(basicInfo, coordinate);
+                this.showSingle(basicInfo);
             }));
         }
 
         protected abstract getCoordinate(basicInfo);
 
-        // 显示指定坐标的一名玩家基本信息
-        public showSingle(basicInfo, coordinate): void {
-            // 玩家基本信息显示
+        // 显示指定坐标的一名玩家准备状态
+        public showSingle(basicInfo): void {
+            // 玩家准备状态显示
             let sprite = this.getSprite(basicInfo);
             if(!sprite) return;
 
             // 设置坐标
+            let coordinate = this.getCoordinate(basicInfo);
             if(coordinate) {
                 Object.keys(coordinate).forEach(key => {
                     sprite[key] = coordinate[key];
@@ -79,7 +79,7 @@ module common.view {
             Laya.stage.addChild(sprite);
         }
 
-        // 删除一名玩家基本信息
+        // 删除一名玩家准备状态
         public removeSingle(uid): void {
             console.log("common.view.PlayerReadyView.removeSingle", uid);
             let preparedSprite = this.preparedSprites[uid.toString()];

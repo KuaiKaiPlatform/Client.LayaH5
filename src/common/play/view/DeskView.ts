@@ -1,6 +1,6 @@
 module common.play {
     
-    /*
+    /**
      *  牌桌显示
      */
     export class DeskView {
@@ -12,6 +12,9 @@ module common.play {
 
         // 玩家准备状态显示
         protected playerReadyView: common.view.PlayerReadyView;
+
+        // 牌桌基本信息显示
+        protected gameSummaryView: common.view.GameSummaryView;
 
         constructor(deskController) {
             this.deskController = deskController;
@@ -25,6 +28,10 @@ module common.play {
             return this.playerReadyView;
         }
 
+        public getGameSummaryView() {
+            return this.gameSummaryView;
+        }
+
         public show(): void {
             // 设置背景
             this.setBg();
@@ -34,6 +41,9 @@ module common.play {
 
             // 显示玩家准备状态
             this.playerReadyView.showAll();
+
+            // 显示牌桌基本信息
+            this.gameSummaryView.show();
         }
 
         // 设置背景
