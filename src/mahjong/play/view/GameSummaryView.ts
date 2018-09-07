@@ -10,7 +10,7 @@ module mahjong.play {
             super(deskController);
         }
 
-        public getCoordinate() {
+        public getRuleCoordinate() {
             return {
                 left: 10,
                 top: 100

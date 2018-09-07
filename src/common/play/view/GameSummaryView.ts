@@ -24,13 +24,29 @@ module common.view {
             }));
         }
 
-        protected abstract getCoordinate();
+        protected abstract getRuleCoordinate();
 
-        // 显示指定坐标的一名玩家准备状态
+        // 显示游戏名称
         public showRule(): void {
             this.ruleSprite.loadImage("common/rule/" + this.deskController.getEnterRes().rule  + ".png");
 
-            let coordinate = this.getCoordinate();
+            let coordinate = this.getRuleCoordinate();
+            // 设置坐标
+            if(coordinate) {
+                Object.keys(coordinate).forEach(key => {
+                    this.ruleSprite[key] = coordinate[key];
+                });
+            }
+
+            //添加到stage
+            Laya.stage.addChild(this.ruleSprite);
+        }
+
+        // 显示牌局模式，如：局 3/8，底 1/2
+        public showMode(): void {
+            this.ruleSprite.loadImage("common/rule/" + this.deskController.getEnterRes().rule  + ".png");
+
+            let coordinate = this.getRuleCoordinate();
             // 设置坐标
             if(coordinate) {
                 Object.keys(coordinate).forEach(key => {
