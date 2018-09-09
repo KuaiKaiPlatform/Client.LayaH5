@@ -1,10 +1,10 @@
-module mahjong.play {
+module mahjong.play.view {
     import Handler = Laya.Handler;
 
     /*
      *  玩家基本信息显示
      */
-    export class PlayerBasicView extends common.view.PlayerBasicView {
+    export class PlayerBasicView extends common.play.view.PlayerBasicView {
 
         constructor(deskController) {
             super(deskController);
@@ -30,7 +30,7 @@ module mahjong.play {
             top: 300
         };
 
-        public getCoordinate(basicInfo) {
+        public getAttrs(basicInfo) {
             switch(this.deskController.findPosition(basicInfo.direction)) {
             case mahjong.play.Position.SELF:
                 return PlayerBasicView.SELF;

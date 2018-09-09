@@ -1,17 +1,21 @@
-module common.view {
+module common.play.view {
     import Handler = Laya.Handler;
     import Sprite = Laya.Sprite;
     import Component = laya.ui.Component;
+    import Label = laya.ui.Label;
+    import GameSetting = common.play.model.GameSetting;
 
     /**
      * 牌桌基本信息显示
      */
-    export abstract class GameSummaryView {
+    export abstract class GameSummaryView extends common.view.ComponentView {
 
-        protected deskController: common.play.DeskController;
+        protected deskController: common.play.controller.DeskController;
         private ruleSprite = new Component();
+        private modeLabel = new Label();
 
         constructor(deskController) {
+            super();
             this.deskController = deskController;
         }
 
@@ -22,40 +26,25 @@ module common.view {
             ], Handler.create(this, () => {
                 this.showRule();
             }));
+
+            this.showMode();
         }
 
-        protected abstract getRuleCoordinate();
+        protected abstract getRuleAttrs();
 
         // 显示游戏名称
         public showRule(): void {
-            this.ruleSprite.loadImage("common/rule/" + this.deskController.getEnterRes().rule  + ".png");
+            this.ruleSprite.loadImage("common/rule/" + GameSetting.RULE  + ".png");
 
-            let coordinate = this.getRuleCoordinate();
-            // 设置坐标
-            if(coordinate) {
-                Object.keys(coordinate).forEach(key => {
-                    this.ruleSprite[key] = coordinate[key];
-                });
-            }
-
-            //添加到stage
-            Laya.stage.addChild(this.ruleSprite);
+            this.showComponent(this.ruleSprite, this.getRuleAttrs());
         }
 
-        // 显示牌局模式，如：局 3/8，底 1/2
+        protected abstract getModeAttrs();
+
+        // 显示牌局模式，如：局 3/8
         public showMode(): void {
-            this.ruleSprite.loadImage("common/rule/" + this.deskController.getEnterRes().rule  + ".png");
-
-            let coordinate = this.getRuleCoordinate();
-            // 设置坐标
-            if(coordinate) {
-                Object.keys(coordinate).forEach(key => {
-                    this.ruleSprite[key] = coordinate[key];
-                });
-            }
-
-            //添加到stage
-            Laya.stage.addChild(this.ruleSprite);
+            this.modeLabel.changeText("局  0/" + GameSetting.TOTAL_SET);
+            this.showComponent(this.modeLabel, this.getModeAttrs());
         }
 
     }

@@ -3,7 +3,7 @@ class GameMain {
     constructor() {
         Laya.init(1334, 750);
 
-        let deskCtrl = new mahjong.play.DeskController(100860);
+        let deskCtrl = new mahjong.play.controller.DeskController(100860);
         deskCtrl.onEnterRes({
             basicInfos: [{
                 uid: 100860,
@@ -27,7 +27,10 @@ class GameMain {
                 state: 1,
                 points: [-88]
             }],
-            rule: 61007
+            setting: {
+                rule: 61007,
+                total_set: 8
+            }
         });
 
         setTimeout(() => deskCtrl.onPlayerEnter({
@@ -40,9 +43,9 @@ class GameMain {
         }), 1000);
 
 
-        setTimeout(() => deskCtrl.onPlayerExit({
-            uid: 100862
-        }), 3000);
+        // setTimeout(() => deskCtrl.onPlayerExit({
+        //     uid: 100862
+        // }), 3000);
 
     }
 

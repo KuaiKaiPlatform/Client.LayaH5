@@ -1,15 +1,16 @@
-module common.view {
+module common.play.view {
     import Handler = Laya.Handler;
 
     /*
      *  玩家基本信息显示
      */
-    export abstract class PlayerBasicView {
+    export abstract class PlayerBasicView extends common.view.ComponentView {
 
-        protected deskController: common.play.DeskController;
+        protected deskController: common.play.controller.DeskController;
         private basicInfoUIs = {};
 
         constructor(deskController) {
+            super();
             this.deskController = deskController;
         }
 
@@ -40,7 +41,7 @@ module common.view {
             }));
         }
 
-        protected abstract getCoordinate(basicInfo);
+        protected abstract getAttrs(basicInfo);
 
         // 显示指定坐标的一名玩家基本信息
         public showSingle(basicInfo): void {
@@ -61,16 +62,8 @@ module common.view {
             // let jiaoBiao = basicInfoUI.getChildByName("img_player_jiao") as laya.display.Sprite;
             // jiaoBiao.visible = false;
 
-            // 设置坐标
-            let coordinate = this.getCoordinate(basicInfo);
-            if(coordinate) {
-                Object.keys(coordinate).forEach(key => {
-                    basicInfoUI[key] = coordinate[key];
-                });
-            }
-
-            //添加到stage
-            Laya.stage.addChild(basicInfoUI);
+            // 显示
+            this.showComponent(basicInfoUI, this.getAttrs(basicInfo));
         }
 
         // 删除一名玩家基本信息

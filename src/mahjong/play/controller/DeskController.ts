@@ -1,11 +1,11 @@
-module mahjong.play {
+module mahjong.play.controller {
 
     // 麻将牌桌控制器
-    export class DeskController extends common.play.DeskController {
+    export class DeskController extends common.play.controller.DeskController {
         
         constructor(selfId) {
             super(selfId);
-            this.setDeskView(new DeskView(this));
+            this.setDeskView(new mahjong.play.view.DeskView(this));
         }
 
         /**
@@ -18,10 +18,10 @@ module mahjong.play {
         }
 
         /**
-         * 检查是否是自己
+         * 初始化牌局数据
          */
-        public isSelf(basicInfo): boolean {
-            return this.selfId == basicInfo.uid;
+        protected createSetInfo() {
+            this.setInfo = new mahjong.play.model.SetInfo(this.setInit);
         }
 
     }

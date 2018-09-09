@@ -1,20 +1,23 @@
-module common.play {
+module common.play.view {
     
     /**
      *  牌桌显示
      */
     export class DeskView {
         // 牌桌逻辑控制类
-        protected deskController: DeskController;
+        protected deskController: common.play.controller.DeskController;
 
         // 玩家基本信息显示
-        protected playerBasicView: common.view.PlayerBasicView;
+        protected playerBasicView: common.play.view.PlayerBasicView;
 
         // 玩家准备状态显示
-        protected playerReadyView: common.view.PlayerReadyView;
+        protected playerReadyView: common.play.view.PlayerReadyView;
 
         // 牌桌基本信息显示
-        protected gameSummaryView: common.view.GameSummaryView;
+        protected gameSummaryView: common.play.view.GameSummaryView;
+
+        // 牌桌菜单按钮显示
+        protected deskMenuView: common.play.view.DeskMenuView;
 
         constructor(deskController) {
             this.deskController = deskController;
@@ -32,6 +35,10 @@ module common.play {
             return this.gameSummaryView;
         }
 
+        public getDeskMenuView() {
+            return this.deskMenuView;
+        }
+
         public show(): void {
             // 设置背景
             this.setBg();
@@ -44,6 +51,10 @@ module common.play {
 
             // 显示牌桌基本信息
             this.gameSummaryView.show();
+
+            // 显示牌桌菜单按钮
+            this.deskMenuView.show();
+
         }
 
         // 设置背景

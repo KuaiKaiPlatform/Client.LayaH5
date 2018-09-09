@@ -1,4 +1,4 @@
-module common.view {
+module common.play.view {
     import Handler = Laya.Handler;
     import Sprite = Laya.Sprite;
     import Component = laya.ui.Component;
@@ -6,13 +6,14 @@ module common.view {
     /**
      * 玩家准备相关操作和状态显示
      */
-    export abstract class PlayerReadyView {
+    export abstract class PlayerReadyView extends common.view.ComponentView {
 
-        protected deskController: common.play.DeskController;
+        protected deskController: common.play.controller.DeskController;
         private preparedSprites = {};
         private prepareSprite;
 
         constructor(deskController) {
+            super();
             this.deskController = deskController;
         }
 
@@ -59,7 +60,7 @@ module common.view {
             }));
         }
 
-        protected abstract getCoordinate(basicInfo);
+        protected abstract getAttrs(basicInfo);
 
         // 显示指定坐标的一名玩家准备状态
         public showSingle(basicInfo): void {
@@ -67,24 +68,16 @@ module common.view {
             let sprite = this.getSprite(basicInfo);
             if(!sprite) return;
 
-            // 设置坐标
-            let coordinate = this.getCoordinate(basicInfo);
-            if(coordinate) {
-                Object.keys(coordinate).forEach(key => {
-                    sprite[key] = coordinate[key];
-                });
-            }
-
-            //添加到stage
-            Laya.stage.addChild(sprite);
+            // 显示
+            this.showComponent(sprite, this.getAttrs(basicInfo));
         }
 
         // 删除一名玩家准备状态
         public removeSingle(uid): void {
-            console.log("common.view.PlayerReadyView.removeSingle", uid);
+            console.log("common.play.view.PlayerReadyView.removeSingle", uid);
             let preparedSprite = this.preparedSprites[uid.toString()];
             if(preparedSprite) {
-                console.log("common.view.PlayerReadyView.removeSingle@preparedSprite found", uid);
+                console.log("common.play.view.PlayerReadyView.removeSingle@preparedSprite found", uid);
                 Laya.stage.removeChild(preparedSprite);
             }
         }

@@ -1,10 +1,10 @@
-module mahjong.play {
+module mahjong.play.view {
     import Handler = Laya.Handler;
 
     /*
      *  玩家准备状态显示
      */
-    export class PlayerReadyView extends common.view.PlayerReadyView {
+    export class PlayerReadyView extends common.play.view.PlayerReadyView {
 
         constructor(deskController) {
             super(deskController);
@@ -38,7 +38,7 @@ module mahjong.play {
             scaleY: 0.5
         };
 
-        public getCoordinate(basicInfo) {
+        public getAttrs(basicInfo) {
             switch(this.deskController.findPosition(basicInfo.direction)) {
             case mahjong.play.Position.SELF:
                 return PlayerReadyView.SELF;
