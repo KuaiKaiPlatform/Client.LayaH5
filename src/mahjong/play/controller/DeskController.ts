@@ -20,7 +20,7 @@ module mahjong.play.controller {
         /**
          * 初始化牌局数据
          */
-        protected createSetInfo() {
+        public createSetInfo() {
             this.setInfo = new mahjong.play.model.SetInfo(this.setInit);
         }
 

@@ -1,6 +1,7 @@
 module common.play.view {
     import Handler = Laya.Handler;
     import Sprite = Laya.Sprite;
+    import Event = Laya.Event;
     import Component = laya.ui.Component;
 
     /**
@@ -29,20 +30,44 @@ module common.play.view {
                     sprite = new Component();
                     this.preparedSprites[uid] = sprite;
                 }
-                sprite.loadImage("mahjong/desk/prepared.png");
+                sprite.loadImage("common/desk/prepared.png");
                 return sprite;
             }
 
             // 未准备状态，自己显示准备按钮，其他人不显示
-            if(this.deskController.isSelf(basicInfo)) {
+            if(this.deskController.isSelf(basicInfo.uid)) {
                 if(!this.prepareSprite) this.prepareSprite = new Component();
-                this.prepareSprite.loadImage("mahjong/desk/prepare.png");
+                this.prepareSprite.loadImage("common/desk/prepare.png");
+                this.prepareSprite.on(Event.CLICK, this, this.onPrepare);
                 return this.prepareSprite;
             }
 
             return null;
         }
 
+        /**
+         * 触发准备
+         */
+        private onPrepare(e: Event): void {
+            let selfId = this.deskController.getSelfId();
+            this.removeSingle(selfId);
+            let basicInfo = this.deskController.getPlayerBasicInfo().getByUid(selfId);
+            basicInfo.state = 1;
+            this.show(basicInfo);
+
+            // 发送准备消息
+
+            // 模拟：2秒后收到开局消息
+            setTimeout(() => {
+                this.deskController.getMessageListener().onSetInit({
+
+                });
+            }, 2000);
+        }
+
+        /**
+         * 显示所有玩家准备状态
+         */
         public showAll() {
             let basicInfos = this.deskController.getPlayerBasicInfo().getAll();
             for(let key in basicInfos) {
@@ -51,10 +76,13 @@ module common.play.view {
             }
         }
 
+        /**
+         * 显示指定玩家准备状态
+         */
         public show(basicInfo) {
             //预加载图集资源
             Laya.loader.load([
-                "res/atlas/mahjong/desk.atlas"
+                "res/atlas/common/desk.atlas"
             ], Handler.create(this, () => {
                 this.showSingle(basicInfo);
             }));
@@ -62,7 +90,9 @@ module common.play.view {
 
         protected abstract getAttrs(basicInfo);
 
-        // 显示指定坐标的一名玩家准备状态
+        /**
+         * 显示一名玩家准备状态
+         */
         public showSingle(basicInfo): void {
             // 玩家准备状态显示
             let sprite = this.getSprite(basicInfo);
@@ -72,7 +102,20 @@ module common.play.view {
             this.showComponent(sprite, this.getAttrs(basicInfo));
         }
 
-        // 删除一名玩家准备状态
+        /**
+         * 删除所有玩家准备状态
+         */
+        public removeAll() {
+            let basicInfos = this.deskController.getPlayerBasicInfo().getAll();
+            for(let key in basicInfos) {
+                let basicInfo = basicInfos[key];
+                this.removeSingle(basicInfo.uid);
+            }
+        }
+
+        /**
+         * 删除一名玩家准备状态
+         */
         public removeSingle(uid): void {
             console.log("common.play.view.PlayerReadyView.removeSingle", uid);
             let preparedSprite = this.preparedSprites[uid.toString()];
@@ -80,6 +123,11 @@ module common.play.view {
                 console.log("common.play.view.PlayerReadyView.removeSingle@preparedSprite found", uid);
                 Laya.stage.removeChild(preparedSprite);
             }
+
+            if(this.deskController.isSelf(uid) && this.prepareSprite) {
+                Laya.stage.removeChild(this.prepareSprite);
+            }
+
         }
 
     }

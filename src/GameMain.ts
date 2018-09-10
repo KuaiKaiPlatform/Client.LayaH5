@@ -4,7 +4,7 @@ class GameMain {
         Laya.init(1334, 750);
 
         let deskCtrl = new mahjong.play.controller.DeskController(100860);
-        deskCtrl.onEnterRes({
+        deskCtrl.getMessageListener().onEnterRes({
             basicInfos: [{
                 uid: 100860,
                 nkn: "阿列的脚印",
@@ -33,7 +33,7 @@ class GameMain {
             }
         });
 
-        setTimeout(() => deskCtrl.onPlayerEnter({
+        setTimeout(() => deskCtrl.getMessageListener().onPlayerEnter({
             uid: 100863,
             nkn: "鲁班七号",
             direction: mahjong.play.Direction.NAN,
