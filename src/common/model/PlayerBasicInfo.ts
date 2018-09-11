@@ -4,38 +4,59 @@ module common.model {
      */
     export class PlayerBasicInfo {
 
-        private basicInfos = [];
+        // 自身ID
+        public static selfId;
 
-        // private uid: number;
-        // private direction: number;
-        // private nickName: string;
-        // private head: string;
-        // private sex: number;
-        // private ip: string;
-        // private state: number;
-        // private offline: boolean;
-        // private points: number[];
+        private static basicInfos;
 
-        constructor(basicInfos) {
+        public static init(basicInfos) {
+            PlayerBasicInfo.basicInfos = {};
             basicInfos.forEach(basicInfo => {
-                this.add(basicInfo);
+                PlayerBasicInfo.add(basicInfo);
             });
         }
 
-        public getByUid(uid) { // 返回指定uid的玩家基本信息
-            return this.basicInfos[uid.toString()];
+        /**
+         * 返回指定uid的玩家基本信息
+         */
+        public static getByUid(uid) {
+            return PlayerBasicInfo.basicInfos[uid.toString()];
         }
 
-        public add(basicInfo) { // 增加一名玩家的基本信息
-            this.basicInfos[basicInfo.uid.toString()] = basicInfo;
+        /**
+         * 返回指定uid的玩家基本信息
+         */
+        public static getSelf() {
+            return PlayerBasicInfo.getByUid(PlayerBasicInfo.selfId);
         }
 
-        public removeByUid(uid) { // 增加一名玩家的基本信息
-            delete this.basicInfos[uid.toString()];
+        /**
+         * 增加一名玩家的基本信息
+         */
+        public static add(basicInfo) {
+            PlayerBasicInfo.basicInfos[basicInfo.uid.toString()] = basicInfo;
         }
 
-        public getAll() {
-            return this.basicInfos;
+        /**
+         * 删除一名玩家的基本信息
+         */
+        public static removeByUid(uid) {
+            delete PlayerBasicInfo.basicInfos[uid.toString()];
+        }
+
+        public static getAll() {
+            return PlayerBasicInfo.basicInfos;
+        }
+
+        public static clear() {
+            PlayerBasicInfo.basicInfos = [];
+        }
+
+        /**
+         * 检查是否是自己
+         */
+        public static isSelf(uid): boolean {
+            return PlayerBasicInfo.selfId == uid;
         }
 
     }

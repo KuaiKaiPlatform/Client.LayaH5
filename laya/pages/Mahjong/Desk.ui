@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":56,
+    "selecteID":62,
     "referenceLines":null,
     "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/assets/mahjong/desk/bg.png","name":"view_mahjong_desk"},
     "nodeParent":-1,
@@ -225,6 +225,84 @@
             "compId":49,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"skin":"mahjong/desk/direction_bg.png","scaleY":0.75,"scaleX":0.75,"centerY":0,"centerX":0},
+            "nodeParent":1,
+            "label":"Image",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":57,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"skin":"mahjong/desk/xi.png","centerY":50,"centerX":0},
+                    "nodeParent":57,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":58,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"skin":"mahjong/desk/nan.png","centerY":0,"centerX":-50},
+                    "nodeParent":57,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":59,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"skin":"mahjong/desk/dong.png","centerY":-50,"centerX":0},
+                    "nodeParent":57,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":60,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"skin":"mahjong/desk/bei.png","centerY":0,"centerX":50},
+                    "nodeParent":57,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":61,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":17,"x":21,"width":126,"skin":"mahjong/desk/direction_focus.png","height":45},
+                    "nodeParent":57,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":62,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {

@@ -1,5 +1,6 @@
 module common.play.view {
     import Handler = Laya.Handler;
+    import PlayerBasicInfo = common.model.PlayerBasicInfo;
 
     /*
      *  玩家基本信息显示
@@ -25,7 +26,7 @@ module common.play.view {
         }
 
         public showAll() {
-            let basicInfos = this.deskController.getPlayerBasicInfo().getAll();
+            let basicInfos = PlayerBasicInfo.getAll();
             for(let key in basicInfos) {
                 let basicInfo = basicInfos[key];
                 this.show(basicInfo);

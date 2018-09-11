@@ -3,7 +3,8 @@ class GameMain {
     constructor() {
         Laya.init(1334, 750);
 
-        let deskCtrl = new mahjong.play.controller.DeskController(100860);
+        common.model.PlayerBasicInfo.selfId = 100860;
+        let deskCtrl = new mahjong.play.controller.DeskController();
         deskCtrl.getMessageListener().onEnterRes({
             basicInfos: [{
                 uid: 100860,
