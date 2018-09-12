@@ -2,11 +2,10 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":45,
-    "referenceLines":null,
-    "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/assets/mahjong/desk/bg.png","name":"view_mahjong_desk"},
+    "selecteID":1,
+    "props":{"y":0,"x":0,"width":1334,"name":"layer_player","height":750},
     "nodeParent":-1,
-    "label":"View(view_mahjong_desk)",
+    "label":"View(layer_player)",
     "isOpen":true,
     "isDirectory":true,
     "isAniNode":true,
@@ -16,59 +15,56 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/DeskCenter.ui",
-            "props":{"name":"desk_center","centerY":0,"centerX":0},
+            "source":"mahjong/PlayerBasicInfo.ui",
+            "props":{"name":"view_player_self","left":40,"bottom":120},
             "nodeParent":1,
-            "label":"UIView(desk_center)",
+            "label":"UIView(view_player_self)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":63,
+            "compId":2,
             "child":[
-                ],
-            "$HIDDEN":false
+                ]
         },
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/PlayerBasicInfos.ui",
-            "props":{"name":"player_basic_info"},
+            "source":"mahjong/PlayerBasicInfo.ui",
+            "props":{"top":300,"right":10,"name":"view_player_next"},
             "nodeParent":1,
-            "label":"UIView(player_basic_info)",
+            "label":"UIView(view_player_next)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":64,
+            "compId":3,
             "child":[
-                ],
-            "$HIDDEN":false
+                ]
         },
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/DeskMenu.ui",
-            "props":{"name":"desk_menu"},
+            "source":"mahjong/PlayerBasicInfo.ui",
+            "props":{"top":300,"name":"view_player_pre","left":10},
             "nodeParent":1,
-            "label":"UIView(desk_menu)",
+            "label":"UIView(view_player_pre)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":67,
+            "compId":4,
             "child":[
-                ],
-            "$HIDDEN":false
+                ]
         },
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/GameSummary.ui",
-            "props":{"name":"game_summary"},
+            "source":"mahjong/PlayerBasicInfo.ui",
+            "props":{"top":40,"right":120,"name":"view_player_opposite"},
             "nodeParent":1,
-            "label":"UIView(game_summary)",
+            "label":"UIView(view_player_opposite)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":68,
+            "compId":5,
             "child":[
                 ]
         }],
@@ -81,6 +77,6 @@
             "frameRate":24,
             "action":0
         }],
-    "$LOCKED":false,
+    "$LOCKED":true,
     "$HIDDEN":false
 }

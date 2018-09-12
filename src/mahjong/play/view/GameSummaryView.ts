@@ -1,5 +1,4 @@
 module mahjong.play.view {
-    import Handler = Laya.Handler;
 
     /*
      *  麻将牌桌基本信息显示
