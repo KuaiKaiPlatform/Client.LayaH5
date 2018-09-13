@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":45,
+    "selecteID":72,
     "referenceLines":null,
     "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/assets/mahjong/desk/bg.png","name":"view_mahjong_desk"},
     "nodeParent":-1,
@@ -69,6 +69,20 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":68,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/DiscardSelf.ui",
+            "props":{"name":"discards_self","centerY":140,"centerX":0},
+            "nodeParent":1,
+            "label":"UIView(discards_self)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":72,
             "child":[
                 ]
         }],
