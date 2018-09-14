@@ -1,8 +1,9 @@
 {
+    "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":4,
-    "props":{"width":38,"sceneColor":"#000000","height":54},
+    "selecteID":6,
+    "props":{"width":66,"sceneColor":"#000000","height":94},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -12,8 +13,9 @@
     "compId":1,
     "child":[
         {
+            "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/landscape_plate_green.png","name":"plate"},
+            "props":{"skin":"mahjong/card/self_hand_plate_green.png","name":"plate","centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"Image(plate)",
             "isDirectory":false,
@@ -24,8 +26,9 @@
                 ]
         },
         {
+            "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/ops_tiao1.png","name":"card"},
+            "props":{"skin":"mahjong/card/self_hand_zi_zhong.png","name":"card"},
             "nodeParent":1,
             "label":"Image(card)",
             "isDirectory":false,
@@ -36,8 +39,9 @@
                 ]
         },
         {
+            "x":15,
             "type":"Image",
-            "props":{"top":0,"skin":"mahjong/card/jiao_bao1.png","scaleY":0.6,"scaleX":0.6,"right":0,"name":"jiao_right_top"},
+            "props":{"top":0,"skin":"mahjong/card/jiao_bao1.png","right":0,"name":"jiao_right_top"},
             "nodeParent":1,
             "label":"Image(jiao_right_top)",
             "isDirectory":false,
@@ -49,8 +53,9 @@
             "$HIDDEN":true
         },
         {
+            "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/jiao_ting.png","scaleY":0.5,"scaleX":0.5,"name":"jiao_left_bottom","left":0,"bottom":0},
+            "props":{"skin":"mahjong/card/jiao_ting.png","name":"jiao_left_bottom","left":0,"bottom":0},
             "nodeParent":1,
             "label":"Image(jiao_left_bottom)",
             "isDirectory":false,
@@ -62,8 +67,9 @@
             "$HIDDEN":true
         },
         {
+            "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/landscape_disabled.png","name":"grey"},
+            "props":{"width":66,"skin":"mahjong/card/landscape_disabled.png","name":"grey","height":94},
             "nodeParent":1,
             "label":"Image(grey)",
             "isDirectory":false,

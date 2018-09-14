@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":3,
+    "selecteID":4,
     "props":{"width":45,"sceneColor":"#000000","height":38},
     "nodeParent":-1,
     "label":"View",
@@ -28,7 +28,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/pre_tong7.png","name":"card"},
+            "props":{"skin":"mahjong/card/pre_tong6.png","name":"card"},
             "nodeParent":1,
             "label":"Image(card)",
             "isDirectory":false,
@@ -41,7 +41,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"top":0,"skin":"mahjong/card/jiao_bao.png","scaleY":0.6,"scaleX":0.6,"right":0,"name":"jiao_right_top"},
+            "props":{"top":0,"skin":"mahjong/card/jiao_bao1.png","scaleY":0.6,"scaleX":0.6,"right":0,"name":"jiao_right_top"},
             "nodeParent":1,
             "label":"Image(jiao_right_top)",
             "isDirectory":false,
@@ -69,7 +69,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/ops_disabled.png","name":"grey"},
+            "props":{"skin":"mahjong/card/horizon_disabled.png","name":"grey"},
             "nodeParent":1,
             "label":"Image(grey)",
             "isDirectory":false,

@@ -2,8 +2,9 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":1,
-    "props":{"width":135,"sceneColor":"#000000","height":254},
+    "selecteID":6,
+    "referenceLines":null,
+    "props":{"width":352,"sceneColor":"#000000","height":145},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -15,66 +16,10 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"right":0,"name":"1_1"},
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":0,"name":"3_1","bottom":90},
             "nodeParent":1,
-            "label":"UIView(1_1)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":2,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":27,"right":0,"name":"1_2"},
-            "nodeParent":1,
-            "label":"UIView(1_2)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":3,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":54,"right":0,"name":"1_3"},
-            "nodeParent":1,
-            "label":"UIView(1_3)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":4,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":81,"right":0,"name":"1_4"},
-            "nodeParent":1,
-            "label":"UIView(1_4)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":5,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":108,"right":0,"name":"1_5"},
-            "nodeParent":1,
-            "label":"UIView(1_5)",
+            "label":"UIView(3_1)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -85,22 +30,219 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":135,"right":0,"name":"1_6"},
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":312,"name":"2_9","bottom":45},
             "nodeParent":1,
-            "label":"UIView(1_6)",
+            "label":"UIView(2_9)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":7,
+            "compId":10,
             "child":[
                 ]
         },
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":162,"right":0,"name":"1_7"},
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":273,"name":"2_8","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_8)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":12,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":234,"name":"2_7","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_7)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":13,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":195,"name":"2_6","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_6)",
+            "isOpen":false,
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":14,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":156,"name":"2_5","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_5)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":22,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":117,"name":"2_4","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_4)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":23,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":78,"name":"2_3","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_3)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":24,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":39,"name":"2_2","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_2)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":25,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":0,"name":"2_1","bottom":45},
+            "nodeParent":1,
+            "label":"UIView(2_1)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":26,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":0,"name":"1_1","bottom":0},
+            "nodeParent":1,
+            "label":"UIView(1_1)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":19,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":39,"name":"1_2","bottom":0},
+            "nodeParent":1,
+            "label":"UIView(1_2)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":18,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":78,"name":"1_3","bottom":0},
+            "nodeParent":1,
+            "label":"UIView(1_3)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":17,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":117,"name":"1_4","bottom":0},
+            "nodeParent":1,
+            "label":"UIView(1_4)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":16,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":156,"name":"1_5","bottom":0},
+            "nodeParent":1,
+            "label":"UIView(1_5)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":15,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":195,"name":"1_6","bottom":0},
+            "nodeParent":1,
+            "label":"UIView(1_6)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":9,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":234,"name":"1_7","bottom":0},
             "nodeParent":1,
             "label":"UIView(1_7)",
             "isDirectory":false,
@@ -113,182 +255,28 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":189,"right":0,"name":"1_8"},
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"var":"1_8","right":273,"bottom":0},
             "nodeParent":1,
             "label":"UIView(1_8)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":9,
+            "compId":7,
             "child":[
                 ]
         },
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":216,"right":0,"name":"1_9"},
+            "source":"mahjong/SingleCardLandscapeGreen.ui",
+            "props":{"right":312,"name":"1_9","bottom":0},
             "nodeParent":1,
             "label":"UIView(1_9)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":10,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":0,"right":45,"name":"2_1"},
-            "nodeParent":1,
-            "label":"UIView(2_1)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
             "compId":11,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":27,"right":45,"name":"2_2"},
-            "nodeParent":1,
-            "label":"UIView(2_2)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":12,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":54,"right":45,"name":"2_3"},
-            "nodeParent":1,
-            "label":"UIView(2_3)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":13,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":81,"right":45,"name":"2_4"},
-            "nodeParent":1,
-            "label":"UIView(2_4)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":14,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":108,"right":45,"name":"2_5"},
-            "nodeParent":1,
-            "label":"UIView(2_5)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":15,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":135,"right":45,"name":"2_6"},
-            "nodeParent":1,
-            "label":"UIView(2_6)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":16,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":162,"right":45,"name":"2_7"},
-            "nodeParent":1,
-            "label":"UIView(2_7)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":17,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":189,"right":45,"name":"2_8"},
-            "nodeParent":1,
-            "label":"UIView(2_8)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":18,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":216,"right":45,"name":"2_9"},
-            "nodeParent":1,
-            "label":"UIView(2_9)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":19,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"right":90,"name":"3_1"},
-            "nodeParent":1,
-            "label":"UIView(3_1)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":20,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"UIView",
-            "source":"mahjong/SingleCardPreGreen.ui",
-            "props":{"top":27,"right":90,"name":"3_2"},
-            "nodeParent":1,
-            "label":"UIView(3_2)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":21,
             "child":[
                 ]
         }],
