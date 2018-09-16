@@ -45,12 +45,8 @@ module common.play {
          */
         public onSetInit(setInit): void {
             //GameData.setInit = setInit;
-            this.deskController.createSetInfo(setInit);
+            this.deskController.createGameSetInfo(setInit);
             this.deskView.getPlayerReadyView().removeAll();
-
-            // 显示牌局
-            
-
         }
 
     }

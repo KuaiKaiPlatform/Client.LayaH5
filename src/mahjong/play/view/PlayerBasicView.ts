@@ -1,7 +1,7 @@
 module mahjong.play.view {
     import Handler = Laya.Handler;
 
-    /*
+    /**
      *  玩家基本信息显示
      */
     export class PlayerBasicView extends common.play.view.PlayerBasicView {
@@ -31,7 +31,8 @@ module mahjong.play.view {
         };
 
         public getAttrs(basicInfo) {
-            switch(this.deskController.findPosition(basicInfo.direction)) {
+            let deskController = this.deskController as mahjong.play.controller.DeskController;
+            switch(deskController.findPositionByDirection(basicInfo.direction)) {
             case mahjong.play.Position.SELF:
                 return PlayerBasicView.SELF;
             case mahjong.play.Position.NEXT:

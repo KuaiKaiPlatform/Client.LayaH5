@@ -14,17 +14,25 @@ module mahjong.play.controller {
         /**
          * 根据玩家方位找到位置
          */
-        public findPosition(direction): number {
+        public findPositionByDirection(direction): number {
             let selfBasicInfo = PlayerBasicInfo.getSelf();
             let pos = direction - selfBasicInfo.direction;
             return pos < 0?pos+4:pos;
         }
 
         /**
+         * 根据玩家uid找到位置
+         */
+        public findPosition(uid): number {
+            let basicInfo = PlayerBasicInfo.getByUid(uid);
+            return this.findPositionByDirection(basicInfo.direction);
+        }
+
+        /**
          * 初始化牌局数据
          */
-        public createSetInfo(setInit) {
-            this.setInfo = new mahjong.play.model.SetInfo(setInit);
+        public createGameSetInfo(setInit) {
+            this.gameSetInfo = new mahjong.play.model.GameSetInfo(setInit);
         }
 
     }

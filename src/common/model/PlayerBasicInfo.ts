@@ -49,7 +49,7 @@ module common.model {
         }
 
         public static clear() {
-            PlayerBasicInfo.basicInfos = [];
+            PlayerBasicInfo.basicInfos = {};
         }
 
         /**

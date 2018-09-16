@@ -2,12 +2,17 @@ module common.play.model {
     /*
      *   牌局信息
      */
-    export class SetInfo {
+    export class GameSetInfo {
 
-        private setInit;
+        protected setInit;
+        protected playerSetInfo: PlayerSetInfo;
 
         constructor(setInit) {
             this.setInit = setInit;
+        }
+
+        public getPlayerSetInfo() {
+            return this.playerSetInfo;
         }
 
         public getCurrentSet() {

@@ -58,9 +58,9 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":82,"x":0,"width":86,"text":"我的昵称","name":"lable_player_name","height":20,"fontSize":15,"color":"#deb40d","bold":true,"align":"center"},
+            "props":{"y":82,"x":0,"width":86,"text":"我的昵称","name":"label_player_name","height":20,"fontSize":15,"color":"#deb40d","bold":true,"align":"center"},
             "nodeParent":1,
-            "label":"Label(lable_player_name)",
+            "label":"Label(label_player_name)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -71,9 +71,9 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":102,"x":0,"width":86,"text":"135","name":"lable_player_score","height":20,"fontSize":18,"color":"#f4f2eb","bold":false,"align":"center"},
+            "props":{"y":102,"x":0,"width":86,"text":"135","name":"label_player_score","height":20,"fontSize":18,"color":"#f4f2eb","bold":false,"align":"center"},
             "nodeParent":1,
-            "label":"Label(lable_player_score)",
+            "label":"Label(label_player_score)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,

@@ -1,7 +1,8 @@
 module mahjong.play.view {
     import Handler = Laya.Handler;
+    import Event = Laya.Event;
 
-    /*
+    /**
      *  玩家准备状态显示
      */
     export class PlayerReadyView extends common.play.view.PlayerReadyView {
@@ -11,7 +12,7 @@ module mahjong.play.view {
         }
 
         private static SELF = {
-            centerX: null,
+            centerX: 0,
             centerY: 280,
             scaleX: 0.5,
             scaleY: 0.5
@@ -19,13 +20,13 @@ module mahjong.play.view {
 
         private static NEXT = {
             centerX: 400,
-            centerY: null,
+            centerY: 0,
             scaleX: 0.5,
             scaleY: 0.5
         };
 
         private static OPPOSITE = {
-            centerX: null,
+            centerX: 0,
             centerY: -280,
             scaleX: 0.5,
             scaleY: 0.5
@@ -33,13 +34,14 @@ module mahjong.play.view {
 
         private static PREVIOUS = {
             centerX: -400,
-            centerY: null,
+            centerY: 0,
             scaleX: 0.5,
             scaleY: 0.5
         };
 
         public getAttrs(basicInfo) {
-            switch(this.deskController.findPosition(basicInfo.direction)) {
+            let deskController = this.deskController as mahjong.play.controller.DeskController;
+            switch(deskController.findPositionByDirection(basicInfo.direction)) {
             case mahjong.play.Position.SELF:
                 return PlayerReadyView.SELF;
             case mahjong.play.Position.NEXT:
@@ -49,6 +51,48 @@ module mahjong.play.view {
             case mahjong.play.Position.PREVIOUS:
                 return PlayerReadyView.PREVIOUS;
             }
+        }
+
+        /**
+         * 触发准备
+         */
+        public onPrepare(e: Event): void {
+            super.onPrepare(e);
+
+            // 模拟：2秒后收到开局消息
+            setTimeout(() => {
+                this.deskController.getMessageListener().onSetInit({
+                    userInfos: [{
+                        uid: 100860,
+                        bet: -1,
+                        handCardNum: 13,
+                        discards: [],
+                        cardGroups: []
+                    }, {
+                        uid: 100861,
+                        bet: -1,
+                        handCardNum: 13,
+                        discards: [],
+                        cardGroups: []
+                    }, {
+                        uid: 100862,
+                        bet: -1,
+                        handCardNum: 13,
+                        discards: [],
+                        cardGroups: []
+                    }, {
+                        uid: 100863,
+                        bet: -1,
+                        handCardNum: 13,
+                        discards: [],
+                        cardGroups: []
+                    }],
+                    curSet: 1,
+                    remainCards: 84,
+                    bankerid: 100862,
+                    stage: 0
+                });
+            }, 2000);
         }
 
     }

@@ -9,5 +9,19 @@ module mahjong.play {
             super(deskController);
         }
 
+        /**
+         * 开局或重连后返回牌局消息
+         */
+        public onSetInit(setInit): void {
+            super.onSetInit(setInit);
+
+            let deskView = this.deskView as mahjong.play.view.DeskView;
+            // 显示手牌和明牌
+            deskView.getHandCardsView().showAll();
+
+            // 显示打出的牌
+            deskView.getDiscardsView().showAll();
+        }
+
     }
 }

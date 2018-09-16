@@ -10,7 +10,7 @@ module common.play.controller {
         protected deskView: common.play.view.DeskView;
 
         // 牌局信息
-        protected setInfo: common.play.model.SetInfo;
+        protected gameSetInfo: common.play.model.GameSetInfo;
 
         public getMessageListener(): common.play.MessageListener {
             return this.messageListener;
@@ -20,12 +20,16 @@ module common.play.controller {
             return this.deskView;
         }
 
-        public abstract createSetInfo(setInit);
+        public getGameSetInfo() {
+            return this.gameSetInfo;
+        }
+
+        public abstract createGameSetInfo(setInit);
 
         /**
-         * 根据玩家方位找到位置
+         * 根据玩家uid找到位置
          */
-        public abstract findPosition(direction): number;
+        public abstract findPosition(uid): number;
 
     }
 }

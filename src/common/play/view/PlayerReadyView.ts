@@ -49,20 +49,13 @@ module common.play.view {
         /**
          * 触发准备
          */
-        private onPrepare(e: Event): void {
+        public onPrepare(e: Event): void {
             this.removeSingle(PlayerBasicInfo.selfId);
             let basicInfo = PlayerBasicInfo.getSelf();
             basicInfo.state = 1;
             this.show(basicInfo);
 
             // 发送准备消息
-
-            // 模拟：2秒后收到开局消息
-            setTimeout(() => {
-                this.deskController.getMessageListener().onSetInit({
-
-                });
-            }, 2000);
         }
 
         /**

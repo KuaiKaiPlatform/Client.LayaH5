@@ -135,13 +135,56 @@
             "x":15,
             "type":"UIView",
             "source":"mahjong/HandCardAndMoSelf.ui",
-            "props":{"name":"handcard_self","centerX":42,"bottom":10},
+            "props":{"name":"handcard_self","centerX":0,"bottom":10},
             "nodeParent":1,
             "label":"UIView(handcard_self)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
             "compId":78,
+            "child":[
+                ],
+            "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/HandCardAndMoOppostie.ui",
+            "props":{"top":10,"name":"handcard_opposite","centerX":0},
+            "nodeParent":1,
+            "label":"UIView(handcard_opposite)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":79,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/HandCardAndMoPre.ui",
+            "props":{"name":"handcard_pre","left":180,"centerY":0},
+            "nodeParent":1,
+            "label":"UIView(handcard_pre)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":80,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/HandCardAndMoNext.ui",
+            "props":{"right":180,"name":"handcard_next","centerY":0},
+            "nodeParent":1,
+            "label":"UIView(handcard_next)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":81,
             "child":[
                 ]
         }],

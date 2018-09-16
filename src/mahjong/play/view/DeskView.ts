@@ -5,8 +5,14 @@ module mahjong.play.view {
      */
     export class DeskView extends common.play.view.DeskView {
 
-        // 牌桌中心方位显示
+        // 麻将牌桌中心方位显示
         protected directionView: mahjong.play.view.DirectionView;
+
+        // 麻将牌桌打出的牌显示
+        protected discardsView: mahjong.play.view.PlayerDiscardsView;
+
+        // 麻将牌桌手牌显示
+        protected handCardsView: mahjong.play.view.PlayerHandCardsView;
 
         constructor(deskController) {
             super(deskController);
@@ -16,6 +22,8 @@ module mahjong.play.view {
             this.deskMenuView       = new mahjong.play.view.DeskMenuView(deskController);
 
             this.directionView      = new mahjong.play.view.DirectionView(deskController);
+            this.discardsView       = new mahjong.play.view.PlayerDiscardsView(deskController);
+            this.handCardsView       = new mahjong.play.view.PlayerHandCardsView(deskController);
         }
 
         public show(): void {
@@ -28,6 +36,14 @@ module mahjong.play.view {
             let imgBg: Laya.Sprite = new Laya.Sprite();
             imgBg.loadImage("mahjong/desk/bg.png");
             Laya.stage.addChild(imgBg);
+        }
+
+        public getDiscardsView() {
+            return this.discardsView;
+        }
+
+        public getHandCardsView() {
+            return this.handCardsView;
         }
 
     }

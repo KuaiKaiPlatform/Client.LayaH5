@@ -50,18 +50,18 @@ module common.play.view {
             let basicInfoUI = this.getUI(basicInfo.uid.toString());
 
             // 昵称
-            let labelName = basicInfoUI.getChildByName("lable_player_name") as laya.ui.Label;
+            let labelName = basicInfoUI.getChildByName("label_player_name") as laya.ui.Label;
             labelName.changeText(basicInfo.nkn);
 
             // 分数
             let total = 0;
             basicInfo.points.forEach(point => total += point);
-            let labelPoint = basicInfoUI.getChildByName("lable_player_score") as laya.ui.Label;
+            let labelPoint = basicInfoUI.getChildByName("label_player_score") as laya.ui.Label;
             labelPoint.changeText(total.toString());
 
             // 隐藏角标
-            // let jiaoBiao = basicInfoUI.getChildByName("img_player_jiao") as laya.display.Sprite;
-            // jiaoBiao.visible = false;
+            let jiaoBiao = basicInfoUI.getChildByName("img_player_jiao") as laya.display.Sprite;
+            jiaoBiao.visible = false;
 
             // 显示
             this.showComponent(basicInfoUI, this.getAttrs(basicInfo));
