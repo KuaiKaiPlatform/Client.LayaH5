@@ -66,25 +66,25 @@ module mahjong.play.view {
                         uid: 100860,
                         bet: -1,
                         handCardNum: 10,
-                        discards: [15, 21, 47, 19, 33],
+                        discards: [15, 21, 47, 19, 33, 23, 46, 45, 13, 35, 23, 34],
                         cardGroups: []
                     }, {
                         uid: 100861,
                         bet: -1,
                         handCardNum: 8,
-                        discards: [39, 41, 25, 36, 17, 11, 13],
+                        discards: [39, 41, 25, 36, 47, 17, 11, 42, 13, 46, 19, 33, 23],
                         cardGroups: []
                     }, {
                         uid: 100862,
                         bet: -1,
                         handCardNum: 13,
-                        discards: [11, 28, 25, 22, 39, 42, 46],
+                        discards: [11, 28, 25, 22, 39, 42, 46, 24, 47, 41, 21, 23, 32, 42],
                         cardGroups: []
                     }, {
                         uid: 100863,
                         bet: -1,
                         handCardNum: 11,
-                        discards: [43, 17, 35, 36, 21, 29, 44, 12],
+                        discards: [43, 17, 35, 36, 21, 29, 44, 12, 11, 16, 24, 28, 39, 31, 42],
                         cardGroups: []
                     }],
                     curSet: 1,

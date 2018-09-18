@@ -16,22 +16,30 @@ module mahjong.play.view {
 
         private static SELF = {
             centerX: 0,
-            centerY: 140
+            centerY: 140,
+            width: 351,
+            height: 145
         };
 
         private static NEXT = {
             centerX: 260,
-            centerY: 0
+            centerY: 0,
+            width: 135,
+            height: 254
         };
 
         private static OPPOSITE = {
             centerX: 0,
-            centerY: -140
+            centerY: -140,
+            width: 351,
+            height: 145
         };
 
         private static PREVIOUS = {
             centerX: -260,
-            centerY: 0
+            centerY: 0,
+            width: 135,
+            height: 254
         };
 
         protected getAttrs(pos) {
@@ -54,24 +62,6 @@ module mahjong.play.view {
             let discardUI = this.discardUIs[uid.toString()];
             if(!discardUI) {
                 discardUI = new laya.ui.View();
-                switch(pos) {
-                case mahjong.play.Position.SELF:
-                    discardUI.width = 351;
-                    discardUI.height = 145;
-                    break;
-                case mahjong.play.Position.NEXT:
-                    discardUI.width = 135;
-                    discardUI.height = 254;
-                    break;
-                case mahjong.play.Position.OPPOSITE:
-                    discardUI.width = 135;
-                    discardUI.height = 254;
-                    break;
-                case mahjong.play.Position.PREVIOUS:
-                    discardUI.width = 351;
-                    discardUI.height = 145;
-                    break;
-                }
                 this.discardUIs[uid.toString()] = discardUI;
             }
             return discardUI;
@@ -123,7 +113,7 @@ module mahjong.play.view {
                     this.addNext(discardUI, index, discard);
                     break;
                 case mahjong.play.Position.OPPOSITE:
-                    //this.showOpposite(setInfo);
+                    this.addOpposite(discardUI, index, discard);
                     break;
                 case mahjong.play.Position.PREVIOUS:
                     this.addPre(discardUI, index, discard);
@@ -142,7 +132,20 @@ module mahjong.play.view {
         public addSelf(discardUI: laya.ui.View, index, discard): void {
             console.log("PlayerDiscardsView.addSelf@adding", index, discard);
             let singleCard = SingleCardFactory.createLandscape(mahjong.play.Theme.GREEN, discard);
-            singleCard.x = 39 * index;
+            singleCard.x = 39 * (index%9);
+            singleCard.y = 45 * Math.floor(index/9);
+            discardUI.addChild(singleCard);
+        }
+
+        /**
+         * 增加一张对家打出的牌
+         */
+        public addOpposite(discardUI: laya.ui.View, index, discard): void {
+            console.log("PlayerDiscardsView.addSelf@adding", index, discard);
+            let singleCard = SingleCardFactory.createLandscape(mahjong.play.Theme.GREEN, discard);
+            singleCard.right = 39 * (index%9);
+            singleCard.bottom = 45 * Math.floor(index/9);
+            singleCard.zOrder = 1000 - index;
             discardUI.addChild(singleCard);
         }
 
@@ -152,8 +155,9 @@ module mahjong.play.view {
         public addNext(discardUI: laya.ui.View, index, discard): void {
             console.log("PlayerDiscardsView.addNext@adding", index, discard);
             let singleCard = SingleCardFactory.createNext(mahjong.play.Theme.GREEN, discard);
-            //singleCard.bottom = 0;
-            singleCard.bottom = 27 * index;
+            singleCard.left = 45 * Math.floor(index/9);
+            singleCard.bottom = 27 * (index%9);
+            singleCard.zOrder = 1000-index;
             discardUI.addChild(singleCard);
         }
 
@@ -163,8 +167,8 @@ module mahjong.play.view {
         public addPre(discardUI: laya.ui.View, index, discard): void {
             console.log("PlayerDiscardsView.addPre@adding", index, discard);
             let singleCard = SingleCardFactory.createPre(mahjong.play.Theme.GREEN, discard);
-            //singleCard.bottom = 0;
-            singleCard.top = 27 * index;
+            singleCard.right = 45 * Math.floor(index/9);
+            singleCard.top = 27 * (index%9);
             discardUI.addChild(singleCard);
         }
 
