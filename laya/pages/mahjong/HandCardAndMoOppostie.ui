@@ -30,7 +30,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/ops_hand_green.png","left":0},
+            "props":{"skin":"mahjong/card/landscape_hand_green.png","left":0},
             "nodeParent":1,
             "label":"Image",
             "isDirectory":false,

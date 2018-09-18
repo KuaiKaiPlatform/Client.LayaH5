@@ -14,4 +14,10 @@ module mahjong.play {
         BEI = 4,
     }
 
+    export enum Theme { // 配色方案
+        GREEN = 1,
+        YELLOW = 2,
+        BLUE = 3
+    }
+
 }

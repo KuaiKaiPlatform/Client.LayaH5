@@ -51,7 +51,7 @@ module mahjong.play.view {
          * 返回指定玩家的手牌UI对象
          */
         protected getUI(uid): laya.ui.View {
-            let handCardUI: ui.mahjong.PlayerBasicInfoUI = this.handCardUIs[uid.toString()];
+            let handCardUI = this.handCardUIs[uid.toString()];
             if(!handCardUI) {
                 switch(this.deskController.findPosition(uid)) {
                 case mahjong.play.Position.SELF:
@@ -107,7 +107,7 @@ module mahjong.play.view {
             //let labelName = handCardUI.getChildByName("lable_player_name") as laya.ui.Label;
             //labelName.changeText(basicInfo.nkn);
 
-            if(this.deskController.findPosition(setInfo.uid) == mahjong.play.Position.SELF) return;
+            //if(this.deskController.findPosition(setInfo.uid) == mahjong.play.Position.SELF) return;
 
             // 显示
             this.showComponent(handCardUI, this.getAttrs(setInfo));

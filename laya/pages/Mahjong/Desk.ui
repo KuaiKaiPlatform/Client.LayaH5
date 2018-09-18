@@ -2,7 +2,6 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":78,
     "referenceLines":null,
     "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/assets/mahjong/desk/bg.png","name":"view_mahjong_desk"},
     "nodeParent":-1,
@@ -90,7 +89,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/DicardPre.ui",
+            "source":"mahjong/DiscardPre.ui",
             "props":{"name":"discards_pre","centerY":0,"centerX":-260},
             "nodeParent":1,
             "label":"UIView(discards_pre)",
@@ -105,7 +104,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/DicardNext.ui",
+            "source":"mahjong/DiscardNext.ui",
             "props":{"name":"discards_next","centerY":0,"centerX":260},
             "nodeParent":1,
             "label":"UIView(discards_next)",
