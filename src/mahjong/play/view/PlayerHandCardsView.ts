@@ -1,6 +1,7 @@
 module mahjong.play.view {
     import Handler = Laya.Handler;
     import Image = Laya.Image;
+    import PlayerSetInfo = mahjong.play.model.PlayerSetInfo;
 
     /**
      *  麻将玩家手牌显示
@@ -94,14 +95,23 @@ module mahjong.play.view {
          * 显示指定玩家手牌
          */
         protected show(setInfo) {
-            if(PlayerBasicInfo.isSelf(setInfo.uid)) return;
+            if(PlayerBasicInfo.isSelf(setInfo.uid)) {
+                this.showSelf(setInfo);
+                return;
+            }
 
             let pos = this.deskController.findPosition(setInfo.uid);
             let handcardUI = this.getUI(setInfo.uid, pos) as laya.ui.View;
 
+            let hasMo: boolean = PlayerSetInfo.hasMo(setInfo);
+            let handCardNum = hasMo?setInfo.handCardNum-1:setInfo.handCardNum;
             // 遍历并显示每张打出的牌
-            for(let i=0; i<setInfo.handCardNum; i++) {
-                this.addSingleCard(handcardUI, pos, i);
+            for(let i=0; i<handCardNum; i++) {
+                this.showSingleCard(handcardUI, i);
+            }
+
+            if(hasMo) {
+                this.showMoCard(handcardUI);
             }
 
             // 显示
@@ -109,72 +119,42 @@ module mahjong.play.view {
         }
 
         /**
-         * 增加一张指定位置玩家手牌
+         * 显示一张指定位置玩家手牌
          */
-        public addSingleCard(handcardUI: laya.ui.View, pos, index): void {
+        public showSingleCard(handcardUI: laya.ui.View, index): void {
             let handcards = handcardUI.getChildByName("handcards") as laya.ui.View;
             let card = handcards.getChildByName((index+1).toString()) as Image;
             card.visible = true;
-            // switch(pos) {
-            // case mahjong.play.Position.SELF:
-            //     this.addSelf(handcardUI, index);
-            //     break;
-            // case mahjong.play.Position.NEXT:
-            //     this.addNext(handcardUI, index);
-            //     break;
-            // case mahjong.play.Position.OPPOSITE:
-            //     this.addOpposite(handcardUI, index);
-            //     break;
-            // case mahjong.play.Position.PREVIOUS:
-            //     this.addPre(handcardUI, index);
-            //     break;
-            // }
         }
 
         /**
-         * 增加一张自己手牌
+         * 显示玩家摸到的手牌
          */
-        protected addSelf(handcardUI: laya.ui.View, index): void {
-            console.log("PlayerHandCardsView.addSelf@adding", index);
-            let singleCard = SingleCardFactory.createOppositeHand(GlobalSetting.THEME_MAHJONG);
-            singleCard.x = 39 * (index%9);
-            singleCard.y = 45 * Math.floor(index/9);
-            handcardUI.addChild(singleCard);
-        }
-        
-        /**
-         * 增加一张对家手牌
-         */
-        protected addOpposite(handcardUI: laya.ui.View, index): void {
-            console.log("PlayerHandCardsView.addOpposite@adding", index);
-            let singleCard = SingleCardFactory.createOppositeHand(GlobalSetting.THEME_MAHJONG);
-            singleCard.right = 39 * (index%9);
-            singleCard.bottom = 45 * Math.floor(index/9);
-            singleCard.zOrder = 1000 - index;
-            handcardUI.addChild(singleCard);
+        public showMoCard(handcardUI: laya.ui.View): void {
+            let card = handcardUI.getChildByName("mo") as Image;
+            card.visible = true;
         }
 
         /**
-         * 增加一张下家手牌
+         * 显示自己的手牌
          */
-        protected addNext(handcardUI: laya.ui.View, index): void {
-            console.log("PlayerHandCardsView.addNext@adding", index);
-            let singleCard = SingleCardFactory.createNextHand(GlobalSetting.THEME_MAHJONG);
-            singleCard.left = 45 * Math.floor(index/9);
-            singleCard.bottom = 27 * (index%9);
-            singleCard.zOrder = 1000-index;
-            handcardUI.addChild(singleCard);
-        }
+        protected showSelf(setInfo): void {
+            let pos = mahjong.play.Position.SELF;
+            let handcardUI = this.getUI(setInfo.uid, pos) as laya.ui.View;
 
-        /**
-         * 增加一张上家手牌
-         */
-        protected addPre(handcardUI: laya.ui.View, index): void {
-            console.log("PlayerHandCardsView.addPre@adding", index);
-            let singleCard = SingleCardFactory.createPreHand(GlobalSetting.THEME_MAHJONG);
-            singleCard.right = 45 * Math.floor(index/9);
-            singleCard.top = 27 * (index%9);
-            handcardUI.addChild(singleCard);
+            let hasMo: boolean = PlayerSetInfo.hasMo(setInfo);
+            if(hasMo) {
+                let moCard = handcardUI.getChildByName("mo") as Image;
+                moCard.visible = true;
+            }
+
+            // 遍历并显示每张打出的牌
+            setInfo.handcards.forEach((discard, index) => {
+                //this.addSingleCard(handcardUI, pos, index, discard);
+            });
+
+            // 显示
+            this.showComponent(handcardUI, this.getAttrs(pos));
         }
 
     }

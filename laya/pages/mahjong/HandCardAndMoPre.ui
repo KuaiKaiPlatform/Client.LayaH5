@@ -30,7 +30,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/pre_hand_green.png","name":"mo","bottom":0},
+            "props":{"visible":false,"skin":"mahjong/card/pre_hand_green.png","name":"mo","bottom":0},
             "nodeParent":1,
             "label":"Image(mo)",
             "isDirectory":false,

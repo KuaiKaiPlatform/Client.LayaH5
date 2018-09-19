@@ -156,7 +156,7 @@ module ui.mahjong {
 module ui.mahjong {
     export class HandCardAndMoNextUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":24,"height":371},"child":[{"type":"HandCardNext","props":{"top":47,"name":"handcards","runtime":"ui.mahjong.HandCardNextUI"}},{"type":"Image","props":{"top":0,"skin":"mahjong/card/next_hand_green.png","name":"mo"}}]};
+        public static  uiView:any ={"type":"View","props":{"width":24,"height":371},"child":[{"type":"HandCardNext","props":{"top":47,"name":"handcards","runtime":"ui.mahjong.HandCardNextUI"}},{"type":"Image","props":{"visible":false,"top":0,"skin":"mahjong/card/next_hand_green.png","name":"mo"}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.HandCardNextUI",ui.mahjong.HandCardNextUI);
@@ -172,7 +172,7 @@ module ui.mahjong {
 module ui.mahjong {
     export class HandCardAndMoOppostieUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":575,"height":55},"child":[{"type":"HandCardOpposite","props":{"right":0,"name":"handcards","runtime":"ui.mahjong.HandCardOppositeUI"}},{"type":"Image","props":{"skin":"mahjong/card/landscape_hand_green.png","name":"mo","left":0}}]};
+        public static  uiView:any ={"type":"View","props":{"width":575,"height":55},"child":[{"type":"HandCardOpposite","props":{"right":0,"name":"handcards","runtime":"ui.mahjong.HandCardOppositeUI"}},{"type":"Image","props":{"visible":false,"skin":"mahjong/card/landscape_hand_green.png","name":"mo","left":0}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.HandCardOppositeUI",ui.mahjong.HandCardOppositeUI);
@@ -188,7 +188,7 @@ module ui.mahjong {
 module ui.mahjong {
     export class HandCardAndMoPreUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":24,"height":371},"child":[{"type":"HandCardPre","props":{"name":"handcards","bottom":47,"runtime":"ui.mahjong.HandCardPreUI"}},{"type":"Image","props":{"skin":"mahjong/card/pre_hand_green.png","name":"mo","bottom":0}}]};
+        public static  uiView:any ={"type":"View","props":{"width":24,"height":371},"child":[{"type":"HandCardPre","props":{"name":"handcards","bottom":47,"runtime":"ui.mahjong.HandCardPreUI"}},{"type":"Image","props":{"visible":false,"skin":"mahjong/card/pre_hand_green.png","name":"mo","bottom":0}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.HandCardPreUI",ui.mahjong.HandCardPreUI);
@@ -204,7 +204,7 @@ module ui.mahjong {
 module ui.mahjong {
     export class HandCardAndMoSelfUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":916,"height":94},"child":[{"type":"HandCardSelf","props":{"name":"handcards","runtime":"ui.mahjong.HandCardSelfUI"}},{"type":"SingleCardSelfHandGreen","props":{"right":0,"name":"mo","runtime":"ui.mahjong.SingleCardSelfHandGreenUI"}}]};
+        public static  uiView:any ={"type":"View","props":{"width":916,"height":94},"child":[{"type":"HandCardSelf","props":{"name":"handcards","runtime":"ui.mahjong.HandCardSelfUI"}},{"type":"SingleCardSelfHandGreen","props":{"visible":false,"right":0,"name":"mo","runtime":"ui.mahjong.SingleCardSelfHandGreenUI"}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.HandCardSelfUI",ui.mahjong.HandCardSelfUI);

@@ -9,5 +9,9 @@ module mahjong.play.model {
             super(setInfos);
         }
 
+        public static hasMo(setInfo): boolean {
+            return setInfo.handCardNum %3 == 2;
+        }
+
     }
 }
