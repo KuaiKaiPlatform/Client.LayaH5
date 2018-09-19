@@ -2,12 +2,17 @@
 
 import DeskController = mahjong.play.controller.DeskController;
 import PlayerBasicInfo = common.model.PlayerBasicInfo;
+import GlobalSetting = common.model.GlobalSetting;
 
 class GameMain {
     constructor() {
         Laya.init(1334, 750);
 
         PlayerBasicInfo.selfId = 100860;
+        GlobalSetting.init({
+            theme_mahjong: mahjong.play.Theme.GREEN
+        });
+
         let deskCtrl = new DeskController();
         deskCtrl.getMessageListener().onEnterRes({
             basicInfos: [{

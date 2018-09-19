@@ -79,13 +79,15 @@ module mahjong.play.view {
                 let setInfos = gameSetInfo.getPlayerSetInfo().getAll();
                 for(let key in setInfos) {
                     let setInfo = setInfos[key];
-                    this.show(setInfo, this.deskController.findPosition(setInfo.uid));
+                    this.show(setInfo);
                 }
             }));
         }
 
-
-        private check(setInfo): boolean {
+        /**
+         * 检查指定玩家是否有打出的牌
+         */
+        protected check(setInfo): boolean {
             let discards = setInfo.discards;
             if(!discards || discards.length == 0) {
                 console.log("PlayerDiscardView.showSelf@discards empty", setInfo.uid);
@@ -97,52 +99,67 @@ module mahjong.play.view {
         /**
          * 显示一名玩家打出的牌
          */
-        public show(setInfo, pos): void {
+        protected show(setInfo): void {
             if(!this.check(setInfo)) return;
             
-            // 遍历并显示每张打出的牌
-            let discards = setInfo.discards;
+            let pos = this.deskController.findPosition(setInfo.uid);
             let discardUI = this.getUI(setInfo.uid, pos) as laya.ui.View;
-    
-            discards.forEach((discard, index) => {
-                switch(pos) {
-                case mahjong.play.Position.SELF:
-                    this.addSelf(discardUI, index, discard);
-                    break;
-                case mahjong.play.Position.NEXT:
-                    this.addNext(discardUI, index, discard);
-                    break;
-                case mahjong.play.Position.OPPOSITE:
-                    this.addOpposite(discardUI, index, discard);
-                    break;
-                case mahjong.play.Position.PREVIOUS:
-                    this.addPre(discardUI, index, discard);
-                    break;
-                }
+
+            // 遍历并显示每张打出的牌
+            setInfo.discards.forEach((discard, index) => {
+                this.addSingleCard(discardUI, pos, index, discard);
             });
 
             // 显示
             this.showComponent(discardUI, this.getAttrs(pos));
+        }
 
+        /**
+         * 增加一张指定玩家打出的牌
+         */
+        public add(uid, index, discard): void {
+            let pos = this.deskController.findPosition(uid);
+            let discardUI = this.getUI(uid, pos) as laya.ui.View;
+            this.addSingleCard(discardUI, pos, index, discard);
+        }
+
+        /**
+         * 增加一张指定位置玩家打出的牌
+         */
+        protected addSingleCard(discardUI: laya.ui.View, pos, index, discard): void {
+            switch(pos) {
+            case mahjong.play.Position.SELF:
+                this.addSelf(discardUI, index, discard);
+                break;
+            case mahjong.play.Position.NEXT:
+                this.addNext(discardUI, index, discard);
+                break;
+            case mahjong.play.Position.OPPOSITE:
+                this.addOpposite(discardUI, index, discard);
+                break;
+            case mahjong.play.Position.PREVIOUS:
+                this.addPre(discardUI, index, discard);
+                break;
+            }
         }
 
         /**
          * 增加一张自己打出的牌
          */
-        public addSelf(discardUI: laya.ui.View, index, discard): void {
+        protected addSelf(discardUI: laya.ui.View, index, discard): void {
             console.log("PlayerDiscardsView.addSelf@adding", index, discard);
-            let singleCard = SingleCardFactory.createLandscape(mahjong.play.Theme.GREEN, discard);
+            let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.x = 39 * (index%9);
             singleCard.y = 45 * Math.floor(index/9);
             discardUI.addChild(singleCard);
         }
-
+        
         /**
          * 增加一张对家打出的牌
          */
-        public addOpposite(discardUI: laya.ui.View, index, discard): void {
-            console.log("PlayerDiscardsView.addSelf@adding", index, discard);
-            let singleCard = SingleCardFactory.createLandscape(mahjong.play.Theme.GREEN, discard);
+        protected addOpposite(discardUI: laya.ui.View, index, discard): void {
+            console.log("PlayerDiscardsView.addOpposite@adding", index, discard);
+            let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.right = 39 * (index%9);
             singleCard.bottom = 45 * Math.floor(index/9);
             singleCard.zOrder = 1000 - index;
@@ -152,9 +169,9 @@ module mahjong.play.view {
         /**
          * 增加一张下家打出的牌
          */
-        public addNext(discardUI: laya.ui.View, index, discard): void {
+        protected addNext(discardUI: laya.ui.View, index, discard): void {
             console.log("PlayerDiscardsView.addNext@adding", index, discard);
-            let singleCard = SingleCardFactory.createNext(mahjong.play.Theme.GREEN, discard);
+            let singleCard = SingleCardFactory.createNextDiscard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.left = 45 * Math.floor(index/9);
             singleCard.bottom = 27 * (index%9);
             singleCard.zOrder = 1000-index;
@@ -164,9 +181,9 @@ module mahjong.play.view {
         /**
          * 增加一张上家打出的牌
          */
-        public addPre(discardUI: laya.ui.View, index, discard): void {
+        protected addPre(discardUI: laya.ui.View, index, discard): void {
             console.log("PlayerDiscardsView.addPre@adding", index, discard);
-            let singleCard = SingleCardFactory.createPre(mahjong.play.Theme.GREEN, discard);
+            let singleCard = SingleCardFactory.createPreDiscard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.right = 45 * Math.floor(index/9);
             singleCard.top = 27 * (index%9);
             discardUI.addChild(singleCard);
