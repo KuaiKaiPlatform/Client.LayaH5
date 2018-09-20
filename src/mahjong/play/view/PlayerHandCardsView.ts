@@ -19,22 +19,30 @@ module mahjong.play.view {
 
         private static SELF = {
             centerX: 0,
-            bottom: 10
+            bottom: 10,
+            width: 916,
+            height: 94
         };
 
         private static NEXT = {
             right: 180,
-            centerY: 0
+            centerY: 0,
+            width: 24,
+            height: 371
         };
 
         private static OPPOSITE = {
             centerX: 0,
-            top: 10
+            top: 10,
+            width: 575,
+            height: 55
         };
 
         private static PREVIOUS = {
             left: 180,
-            centerY: 0
+            centerY: 0,
+            width: 24,
+            height: 371
         };
 
         public getAttrs(pos) {
@@ -54,20 +62,31 @@ module mahjong.play.view {
          * 返回指定玩家的手牌UI对象
          */
         protected getUI(uid, pos): View {
-            let handCardUI = this.handCardUIs[uid.toString()];
+            let handCardUI = this.handCardUIs[uid.toString()] as View;
             if(!handCardUI) {
+                handCardUI = new View();
+                let handcards = new View();
+                handcards.name = "handcards";
+                handCardUI.addChild(handcards);
+
                 switch(pos) {
                 case mahjong.play.Position.SELF:
-                    handCardUI = new ui.mahjong.HandCardAndMoSelfUI();
+                    handcards.left = 0;
                     break;
                 case mahjong.play.Position.NEXT:
-                    handCardUI = new ui.mahjong.HandCardAndMoNextUI();
+                    handcards.bottom = 0;
+                    handcards.width = 24;
+                    handcards.height = 323;
                     break;
                 case mahjong.play.Position.OPPOSITE:
-                    handCardUI = new ui.mahjong.HandCardAndMoOppostieUI();
+                    handcards.right = 0;
+                    handcards.width = 520;
+                    handcards.height = 55;
                     break;
                 case mahjong.play.Position.PREVIOUS:
-                    handCardUI = new ui.mahjong.HandCardAndMoPreUI();
+                    handcards.top = 0;
+                    handcards.width = 24;
+                    handcards.height = 323;
                     break;
                 }
                 this.handCardUIs[uid.toString()] = handCardUI;
@@ -97,7 +116,7 @@ module mahjong.play.view {
          */
         protected show(setInfo) {
             if(PlayerBasicInfo.isSelf(setInfo.uid)) {
-                this.showSelf(setInfo);
+                //this.showSelf(setInfo);
                 return;
             }
 
@@ -108,11 +127,11 @@ module mahjong.play.view {
             let handCardNum = hasMo?setInfo.handCardNum-1:setInfo.handCardNum;
             // 遍历并显示每张打出的牌
             for(let i=0; i<handCardNum; i++) {
-                this.showSingleCard(handcardUI, i);
+                this.addSingleCard(handcardUI, i, pos);
             }
 
             if(hasMo) {
-                this.showMoCard(handcardUI);
+                this.addMoCard(handcardUI, pos);
             }
 
             // 显示
@@ -122,18 +141,54 @@ module mahjong.play.view {
         /**
          * 显示一张指定位置玩家手牌
          */
-        public showSingleCard(handcardUI: View, index): void {
+        public addSingleCard(handcardUI: View, index, pos): void {
             let handcards = handcardUI.getChildByName("handcards") as View;
-            let card = handcards.getChildByName((index+1).toString()) as Image;
-            card.visible = true;
+            let singleCard: Image;
+            switch(pos) {
+            case mahjong.play.Position.SELF:
+                //singleCard = SingleCardFactory.create;
+                break;
+            case mahjong.play.Position.NEXT:
+                singleCard = SingleCardFactory.createNextHand(GlobalSetting.THEME_MAHJONG);
+                singleCard.top = 23 * index;
+                break;
+            case mahjong.play.Position.OPPOSITE:
+                singleCard = SingleCardFactory.createOppositeHand(GlobalSetting.THEME_MAHJONG);
+                singleCard.left = 40 * index;
+                break;
+            case mahjong.play.Position.PREVIOUS:
+                singleCard = SingleCardFactory.createPreHand(GlobalSetting.THEME_MAHJONG);
+                singleCard.bottom = 23 * index;
+                singleCard.zOrder = 1000 - index;
+                break;
+            }
+            handcards.addChild(singleCard);
         }
 
         /**
          * 显示玩家摸到的手牌
          */
-        public showMoCard(handcardUI: View): void {
-            let card = handcardUI.getChildByName("mo") as Image;
-            card.visible = true;
+        public addMoCard(handcardUI: View, pos): void {
+            let moCard: Image;
+            switch(pos) {
+            case mahjong.play.Position.SELF:
+                //singleCard = SingleCardFactory.create;
+                break;
+            case mahjong.play.Position.NEXT:
+                moCard = SingleCardFactory.createNextHand(GlobalSetting.THEME_MAHJONG);
+                moCard.top = 0;
+                break;
+            case mahjong.play.Position.OPPOSITE:
+                moCard = SingleCardFactory.createOppositeHand(GlobalSetting.THEME_MAHJONG);
+                moCard.left = 0;
+                break;
+            case mahjong.play.Position.PREVIOUS:
+                moCard = SingleCardFactory.createPreHand(GlobalSetting.THEME_MAHJONG);
+                moCard.bottom = 0;
+                break;
+            }
+            moCard.name = "mo";
+            handcardUI.addChild(moCard);
         }
 
         /**

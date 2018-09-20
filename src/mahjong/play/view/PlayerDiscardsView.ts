@@ -58,7 +58,7 @@ module mahjong.play.view {
         /**
          * 返回指定玩家的打出的牌UI对象
          */
-        protected getUI(uid, pos): laya.ui.View {
+        protected getUI(uid): laya.ui.View {
             let discardUI = this.discardUIs[uid.toString()];
             if(!discardUI) {
                 discardUI = new laya.ui.View();
@@ -103,7 +103,7 @@ module mahjong.play.view {
             if(!this.check(setInfo)) return;
             
             let pos = this.deskController.findPosition(setInfo.uid);
-            let discardUI = this.getUI(setInfo.uid, pos) as laya.ui.View;
+            let discardUI = this.getUI(setInfo.uid) as laya.ui.View;
 
             // 遍历并显示每张打出的牌
             setInfo.discards.forEach((discard, index) => {
@@ -119,7 +119,7 @@ module mahjong.play.view {
          */
         public add(uid, index, discard): void {
             let pos = this.deskController.findPosition(uid);
-            let discardUI = this.getUI(uid, pos) as laya.ui.View;
+            let discardUI = this.getUI(uid) as laya.ui.View;
             this.addSingleCard(discardUI, pos, index, discard);
         }
 
