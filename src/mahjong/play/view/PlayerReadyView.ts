@@ -74,7 +74,15 @@ module mahjong.play.view {
                         bet: -1,
                         handCardNum: 7,
                         discards: [39, 41, 25, 36, 47, 17, 11, 42, 13, 46, 19, 33, 23],
-                        cardGroups: []
+                        cardGroups: [{
+                            operType: 40,
+                            cards: [36, 36],
+                            target: 36
+                        }, {
+                            operType: 60,
+                            cards: [19, 19, 19],
+                            target: 19
+                        }]
                     }, {
                         uid: 100862,
                         bet: -1,
@@ -86,7 +94,15 @@ module mahjong.play.view {
                         bet: -1,
                         handCardNum: 10,
                         discards: [43, 17, 35, 36, 21, 29, 44, 12, 11, 16, 24, 28, 39, 31, 42],
-                        cardGroups: []
+                        cardGroups: [{
+                            operType: 70,
+                            cards: [43, 43, 43],
+                            target: 43
+                        }, {
+                            operType: 40,
+                            cards: [24, 24],
+                            target: 24
+                        }]
                     }],
                     curSet: 1,
                     remainCards: 84,

@@ -6,7 +6,9 @@ import GlobalSetting = common.model.GlobalSetting;
 
 class GameMain {
     constructor() {
-        Laya.init(1334, 750);
+        Laya.init(1334, 750, Laya.WebGL);
+        Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
+        Laya.stage.scaleMode = "exactfit";
 
         PlayerBasicInfo.selfId = 100860;
         GlobalSetting.init({

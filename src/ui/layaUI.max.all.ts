@@ -2,6 +2,22 @@
 import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
 module ui.mahjong {
+    export class CardGroupSelfThreeUI extends View {
+
+        public static  uiView:any ={"type":"View","props":{"width":180,"height":84},"child":[{"type":"SingleCardSelfGroupGreen","props":{"name":"1","runtime":"ui.mahjong.SingleCardSelfGroupGreenUI"}},{"type":"SingleCardSelfGroupGreen","props":{"x":60,"name":"2","runtime":"ui.mahjong.SingleCardSelfGroupGreenUI"}},{"type":"SingleCardSelfGroupGreen","props":{"x":120,"name":"3","runtime":"ui.mahjong.SingleCardSelfGroupGreenUI"}}]};
+        constructor(){ super()}
+        createChildren():void {
+        			View.regComponent("ui.mahjong.SingleCardSelfGroupGreenUI",ui.mahjong.SingleCardSelfGroupGreenUI);
+
+            super.createChildren();
+            this.createView(ui.mahjong.CardGroupSelfThreeUI.uiView);
+
+        }
+
+    }
+}
+
+module ui.mahjong {
     export class CenterDirectionsUI extends View {
 
         public static  uiView:any ={"type":"View","props":{"width":123,"height":123},"child":[{"type":"Image","props":{"width":18,"skin":"mahjong/desk/dong.png","height":20,"centerY":35,"centerX":0}},{"type":"Image","props":{"width":18,"skin":"mahjong/desk/nan.png","height":20,"centerY":0,"centerX":35}},{"type":"Image","props":{"width":18,"skin":"mahjong/desk/xi.png","height":20,"centerY":-35,"centerX":0}},{"type":"Image","props":{"width":18,"skin":"mahjong/desk/bei.png","height":20,"centerY":0,"centerX":-35}}]};
@@ -19,11 +35,11 @@ module ui.mahjong {
 module ui.mahjong {
     export class DeskUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"x":0,"name":"view_mahjong_desk"},"child":[{"type":"DeskCenter","props":{"name":"desk_center","centerY":0,"centerX":0,"runtime":"ui.mahjong.DeskCenterUI"}},{"type":"PlayerBasicInfos","props":{"name":"player_basic_info","runtime":"ui.mahjong.PlayerBasicInfosUI"}},{"type":"DeskMenu","props":{"name":"desk_menu","runtime":"ui.mahjong.DeskMenuUI"}},{"type":"GameSummary","props":{"name":"game_summary","runtime":"ui.mahjong.GameSummaryUI"}},{"type":"DiscardSelf","props":{"name":"discards_self","centerY":140,"centerX":0,"runtime":"ui.mahjong.DiscardSelfUI"}},{"type":"DiscardPre","props":{"name":"discards_pre","centerY":0,"centerX":-260,"runtime":"ui.mahjong.DiscardPreUI"}},{"type":"DiscardNext","props":{"name":"discards_next","centerY":0,"centerX":260,"runtime":"ui.mahjong.DiscardNextUI"}},{"type":"DiscardOpposite","props":{"name":"discards_opposite","centerY":-140,"centerX":0,"runtime":"ui.mahjong.DiscardOppositeUI"}},{"type":"HandCardAndMoSelf","props":{"name":"handcard_self","centerX":0,"bottom":10,"runtime":"ui.mahjong.HandCardAndMoSelfUI"}},{"type":"HandCardAndMoOppostie","props":{"top":10,"name":"handcard_opposite","centerX":0,"runtime":"ui.mahjong.HandCardAndMoOppostieUI"}},{"type":"HandCardAndMoPre","props":{"name":"handcard_pre","left":180,"centerY":0,"runtime":"ui.mahjong.HandCardAndMoPreUI"}},{"type":"HandCardAndMoNext","props":{"right":180,"name":"handcard_next","centerY":0,"runtime":"ui.mahjong.HandCardAndMoNextUI"}}]};
+        public static  uiView:any ={"type":"View","props":{"x":0,"name":"view_mahjong_desk"},"child":[{"type":"DeskCenter","props":{"name":"desk_center","centerY":0,"centerX":0,"runtime":"ui.mahjong.DeskCenterUI"}},{"type":"PlayerBasicInfos","props":{"name":"player_basic_info","runtime":"ui.mahjong.PlayerBasicInfosUI"}},{"type":"DeskMenu","props":{"name":"desk_menu","runtime":"ui.mahjong.DeskMenuUI"}},{"type":"GameSummary","props":{"name":"game_summary","runtime":"ui.mahjong.GameSummaryUI"}},{"type":"DiscardSelf","props":{"name":"discards_self","centerY":140,"centerX":0,"runtime":"ui.mahjong.DiscardSelfUI"}},{"type":"DiscardPre","props":{"name":"discards_pre","centerY":0,"centerX":-260,"runtime":"ui.mahjong.DiscardPreUI"}},{"type":"DiscardNext","props":{"name":"discards_next","centerY":0,"centerX":260,"runtime":"ui.mahjong.DiscardNextUI"}},{"type":"DiscardOpposite","props":{"name":"discards_opposite","centerY":-140,"centerX":0,"runtime":"ui.mahjong.DiscardOppositeUI"}},{"type":"HandCardAndMoSelf","props":{"name":"handcard_self","centerX":0,"bottom":10,"runtime":"ui.mahjong.HandCardAndMoSelfUI"}},{"type":"HandCardAndMoOppostie","props":{"top":10,"name":"handcard_opposite","centerX":0,"runtime":"ui.mahjong.HandCardAndMoOppostieUI"}},{"type":"HandCardAndMoPre","props":{"name":"handcard_pre","left":180,"centerY":0,"runtime":"ui.mahjong.HandCardAndMoPreUI"}},{"type":"HandCardAndMoNext","props":{"right":180,"name":"handcard_next","centerY":0,"runtime":"ui.mahjong.HandCardAndMoNextUI"}},{"type":"CardGroupSelfThree","props":{"name":"card_group_self_1","centerX":-188,"bottom":10,"runtime":"ui.mahjong.CardGroupSelfThreeUI"}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.DeskCenterUI",ui.mahjong.DeskCenterUI);
-			View.regComponent("ui.mahjong.HandCardAndMoNextUI",ui.mahjong.HandCardAndMoNextUI);
+			View.regComponent("ui.mahjong.CardGroupSelfThreeUI",ui.mahjong.CardGroupSelfThreeUI);
 			View.regComponent("ui.mahjong.DeskMenuUI",ui.mahjong.DeskMenuUI);
 			View.regComponent("ui.mahjong.GameSummaryUI",ui.mahjong.GameSummaryUI);
 			View.regComponent("ui.mahjong.DiscardSelfUI",ui.mahjong.DiscardSelfUI);
@@ -33,6 +49,7 @@ module ui.mahjong {
 			View.regComponent("ui.mahjong.HandCardAndMoSelfUI",ui.mahjong.HandCardAndMoSelfUI);
 			View.regComponent("ui.mahjong.HandCardAndMoOppostieUI",ui.mahjong.HandCardAndMoOppostieUI);
 			View.regComponent("ui.mahjong.HandCardAndMoPreUI",ui.mahjong.HandCardAndMoPreUI);
+			View.regComponent("ui.mahjong.HandCardAndMoNextUI",ui.mahjong.HandCardAndMoNextUI);
 			View.regComponent("ui.mahjong.DiscardNextUI",ui.mahjong.DiscardNextUI);
 
             super.createChildren();
@@ -356,9 +373,24 @@ module ui.mahjong {
 }
 
 module ui.mahjong {
+    export class SingleCardSelfGroupGreenUI extends View {
+
+        public static  uiView:any ={"type":"View","props":{"width":60,"height":84},"child":[{"type":"Image","props":{"skin":"mahjong/card/self_group_plate_green.png","name":"plate"}},{"type":"Image","props":{"width":60,"skin":"mahjong/card/self_group_34.png","name":"card","height":84}},{"type":"Image","props":{"visible":false,"top":0,"skin":"mahjong/card/jiao_bao1.png","right":0,"name":"jiao_right_top"}},{"type":"Image","props":{"visible":false,"skin":"mahjong/card/jiao_ting.png","name":"jiao_left_bottom","left":0,"bottom":0}}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.mahjong.SingleCardSelfGroupGreenUI.uiView);
+
+        }
+
+    }
+}
+
+module ui.mahjong {
     export class SingleCardSelfHandGreenUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":66,"height":94},"child":[{"type":"Image","props":{"skin":"mahjong/card/self_hand_plate_green.png","name":"plate","centerY":0,"centerX":0}},{"type":"Image","props":{"visible":false,"skin":"mahjong/card/self_hand_45.png","name":"card"}},{"type":"Image","props":{"visible":false,"top":0,"skin":"mahjong/card/jiao_bao1.png","right":0,"name":"jiao_right_top"}},{"type":"Image","props":{"visible":false,"skin":"mahjong/card/jiao_ting.png","name":"jiao_left_bottom","left":0,"bottom":0}},{"type":"Image","props":{"width":66,"visible":false,"skin":"mahjong/card/landscape_disabled.png","name":"grey","height":94}}]};
+        public static  uiView:any ={"type":"View","props":{"width":66,"height":94},"child":[{"type":"Image","props":{"skin":"mahjong/card/self_hand_plate_green.png","name":"plate","centerY":0,"centerX":0}},{"type":"Image","props":{"skin":"mahjong/card/self_hand_45.png","name":"card"}},{"type":"Image","props":{"visible":false,"top":0,"skin":"mahjong/card/jiao_bao1.png","right":0,"name":"jiao_right_top"}},{"type":"Image","props":{"visible":false,"skin":"mahjong/card/jiao_ting.png","name":"jiao_left_bottom","left":0,"bottom":0}},{"type":"Image","props":{"width":66,"visible":false,"skin":"mahjong/card/landscape_disabled.png","name":"grey","height":94}}]};
         constructor(){ super()}
         createChildren():void {
         

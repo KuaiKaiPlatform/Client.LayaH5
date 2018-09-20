@@ -186,6 +186,34 @@
             "compId":81,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/CardGroupPengSelf.ui",
+            "props":{"name":"card_group_self_2","centerX":-188,"bottom":10},
+            "nodeParent":1,
+            "label":"UIView(card_group_self_2)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":82,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/CardGroupDianGangSelf.ui",
+            "props":{"name":"card_group_self_1","centerX":-388,"bottom":10},
+            "nodeParent":1,
+            "label":"UIView(card_group_self_1)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":83,
+            "child":[
+                ]
         }],
     "animations":[
         {

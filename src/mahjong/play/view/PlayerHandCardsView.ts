@@ -1,6 +1,7 @@
 module mahjong.play.view {
     import Handler = Laya.Handler;
     import Image = Laya.Image;
+    import view = Laya.View;
     import PlayerSetInfo = mahjong.play.model.PlayerSetInfo;
 
     /**
@@ -52,7 +53,7 @@ module mahjong.play.view {
         /**
          * 返回指定玩家的手牌UI对象
          */
-        protected getUI(uid, pos): laya.ui.View {
+        protected getUI(uid, pos): View {
             let handCardUI = this.handCardUIs[uid.toString()];
             if(!handCardUI) {
                 switch(pos) {
@@ -101,7 +102,7 @@ module mahjong.play.view {
             }
 
             let pos = this.deskController.findPosition(setInfo.uid);
-            let handcardUI = this.getUI(setInfo.uid, pos) as laya.ui.View;
+            let handcardUI = this.getUI(setInfo.uid, pos) as View;
 
             let hasMo: boolean = PlayerSetInfo.hasMo(setInfo);
             let handCardNum = hasMo?setInfo.handCardNum-1:setInfo.handCardNum;
@@ -121,8 +122,8 @@ module mahjong.play.view {
         /**
          * 显示一张指定位置玩家手牌
          */
-        public showSingleCard(handcardUI: laya.ui.View, index): void {
-            let handcards = handcardUI.getChildByName("handcards") as laya.ui.View;
+        public showSingleCard(handcardUI: View, index): void {
+            let handcards = handcardUI.getChildByName("handcards") as View;
             let card = handcards.getChildByName((index+1).toString()) as Image;
             card.visible = true;
         }
@@ -130,7 +131,7 @@ module mahjong.play.view {
         /**
          * 显示玩家摸到的手牌
          */
-        public showMoCard(handcardUI: laya.ui.View): void {
+        public showMoCard(handcardUI: View): void {
             let card = handcardUI.getChildByName("mo") as Image;
             card.visible = true;
         }
@@ -140,21 +141,42 @@ module mahjong.play.view {
          */
         protected showSelf(setInfo): void {
             let pos = mahjong.play.Position.SELF;
-            let handcardUI = this.getUI(setInfo.uid, pos) as laya.ui.View;
+            let handcardUI = this.getUI(setInfo.uid, pos) as View;
 
+            let handcards = setInfo.handcards;
             let hasMo: boolean = PlayerSetInfo.hasMo(setInfo);
             if(hasMo) {
-                let moCard = handcardUI.getChildByName("mo") as Image;
-                moCard.visible = true;
+                let card = handcards[handcards.length-1];
+                let moCardView = handcardUI.getChildByName("mo") as View;
+                let moCard = moCardView.getChildByName("card") as Image;
+                moCard.skin = "mahjong/card/self_hand_" + card + ".png";
+                moCardView.visible = true;
+                console.log("PlayerHandCardsView.showSelf@mo", card);
             }
 
+            // 复制除了摸牌外的手牌，排序
+            let showHandcards = hasMo?handcards.slice(0, handcards.length-1):handcards.slice(0);
+            showHandcards.sort((a, b) => b-a);
+
             // 遍历并显示每张打出的牌
-            setInfo.handcards.forEach((discard, index) => {
-                //this.addSingleCard(handcardUI, pos, index, discard);
+            showHandcards.forEach((handcard, index) => {
+                this.addSelfCard(handcardUI, index, handcard);
             });
 
             // 显示
             this.showComponent(handcardUI, this.getAttrs(pos));
+        }
+
+
+        /**
+         * 增加一张自己的手牌
+         */
+        public addSelfCard(handcardUI: View, index, handcard): void {
+            let handcards = handcardUI.getChildByName("handcards") as View;
+            let cardView = handcards.getChildByName((index+1).toString()) as View;
+            let card = cardView.getChildByName("card") as Image;
+            card.skin = "mahjong/card/self_hand_" + handcard + ".png";
+            cardView.visible = true;
         }
 
     }
