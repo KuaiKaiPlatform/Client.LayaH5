@@ -1,7 +1,7 @@
 module mahjong.play.view {
     import Handler = Laya.Handler;
     import Image = Laya.Image;
-    import view = Laya.View;
+    import View = Laya.View;
     import PlayerSetInfo = mahjong.play.model.PlayerSetInfo;
 
     /**
@@ -72,6 +72,8 @@ module mahjong.play.view {
                 switch(pos) {
                 case mahjong.play.Position.SELF:
                     handcards.left = 0;
+                    handcards.width = 832;
+                    handcards.height = 94;
                     break;
                 case mahjong.play.Position.NEXT:
                     handcards.bottom = 0;
@@ -116,7 +118,7 @@ module mahjong.play.view {
          */
         protected show(setInfo) {
             if(PlayerBasicInfo.isSelf(setInfo.uid)) {
-                //this.showSelf(setInfo);
+                this.showSelf(setInfo);
                 return;
             }
 
@@ -131,7 +133,7 @@ module mahjong.play.view {
             }
 
             if(hasMo) {
-                this.addMoCard(handcardUI, pos);
+                this.showMoCard(handcardUI, pos);
             }
 
             // 显示
@@ -139,14 +141,13 @@ module mahjong.play.view {
         }
 
         /**
-         * 显示一张指定位置玩家手牌
+         * 显示一张其他玩家的手牌
          */
         public addSingleCard(handcardUI: View, index, pos): void {
             let handcards = handcardUI.getChildByName("handcards") as View;
             let singleCard: Image;
             switch(pos) {
             case mahjong.play.Position.SELF:
-                //singleCard = SingleCardFactory.create;
                 break;
             case mahjong.play.Position.NEXT:
                 singleCard = SingleCardFactory.createNextHand(GlobalSetting.THEME_MAHJONG);
@@ -166,13 +167,17 @@ module mahjong.play.view {
         }
 
         /**
-         * 显示玩家摸到的手牌
+         * 显示其他玩家摸到的手牌
          */
-        public addMoCard(handcardUI: View, pos): void {
-            let moCard: Image;
+        public showMoCard(handcardUI: View, pos): void {
+            let moCard = handcardUI.getChildByName("mo") as Image;
+            if(moCard) {
+                moCard.visible = true;
+                return;
+            }
+            
             switch(pos) {
             case mahjong.play.Position.SELF:
-                //singleCard = SingleCardFactory.create;
                 break;
             case mahjong.play.Position.NEXT:
                 moCard = SingleCardFactory.createNextHand(GlobalSetting.THEME_MAHJONG);
@@ -201,12 +206,7 @@ module mahjong.play.view {
             let handcards = setInfo.handcards;
             let hasMo: boolean = PlayerSetInfo.hasMo(setInfo);
             if(hasMo) {
-                let card = handcards[handcards.length-1];
-                let moCardView = handcardUI.getChildByName("mo") as View;
-                let moCard = moCardView.getChildByName("card") as Image;
-                moCard.skin = "mahjong/card/self_hand_" + card + ".png";
-                moCardView.visible = true;
-                console.log("PlayerHandCardsView.showSelf@mo", card);
+                this.showSelfMo(handcardUI, handcards[handcards.length-1]);
             }
 
             // 复制除了摸牌外的手牌，排序
@@ -222,16 +222,26 @@ module mahjong.play.view {
             this.showComponent(handcardUI, this.getAttrs(pos));
         }
 
+        /**
+         * 显示自己的摸牌
+         */
+        protected showSelfMo(handcardUI: View, moCard): void {
+            handcardUI.removeChildByName("mo");
+            let moCardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, moCard);
+            moCardView.right = 0;
+            moCardView.name = "mo";
+            handcardUI.addChild(moCardView);
+            console.log("PlayerHandCardsView.showSelfMo@card", moCard);
+        }
 
         /**
          * 增加一张自己的手牌
          */
-        public addSelfCard(handcardUI: View, index, handcard): void {
+        public addSelfCard(handcardUI: View, index, card): void {
             let handcards = handcardUI.getChildByName("handcards") as View;
-            let cardView = handcards.getChildByName((index+1).toString()) as View;
-            let card = cardView.getChildByName("card") as Image;
-            card.skin = "mahjong/card/self_hand_" + handcard + ".png";
-            cardView.visible = true;
+            let cardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, card);
+            cardView.right = 64 * index;
+            handcards.addChild(cardView);
         }
 
     }

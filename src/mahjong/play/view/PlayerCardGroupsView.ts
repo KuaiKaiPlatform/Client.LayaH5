@@ -3,23 +3,45 @@ module mahjong.play.view {
     import View = Laya.View;
 
     /**
-     *  麻将玩家打出的牌显示
+     *  麻将玩家明牌（吃、碰、杠）显示
      */
-    export class PlayerDiscardsView extends common.view.ComponentView {
+    export class PlayerCardGroupsView extends common.view.ComponentView {
 
         protected deskController: mahjong.play.controller.DeskController;
-        private discardUIs = {};
+        private playerUIs = {};
 
         constructor(deskController) {
             super();
             this.deskController = deskController;
         }
 
+        private static SELF_GROUPS = [{
+            left: 0,
+            bottom: 0,
+            width: 180,
+            height: 100
+        }, {
+            left: 200,
+            bottom: 0,
+            width: 180,
+            height: 100
+        }, {
+            left: 400,
+            bottom: 0,
+            width: 180,
+            height: 100
+        }, {
+            left: 600,
+            bottom: 0,
+            width: 180,
+            height: 100
+        }];
+
         private static SELF = {
-            centerX: 0,
-            centerY: 140,
-            width: 351,
-            height: 145
+            centerX: -30,
+            bottom: 10,
+            width: 780,
+            height: 100
         };
 
         private static NEXT = {
@@ -46,30 +68,30 @@ module mahjong.play.view {
         protected getAttrs(pos) {
             switch(pos) {
             case mahjong.play.Position.SELF:
-                return PlayerDiscardsView.SELF;
+                return PlayerCardGroupsView.SELF;
             case mahjong.play.Position.NEXT:
-                return PlayerDiscardsView.NEXT;
+                return PlayerCardGroupsView.NEXT;
             case mahjong.play.Position.OPPOSITE:
-                return PlayerDiscardsView.OPPOSITE;
+                return PlayerCardGroupsView.OPPOSITE;
             case mahjong.play.Position.PREVIOUS:
-                return PlayerDiscardsView.PREVIOUS;
+                return PlayerCardGroupsView.PREVIOUS;
             }
         }
 
         /**
-         * 返回指定玩家的打出的牌UI对象
+         * 返回指定玩家的明牌UI对象
          */
         protected getUI(uid): View {
-            let discardUI = this.discardUIs[uid.toString()];
-            if(!discardUI) {
-                discardUI = new View();
-                this.discardUIs[uid.toString()] = discardUI;
+            let playerUI = this.playerUIs[uid.toString()];
+            if(!playerUI) {
+                playerUI = new View();
+                this.playerUIs[uid.toString()] = playerUI;
             }
-            return discardUI;
+            return playerUI;
         }
 
         /**
-         * 显示所有玩家打出的牌
+         * 显示所有玩家明牌
          */
         public showAll() {
             //预加载图集资源
@@ -86,33 +108,33 @@ module mahjong.play.view {
         }
 
         /**
-         * 检查指定玩家是否有打出的牌
+         * 检查指定玩家是否有明牌
          */
         protected check(setInfo): boolean {
-            let discards = setInfo.discards;
-            if(!discards || discards.length == 0) {
-                console.log("PlayerDiscardView.showSelf@discards empty", setInfo.uid);
+            let cardGroups = setInfo.cardGroups;
+            if(!cardGroups || cardGroups.length == 0) {
+                console.log("PlayerCardGroupsView.check@card groups empty", setInfo.uid);
                 return false;
             }
             return true;
         }
 
         /**
-         * 显示一名玩家打出的牌
+         * 显示一名玩家明牌
          */
         protected show(setInfo): void {
             if(!this.check(setInfo)) return;
             
             let pos = this.deskController.findPosition(setInfo.uid);
-            let discardUI = this.getUI(setInfo.uid) as View;
+            let playerUI = this.getUI(setInfo.uid) as View;
 
-            // 遍历并显示每张打出的牌
-            setInfo.discards.forEach((discard, index) => {
-                this.addSingleCard(discardUI, pos, index, discard);
+            // 遍历并显示各组明牌
+            setInfo.cardGroups.forEach((cardGroup, index) => {
+                this.addCardGroup(playerUI, pos, index, cardGroup);
             });
 
             // 显示
-            this.showComponent(discardUI, this.getAttrs(pos));
+            this.showComponent(playerUI, this.getAttrs(pos));
         }
 
         /**
@@ -121,13 +143,13 @@ module mahjong.play.view {
         public add(uid, index, discard): void {
             let pos = this.deskController.findPosition(uid);
             let discardUI = this.getUI(uid) as View;
-            this.addSingleCard(discardUI, pos, index, discard);
+            this.addCardGroup(discardUI, pos, index, discard);
         }
 
         /**
          * 增加一张指定位置玩家打出的牌
          */
-        protected addSingleCard(discardUI: View, pos, index, discard): void {
+        protected addCardGroup(discardUI: View, pos, index, discard): void {
             switch(pos) {
             case mahjong.play.Position.SELF:
                 this.addSelf(discardUI, index, discard);

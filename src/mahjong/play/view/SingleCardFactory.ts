@@ -8,7 +8,57 @@ module mahjong.play.view {
     export class SingleCardFactory {
 
         /**
-         *   新建竖向（自己和对家）打出的一张指定麻将牌
+         *   新建一张自己的指定手牌
+         */
+        public static createSelfHand(theme, card) {
+            let singleCard: View;
+            switch(theme) {
+            case mahjong.play.Theme.GREEN:
+                singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
+                break;
+            case mahjong.play.Theme.YELLOW:
+                singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
+                break;
+            case mahjong.play.Theme.BLUE:
+                singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
+                break;
+            default:
+                singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
+                break;
+            }
+            let cardImage = singleCard.getChildByName("card") as Image;
+            cardImage.skin = "mahjong/card/self_hand_" + card + ".png";
+            cardImage.visible = true;
+            return singleCard;
+        }
+
+        /**
+         *   新建一张自己的指定明牌（吃、碰、杠）
+         */
+        public static createSelfGroup(theme, card) {
+            let singleCard: View;
+            switch(theme) {
+            case mahjong.play.Theme.GREEN:
+                singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
+                break;
+            case mahjong.play.Theme.YELLOW:
+                singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
+                break;
+            case mahjong.play.Theme.BLUE:
+                singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
+                break;
+            default:
+                singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
+                break;
+            }
+            let cardImage = singleCard.getChildByName("card") as Image;
+            cardImage.skin = "mahjong/card/self_group_" + card + ".png";
+            cardImage.visible = true;
+            return singleCard;
+        }
+
+        /**
+         *   新建一张竖向（自己和对家打出的）指定麻将牌
          */
         public static createLandscapeDiscard(theme, card) {
             let singleCard: View;
@@ -33,7 +83,7 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建对家单张手牌麻将Image
+         *   新建一张对家手牌麻将Image
          */
         public static createOppositeHand(theme) {
             let path: string;
@@ -55,7 +105,7 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建下家打出的一张指定麻将牌
+         *   新建一张下家打出的指定麻将牌
          */
         public static createNextDiscard(theme, card) {
             let singleCard: View;
@@ -80,7 +130,7 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建下家单张手牌麻将Image
+         *   新建一张下家手牌麻将Image
          */
         public static createNextHand(theme) {
             let path: string;
@@ -102,7 +152,7 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建上家打出的一张指定麻将牌
+         *   新建一张上家打出的指定麻将牌
          */
         public static createPreDiscard(theme, card) {
             let singleCard: View;
@@ -127,7 +177,7 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建上家单张手牌麻将Image
+         *   新建一张上家手牌麻将Image
          */
         public static createPreHand(theme) {
             let path: string;
