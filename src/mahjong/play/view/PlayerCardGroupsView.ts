@@ -15,54 +15,32 @@ module mahjong.play.view {
             this.deskController = deskController;
         }
 
-        private static SELF_GROUPS = [{
-            left: 0,
-            bottom: 0,
-            width: 180,
-            height: 100
-        }, {
-            left: 200,
-            bottom: 0,
-            width: 180,
-            height: 100
-        }, {
-            left: 400,
-            bottom: 0,
-            width: 180,
-            height: 100
-        }, {
-            left: 600,
-            bottom: 0,
-            width: 180,
-            height: 100
-        }];
-
         private static SELF = {
-            centerX: -30,
+            centerX: -100,
             bottom: 10,
             width: 780,
             height: 100
         };
 
         private static NEXT = {
-            centerX: 260,
-            centerY: 0,
-            width: 135,
-            height: 254
+            right: 180,
+            centerY: 60,
+            width: 45,
+            height: 389
         };
 
         private static OPPOSITE = {
-            centerX: 0,
-            centerY: -140,
-            width: 351,
-            height: 145
+            centerX: 68,
+            top: 10,
+            width: 495,
+            height: 64
         };
 
         private static PREVIOUS = {
-            centerX: -260,
-            centerY: 0,
-            width: 135,
-            height: 254
+            left: 180,
+            centerY: -60,
+            width: 45,
+            height: 389
         };
 
         protected getAttrs(pos) {
@@ -138,78 +116,74 @@ module mahjong.play.view {
         }
 
         /**
-         * 增加一张指定玩家打出的牌
+         * 增加一组指定玩家明牌
          */
-        public add(uid, index, discard): void {
+        public add(uid, index, cardGroup): void {
             let pos = this.deskController.findPosition(uid);
-            let discardUI = this.getUI(uid) as View;
-            this.addCardGroup(discardUI, pos, index, discard);
+            let playerUI = this.getUI(uid) as View;
+            this.addCardGroup(playerUI, pos, index, cardGroup);
         }
 
         /**
-         * 增加一张指定位置玩家打出的牌
+         * 增加一组指定位置玩家明牌
          */
-        protected addCardGroup(discardUI: View, pos, index, discard): void {
+        protected addCardGroup(playerUI: View, pos, index, cardGroup): void {
             switch(pos) {
             case mahjong.play.Position.SELF:
-                this.addSelf(discardUI, index, discard);
+                this.addSelf(playerUI, index, cardGroup);
                 break;
             case mahjong.play.Position.NEXT:
-                this.addNext(discardUI, index, discard);
+                this.addNext(playerUI, index, cardGroup);
                 break;
             case mahjong.play.Position.OPPOSITE:
-                this.addOpposite(discardUI, index, discard);
+                this.addOpposite(playerUI, index, cardGroup);
                 break;
             case mahjong.play.Position.PREVIOUS:
-                this.addPre(discardUI, index, discard);
+                this.addPre(playerUI, index, cardGroup);
                 break;
             }
         }
 
         /**
-         * 增加一张自己打出的牌
+         * 增加一组自己明牌
          */
-        protected addSelf(discardUI: View, index, discard): void {
-            console.log("PlayerDiscardsView.addSelf@adding", index, discard);
-            let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.THEME_MAHJONG, discard);
-            singleCard.x = 39 * (index%9);
-            singleCard.y = 45 * Math.floor(index/9);
-            discardUI.addChild(singleCard);
+        protected addSelf(playerUI: View, index, cardGroup): void {
+            console.log("PlayerCardGroupsView.addSelf@adding", index, JSON.stringify(cardGroup));
+            let groupView = CardGroupFactory.createSelfGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            groupView.left = 200 * index;
+            groupView.bottom = 0;
+            playerUI.addChild(groupView);
         }
         
         /**
-         * 增加一张对家打出的牌
+         * 增加一组对家明牌
          */
-        protected addOpposite(discardUI: View, index, discard): void {
-            console.log("PlayerDiscardsView.addOpposite@adding", index, discard);
-            let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.THEME_MAHJONG, discard);
-            singleCard.right = 39 * (index%9);
-            singleCard.bottom = 45 * Math.floor(index/9);
-            singleCard.zOrder = 1000 - index;
-            discardUI.addChild(singleCard);
+        protected addOpposite(playerUI: View, index, cardGroup): void {
+            console.log("PlayerCardGroupsView.addOpposite@adding", index, JSON.stringify(cardGroup));
+            let groupView = CardGroupFactory.createOppositeGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            groupView.right = 127 * index;
+            groupView.bottom = 0;
+            playerUI.addChild(groupView);
         }
 
         /**
-         * 增加一张下家打出的牌
+         * 增加一组下家明牌
          */
-        protected addNext(discardUI: View, index, discard): void {
-            console.log("PlayerDiscardsView.addNext@adding", index, discard);
-            let singleCard = SingleCardFactory.createNextDiscard(GlobalSetting.THEME_MAHJONG, discard);
-            singleCard.left = 45 * Math.floor(index/9);
-            singleCard.bottom = 27 * (index%9);
-            singleCard.zOrder = 1000-index;
-            discardUI.addChild(singleCard);
+        protected addNext(playerUI: View, index, cardGroup): void {
+            console.log("PlayerCardGroupsView.addNext@adding", index, JSON.stringify(cardGroup));
+            let groupView = CardGroupFactory.createNextGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            groupView.bottom = 99 * index;
+            playerUI.addChild(groupView);
         }
 
         /**
-         * 增加一张上家打出的牌
+         * 增加一组上家明牌
          */
-        protected addPre(discardUI: View, index, discard): void {
-            console.log("PlayerDiscardsView.addPre@adding", index, discard);
-            let singleCard = SingleCardFactory.createPreDiscard(GlobalSetting.THEME_MAHJONG, discard);
-            singleCard.right = 45 * Math.floor(index/9);
-            singleCard.top = 27 * (index%9);
-            discardUI.addChild(singleCard);
+        protected addPre(playerUI: View, index, cardGroup): void {
+            console.log("PlayerCardGroupsView.addPre@adding", index, JSON.stringify(cardGroup));
+            let groupView = CardGroupFactory.createPreGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            groupView.top = 99 * index;
+            playerUI.addChild(groupView);
         }
 
     }

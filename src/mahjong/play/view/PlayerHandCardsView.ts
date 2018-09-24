@@ -26,7 +26,7 @@ module mahjong.play.view {
 
         private static NEXT = {
             right: 180,
-            centerY: 0,
+            centerY: -50,
             width: 24,
             height: 371
         };
@@ -40,7 +40,7 @@ module mahjong.play.view {
 
         private static PREVIOUS = {
             left: 180,
-            centerY: 0,
+            centerY: 50,
             width: 24,
             height: 371
         };

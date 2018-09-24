@@ -172,7 +172,7 @@ module mahjong.play.view {
          */
         protected addNext(discardUI: View, index, discard): void {
             console.log("PlayerDiscardsView.addNext@adding", index, discard);
-            let singleCard = SingleCardFactory.createNextDiscard(GlobalSetting.THEME_MAHJONG, discard);
+            let singleCard = SingleCardFactory.createNextCard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.left = 45 * Math.floor(index/9);
             singleCard.bottom = 27 * (index%9);
             singleCard.zOrder = 1000-index;
@@ -184,7 +184,7 @@ module mahjong.play.view {
          */
         protected addPre(discardUI: View, index, discard): void {
             console.log("PlayerDiscardsView.addPre@adding", index, discard);
-            let singleCard = SingleCardFactory.createPreDiscard(GlobalSetting.THEME_MAHJONG, discard);
+            let singleCard = SingleCardFactory.createPreCard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.right = 45 * Math.floor(index/9);
             singleCard.top = 27 * (index%9);
             discardUI.addChild(singleCard);

@@ -35,7 +35,7 @@ module mahjong.play.view {
         /**
          *   新建一张自己的指定明牌（吃、碰、杠）
          */
-        public static createSelfGroup(theme, card) {
+        public static createSelfGroupCard(theme, card) {
             let singleCard: View;
             switch(theme) {
             case mahjong.play.Theme.GREEN:
@@ -58,7 +58,32 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建一张竖向（自己和对家打出的）指定麻将牌
+         *   新建一张自己明牌中隐藏麻将Image
+         */
+        public static createSelfGroupHidden(theme) {
+            let path: string;
+            switch(theme) {
+            case mahjong.play.Theme.GREEN:
+                path = "mahjong/card/self_group_hidden_green.png";
+                break;
+            case mahjong.play.Theme.YELLOW:
+                path = "mahjong/card/self_group_hidden_yellow.png";
+                break;
+            case mahjong.play.Theme.BLUE:
+                path = "mahjong/card/self_group_hidden_blue.png";
+                break;
+            default:
+                path = "mahjong/card/self_group_hidden_green.png";
+                break;
+            }
+            let image = new Image(path);
+            image.width = 60;
+            image.height = 84;
+            return image;
+        }
+
+        /**
+         *   新建一张竖向指定麻将牌
          */
         public static createLandscapeDiscard(theme, card) {
             let singleCard: View;
@@ -77,7 +102,8 @@ module mahjong.play.view {
                 break;
             }
             let cardImage = singleCard.getChildByName("card") as Image;
-            cardImage.skin = "mahjong/card/landscape_" + card + ".png";
+            //cardImage.skin = "mahjong/card/landscape_" + card + ".png";
+            cardImage.skin = "mahjong/card/self_group_" + card + ".png";
             cardImage.visible = true;
             return singleCard;
         }
@@ -92,10 +118,10 @@ module mahjong.play.view {
                 path = "mahjong/card/landscape_hand_green.png";
                 break;
             case mahjong.play.Theme.YELLOW:
-                path = "mahjong/card/landscape_hand_green.png";
+                path = "mahjong/card/landscape_hand_yellow.png";
                 break;
             case mahjong.play.Theme.BLUE:
-                path = "mahjong/card/landscape_hand_green.png";
+                path = "mahjong/card/landscape_hand_blue.png";
                 break;
             default:
                 path = "mahjong/card/landscape_hand_green.png";
@@ -105,9 +131,34 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建一张下家打出的指定麻将牌
+         *   新建一张对家明牌中的隐藏麻将Image
          */
-        public static createNextDiscard(theme, card) {
+        public static createOppositeHidden(theme) {
+            let path: string;
+            switch(theme) {
+            case mahjong.play.Theme.GREEN:
+                path = "mahjong/card/self_group_hidden_green.png";
+                break;
+            case mahjong.play.Theme.YELLOW:
+                path = "mahjong/card/self_group_hidden_yellow.png";
+                break;
+            case mahjong.play.Theme.BLUE:
+                path = "mahjong/card/self_group_hidden_blue.png";
+                break;
+            default:
+                path = "mahjong/card/self_group_hidden_green.png";
+                break;
+            }
+            let image = new Image(path);
+            image.width = 38;
+            image.height = 54;
+            return image;
+        }
+
+        /**
+         *   新建一张下家指定麻将牌
+         */
+        public static createNextCard(theme, card) {
             let singleCard: View;
             switch(theme) {
             case mahjong.play.Theme.GREEN:
@@ -139,10 +190,10 @@ module mahjong.play.view {
                 path = "mahjong/card/next_hand_green.png";
                 break;
             case mahjong.play.Theme.YELLOW:
-                path = "mahjong/card/next_hand_green.png";
+                path = "mahjong/card/next_hand_yellow.png";
                 break;
             case mahjong.play.Theme.BLUE:
-                path = "mahjong/card/next_hand_green.png";
+                path = "mahjong/card/next_hand_blue.png";
                 break;
             default:
                 path = "mahjong/card/next_hand_green.png";
@@ -152,9 +203,34 @@ module mahjong.play.view {
         }
 
         /**
-         *   新建一张上家打出的指定麻将牌
+         *   新建一张下家隐藏麻将Image
          */
-        public static createPreDiscard(theme, card) {
+        public static createNextHidden(theme) {
+            let path: string;
+            switch(theme) {
+            case mahjong.play.Theme.GREEN:
+                path = "mahjong/card/next_hidden_green.png";
+                break;
+            case mahjong.play.Theme.YELLOW:
+                path = "mahjong/card/next_hidden_yellow.png";
+                break;
+            case mahjong.play.Theme.BLUE:
+                path = "mahjong/card/next_hidden_blue.png";
+                break;
+            default:
+                path = "mahjong/card/next_hidden_green.png";
+                break;
+            }
+            let image = new Image(path);
+            image.width = 45;
+            image.height = 38;
+            return image;
+        }
+
+        /**
+         *   新建一张上家指定麻将牌
+         */
+        public static createPreCard(theme, card) {
             let singleCard: View;
             switch(theme) {
             case mahjong.play.Theme.GREEN:
@@ -186,16 +262,41 @@ module mahjong.play.view {
                 path = "mahjong/card/pre_hand_green.png";
                 break;
             case mahjong.play.Theme.YELLOW:
-                path = "mahjong/card/pre_hand_green.png";
+                path = "mahjong/card/pre_hand_yellow.png";
                 break;
             case mahjong.play.Theme.BLUE:
-                path = "mahjong/card/pre_hand_green.png";
+                path = "mahjong/card/pre_hand_blue.png";
                 break;
             default:
                 path = "mahjong/card/pre_hand_green.png";
                 break;
             }
             return new Image(path);
+        }
+
+        /**
+         *   新建一张上家隐藏麻将Image
+         */
+        public static createPreHidden(theme) {
+            let path: string;
+            switch(theme) {
+            case mahjong.play.Theme.GREEN:
+                path = "mahjong/card/pre_hidden_green.png";
+                break;
+            case mahjong.play.Theme.YELLOW:
+                path = "mahjong/card/pre_hidden_yellow.png";
+                break;
+            case mahjong.play.Theme.BLUE:
+                path = "mahjong/card/pre_hidden_blue.png";
+                break;
+            default:
+                path = "mahjong/card/pre_hidden_green.png";
+                break;
+            }
+            let image = new Image(path);
+            image.width = 45;
+            image.height = 38;
+            return image;
         }
 
     }

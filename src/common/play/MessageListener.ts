@@ -15,7 +15,7 @@ module common.play {
         }
 
         /**
-         * 加入牌桌返回消息
+         * 自己加入牌桌返回消息
          */
         public onEnterRes(enterRes): void {
             GameData.enterRes = enterRes;
@@ -47,6 +47,9 @@ module common.play {
             //GameData.setInit = setInit;
             this.deskController.createGameSetInfo(setInit);
             this.deskView.getPlayerReadyView().removeAll();
+
+            // 显示牌局基本信息
+            this.deskView.getGameSummaryView().onSetInit();
         }
 
     }

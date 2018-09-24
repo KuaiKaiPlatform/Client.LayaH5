@@ -11,23 +11,23 @@ module mahjong.play.view {
         }
 
         private static SELF = {
-            left: 40,
+            left: 30,
             bottom: 120
         };
 
         private static NEXT = {
             right: 10,
-            top: 300
+            centerY: 0
         };
 
         private static OPPOSITE = {
-            right: 120,
-            top: 40
+            right: 80,
+            top: 30
         };
 
         private static PREVIOUS = {
             left: 10,
-            top: 300
+            centerY: 0
         };
 
         public getAttrs(basicInfo) {

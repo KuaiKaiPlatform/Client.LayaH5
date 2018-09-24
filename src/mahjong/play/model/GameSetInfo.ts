@@ -10,5 +10,9 @@ module mahjong.play.model {
             this.playerSetInfo = new mahjong.play.model.PlayerSetInfo(setInit.userInfos);
         }
 
+        public getRemainCards() {
+            return this.setInit.remainCards;
+        }
+
     }
 }

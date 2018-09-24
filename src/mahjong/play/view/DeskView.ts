@@ -14,6 +14,9 @@ module mahjong.play.view {
         // 麻将牌桌手牌显示
         protected handCardsView: mahjong.play.view.PlayerHandCardsView;
 
+        // 麻将牌桌明牌显示
+        protected cardGroupsView: mahjong.play.view.PlayerCardGroupsView;
+
         constructor(deskController) {
             super(deskController);
             this.playerBasicView    = new mahjong.play.view.PlayerBasicView(deskController);
@@ -23,7 +26,8 @@ module mahjong.play.view {
 
             this.directionView      = new mahjong.play.view.DirectionView(deskController);
             this.discardsView       = new mahjong.play.view.PlayerDiscardsView(deskController);
-            this.handCardsView       = new mahjong.play.view.PlayerHandCardsView(deskController);
+            this.handCardsView      = new mahjong.play.view.PlayerHandCardsView(deskController);
+            this.cardGroupsView     = new mahjong.play.view.PlayerCardGroupsView(deskController);
         }
 
         public show(): void {
@@ -44,6 +48,10 @@ module mahjong.play.view {
 
         public getHandCardsView() {
             return this.handCardsView;
+        }
+
+        public getCardGroupsView() {
+            return this.cardGroupsView;
         }
 
     }

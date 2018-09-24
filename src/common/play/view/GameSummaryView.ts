@@ -11,8 +11,8 @@ module common.play.view {
     export abstract class GameSummaryView extends common.view.ComponentView {
 
         protected deskController: common.play.controller.DeskController;
-        private ruleSprite = new Component();
-        private modeLabel = new Label();
+        protected ruleSprite = new Component();
+        protected modeLabel = new Label();
 
         constructor(deskController) {
             super();
@@ -27,12 +27,14 @@ module common.play.view {
                 this.showRule();
             }));
 
-            this.showMode();
+            this.showMode(0);
         }
 
         protected abstract getRuleAttrs();
 
-        // 显示游戏名称
+        /**
+         * 显示游戏名称
+         */
         public showRule(): void {
             this.ruleSprite.loadImage("common/rule/" + GameSetting.RULE  + ".png");
 
@@ -41,10 +43,22 @@ module common.play.view {
 
         protected abstract getModeAttrs();
 
-        // 显示牌局模式，如：局 3/8
-        public showMode(): void {
-            this.modeLabel.changeText("局  0/" + GameSetting.TOTAL_SET);
+        /**
+         * 显示牌局模式，如：局 3/8
+         */
+        public showMode(curSet): void {
+            this.modeLabel.changeText("局  " + curSet + "/" + GameSetting.TOTAL_SET);
             this.showComponent(this.modeLabel, this.getModeAttrs());
+        }
+
+        /**
+         * 牌局开始或重连
+         */
+        public onSetInit() {
+            let gameSetInfo = this.deskController.getGameSetInfo();
+
+            // 显示局数
+            this.showMode(gameSetInfo.getCurrentSet());
         }
 
     }

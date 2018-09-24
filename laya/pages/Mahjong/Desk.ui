@@ -191,7 +191,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/CardGroupDianGangSelf.ui",
+            "source":"mahjong/CardGroupSelfDianGang.ui",
             "props":{"name":"card_group_self_1","centerX":-388,"bottom":10},
             "nodeParent":1,
             "label":"UIView(card_group_self_1)",
@@ -205,7 +205,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/CardGroupPengSelf.ui",
+            "source":"mahjong/CardGroupSelfPeng.ui",
             "props":{"name":"card_group_self_2","centerX":-188,"bottom":10},
             "nodeParent":1,
             "label":"UIView(card_group_self_2)",

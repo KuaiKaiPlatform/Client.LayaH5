@@ -77,5 +77,19 @@ module common.play.view {
             }
         }
 
+        /**
+         * 显示指定庄家
+         * @param bankerId
+         */
+        public showBanker(bankerId) {
+            console.log("PlayerBasicView.showBanker@id", bankerId);
+            for(let key in this.basicInfoUIs) {
+                console.log("PlayerBasicView.showBanker@processing", key);
+                let basicInfoUI = this.basicInfoUIs[key];
+                let jiaoBiao = basicInfoUI.getChildByName("img_player_jiao") as laya.display.Sprite;
+                jiaoBiao.visible = (bankerId == parseInt(key))?true:false;
+            }
+        }
+
     }
 }

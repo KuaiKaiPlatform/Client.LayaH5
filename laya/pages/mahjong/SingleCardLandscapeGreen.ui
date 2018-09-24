@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":3,
+    "selecteID":2,
     "props":{"width":38,"sceneColor":"#000000","height":54},
     "nodeParent":-1,
     "label":"View",
@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"skin":"mahjong/card/landscape_plate_green.png","name":"plate"},
+            "props":{"width":38,"skin":"mahjong/card/self_group_plate_green.png","name":"plate","height":54},
             "nodeParent":1,
             "label":"Image(plate)",
             "isDirectory":false,
@@ -28,7 +28,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"visible":false,"skin":"mahjong/card/landscape_21.png","name":"card"},
+            "props":{"width":38,"visible":false,"skin":"mahjong/card/self_group_16.png","name":"card","height":54},
             "nodeParent":1,
             "label":"Image(card)",
             "isDirectory":false,

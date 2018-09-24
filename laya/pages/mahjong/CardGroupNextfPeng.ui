@@ -2,10 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":4,
-    "props":{"width":1334,"name":"layer_summary","height":750},
+    "selecteID":1,
+    "referenceLines":null,
+    "props":{"width":45,"sceneColor":"#000000","height":92},
     "nodeParent":-1,
-    "label":"View(layer_summary)",
+    "label":"View",
     "isOpen":true,
     "isDirectory":true,
     "isAniNode":true,
@@ -14,40 +15,43 @@
     "child":[
         {
             "x":15,
-            "type":"Image",
-            "props":{"y":100,"x":10,"top":100,"skin":"common/rule/61007.png","left":10},
+            "type":"UIView",
+            "source":"mahjong/SingleCardNextGreen.ui",
+            "props":{"name":"1"},
             "nodeParent":1,
-            "label":"Image",
+            "label":"UIView(1)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":2,
+            "compId":45,
             "child":[
                 ]
         },
         {
             "x":15,
-            "type":"Label",
-            "props":{"top":10,"text":"局  3/16  底  1/2","left":10,"fontSize":20,"color":"#47c03d","bold":false},
+            "type":"UIView",
+            "source":"mahjong/SingleCardNextGreen.ui",
+            "props":{"top":27,"name":"2"},
             "nodeParent":1,
-            "label":"Label",
+            "label":"UIView(2)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":3,
+            "compId":46,
             "child":[
                 ]
         },
         {
             "x":15,
-            "type":"Label",
-            "props":{"top":50,"text":"余 53 张","left":10,"fontSize":20,"color":"#47c03d","bold":false},
+            "type":"UIView",
+            "source":"mahjong/SingleCardNextGreen.ui",
+            "props":{"top":54,"name":"3"},
             "nodeParent":1,
-            "label":"Label",
+            "label":"UIView(3)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":4,
+            "compId":47,
             "child":[
                 ]
         }],
@@ -59,6 +63,5 @@
             "id":1,
             "frameRate":24,
             "action":0
-        }],
-    "$HIDDEN":false
+        }]
 }

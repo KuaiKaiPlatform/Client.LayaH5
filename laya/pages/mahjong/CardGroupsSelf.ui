@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":1,
+    "selecteID":3,
     "props":{"width":780,"sceneColor":"#000000","height":100},
     "nodeParent":-1,
     "label":"View",
@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/CardGroupDianGangSelf.ui",
+            "source":"mahjong/CardGroupSelfDianGang.ui",
             "props":{"name":"1","left":0,"bottom":0},
             "nodeParent":1,
             "label":"UIView(1)",
@@ -29,7 +29,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/CardGroupPengSelf.ui",
+            "source":"mahjong/CardGroupSelfPeng.ui",
             "props":{"name":"2","left":200,"bottom":0},
             "nodeParent":1,
             "label":"UIView(2)",
@@ -43,7 +43,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/CardGroupPengSelf.ui",
+            "source":"mahjong/CardGroupSelfPeng.ui",
             "props":{"name":"3","left":400,"bottom":0},
             "nodeParent":1,
             "label":"UIView(3)",
@@ -57,7 +57,7 @@
         {
             "x":15,
             "type":"UIView",
-            "source":"mahjong/CardGroupDianGangSelf.ui",
+            "source":"mahjong/CardGroupSelfDianGang.ui",
             "props":{"name":"4","left":600,"bottom":0},
             "nodeParent":1,
             "label":"UIView(4)",
