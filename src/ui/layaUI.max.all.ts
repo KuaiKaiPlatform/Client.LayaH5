@@ -4,7 +4,7 @@ import Dialog=laya.ui.Dialog;
 module ui.mahjong {
     export class CardGroupNextUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":45,"height":398},"child":[{"type":"CardGroupNextfDianGang","props":{"name":"1","bottom":0,"runtime":"ui.mahjong.CardGroupNextfDianGangUI"}},{"type":"CardGroupNextfPeng","props":{"name":"2","bottom":102,"runtime":"ui.mahjong.CardGroupNextfPengUI"}},{"type":"CardGroupNextfDianGang","props":{"name":"3","bottom":204,"runtime":"ui.mahjong.CardGroupNextfDianGangUI"}},{"type":"CardGroupNextfPeng","props":{"name":"4","bottom":306,"runtime":"ui.mahjong.CardGroupNextfPengUI"}}]};
+        public static  uiView:any ={"type":"View","props":{"width":45,"height":389},"child":[{"type":"CardGroupNextfDianGang","props":{"name":"1","bottom":0,"runtime":"ui.mahjong.CardGroupNextfDianGangUI"}},{"type":"CardGroupNextfPeng","props":{"name":"2","bottom":99,"runtime":"ui.mahjong.CardGroupNextfPengUI"}},{"type":"CardGroupNextfDianGang","props":{"name":"3","bottom":198,"runtime":"ui.mahjong.CardGroupNextfDianGangUI"}},{"type":"CardGroupNextfPeng","props":{"name":"4","bottom":297,"runtime":"ui.mahjong.CardGroupNextfPengUI"}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.CardGroupNextfDianGangUI",ui.mahjong.CardGroupNextfDianGangUI);
@@ -21,7 +21,7 @@ module ui.mahjong {
 module ui.mahjong {
     export class CardGroupNextfDianGangUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":45,"height":92},"child":[{"type":"SingleCardNextGreen","props":{"name":"1","runtime":"ui.mahjong.SingleCardNextGreenUI"}},{"type":"SingleCardNextGreen","props":{"top":27,"name":"2","runtime":"ui.mahjong.SingleCardNextGreenUI"}},{"type":"SingleCardNextGreen","props":{"top":54,"name":"3","runtime":"ui.mahjong.SingleCardNextGreenUI"}},{"type":"SingleCardNextGreen","props":{"top":17,"name":"4","runtime":"ui.mahjong.SingleCardNextGreenUI"}}]};
+        public static  uiView:any ={"type":"View","props":{"width":45,"height":92},"child":[{"type":"SingleCardNextGreen","props":{"name":"1","runtime":"ui.mahjong.SingleCardNextGreenUI"}},{"type":"SingleCardNextGreen","props":{"top":27,"name":"2","runtime":"ui.mahjong.SingleCardNextGreenUI"}},{"type":"SingleCardNextGreen","props":{"top":54,"name":"3","runtime":"ui.mahjong.SingleCardNextGreenUI"}},{"type":"SingleCardNextGreen","props":{"top":22,"name":"4","runtime":"ui.mahjong.SingleCardNextGreenUI"}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.SingleCardNextGreenUI",ui.mahjong.SingleCardNextGreenUI);
@@ -291,7 +291,7 @@ module ui.mahjong {
 module ui.mahjong {
     export class GameSummaryUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"width":1334,"name":"layer_summary","height":750},"child":[{"type":"Image","props":{"y":100,"x":10,"top":100,"skin":"common/rule/61007.png","left":10}},{"type":"Label","props":{"top":10,"text":"局  3/16  底  1/2","left":10,"fontSize":20,"color":"#47c03d","bold":false}}]};
+        public static  uiView:any ={"type":"View","props":{"width":1334,"name":"layer_summary","height":750},"child":[{"type":"Image","props":{"y":100,"x":10,"top":100,"skin":"common/rule/61007.png","left":10}},{"type":"Label","props":{"top":10,"text":"局  3/16  底  1/2","left":10,"fontSize":20,"color":"#47c03d","bold":false}},{"type":"Label","props":{"top":50,"text":"余 53 张","left":10,"fontSize":20,"color":"#47c03d","bold":false}}]};
         constructor(){ super()}
         createChildren():void {
         
@@ -447,7 +447,7 @@ module ui.mahjong {
 module ui.mahjong {
     export class PlayerBasicInfosUI extends View {
 
-        public static  uiView:any ={"type":"View","props":{"y":0,"x":0,"width":1334,"name":"layer_player","height":750},"child":[{"type":"PlayerBasicInfo","props":{"name":"view_player_self","left":40,"bottom":120,"runtime":"ui.mahjong.PlayerBasicInfoUI"}},{"type":"PlayerBasicInfo","props":{"top":300,"right":10,"name":"view_player_next","runtime":"ui.mahjong.PlayerBasicInfoUI"}},{"type":"PlayerBasicInfo","props":{"top":300,"name":"view_player_pre","left":10,"runtime":"ui.mahjong.PlayerBasicInfoUI"}},{"type":"PlayerBasicInfo","props":{"top":40,"right":120,"name":"view_player_opposite","runtime":"ui.mahjong.PlayerBasicInfoUI"}}]};
+        public static  uiView:any ={"type":"View","props":{"y":0,"x":0,"width":1334,"name":"layer_player","height":750},"child":[{"type":"PlayerBasicInfo","props":{"name":"view_player_self","left":30,"bottom":120,"runtime":"ui.mahjong.PlayerBasicInfoUI"}},{"type":"PlayerBasicInfo","props":{"right":10,"name":"view_player_next","centerY":0,"runtime":"ui.mahjong.PlayerBasicInfoUI"}},{"type":"PlayerBasicInfo","props":{"name":"view_player_pre","left":10,"centerY":0,"runtime":"ui.mahjong.PlayerBasicInfoUI"}},{"type":"PlayerBasicInfo","props":{"top":30,"right":80,"name":"view_player_opposite","runtime":"ui.mahjong.PlayerBasicInfoUI"}}]};
         constructor(){ super()}
         createChildren():void {
         			View.regComponent("ui.mahjong.PlayerBasicInfoUI",ui.mahjong.PlayerBasicInfoUI);
