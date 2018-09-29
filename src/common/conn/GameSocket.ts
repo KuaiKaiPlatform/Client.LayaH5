@@ -13,9 +13,11 @@ module common.conn {
         private socket: Socket;
         private byte: Byte;
         private url: string;
-        private name: string;
+        private name: string;                   // 连接的服务器名称，如：Game logic server 1
+        private connecting: boolean = false;
 
-        public constructor() {
+        public constructor(name) {
+            this.name = name;
             this.byte = new Byte();
             this.byte.endian = Byte.LITTLE_ENDIAN;
             this.socket = new Socket();
@@ -42,6 +44,7 @@ module common.conn {
          * 建立连接
          */
         private doConnect(): void {
+            this.connecting = true;
             this.socket.connectByUrl(this.url);
             this.socket.on(Laya.Event.OPEN, this, this.openHandler);
             this.socket.on(Laya.Event.MESSAGE, this, this.receiveHandler);
@@ -50,6 +53,7 @@ module common.conn {
         }
 
         private openHandler(event: any = null): void {
+            this.connecting = false;
             console.log("GameSocket.openHandler", this.url);
             GameEventDispacher.instance.event(GlobalEvent.SERVER_CONNECTED, [this.url, this.name]);
         }
@@ -59,11 +63,30 @@ module common.conn {
         }
 
         private closeHandler(e: any = null): void {
-            //关闭事件
+            this.connecting = false;
+            console.warn("GameSocket.closeHandler@Socket closed:", JSON.stringify(e));
+            GameEventDispacher.instance.event(GlobalEvent.SERVER_CONNECTION_CLOSED, [this.url, this.name]);
         }
 
         private errorHandler(e: any = null): void {
-            //连接出错
+            this.connecting = false;
+            console.error("GameSocket.errorHandler", JSON.stringify(e));
+        }
+
+        public send(bytes) {
+            this.socket.send(bytes);
+        }
+
+        public close() {
+            this.socket.close();
+        }
+
+        public isConnected(): boolean {
+            return this.socket.connected;
+        }
+
+        public isConnecting(): boolean {
+            return this.connecting;
         }
 
     }
