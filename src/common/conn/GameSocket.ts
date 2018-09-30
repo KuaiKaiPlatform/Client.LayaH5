@@ -4,6 +4,7 @@ module common.conn {
     import Byte = Laya.Byte;
     import GameEventDispacher = common.event.GameEventDispacher;
     import GlobalEvent = common.event.GlobalEvent;
+    import MessageHandler = common.msg.MessageHandler;
 
     // Socket
     export class GameSocket {
@@ -11,17 +12,14 @@ module common.conn {
         public static PREFIX_URL = "ws://";
 
         private socket: Socket;
-        private byte: Byte;
         private url: string;
         private name: string;                   // 连接的服务器名称，如：Game logic server 1
         private connecting: boolean = false;
 
         public constructor(name) {
             this.name = name;
-            this.byte = new Byte();
-            this.byte.endian = Byte.LITTLE_ENDIAN;
             this.socket = new Socket();
-            this.socket.endian = Byte.LITTLE_ENDIAN;
+            //this.socket.endian = Byte.LITTLE_ENDIAN;
         }
 
         /**
@@ -59,7 +57,13 @@ module common.conn {
         }
 
         private receiveHandler(msg: any = null): void {
-            ///接收到数据触发函数
+            console.log("GameSocket.receiveHandler@msg", typeof msg, msg);
+            if(msg instanceof ArrayBuffer) {
+                MessageHandler.handleBytes(msg);
+            } else {
+                MessageHandler.handleText(msg);
+            }
+            this.socket.input.clear();
         }
 
         private closeHandler(e: any = null): void {
@@ -73,8 +77,12 @@ module common.conn {
             console.error("GameSocket.errorHandler", JSON.stringify(e));
         }
 
-        public send(bytes) {
-            this.socket.send(bytes);
+        public sendText(text: string) {
+            this.socket.send(text);
+        }
+
+        public sendByte(byte: Byte) {
+            this.socket.send(byte.buffer);
         }
 
         public close() {
