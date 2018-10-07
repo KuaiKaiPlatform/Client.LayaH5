@@ -9,11 +9,12 @@ module common.view {
         public showComponent(component, attrs): void {
             // 设置坐标
             if(attrs) {
+                //console.log("ComponentView.showComponent", attrs);
                 Object.keys(attrs).forEach(key => {
+                    //console.log("ComponentView.showComponent", key);
                     component[key] = attrs[key];
                 });
             }
-
             //添加到stage
             Laya.stage.addChild(component);
         }

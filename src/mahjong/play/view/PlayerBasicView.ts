@@ -30,9 +30,9 @@ module mahjong.play.view {
             centerY: 0
         };
 
-        public getAttrs(basicInfo) {
+        public getAttrs(playerInfo) {
             let deskController = this.deskController as mahjong.play.controller.DeskController;
-            switch(deskController.findPositionByDirection(basicInfo.direction)) {
+            switch(deskController.findPositionByDirection(playerInfo.direction)) {
             case mahjong.play.Position.SELF:
                 return PlayerBasicView.SELF;
             case mahjong.play.Position.NEXT:

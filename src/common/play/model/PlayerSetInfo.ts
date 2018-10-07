@@ -1,4 +1,7 @@
 module common.play.model {
+
+    import Login = common.conn.Login;
+    
     /*
      *   玩家牌局信息
      */
@@ -23,7 +26,7 @@ module common.play.model {
          * 返回自身玩家牌局信息
          */
         public getSelf() {
-            return this.getByUid(PlayerBasicInfo.selfId);
+            return this.getByUid(Login.getUid());
         }
 
         /**

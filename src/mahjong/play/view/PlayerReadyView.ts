@@ -1,4 +1,5 @@
 module mahjong.play.view {
+
     import Handler = Laya.Handler;
     import Event = Laya.Event;
 
@@ -39,9 +40,9 @@ module mahjong.play.view {
             scaleY: 0.5
         };
 
-        public getAttrs(basicInfo) {
+        public getAttrs(playerInfo) {
             let deskController = this.deskController as mahjong.play.controller.DeskController;
-            switch(deskController.findPositionByDirection(basicInfo.direction)) {
+            switch(deskController.findPositionByDirection(playerInfo.direction)) {
             case mahjong.play.Position.SELF:
                 return PlayerReadyView.SELF;
             case mahjong.play.Position.NEXT:

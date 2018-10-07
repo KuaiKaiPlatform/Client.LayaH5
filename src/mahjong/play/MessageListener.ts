@@ -10,6 +10,23 @@ module mahjong.play {
         }
 
         /**
+         * 自己加入牌桌返回消息
+         */
+        public onDeskInfo(sDeskInfo): void {
+            // let Direction = Protocol.getEnum("mahjong.Direction");
+            // console.log("mahjong.play.MessageListener.onDeskInfo@Direction", Direction);
+            // for(let key in Direction) {
+            //     console.log("mahjong.play.MessageListener.onDeskInfo@Direction", key, Direction[key]);
+            // }
+            sDeskInfo.playerInfos.forEach(playerInfo => {
+                playerInfo.direction = playerInfo.seat;
+                //console.log("mahjong.play.MessageListener.onDeskInfo@direction", Direction.valueOf(playerInfo.seat));
+            });
+            //super.onDeskInfo(mahjong.Module.sDeskInfo);
+            super.onDeskInfo(sDeskInfo);
+        }
+
+        /**
          * 开局或重连后返回牌局消息
          */
         public onSetInit(setInit): void {
@@ -30,6 +47,10 @@ module mahjong.play {
             deskView.getDiscardsView().showAll();
 
             
+        }
+
+        public toString() {
+            return "mahjong.play.MessageListener";
         }
 
     }

@@ -1,64 +1,42 @@
 // 程序入口
 
-import DeskController = mahjong.play.controller.DeskController;
-import PlayerBasicInfo = common.model.PlayerBasicInfo;
-import GlobalSetting = common.model.GlobalSetting;
+import Protocol = common.pb.Protocol;
+import Login = common.conn.Login;
+import MessageHandler = common.msg.MessageHandler;
+import MessageSender = common.msg.MessageSender;
 
 class GameMain {
     constructor() {
+
         Laya.init(1334, 750, Laya.WebGL);
         Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
         Laya.stage.scaleMode = "exactfit";
 
-        PlayerBasicInfo.selfId = 100860;
-        GlobalSetting.init({
-            theme_mahjong: mahjong.play.Theme.GREEN
+        //mahjong.Module.test();
+
+        MessageHandler.init();
+        MessageSender.init();
+
+        // 初始化Protobuf
+        Protocol.init().then(() => {
+            // 初始化各模块
+            return this.initModules();
+        }).then(() => {
+            console.log("GameMain@Modules init finish.");
+            // 连接服务器
+            Login.init();
+            return Login.connectGs();
         });
+    }
 
-        let deskCtrl = new DeskController();
-        deskCtrl.getMessageListener().onEnterRes({
-            basicInfos: [{
-                uid: 100860,
-                nkn: "阿列的脚印",
-                direction: mahjong.play.Direction.XI,
-                head: "http://",
-                state: 0,
-                points: [187]
-            }, {
-                uid: 100861,
-                nkn: "龙的传人",
-                direction: mahjong.play.Direction.BEI,
-                head: "http://",
-                state: 1,
-                points: [27]
-            }, {
-                uid: 100862,
-                nkn: "未来不是梦",
-                direction: mahjong.play.Direction.DONG,
-                head: "http://",
-                state: 1,
-                points: [-88]
-            }],
-            setting: {
-                rule: 61007,
-                total_set: 8
-            }
-        });
-
-        setTimeout(() => deskCtrl.getMessageListener().onPlayerEnter({
-            uid: 100863,
-            nkn: "鲁班七号",
-            direction: mahjong.play.Direction.NAN,
-            head: "http://",
-            state: 0,
-            points: [-126]
-        }), 1000);
-
-
-        // setTimeout(() => deskCtrl.onPlayerExit({
-        //     uid: 100862
-        // }), 3000);
-
+    /**
+     * 初始化各模块
+     */
+    private initModules() {
+        let promises = new Array();
+        promises.push(mahjong.Module.init());
+        promises.push(common.play.Module.init());
+        return Promise.all(promises);
     }
 
 }

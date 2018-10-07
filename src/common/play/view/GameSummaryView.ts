@@ -1,4 +1,5 @@
 module common.play.view {
+
     import Handler = Laya.Handler;
     import Sprite = Laya.Sprite;
     import Component = laya.ui.Component;
@@ -20,6 +21,7 @@ module common.play.view {
         }
 
         public show() {
+            console.log("GameSummaryView.show");
             //预加载图集资源
             Laya.loader.load([
                 "res/atlas/common/rule.atlas"
@@ -36,7 +38,8 @@ module common.play.view {
          * 显示游戏名称
          */
         public showRule(): void {
-            this.ruleSprite.loadImage("common/rule/" + GameSetting.RULE  + ".png");
+            //console.log("GameSummaryView.showRule", GameSetting.rule);
+            this.ruleSprite.loadImage("common/rule/" + GameSetting.rule  + ".png");
 
             this.showComponent(this.ruleSprite, this.getRuleAttrs());
         }
@@ -47,7 +50,8 @@ module common.play.view {
          * 显示牌局模式，如：局 3/8
          */
         public showMode(curSet): void {
-            this.modeLabel.changeText("局  " + curSet + "/" + GameSetting.TOTAL_SET);
+            //console.log("GameSummaryView.showMode@totalSet", GameSetting.get("totalSet"));
+            this.modeLabel.changeText("局  " + curSet + "/" + GameSetting.get("totalSet"));
             this.showComponent(this.modeLabel, this.getModeAttrs());
         }
 

@@ -3,6 +3,8 @@ module mahjong.play.view {
     import Image = Laya.Image;
     import View = Laya.View;
     import PlayerSetInfo = mahjong.play.model.PlayerSetInfo;
+    import PlayerInfo = common.play.model.PlayerInfo;
+    import GlobalSetting = common.model.GlobalSetting;
 
     /**
      *  麻将玩家手牌显示
@@ -117,7 +119,7 @@ module mahjong.play.view {
          * 显示指定玩家手牌
          */
         protected show(setInfo) {
-            if(PlayerBasicInfo.isSelf(setInfo.uid)) {
+            if(PlayerInfo.isSelf(setInfo.uid)) {
                 this.showSelf(setInfo);
                 return;
             }

@@ -1,11 +1,15 @@
 module mahjong.play.view {
+
     import View = Laya.View;
     import Image = Laya.Image;
+    import Protocol = common.pb.Protocol;
 
     /**
      *   明牌显示工厂类
      */
     export class CardGroupFactory {
+
+        
 
         /**
          *   新建一组自己的明牌
@@ -14,6 +18,8 @@ module mahjong.play.view {
             let result = new View();
             result.width = 180;
             result.height = 100;
+
+            let OperType = Protocol.getEnum("mahjong.OperType");
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
@@ -50,6 +56,8 @@ module mahjong.play.view {
             let result = new View();
             result.width = 114;
             result.height = 64;
+
+            let OperType = Protocol.getEnum("mahjong.OperType");
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
@@ -88,6 +96,8 @@ module mahjong.play.view {
             result.width = 45;
             result.height = 92;
 
+            let OperType = Protocol.getEnum("mahjong.OperType");
+
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
                 let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createNextHidden(theme):SingleCardFactory.createNextCard(theme, card);
@@ -122,6 +132,8 @@ module mahjong.play.view {
             let result = new View();
             result.width = 45;
             result.height = 92;
+
+            let OperType = Protocol.getEnum("mahjong.OperType");
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {

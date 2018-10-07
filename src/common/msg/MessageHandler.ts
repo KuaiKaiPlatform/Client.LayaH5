@@ -7,6 +7,10 @@ module common.msg {
 
         private static byte: Byte = new Byte();
 
+        public static init() {
+            this.byte.endian = Byte.LITTLE_ENDIAN;
+        }
+
         /**
          * 处理收到的二进制数据
          */
@@ -21,9 +25,10 @@ module common.msg {
                 return;
             }
 
+            console.log("MessageHandler.handleBytes@handling msg:", parsed.msgId, Protocol.getMsgType(parsed.msgId), JSON.stringify(parsed.message));
             // 发送事件：事件类型为 "message.${msgId}"，数据为 ProtoBuf 消息实例
             GameEventDispacher.instance.eventMsg(parsed.msgId, parsed.message);
-            console.log("MessageHandler.handleBytes@finish msgId:", parsed.msgId);
+            console.log("MessageHandler.handleBytes@finish msg:", parsed.msgId, Protocol.getMsgType(parsed.msgId));
 
         }
 

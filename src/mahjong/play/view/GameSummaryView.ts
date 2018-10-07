@@ -1,4 +1,5 @@
 module mahjong.play.view {
+    
     import Label = Laya.Label;
 
     /*

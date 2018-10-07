@@ -1,6 +1,7 @@
 module mahjong.play.view {
     import Handler = Laya.Handler;
     import View = Laya.View;
+    import GlobalSetting = common.model.GlobalSetting;
 
     /**
      *  麻将玩家打出的牌显示
@@ -60,10 +61,10 @@ module mahjong.play.view {
          * 返回指定玩家的打出的牌UI对象
          */
         protected getUI(uid): View {
-            let discardUI = this.discardUIs[uid.toString()];
+            let discardUI = this.discardUIs[uid];
             if(!discardUI) {
                 discardUI = new View();
-                this.discardUIs[uid.toString()] = discardUI;
+                this.discardUIs[uid] = discardUI;
             }
             return discardUI;
         }

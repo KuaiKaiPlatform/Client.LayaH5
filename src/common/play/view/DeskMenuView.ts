@@ -1,4 +1,5 @@
 module common.play.view {
+    
     import Handler = Laya.Handler;
     import Sprite = Laya.Sprite;
     import Component = laya.ui.Component;
@@ -20,6 +21,7 @@ module common.play.view {
         }
 
         public show() {
+            console.log("DeskMenuView.show");
             //预加载图集资源
             Laya.loader.load([
                 "res/atlas/common/desk.atlas"

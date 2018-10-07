@@ -19,45 +19,56 @@ module common.conn {
         public constructor(name) {
             this.name = name;
             this.socket = new Socket();
-            //this.socket.endian = Byte.LITTLE_ENDIAN;
+            this.socket.endian = Byte.LITTLE_ENDIAN;
         }
 
         /**
          * 连接到指定IP和端口
          */
-        public connectTo(ip, port): void {
+        public connectTo(ip, port) {
             this.url = GameSocket.PREFIX_URL + ip + ":" + port;
-            this.doConnect();
+            return this.doConnect();
         }
 
         /**
          * 连接到指定url
          */
-        public connectByUrl(url): void {
+        public connectByUrl(url) {
             this.url = url;
-            this.doConnect();
+            return this.doConnect();
         }
 
         /**
          * 建立连接
          */
-        private doConnect(): void {
-            this.connecting = true;
-            this.socket.connectByUrl(this.url);
-            this.socket.on(Laya.Event.OPEN, this, this.openHandler);
-            this.socket.on(Laya.Event.MESSAGE, this, this.receiveHandler);
-            this.socket.on(Laya.Event.CLOSE, this, this.closeHandler);
-            this.socket.on(Laya.Event.ERROR, this, this.errorHandler);
+        private doConnect() {
+            return new Promise ((resolve, reject) => {
+                console.log("GameSocket.doConnect@", this.url);
+                this.connecting = true;
+                this.socket.connectByUrl(this.url);
+                this.socket.on(Laya.Event.OPEN, this, event => {
+                    this.openHandler(event);
+                    resolve();
+                });
+
+                this.socket.on(Laya.Event.MESSAGE, this, this.receiveHandler);
+                this.socket.on(Laya.Event.CLOSE, this, e => {
+                    this.closeHandler(e);
+                    reject();
+                });
+
+                this.socket.on(Laya.Event.ERROR, this, this.errorHandler);
+            });
         }
 
         private openHandler(event: any = null): void {
             this.connecting = false;
-            console.log("GameSocket.openHandler", this.url);
+            console.log("GameSocket.openHandler@", this.url);
             GameEventDispacher.instance.event(GlobalEvent.SERVER_CONNECTED, [this.url, this.name]);
         }
 
         private receiveHandler(msg: any = null): void {
-            console.log("GameSocket.receiveHandler@msg", typeof msg, msg);
+            console.log("GameSocket.receiveHandler@msg", typeof msg, this.url, msg);
             if(msg instanceof ArrayBuffer) {
                 MessageHandler.handleBytes(msg);
             } else {
@@ -68,13 +79,13 @@ module common.conn {
 
         private closeHandler(e: any = null): void {
             this.connecting = false;
-            console.warn("GameSocket.closeHandler@Socket closed:", JSON.stringify(e));
+            console.error("GameSocket.closeHandler@Socket closed:", this.url, e);
             GameEventDispacher.instance.event(GlobalEvent.SERVER_CONNECTION_CLOSED, [this.url, this.name]);
         }
 
         private errorHandler(e: any = null): void {
             this.connecting = false;
-            console.error("GameSocket.errorHandler", JSON.stringify(e));
+            console.error("GameSocket.errorHandler@", e);
         }
 
         public sendText(text: string) {

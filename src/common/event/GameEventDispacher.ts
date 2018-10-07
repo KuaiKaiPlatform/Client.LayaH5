@@ -30,6 +30,7 @@ module common.event {
          * @return 此 EventDispatcher 对象。
          */
         onMsg(msgId: number, caller: any, listener: Function, args?: Array<any>): EventDispatcher {
+            console.log("GameEventDispacher.onMsg@listener registered on message", Protocol.getMsgType(msgId), msgId, caller.toString());
 			return super.on("message." + msgId, caller, listener, args);
 		}
 
@@ -42,6 +43,7 @@ module common.event {
          * @return 此 EventDispatcher 对象。
          */
         onceMsg(msgId: number, caller: any, listener: Function, args?: Array<any>): EventDispatcher {
+            console.log("GameEventDispacher.onceMsg@listener registered on message", Protocol.getMsgType(msgId), msgId, caller.toString());
 			return super.once("message." + msgId, caller, listener, args);
 		}
 

@@ -17,6 +17,7 @@ module mahjong.play.view {
         }
 
         public show() {
+            console.log("DirectionView.show");
             //预加载图集资源
             Laya.loader.load([
                 "res/atlas/mahjong/desk.atlas"
@@ -27,7 +28,7 @@ module mahjong.play.view {
 
         // 显示方位
         public showDirection(): void {
-            console.log("mahjong.play.view.showDirection@Showing desk center");
+            console.log("mahjong.play.view.DirectionView.showDirection@Showing desk center");
             if(!this.deskCenterUI) this.deskCenterUI = new ui.mahjong.DeskCenterUI();
             this.showComponent(this.deskCenterUI, {
                 centerX: 0,

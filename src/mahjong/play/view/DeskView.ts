@@ -37,6 +37,7 @@ module mahjong.play.view {
 
         // 设置背景
         public setBg(): void {
+            console.log("DeskView.setBg");
             let imgBg: Laya.Sprite = new Laya.Sprite();
             imgBg.loadImage("mahjong/desk/bg.png");
             Laya.stage.addChild(imgBg);
