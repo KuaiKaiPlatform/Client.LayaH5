@@ -1,9 +1,5 @@
 module common.play {
 
-    import GameSetting = common.play.model.GameSetting;
-    import GameData = common.play.model.GameData;
-    import PlayerInfo = common.play.model.PlayerInfo;
-
     // 牌桌消息监听器
     export class MessageListener {
 
@@ -19,26 +15,27 @@ module common.play {
          * 自己加入牌桌返回消息
          */
         public onDeskInfo(sDeskInfo): void {
-            GameData.sDeskInfo = sDeskInfo;
-            PlayerInfo.init(sDeskInfo);
-            GameSetting.init(sDeskInfo);
+            common.play.model.GameData.sDeskInfo = sDeskInfo;
+            common.play.model.PlayerInfo.init(sDeskInfo);
+            common.play.model.GameSetting.init(sDeskInfo);
             this.deskView.show();
         }
 
         /**
          * 有人加入牌桌返回消息
          */
-        public onPlayerEnter(playerInfo): void {
-            PlayerInfo.add(playerInfo);
-            this.deskView.onPlayerEnter(playerInfo);
+        public onPlayerJoin(sPlayerJoin): void {
+            common.play.model.PlayerInfo.add(sPlayerJoin.player);
+            this.deskView.onPlayerJoin(sPlayerJoin);
+            console.log("common.play.MessageListener.onPlayerJoin@done", JSON.stringify(sPlayerJoin));
         }
 
         /**
          * 有人离开牌桌返回消息
          */
-        public onPlayerExit(exitRes): void {
+        public onPlayerQuit(exitRes): void {
             this.deskView.onPlayerExit(exitRes.uid);
-            PlayerInfo.removeByUid(exitRes.uid);
+            common.play.model.PlayerInfo.removeByUid(exitRes.uid);
         }
 
         /**

@@ -1,20 +1,17 @@
 module common.play.model {
 
-    import Login = common.conn.Login;
-
     /*
      *   玩家基本信息
      */
     export class PlayerInfo {
 
-        private static playerInfos;
+        private static players = {};
 
         public static init(sDeskInfo) {
-            this.playerInfos = {};
-            sDeskInfo.playerInfos.forEach(playerInfo => {
-                playerInfo.total = 0;
-                playerInfo.points.forEach(point => playerInfo.total += point);
-                this.add(playerInfo);
+            sDeskInfo.desk.players.forEach(player => {
+                player.total = 0;
+                player.points.forEach(point => player.total += point);
+                this.add(player);
             });
         }
 
@@ -22,7 +19,7 @@ module common.play.model {
          * 返回指定uid的玩家基本信息
          */
         public static getByUid(uid) {
-            return this.playerInfos[uid];
+            return this.players[uid];
         }
 
         /**
@@ -35,23 +32,23 @@ module common.play.model {
         /**
          * 增加一名玩家的基本信息
          */
-        public static add(playerInfo) {
-            this.playerInfos[playerInfo.userInfo.uid] = playerInfo;
+        public static add(player) {
+            this.players[player.user.uid] = player;
         }
 
         /**
          * 删除一名玩家的基本信息
          */
         public static removeByUid(uid) {
-            delete this.playerInfos[uid];
+            delete this.players[uid];
         }
 
         public static getAll() {
-            return this.playerInfos;
+            return this.players;
         }
 
-        public static clear() {
-            this.playerInfos = {};
+        public static clearAll() {
+            this.players = {};
         }
 
         /**

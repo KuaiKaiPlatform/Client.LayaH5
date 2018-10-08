@@ -1,9 +1,5 @@
 module mahjong.play.controller {
 
-    import PlayerInfo = common.play.model.PlayerInfo;
-    import DeskView = mahjong.play.view.DeskView;
-    import MessageListener = mahjong.play.MessageListener;
-
     // 麻将牌桌控制器
     export class DeskController extends common.play.controller.DeskController {
         
@@ -15,15 +11,15 @@ module mahjong.play.controller {
 
         constructor() {
             super();
-            this.deskView = new DeskView(this);
-            this.messageListener = new MessageListener(this);
+            this.deskView = new mahjong.play.view.DeskView(this);
+            this.messageListener = new mahjong.play.MessageListener(this);
         }
 
         /**
          * 根据玩家方位找到位置
          */
         public findPositionByDirection(direction): number {
-            let selfPlayerInfo = PlayerInfo.getSelf();
+            let selfPlayerInfo = common.play.model.PlayerInfo.getSelf();
             let pos = direction - selfPlayerInfo.direction;
             return pos < 0?pos+4:pos;
         }
@@ -32,7 +28,7 @@ module mahjong.play.controller {
          * 根据玩家uid找到位置
          */
         public findPosition(uid): number {
-            let playerInfo = PlayerInfo.getByUid(uid);
+            let playerInfo = common.play.model.PlayerInfo.getByUid(uid);
             return this.findPositionByDirection(playerInfo.direction);
         }
 

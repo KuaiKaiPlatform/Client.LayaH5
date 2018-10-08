@@ -2,9 +2,6 @@ module mahjong.play.view {
     import Handler = Laya.Handler;
     import Image = Laya.Image;
     import View = Laya.View;
-    import PlayerSetInfo = mahjong.play.model.PlayerSetInfo;
-    import PlayerInfo = common.play.model.PlayerInfo;
-    import GlobalSetting = common.model.GlobalSetting;
 
     /**
      *  麻将玩家手牌显示
@@ -119,7 +116,7 @@ module mahjong.play.view {
          * 显示指定玩家手牌
          */
         protected show(setInfo) {
-            if(PlayerInfo.isSelf(setInfo.uid)) {
+            if(common.play.model.PlayerInfo.isSelf(setInfo.uid)) {
                 this.showSelf(setInfo);
                 return;
             }
@@ -127,7 +124,7 @@ module mahjong.play.view {
             let pos = this.deskController.findPosition(setInfo.uid);
             let handcardUI = this.getUI(setInfo.uid, pos) as View;
 
-            let hasMo: boolean = PlayerSetInfo.hasMo(setInfo);
+            let hasMo: boolean = mahjong.play.model.PlayerSetInfo.hasMo(setInfo);
             let handCardNum = hasMo?setInfo.handCardNum-1:setInfo.handCardNum;
             // 遍历并显示每张打出的牌
             for(let i=0; i<handCardNum; i++) {
@@ -146,8 +143,10 @@ module mahjong.play.view {
          * 显示一张其他玩家的手牌
          */
         public addSingleCard(handcardUI: View, index, pos): void {
+            let GlobalSetting = common.model.GlobalSetting;
             let handcards = handcardUI.getChildByName("handcards") as View;
             let singleCard: Image;
+
             switch(pos) {
             case mahjong.play.Position.SELF:
                 break;
@@ -172,6 +171,7 @@ module mahjong.play.view {
          * 显示其他玩家摸到的手牌
          */
         public showMoCard(handcardUI: View, pos): void {
+            let GlobalSetting = common.model.GlobalSetting;
             let moCard = handcardUI.getChildByName("mo") as Image;
             if(moCard) {
                 moCard.visible = true;
@@ -206,7 +206,7 @@ module mahjong.play.view {
             let handcardUI = this.getUI(setInfo.uid, pos) as View;
 
             let handcards = setInfo.handcards;
-            let hasMo: boolean = PlayerSetInfo.hasMo(setInfo);
+            let hasMo: boolean = mahjong.play.model.PlayerSetInfo.hasMo(setInfo);
             if(hasMo) {
                 this.showSelfMo(handcardUI, handcards[handcards.length-1]);
             }
@@ -228,6 +228,7 @@ module mahjong.play.view {
          * 显示自己的摸牌
          */
         protected showSelfMo(handcardUI: View, moCard): void {
+            let GlobalSetting = common.model.GlobalSetting;
             handcardUI.removeChildByName("mo");
             let moCardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, moCard);
             moCardView.right = 0;
@@ -240,6 +241,7 @@ module mahjong.play.view {
          * 增加一张自己的手牌
          */
         public addSelfCard(handcardUI: View, index, card): void {
+            let GlobalSetting = common.model.GlobalSetting;
             let handcards = handcardUI.getChildByName("handcards") as View;
             let cardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, card);
             cardView.right = 64 * index;

@@ -2,14 +2,11 @@ module mahjong.play.view {
 
     import View = Laya.View;
     import Image = Laya.Image;
-    import Protocol = common.pb.Protocol;
 
     /**
      *   明牌显示工厂类
      */
     export class CardGroupFactory {
-
-        
 
         /**
          *   新建一组自己的明牌

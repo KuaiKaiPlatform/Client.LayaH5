@@ -2,9 +2,6 @@ module common.conn {
 
     import Socket = Laya.Socket;
     import Byte = Laya.Byte;
-    import GameEventDispacher = common.event.GameEventDispacher;
-    import GlobalEvent = common.event.GlobalEvent;
-    import MessageHandler = common.msg.MessageHandler;
 
     // Socket
     export class GameSocket {
@@ -64,7 +61,7 @@ module common.conn {
         private openHandler(event: any = null): void {
             this.connecting = false;
             console.log("GameSocket.openHandler@", this.url);
-            GameEventDispacher.instance.event(GlobalEvent.SERVER_CONNECTED, [this.url, this.name]);
+            GameEventDispacher.instance.event(common.event.GlobalEvent.SERVER_CONNECTED, [this.url, this.name]);
         }
 
         private receiveHandler(msg: any = null): void {
@@ -80,7 +77,7 @@ module common.conn {
         private closeHandler(e: any = null): void {
             this.connecting = false;
             console.error("GameSocket.closeHandler@Socket closed:", this.url, e);
-            GameEventDispacher.instance.event(GlobalEvent.SERVER_CONNECTION_CLOSED, [this.url, this.name]);
+            GameEventDispacher.instance.event(common.event.GlobalEvent.SERVER_CONNECTION_CLOSED, [this.url, this.name]);
         }
 
         private errorHandler(e: any = null): void {

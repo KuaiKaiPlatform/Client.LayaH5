@@ -1,8 +1,7 @@
 module common.msg {
 
     import Byte = Laya.Byte;
-    import GameEventDispacher = common.event.GameEventDispacher;
-
+    
     export class MessageHandler {
 
         private static byte: Byte = new Byte();

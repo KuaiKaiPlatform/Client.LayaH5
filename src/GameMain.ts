@@ -4,6 +4,7 @@ import Protocol = common.pb.Protocol;
 import Login = common.conn.Login;
 import MessageHandler = common.msg.MessageHandler;
 import MessageSender = common.msg.MessageSender;
+import GameEventDispacher = common.event.GameEventDispacher;
 
 class GameMain {
     constructor() {
@@ -24,8 +25,7 @@ class GameMain {
         }).then(() => {
             console.log("GameMain@Modules init finish.");
             // 连接服务器
-            Login.init();
-            return Login.connectGs();
+            return Login.init().connectGs();
         });
     }
 
@@ -34,8 +34,9 @@ class GameMain {
      */
     private initModules() {
         let promises = new Array();
-        promises.push(mahjong.Module.init());
         promises.push(common.play.Module.init());
+        promises.push(hall.desk.Module.init());
+        promises.push(mahjong.Module.init());
         return Promise.all(promises);
     }
 

@@ -28,6 +28,7 @@ module common.pb {
 			return new Promise((resolve, reject) => {
 				Laya.loader.load("res/pb/meta.json", Laya.Handler.create(this, () => {
 					Protocol.meta = Laya.loader.getRes("res/pb/meta.json");
+					console.log("Protocol.loadMeta@finish");
 					resolve();
 				}), null, Laya.Loader.JSON);
 			});
@@ -44,7 +45,7 @@ module common.pb {
 					//console.log("Protocol.loadAll", origin, "-", target);
 					return target.indexOf("res/pb/") > -1?target:"res/pb/" + target;
 				};
-
+				console.log("Protocol.loadAll@start");
 				PbRoot.load(this.meta.fileNames, (err, root) => {
 					if (err) {
 						console.error("Protocol.loadAll@err", err);

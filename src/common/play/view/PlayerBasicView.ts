@@ -1,7 +1,6 @@
 module common.play.view {
 
     import Handler = Laya.Handler;
-    import PlayerInfo = common.play.model.PlayerInfo;
 
     /*
      *  玩家基本信息显示
@@ -28,45 +27,46 @@ module common.play.view {
 
         public showAll() {
             console.log("PlayerBasicView.showAll");
-            let playerInfos = PlayerInfo.getAll();
+            let playerInfos = common.play.model.PlayerInfo.getAll();
             for(let key in playerInfos) {
                 let playerInfo = playerInfos[key];
                 this.show(playerInfo);
             }
         }
 
-        public show(playerInfo) {
+        public show(player) {
             //预加载图集资源
             Laya.loader.load([
                 "res/atlas/player.atlas"
             ], Handler.create(this, () => {
-                this.showSingle(playerInfo);
+                this.showSingle(player);
             }));
         }
 
         protected abstract getAttrs(playerInfo);
 
         // 显示指定坐标的一名玩家基本信息
-        public showSingle(playerInfo): void {
+        public showSingle(player): void {
+            let user = player.user;
             // 玩家基本信息显示
-            let basicInfoUI = this.getUI(playerInfo.userInfo.uid);
+            let basicInfoUI = this.getUI(user.uid);
 
             // 昵称
             let labelName = basicInfoUI.getChildByName("label_player_name") as laya.ui.Label;
-            labelName.changeText(playerInfo.userInfo.nkn);
+            labelName.changeText(user.nkn);
 
             // 分数
             // let total = 0;
             // basicInfo.points.forEach(point => total += point);
             let labelPoint = basicInfoUI.getChildByName("label_player_score") as laya.ui.Label;
-            labelPoint.changeText(playerInfo.total.toString());
+            labelPoint.changeText(player.total.toString());
 
             // 隐藏角标
             let jiaoBiao = basicInfoUI.getChildByName("img_player_jiao") as laya.display.Sprite;
             jiaoBiao.visible = false;
 
             // 显示
-            this.showComponent(basicInfoUI, this.getAttrs(playerInfo));
+            this.showComponent(basicInfoUI, this.getAttrs(player));
         }
 
         // 删除一名玩家基本信息

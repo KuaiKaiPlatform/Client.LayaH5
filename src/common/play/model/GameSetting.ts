@@ -4,15 +4,14 @@ module common.play.model {
      */
     export class GameSetting {
 
-        // public static RULE                  = "rule";
-        // public static TOTAL_SET             = "total_set";
         public static rule;
         public static settings = {};
 
         public static init(sDeskInfo) {
-            this.rule = sDeskInfo.rule;
-            this.settings[sDeskInfo.rule] = sDeskInfo.setting;
-            console.log("GameSetting.init", this.rule, sDeskInfo.setting);
+            let desk = sDeskInfo.desk;
+            this.rule = desk.rule;
+            this.settings[desk.rule] = desk.setting;
+            console.log("GameSetting.init", this.rule, desk.setting);
         }
 
         public static get(key) {

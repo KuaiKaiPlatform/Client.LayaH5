@@ -1,8 +1,6 @@
 module common.msg {
 
     import Byte = Laya.Byte;
-    import Protocol = common.pb.Protocol;
-    import GameSocket = common.conn.GameSocket;
 
     /**
      * 消息发送
@@ -16,11 +14,11 @@ module common.msg {
             this.byte.endian = Byte.LITTLE_ENDIAN;
         }
 
-        public static getGameSocket(serverId): GameSocket {
+        public static getGameSocket(serverId): common.conn.GameSocket {
             console.log("MessageSender.getGameSocket@serverId", serverId);
             let gameSocket = this.gameSockets[serverId];
             if(!gameSocket) {
-                gameSocket = new GameSocket(serverId);
+                gameSocket = new common.conn.GameSocket(serverId);
                 this.gameSockets[serverId] = gameSocket;
             }
             return gameSocket;

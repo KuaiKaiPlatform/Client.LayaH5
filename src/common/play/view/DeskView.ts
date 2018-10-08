@@ -61,9 +61,9 @@ module common.play.view {
         public setBg(): void {
         }
 
-        public onPlayerEnter(basicInfo): void {
-            this.playerBasicView.show(basicInfo);
-            this.playerReadyView.show(basicInfo);
+        public onPlayerJoin(sPlayerJoin): void {
+            this.playerBasicView.show(sPlayerJoin.player);
+            this.playerReadyView.show(sPlayerJoin.player);
         }
 
         public onPlayerExit(uid): void {

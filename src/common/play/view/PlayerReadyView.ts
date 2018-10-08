@@ -3,8 +3,6 @@ module common.play.view {
     import Sprite = Laya.Sprite;
     import Event = Laya.Event;
     import Component = laya.ui.Component;
-    import PlayerInfo = common.play.model.PlayerInfo;
-    import Login = common.conn.Login;
 
     /**
      * 玩家准备相关操作和状态显示
@@ -23,10 +21,10 @@ module common.play.view {
         /**
          * 返回指定玩家的准备相关UI对象
          */
-        private getSprite(playerInfo): Component {
+        private getSprite(player): Component {
             // 准备状态
-            if(playerInfo.prepared) {
-                let uid = playerInfo.userInfo.uid;
+            if(player.prepared) {
+                let uid = player.user.uid;
                 let sprite = this.preparedSprites[uid] as Component;
                 if(!sprite) {
                     sprite = new Component();
@@ -37,7 +35,7 @@ module common.play.view {
             }
 
             // 未准备状态，自己显示准备按钮，其他人不显示
-            if(PlayerInfo.isSelf(playerInfo.userInfo.uid)) {
+            if(common.play.model.PlayerInfo.isSelf(player.user.uid)) {
                 if(!this.prepareSprite) this.prepareSprite = new Component();
                 this.prepareSprite.loadImage("common/desk/prepare.png");
                 this.prepareSprite.on(Event.CLICK, this, this.onPrepare);
@@ -52,7 +50,7 @@ module common.play.view {
          */
         public onPrepare(e: Event): void {
             this.removeSingle(Login.getUid());
-            let selfPlayerInfo = PlayerInfo.getSelf();
+            let selfPlayerInfo = common.play.model.PlayerInfo.getSelf();
             selfPlayerInfo.prepared = true;
             this.show(selfPlayerInfo);
 
@@ -64,7 +62,7 @@ module common.play.view {
          */
         public showAll() {
             console.log("PlayerReadyView.showAll");
-            let playerInfos = PlayerInfo.getAll();
+            let playerInfos = common.play.model.PlayerInfo.getAll();
             for(let key in playerInfos) {
                 let playerInfo = playerInfos[key];
                 this.show(playerInfo);
@@ -101,7 +99,7 @@ module common.play.view {
          * 删除所有玩家准备状态
          */
         public removeAll() {
-            let playerInfos = PlayerInfo.getAll();
+            let playerInfos = common.play.model.PlayerInfo.getAll();
             for(let key in playerInfos) {
                 let playerInfo = playerInfos[key];
                 this.removeSingle(playerInfo.userInfo.uid);
@@ -119,7 +117,7 @@ module common.play.view {
                 Laya.stage.removeChild(preparedSprite);
             }
 
-            if(PlayerInfo.isSelf(uid) && this.prepareSprite) {
+            if(common.play.model.PlayerInfo.isSelf(uid) && this.prepareSprite) {
                 Laya.stage.removeChild(this.prepareSprite);
             }
 

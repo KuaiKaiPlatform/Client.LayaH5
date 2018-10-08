@@ -2,7 +2,6 @@ module common.msg {
 
     import Byte = Laya.Byte;
     import Browser = Laya.Browser;
-    import Protocol = common.pb.Protocol;
 
     /**
      * 消息错误代码

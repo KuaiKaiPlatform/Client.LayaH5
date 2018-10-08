@@ -1,7 +1,5 @@
 module mahjong.play {
 
-    import GameSetting = common.play.model.GameSetting;
-
     // 牌桌消息监听器
     export class MessageListener extends common.play.MessageListener {
 
@@ -18,12 +16,13 @@ module mahjong.play {
             // for(let key in Direction) {
             //     console.log("mahjong.play.MessageListener.onDeskInfo@Direction", key, Direction[key]);
             // }
-            sDeskInfo.playerInfos.forEach(playerInfo => {
-                playerInfo.direction = playerInfo.seat;
+            sDeskInfo.desk.players.forEach(player => {
+                player.direction = player.seat;
                 //console.log("mahjong.play.MessageListener.onDeskInfo@direction", Direction.valueOf(playerInfo.seat));
             });
             //super.onDeskInfo(mahjong.Module.sDeskInfo);
             super.onDeskInfo(sDeskInfo);
+            console.log("mahjong.play.MessageListener.onDeskInfo@done", JSON.stringify(sDeskInfo));
         }
 
         /**

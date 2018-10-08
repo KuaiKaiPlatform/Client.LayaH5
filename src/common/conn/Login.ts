@@ -1,12 +1,5 @@
 module common.conn {
 
-    import GameEventDispacher = common.event.GameEventDispacher;
-    import GlobalEvent = common.event.GlobalEvent;
-    import Protocol = common.pb.Protocol;
-    import MessageSender = common.msg.MessageSender;
-    import GameSocket = common.conn.GameSocket;
-    import Random = common.utils.Random;
-
     export class Login {
 
         private static serverInfo = {
@@ -23,7 +16,8 @@ module common.conn {
         };
 
         public static init() {
-            this.userInfo.uid = Random.getInt(100001, 1000000);
+            this.userInfo.uid = common.utils.Random.getInt(100001, 1000000);
+            return this;
         }
 
         public static getUid() {
@@ -45,7 +39,7 @@ module common.conn {
             }, () => {
                 // 连接失败
                 console.error("Login.connectGs@web socket connect failed", si);
-                GameEventDispacher.instance.event(GlobalEvent.SERVER_CONNECTION_FAIL);
+                GameEventDispacher.instance.event(common.event.GlobalEvent.SERVER_CONNECTION_FAIL);
                 return Promise.reject(si);
             }).then(() => {
                 return this.loginGs();

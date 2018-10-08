@@ -4,7 +4,6 @@ module common.play.view {
     import Sprite = Laya.Sprite;
     import Component = laya.ui.Component;
     import Label = laya.ui.Label;
-    import GameSetting = common.play.model.GameSetting;
 
     /**
      * 牌桌基本信息显示
@@ -39,7 +38,7 @@ module common.play.view {
          */
         public showRule(): void {
             //console.log("GameSummaryView.showRule", GameSetting.rule);
-            this.ruleSprite.loadImage("common/rule/" + GameSetting.rule  + ".png");
+            this.ruleSprite.loadImage("common/rule/" + common.play.model.GameSetting.rule  + ".png");
 
             this.showComponent(this.ruleSprite, this.getRuleAttrs());
         }
@@ -51,7 +50,7 @@ module common.play.view {
          */
         public showMode(curSet): void {
             //console.log("GameSummaryView.showMode@totalSet", GameSetting.get("totalSet"));
-            this.modeLabel.changeText("局  " + curSet + "/" + GameSetting.get("totalSet"));
+            this.modeLabel.changeText("局  " + curSet + "/" + common.play.model.GameSetting.get("totalSet"));
             this.showComponent(this.modeLabel, this.getModeAttrs());
         }
 

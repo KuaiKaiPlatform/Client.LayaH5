@@ -1,20 +1,21 @@
 module mahjong {
 
-    import GameEventDispacher = common.event.GameEventDispacher;
-    import DeskController = mahjong.play.controller.DeskController;
-    import GlobalSetting = common.model.GlobalSetting;
-    import Protocol = common.pb.Protocol;
-
     export class Module {
 
         /**
-         * 麻将模块初始化：监听消息
+         * 麻将模块初始化：单例，监听消息等
          */
         public static init() {
+            let GameEventDispacher = common.event.GameEventDispacher;
+            let GlobalSetting = common.model.GlobalSetting;
+            let Protocol = common.pb.Protocol;
+            let DeskController = mahjong.play.controller.DeskController;
+
             // 牌桌，监听消息
             DeskController.init();
-            let messageListener = DeskController.instance.getMessageListener();
+            let messageListener = DeskController.instance.getMessageListener() as mahjong.play.MessageListener;
             GameEventDispacher.instance.onMsg(Protocol.meta.hall.SDeskInfo, messageListener, messageListener.onDeskInfo);
+            GameEventDispacher.instance.onMsg(Protocol.meta.hall.SPlayerJoin, messageListener, messageListener.onPlayerJoin);
             
             // 牌桌设置
             GlobalSetting.init({
@@ -27,8 +28,8 @@ module mahjong {
         }
 
         public static sDeskInfo = {
-            playerInfos: [{
-                userInfo: {
+            players: [{
+                user: {
                     uid: 100890,
                     nkn: "阿列的脚印"
                 },
@@ -37,7 +38,7 @@ module mahjong {
                 prepared: false,
                 points: [187]
             }, {
-                userInfo: {
+                user: {
                     uid: 100861,
                     nkn: "龙的传人"
                 },
@@ -46,7 +47,7 @@ module mahjong {
                 prepared: true,
                 points: [27]
             }, {
-                userInfo: {
+                user: {
                     uid: 100862,
                     nkn: "未来不是梦"
                 },
@@ -62,7 +63,7 @@ module mahjong {
         };
 
         public static test() {
-            let deskCtrl = new DeskController();
+            let deskCtrl = new mahjong.play.controller.DeskController();
             deskCtrl.getMessageListener().onDeskInfo(this.sDeskInfo);
             //DeskController.instance.getMessageListener().onJoinDesk(this.sJoinDesk);
 

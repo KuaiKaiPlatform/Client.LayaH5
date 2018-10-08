@@ -1,7 +1,5 @@
 module common.play {
 
-    import GlobalSetting = common.model.GlobalSetting;
-
     export class Module {
 
         /**

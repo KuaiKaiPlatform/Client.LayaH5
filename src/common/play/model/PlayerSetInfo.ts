@@ -1,6 +1,4 @@
 module common.play.model {
-
-    import Login = common.conn.Login;
     
     /*
      *   玩家牌局信息
@@ -19,7 +17,7 @@ module common.play.model {
          * 返回指定uid的玩家牌局信息
          */
         public getByUid(uid) {
-            return this.setInfos[uid.toString()];
+            return this.setInfos[uid];
         }
 
         /**
@@ -33,14 +31,14 @@ module common.play.model {
          * 增加一名玩家的牌局信息
          */
         public add(setInfo) {
-            this.setInfos[setInfo.uid.toString()] = setInfo;
+            this.setInfos[setInfo.uid] = setInfo;
         }
 
         /**
          * 删除一名玩家的牌局信息
          */
         public removeByUid(uid) {
-            delete this.setInfos[uid.toString()];
+            delete this.setInfos[uid];
         }
 
         public getAll() {
