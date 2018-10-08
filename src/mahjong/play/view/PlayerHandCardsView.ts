@@ -116,7 +116,7 @@ module mahjong.play.view {
          * 显示指定玩家手牌
          */
         protected show(setInfo) {
-            if(common.play.model.PlayerInfo.isSelf(setInfo.uid)) {
+            if(Login.isSelf(setInfo.uid)) {
                 this.showSelf(setInfo);
                 return;
             }

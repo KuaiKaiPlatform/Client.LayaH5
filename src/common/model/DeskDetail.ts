@@ -31,7 +31,7 @@ module common.model {
             player.total = 0;
             player.points.forEach(point => player.total += point);
             this.players[player.user.uid] = player;
-            console.log("DeskDetail.addPlayer", player.user.uid, this.getKey());
+            console.log("common.model.DeskDetail.addPlayer", player.user.uid, this.getKey());
         }
 
         public getAllPlayers() {

@@ -15,8 +15,11 @@ module common.play {
          * 自己加入牌桌返回消息
          */
         public onDeskInfo(sDeskInfo): void {
-            common.play.model.GameData.sDeskInfo = sDeskInfo;
-            common.play.model.PlayerInfo.init(sDeskInfo);
+            let DeskInfo = common.model.DeskInfo;
+            let deskDetail = DeskInfo.get(DeskInfo.getKey(sDeskInfo.desk));
+            this.deskController.setDeskDetail(deskDetail);
+
+            //common.play.model.PlayerInfo.init(sDeskInfo);
             common.play.model.GameSetting.init(sDeskInfo);
             this.deskView.show();
         }
@@ -25,7 +28,7 @@ module common.play {
          * 有人加入牌桌返回消息
          */
         public onPlayerJoin(sPlayerJoin): void {
-            common.play.model.PlayerInfo.add(sPlayerJoin.player);
+            //common.play.model.PlayerInfo.add(sPlayerJoin.player);
             this.deskView.onPlayerJoin(sPlayerJoin);
             console.log("common.play.MessageListener.onPlayerJoin@done", JSON.stringify(sPlayerJoin));
         }
@@ -35,7 +38,7 @@ module common.play {
          */
         public onPlayerQuit(exitRes): void {
             this.deskView.onPlayerExit(exitRes.uid);
-            common.play.model.PlayerInfo.removeByUid(exitRes.uid);
+            //common.play.model.PlayerInfo.removeByUid(exitRes.uid);
         }
 
         /**

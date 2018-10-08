@@ -27,10 +27,10 @@ module common.play.view {
 
         public showAll() {
             console.log("PlayerBasicView.showAll");
-            let playerInfos = common.play.model.PlayerInfo.getAll();
-            for(let key in playerInfos) {
-                let playerInfo = playerInfos[key];
-                this.show(playerInfo);
+            //let players = common.play.model.PlayerInfo.getAll();
+            let players = this.deskController.getDeskDetail().getAllPlayers();
+            for(let key in players) {
+                this.show(players[key]);
             }
         }
 

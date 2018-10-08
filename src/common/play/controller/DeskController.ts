@@ -3,6 +3,8 @@ module common.play.controller {
     // 牌桌控制器
     export abstract class DeskController {
 
+        protected deskDetail: common.model.DeskDetail;
+
         // 消息监听器
         protected messageListener: common.play.MessageListener;
 
@@ -22,6 +24,14 @@ module common.play.controller {
 
         public getGameSetInfo() {
             return this.gameSetInfo;
+        }
+
+        public getDeskDetail() : common.model.DeskDetail {
+            return this.deskDetail;
+        }
+
+        public setDeskDetail(deskDetail) {
+            this.deskDetail = deskDetail;
         }
 
         public abstract createGameSetInfo(setInit);

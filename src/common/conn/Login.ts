@@ -25,6 +25,13 @@ module common.conn {
         }
 
         /**
+         * 检查是否是自己
+         */
+        public static isSelf(uid): boolean {
+            return this.getUid() == uid;
+        }
+
+        /**
          * 连接游戏服务器
          */
         public static connectGs() {

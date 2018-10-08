@@ -19,8 +19,8 @@ module mahjong.play.controller {
          * 根据玩家方位找到位置
          */
         public findPositionByDirection(direction): number {
-            let selfPlayerInfo = common.play.model.PlayerInfo.getSelf();
-            let pos = direction - selfPlayerInfo.direction;
+            let selfPlayer = this.deskDetail.getPlayer(Login.getUid());
+            let pos = direction - selfPlayer.direction;
             return pos < 0?pos+4:pos;
         }
 
@@ -28,8 +28,9 @@ module mahjong.play.controller {
          * 根据玩家uid找到位置
          */
         public findPosition(uid): number {
-            let playerInfo = common.play.model.PlayerInfo.getByUid(uid);
-            return this.findPositionByDirection(playerInfo.direction);
+            //let player = common.play.model.PlayerInfo.getByUid(uid);
+            let player = this.deskDetail.getPlayer(uid);
+            return this.findPositionByDirection(player.direction);
         }
 
         /**

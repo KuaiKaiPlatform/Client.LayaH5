@@ -12,7 +12,7 @@ module hall.desk {
             let DeskInfo = common.model.DeskInfo;
             let deskKey = DeskInfo.getKey(sDeskInfo.desk);
             DeskInfo.add(deskKey, sDeskInfo.desk);
-            console.log("hall.desk.MessageListener.onDeskInfo@done", JSON.stringify(sDeskInfo));
+            console.log("hall.desk.MessageListener.onDeskInfo@done", deskKey);
         }
 
         /**

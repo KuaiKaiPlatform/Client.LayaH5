@@ -22,7 +22,7 @@ module mahjong.play {
             });
             //super.onDeskInfo(mahjong.Module.sDeskInfo);
             super.onDeskInfo(sDeskInfo);
-            console.log("mahjong.play.MessageListener.onDeskInfo@done", JSON.stringify(sDeskInfo));
+            console.log("mahjong.play.MessageListener.onDeskInfo@done", common.model.DeskInfo.getKey(sDeskInfo.desk));
         }
 
         /**

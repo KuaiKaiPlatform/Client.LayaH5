@@ -21,7 +21,7 @@ module common.model {
          */
         public static add(deskKey, desk) {
             this.desks[deskKey] = new DeskDetail(desk);
-            console.log("hall.model.DeskInfo.add", deskKey, desk);
+            console.log("common.model.DeskInfo.add@done", deskKey);
         }
 
         /**

@@ -35,7 +35,7 @@ module common.play.view {
             }
 
             // 未准备状态，自己显示准备按钮，其他人不显示
-            if(common.play.model.PlayerInfo.isSelf(player.user.uid)) {
+            if(Login.isSelf(player.user.uid)) {
                 if(!this.prepareSprite) this.prepareSprite = new Component();
                 this.prepareSprite.loadImage("common/desk/prepare.png");
                 this.prepareSprite.on(Event.CLICK, this, this.onPrepare);
@@ -50,9 +50,9 @@ module common.play.view {
          */
         public onPrepare(e: Event): void {
             this.removeSingle(Login.getUid());
-            let selfPlayerInfo = common.play.model.PlayerInfo.getSelf();
-            selfPlayerInfo.prepared = true;
-            this.show(selfPlayerInfo);
+            let selfPlayer = this.deskController.getDeskDetail().getPlayer(Login.getUid());
+            selfPlayer.prepared = true;
+            this.show(selfPlayer);
 
             // 发送准备消息
         }
@@ -62,10 +62,10 @@ module common.play.view {
          */
         public showAll() {
             console.log("PlayerReadyView.showAll");
-            let playerInfos = common.play.model.PlayerInfo.getAll();
-            for(let key in playerInfos) {
-                let playerInfo = playerInfos[key];
-                this.show(playerInfo);
+            //let players = common.play.model.PlayerInfo.getAll();
+            let players = this.deskController.getDeskDetail().getAllPlayers();
+            for(let key in players) {
+                this.show(players[key]);
             }
         }
 
@@ -99,10 +99,11 @@ module common.play.view {
          * 删除所有玩家准备状态
          */
         public removeAll() {
-            let playerInfos = common.play.model.PlayerInfo.getAll();
-            for(let key in playerInfos) {
-                let playerInfo = playerInfos[key];
-                this.removeSingle(playerInfo.userInfo.uid);
+            //let players = common.play.model.PlayerInfo.getAll();
+            let players = this.deskController.getDeskDetail().getAllPlayers();
+            for(let key in players) {
+                let player = players[key];
+                this.removeSingle(player.user.uid);
             }
         }
 
@@ -117,7 +118,7 @@ module common.play.view {
                 Laya.stage.removeChild(preparedSprite);
             }
 
-            if(common.play.model.PlayerInfo.isSelf(uid) && this.prepareSprite) {
+            if(Login.isSelf(uid) && this.prepareSprite) {
                 Laya.stage.removeChild(this.prepareSprite);
             }
 
