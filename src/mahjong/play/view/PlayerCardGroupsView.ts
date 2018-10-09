@@ -148,7 +148,7 @@ module mahjong.play.view {
          * 增加一组自己明牌
          */
         protected addSelf(playerUI: View, index, cardGroup): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addSelf@adding", index, JSON.stringify(cardGroup));
             let groupView = CardGroupFactory.createSelfGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
             groupView.left = 200 * index;
@@ -160,7 +160,7 @@ module mahjong.play.view {
          * 增加一组对家明牌
          */
         protected addOpposite(playerUI: View, index, cardGroup): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addOpposite@adding", index, JSON.stringify(cardGroup));
             let groupView = CardGroupFactory.createOppositeGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
             groupView.right = 127 * index;
@@ -172,7 +172,7 @@ module mahjong.play.view {
          * 增加一组下家明牌
          */
         protected addNext(playerUI: View, index, cardGroup): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addNext@adding", index, JSON.stringify(cardGroup));
             let groupView = CardGroupFactory.createNextGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
             groupView.bottom = 99 * index;
@@ -183,7 +183,7 @@ module mahjong.play.view {
          * 增加一组上家明牌
          */
         protected addPre(playerUI: View, index, cardGroup): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addPre@adding", index, JSON.stringify(cardGroup));
             let groupView = CardGroupFactory.createPreGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
             groupView.top = 99 * index;

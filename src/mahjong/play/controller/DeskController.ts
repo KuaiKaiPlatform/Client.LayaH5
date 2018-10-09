@@ -3,6 +3,9 @@ module mahjong.play.controller {
     // 麻将牌桌控制器
     export class DeskController extends common.play.controller.DeskController {
         
+        // 根据玩法找到牌桌显示类（暂未使用）
+        private rule2DeskView = {};
+
         public static instance;
 
         public static init() {
@@ -16,21 +19,12 @@ module mahjong.play.controller {
         }
 
         /**
-         * 根据玩家方位找到位置
+         * 找到指定玩家相对位置：mahjong.play.Position
          */
-        public findPositionByDirection(direction): number {
-            let selfPlayer = this.deskDetail.getPlayer(Login.getUid());
-            let pos = direction - selfPlayer.direction;
+        public findPosition(player): number {
+            let selfPlayer = this.deskDetail.getPlayer(this.selfId);
+            let pos = player.seat - selfPlayer.seat;
             return pos < 0?pos+4:pos;
-        }
-
-        /**
-         * 根据玩家uid找到位置
-         */
-        public findPosition(uid): number {
-            //let player = common.play.model.PlayerInfo.getByUid(uid);
-            let player = this.deskDetail.getPlayer(uid);
-            return this.findPositionByDirection(player.direction);
         }
 
         /**

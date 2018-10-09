@@ -3,7 +3,11 @@ module common.play.controller {
     // 牌桌控制器
     export abstract class DeskController {
 
-        protected deskDetail: common.model.DeskDetail;
+        // 自身 ID
+        protected selfId;
+
+        // 牌桌数据
+        protected deskDetail: common.data.DeskDetail;
 
         // 消息监听器
         protected messageListener: common.play.MessageListener;
@@ -26,7 +30,7 @@ module common.play.controller {
             return this.gameSetInfo;
         }
 
-        public getDeskDetail() : common.model.DeskDetail {
+        public getDeskDetail() : common.data.DeskDetail {
             return this.deskDetail;
         }
 
@@ -36,10 +40,19 @@ module common.play.controller {
 
         public abstract createGameSetInfo(setInit);
 
-        /**
-         * 根据玩家uid找到位置
-         */
-        public abstract findPosition(uid): number;
+        public getSelfId() {
+            return this.selfId;
+        }
+
+        public setSelfId(selfId) {
+            this.selfId = selfId;
+        }
+
+        public launch(selfId, deskDetail) {
+            this.setSelfId(Login.getUid());
+            this.setDeskDetail(deskDetail);
+            this.deskView.show();
+        }
 
     }
 }

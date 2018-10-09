@@ -143,7 +143,7 @@ module mahjong.play.view {
          * 显示一张其他玩家的手牌
          */
         public addSingleCard(handcardUI: View, index, pos): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             let handcards = handcardUI.getChildByName("handcards") as View;
             let singleCard: Image;
 
@@ -171,7 +171,7 @@ module mahjong.play.view {
          * 显示其他玩家摸到的手牌
          */
         public showMoCard(handcardUI: View, pos): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             let moCard = handcardUI.getChildByName("mo") as Image;
             if(moCard) {
                 moCard.visible = true;
@@ -228,7 +228,7 @@ module mahjong.play.view {
          * 显示自己的摸牌
          */
         protected showSelfMo(handcardUI: View, moCard): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             handcardUI.removeChildByName("mo");
             let moCardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, moCard);
             moCardView.right = 0;
@@ -241,7 +241,7 @@ module mahjong.play.view {
          * 增加一张自己的手牌
          */
         public addSelfCard(handcardUI: View, index, card): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             let handcards = handcardUI.getChildByName("handcards") as View;
             let cardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, card);
             cardView.right = 64 * index;

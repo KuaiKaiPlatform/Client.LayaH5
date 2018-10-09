@@ -1,11 +1,11 @@
-module common.model {
+module common.data {
     
     /**
      * 牌桌
      */
     export class DeskInfo {
 
-        private static desks = {};
+        private static deskDetails = {};
 
         /**
          * 返回牌桌标识
@@ -20,30 +20,32 @@ module common.model {
          * 增加一个牌桌信息
          */
         public static add(deskKey, desk) {
-            this.desks[deskKey] = new DeskDetail(desk);
-            console.log("common.model.DeskInfo.add@done", deskKey);
+            let deskDetail = new DeskDetail(desk);
+            this.deskDetails[deskKey] = deskDetail;
+            console.log("common.model.DeskInfo.add", deskKey);
+            return deskDetail;
         }
 
         /**
          * 返回指定牌桌
          */
         public static get(deskKey) {
-            return this.desks[deskKey];
+            return this.deskDetails[deskKey];
         }
 
         /**
          * 删除指定牌桌
          */
         public static remove(deskKey) {
-            delete this.desks[deskKey];
+            delete this.deskDetails[deskKey];
         }
 
         public static getAll() {
-            return this.desks;
+            return this.deskDetails;
         }
 
         public static clearAll() {
-            this.desks = {};
+            this.deskDetails = {};
         }
 
     }

@@ -6,13 +6,54 @@ module hall.desk {
          * 大厅牌桌模块初始化：监听消息
          */
         public static init() {
-            // 有玩家加入
+            // 牌桌信息
             GameEventDispacher.instance.onMsg(Protocol.meta.hall.SDeskInfo, MessageListener, MessageListener.onDeskInfo);
+
+            // 有玩家加入
             GameEventDispacher.instance.onMsg(Protocol.meta.hall.SPlayerJoin, MessageListener, MessageListener.onPlayerJoin);
 
             console.log("hall.desk.Module.init@finish");
             return Promise.resolve();
         }
+
+        public static test() {
+            MessageListener.onDeskInfo(this.sDeskInfo);
+        }
+
+        public static sDeskInfo = {
+            players: [{
+                user: {
+                    uid: 100890,
+                    nkn: "阿列的脚印"
+                },
+                seat: 3,
+                head: "http://",
+                prepared: false,
+                points: [187]
+            }, {
+                user: {
+                    uid: 100861,
+                    nkn: "龙的传人"
+                },
+                seat: 4,
+                head: "http://",
+                prepared: true,
+                points: [27]
+            }, {
+                user: {
+                    uid: 100862,
+                    nkn: "未来不是梦"
+                },
+                seat: 1,
+                head: "http://",
+                prepared: true,
+                points: [-88]
+            }],
+            rule: 61007,
+            setting: {
+                totalSet: 8
+            }
+        };
 
     }
 }

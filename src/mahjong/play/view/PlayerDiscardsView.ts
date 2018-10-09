@@ -148,7 +148,7 @@ module mahjong.play.view {
          * 增加一张自己打出的牌
          */
         protected addSelf(discardUI: View, index, discard): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addSelf@adding", index, discard);
             let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.x = 39 * (index%9);
@@ -160,7 +160,7 @@ module mahjong.play.view {
          * 增加一张对家打出的牌
          */
         protected addOpposite(discardUI: View, index, discard): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addOpposite@adding", index, discard);
             let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.right = 39 * (index%9);
@@ -173,7 +173,7 @@ module mahjong.play.view {
          * 增加一张下家打出的牌
          */
         protected addNext(discardUI: View, index, discard): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addNext@adding", index, discard);
             let singleCard = SingleCardFactory.createNextCard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.left = 45 * Math.floor(index/9);
@@ -186,7 +186,7 @@ module mahjong.play.view {
          * 增加一张上家打出的牌
          */
         protected addPre(discardUI: View, index, discard): void {
-            let GlobalSetting = common.model.GlobalSetting;
+            let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addPre@adding", index, discard);
             let singleCard = SingleCardFactory.createPreCard(GlobalSetting.THEME_MAHJONG, discard);
             singleCard.right = 45 * Math.floor(index/9);

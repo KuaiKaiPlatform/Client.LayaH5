@@ -1,10 +1,10 @@
-module common.model {
+module common.data {
     
     /**
      * 牌桌
      */
     export class DeskDetail {
-
+        // 消息返回的 desk 对象
         private desk;
         private players = {};
 
@@ -16,18 +16,26 @@ module common.model {
         }
 
         /**
-         * 返回牌桌标识
+         * 返回牌桌标识：deskId-clubId
          */
         public getKey() {
-            let deskId = this.desk.deskId;
-            let clubId = this.desk.clubId;
-            return deskId + "-" + (clubId?clubId:0);
+            return DeskInfo.getKey(this.desk);
+        }
+
+        public getRule() {
+            return this.desk.rule;
+        }
+
+        public getSettingValue(key) {
+            let setting = this.desk.setting;
+            return setting?setting[key]:null;
         }
 
         /**
          * 玩家加入牌局
          */
         public addPlayer(player) {
+            // 玩家总分
             player.total = 0;
             player.points.forEach(point => player.total += point);
             this.players[player.user.uid] = player;
@@ -54,6 +62,13 @@ module common.model {
          */
         public getPlayer(uid) {
             return this.players[uid];
+        }
+
+        /**
+         * 是否为自己加入的牌桌
+         */
+        public hasSelf() {
+            return Login.getUid() in this.players;
         }
 
     }

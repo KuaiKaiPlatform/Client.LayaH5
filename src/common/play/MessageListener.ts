@@ -12,19 +12,6 @@ module common.play {
         }
 
         /**
-         * 自己加入牌桌返回消息
-         */
-        public onDeskInfo(sDeskInfo): void {
-            let DeskInfo = common.model.DeskInfo;
-            let deskDetail = DeskInfo.get(DeskInfo.getKey(sDeskInfo.desk));
-            this.deskController.setDeskDetail(deskDetail);
-
-            //common.play.model.PlayerInfo.init(sDeskInfo);
-            common.play.model.GameSetting.init(sDeskInfo);
-            this.deskView.show();
-        }
-
-        /**
          * 有人加入牌桌返回消息
          */
         public onPlayerJoin(sPlayerJoin): void {

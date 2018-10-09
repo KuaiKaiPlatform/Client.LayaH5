@@ -1,4 +1,4 @@
-module common.model {
+module common.data {
     /*
      *   全局设置
      */

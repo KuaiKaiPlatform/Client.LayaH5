@@ -72,27 +72,27 @@ module common.play.view {
         /**
          * 显示指定玩家准备状态
          */
-        public show(playerInfo) {
+        public show(player) {
             //预加载图集资源
             Laya.loader.load([
                 "res/atlas/common/desk.atlas"
             ], Handler.create(this, () => {
-                this.showSingle(playerInfo);
+                this.showSingle(player);
             }));
         }
 
-        protected abstract getAttrs(playerInfo);
+        protected abstract getAttrs(player);
 
         /**
          * 显示一名玩家准备状态
          */
-        public showSingle(playerInfo): void {
+        public showSingle(player): void {
             // 玩家准备状态显示
-            let sprite = this.getSprite(playerInfo);
+            let sprite = this.getSprite(player);
             if(!sprite) return;
 
             // 显示
-            this.showComponent(sprite, this.getAttrs(playerInfo));
+            this.showComponent(sprite, this.getAttrs(player));
         }
 
         /**

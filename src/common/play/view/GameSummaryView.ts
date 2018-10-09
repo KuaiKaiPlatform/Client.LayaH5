@@ -38,7 +38,7 @@ module common.play.view {
          */
         public showRule(): void {
             //console.log("GameSummaryView.showRule", GameSetting.rule);
-            this.ruleSprite.loadImage("common/rule/" + common.play.model.GameSetting.rule  + ".png");
+            this.ruleSprite.loadImage("common/rule/" + this.deskController.getDeskDetail().getRule() + ".png");
 
             this.showComponent(this.ruleSprite, this.getRuleAttrs());
         }
@@ -50,7 +50,7 @@ module common.play.view {
          */
         public showMode(curSet): void {
             //console.log("GameSummaryView.showMode@totalSet", GameSetting.get("totalSet"));
-            this.modeLabel.changeText("局  " + curSet + "/" + common.play.model.GameSetting.get("totalSet"));
+            this.modeLabel.changeText("局  " + curSet + "/" + this.deskController.getDeskDetail().getSettingValue("totalSet"));
             this.showComponent(this.modeLabel, this.getModeAttrs());
         }
 
