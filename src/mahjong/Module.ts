@@ -10,8 +10,11 @@ module mahjong {
             let GlobalSetting = common.data.GlobalSetting;
             let Protocol = common.pb.Protocol;
             let DeskController = mahjong.play.controller.DeskController;
+            let Theme = Protocol.getEnum("common.MahjongTheme");
 
             DeskController.init();
+
+            mahjong.play.view.SingleCardFactory.init();
 
             // 牌桌，监听消息
             // let messageListener = DeskController.instance.getMessageListener() as mahjong.play.MessageListener;
@@ -20,7 +23,7 @@ module mahjong {
             
             // 牌桌设置
             GlobalSetting.init({
-                theme_mahjong: mahjong.play.Theme.GREEN
+                mahjongTheme: Theme.GREEN
             });
 
             console.log("mahjong.Module.init@finish");

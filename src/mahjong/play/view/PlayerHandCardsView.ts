@@ -151,15 +151,15 @@ module mahjong.play.view {
             case mahjong.play.Position.SELF:
                 break;
             case mahjong.play.Position.NEXT:
-                singleCard = SingleCardFactory.createNextHand(GlobalSetting.THEME_MAHJONG);
+                singleCard = SingleCardFactory.createNextHand(GlobalSetting.get("mahjongTheme"));
                 singleCard.top = 23 * index;
                 break;
             case mahjong.play.Position.OPPOSITE:
-                singleCard = SingleCardFactory.createOppositeHand(GlobalSetting.THEME_MAHJONG);
+                singleCard = SingleCardFactory.createOppositeHand(GlobalSetting.get("mahjongTheme"));
                 singleCard.left = 40 * index;
                 break;
             case mahjong.play.Position.PREVIOUS:
-                singleCard = SingleCardFactory.createPreHand(GlobalSetting.THEME_MAHJONG);
+                singleCard = SingleCardFactory.createPreHand(GlobalSetting.get("mahjongTheme"));
                 singleCard.bottom = 23 * index;
                 singleCard.zOrder = 1000 - index;
                 break;
@@ -182,15 +182,15 @@ module mahjong.play.view {
             case mahjong.play.Position.SELF:
                 break;
             case mahjong.play.Position.NEXT:
-                moCard = SingleCardFactory.createNextHand(GlobalSetting.THEME_MAHJONG);
+                moCard = SingleCardFactory.createNextHand(GlobalSetting.get("mahjongTheme"));
                 moCard.top = 0;
                 break;
             case mahjong.play.Position.OPPOSITE:
-                moCard = SingleCardFactory.createOppositeHand(GlobalSetting.THEME_MAHJONG);
+                moCard = SingleCardFactory.createOppositeHand(GlobalSetting.get("mahjongTheme"));
                 moCard.left = 0;
                 break;
             case mahjong.play.Position.PREVIOUS:
-                moCard = SingleCardFactory.createPreHand(GlobalSetting.THEME_MAHJONG);
+                moCard = SingleCardFactory.createPreHand(GlobalSetting.get("mahjongTheme"));
                 moCard.bottom = 0;
                 break;
             }
@@ -230,7 +230,7 @@ module mahjong.play.view {
         protected showSelfMo(handcardUI: View, moCard): void {
             let GlobalSetting = common.data.GlobalSetting;
             handcardUI.removeChildByName("mo");
-            let moCardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, moCard);
+            let moCardView = SingleCardFactory.createSelfHand(GlobalSetting.get("mahjongTheme"), moCard);
             moCardView.right = 0;
             moCardView.name = "mo";
             handcardUI.addChild(moCardView);
@@ -243,7 +243,7 @@ module mahjong.play.view {
         public addSelfCard(handcardUI: View, index, card): void {
             let GlobalSetting = common.data.GlobalSetting;
             let handcards = handcardUI.getChildByName("handcards") as View;
-            let cardView = SingleCardFactory.createSelfHand(GlobalSetting.THEME_MAHJONG, card);
+            let cardView = SingleCardFactory.createSelfHand(GlobalSetting.get("mahjongTheme"), card);
             cardView.right = 64 * index;
             handcards.addChild(cardView);
         }

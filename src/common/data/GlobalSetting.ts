@@ -4,12 +4,15 @@ module common.data {
      */
     export class GlobalSetting {
 
-        public static THEME_MAHJONG                 = "theme_mahjong";
+        private static setting;
 
         public static init(setting) {
-            for(let key in setting) {
-                GlobalSetting[key.toUpperCase()] = setting[key];
-            }
+            this.setting = setting;
+        }
+
+        public static get(key) {
+            let setting = this.setting;
+            return setting?setting[key]:null;
         }
 
     }

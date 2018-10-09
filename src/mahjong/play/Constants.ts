@@ -26,10 +26,10 @@ module mahjong.play {
     //     HU = 90
     // }
 
-    export enum Theme { // 配色方案
-        GREEN = 1,
-        YELLOW = 2,
-        BLUE = 3
-    }
+    // export enum Theme { // 配色方案
+    //     GREEN = 1,
+    //     YELLOW = 2,
+    //     BLUE = 3
+    // }
 
 }

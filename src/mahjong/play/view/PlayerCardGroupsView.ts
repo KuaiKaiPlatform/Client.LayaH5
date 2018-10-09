@@ -150,7 +150,7 @@ module mahjong.play.view {
         protected addSelf(playerUI: View, index, cardGroup): void {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addSelf@adding", index, JSON.stringify(cardGroup));
-            let groupView = CardGroupFactory.createSelfGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            let groupView = CardGroupFactory.createSelfGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
             groupView.left = 200 * index;
             groupView.bottom = 0;
             playerUI.addChild(groupView);
@@ -162,7 +162,7 @@ module mahjong.play.view {
         protected addOpposite(playerUI: View, index, cardGroup): void {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addOpposite@adding", index, JSON.stringify(cardGroup));
-            let groupView = CardGroupFactory.createOppositeGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            let groupView = CardGroupFactory.createOppositeGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
             groupView.right = 127 * index;
             groupView.bottom = 0;
             playerUI.addChild(groupView);
@@ -174,7 +174,7 @@ module mahjong.play.view {
         protected addNext(playerUI: View, index, cardGroup): void {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addNext@adding", index, JSON.stringify(cardGroup));
-            let groupView = CardGroupFactory.createNextGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            let groupView = CardGroupFactory.createNextGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
             groupView.bottom = 99 * index;
             playerUI.addChild(groupView);
         }
@@ -185,7 +185,7 @@ module mahjong.play.view {
         protected addPre(playerUI: View, index, cardGroup): void {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerCardGroupsView.addPre@adding", index, JSON.stringify(cardGroup));
-            let groupView = CardGroupFactory.createPreGroup(GlobalSetting.THEME_MAHJONG, cardGroup);
+            let groupView = CardGroupFactory.createPreGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
             groupView.top = 99 * index;
             playerUI.addChild(groupView);
         }
