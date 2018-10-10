@@ -10,6 +10,7 @@ module common.data {
 
         public constructor(desk) {
             this.desk = desk;
+            desk.settings = JSON.parse(desk.setting.json);
             desk.players.forEach(player => {
                 this.addPlayer(player);
             });
@@ -27,7 +28,7 @@ module common.data {
         }
 
         public getSettingValue(key) {
-            let setting = this.desk.setting;
+            let setting = this.desk.settings;
             return setting?setting[key]:null;
         }
 
