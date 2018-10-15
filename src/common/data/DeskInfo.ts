@@ -11,6 +11,7 @@ module common.data {
          * 返回牌桌标识
          */
         public static getKey(obj) {
+            if(obj.uniq) obj = obj.uniq;
             let deskId = obj.deskId;
             let clubId = obj.clubId;
             return deskId + "-" + (clubId?clubId:0);
