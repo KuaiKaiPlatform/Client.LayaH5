@@ -62,7 +62,17 @@ module common.play.view {
          */
         public showAll() {
             console.log("PlayerReadyView.showAll");
-            //let players = common.play.model.PlayerInfo.getAll();
+            
+            //预加载图集资源
+            // Laya.loader.load([
+            //     "res/atlas/common/desk.atlas"
+            // ], Handler.create(this, () => {
+            //     let players = this.deskController.getDeskDetail().getAllPlayers();
+            //     for(let key in players) {
+            //         this.showSingle(players[key]);
+            //     }
+            // }));
+
             let players = this.deskController.getDeskDetail().getAllPlayers();
             for(let key in players) {
                 this.show(players[key]);
@@ -73,12 +83,13 @@ module common.play.view {
          * 显示指定玩家准备状态
          */
         public show(player) {
+            this.showSingle(player);
             //预加载图集资源
-            Laya.loader.load([
-                "res/atlas/common/desk.atlas"
-            ], Handler.create(this, () => {
-                this.showSingle(player);
-            }));
+            // Laya.loader.load([
+            //     "res/atlas/common/desk.atlas"
+            // ], Handler.create(this, () => {
+            //     this.showSingle(player);
+            // }));
         }
 
         protected abstract getAttrs(player);

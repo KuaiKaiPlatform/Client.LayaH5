@@ -1,5 +1,7 @@
 module hall.desk {
 
+    import Handler = Laya.Handler;
+
     export class Module {
 
         /**
@@ -12,8 +14,20 @@ module hall.desk {
             // 有玩家加入
             GameEventDispacher.instance.onMsg(Protocol.meta.hall.SPlayerJoin, MessageListener, MessageListener.onPlayerJoin);
 
-            console.log("hall.desk.Module.init@finish");
-            return Promise.resolve();
+            // console.log("hall.desk.Module.init@finish");
+            // return Promise.resolve();
+
+            //预加载图集资源
+			return new Promise((resolve, reject) => {
+				Laya.loader.load([
+                    "res/atlas/player.atlas",
+                    "res/atlas/common/desk.atlas"
+                ], Handler.create(this, () => {
+                    console.log("hall.desk.Module.init@finish");
+					resolve();
+				}));
+			});
+
         }
 
         public static test() {

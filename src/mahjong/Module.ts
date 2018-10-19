@@ -1,5 +1,7 @@
 module mahjong {
 
+    import Handler = Laya.Handler;
+
     export class Module {
 
         /**
@@ -17,9 +19,8 @@ module mahjong {
             mahjong.play.view.SingleCardFactory.init();
 
             // 牌桌，监听消息
-            // let messageListener = DeskController.instance.getMessageListener() as mahjong.play.MessageListener;
-            // GameEventDispacher.instance.onMsg(Protocol.meta.hall.SDeskInfo, messageListener, messageListener.onDeskInfo);
-            // GameEventDispacher.instance.onMsg(Protocol.meta.hall.SPlayerJoin, messageListener, messageListener.onPlayerJoin);
+            let messageListener = DeskController.instance.getMessageListener() as mahjong.play.MessageListener;
+            GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SSetInit, messageListener, messageListener.onSetInit);
             
             // 牌桌设置
             GlobalSetting.init({
@@ -28,6 +29,16 @@ module mahjong {
 
             console.log("mahjong.Module.init@finish");
             return Promise.resolve();
+
+            //预加载图集资源
+			// return new Promise((resolve, reject) => {
+			// 	Laya.loader.load([
+            //         "res/atlas/mahjong/card.atlas"
+            //     ], Handler.create(this, () => {
+            //         console.log("mahjong.Module.init@finish");
+			// 		resolve();
+			// 	}));
+			// });
         }
 
     }

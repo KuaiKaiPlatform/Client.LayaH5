@@ -36,11 +36,12 @@ module common.play.view {
 
         public show(player) {
             //预加载图集资源
-            Laya.loader.load([
-                "res/atlas/player.atlas"
-            ], Handler.create(this, () => {
-                this.showSingle(player);
-            }));
+            // Laya.loader.load([
+            //     "res/atlas/player.atlas"
+            // ], Handler.create(this, () => {
+            //     this.showSingle(player);
+            // }));
+            this.showSingle(player);
         }
 
         protected abstract getAttrs(playerInfo);

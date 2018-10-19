@@ -9,6 +9,10 @@ module mahjong.play.model {
             super(setInfos);
         }
 
+        /**
+         * 是否刚摸牌
+         * @param setInfo 
+         */
         public static hasMo(setInfo): boolean {
             return setInfo.handCardNum %3 == 2;
         }

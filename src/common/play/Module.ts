@@ -1,5 +1,7 @@
 module common.play {
 
+    import Handler = Laya.Handler;
+
     export class Module {
 
         // // 麻将牌桌

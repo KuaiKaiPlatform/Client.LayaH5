@@ -7,7 +7,7 @@ module mahjong.play.model {
 
         constructor(setInit) {
             super(setInit);
-            this.playerSetInfo = new mahjong.play.model.PlayerSetInfo(setInit.userInfos);
+            this.playerSetInfo = new mahjong.play.model.PlayerSetInfo(setInit.playerSetInfos);
         }
 
         public getRemainCards() {
