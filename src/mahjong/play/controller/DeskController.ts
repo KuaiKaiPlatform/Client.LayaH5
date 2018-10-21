@@ -28,6 +28,13 @@ module mahjong.play.controller {
         }
 
         /**
+         * 找到指定玩家相对位置：mahjong.play.Position
+         */
+        public findPositionByUid(uid): number {
+            return this.findPosition(this.deskDetail.getPlayer(uid));
+        }
+
+        /**
          * 初始化牌局数据
          */
         public createGameSetInfo(setInit) {

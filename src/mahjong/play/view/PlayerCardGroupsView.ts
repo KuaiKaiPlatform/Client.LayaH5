@@ -103,7 +103,7 @@ module mahjong.play.view {
         protected show(setInfo): void {
             if(!this.check(setInfo)) return;
             
-            let pos = this.deskController.findPosition(setInfo.uid);
+            let pos = this.deskController.findPositionByUid(setInfo.uid);
             let playerUI = this.getUI(setInfo.uid) as View;
 
             // 遍历并显示各组明牌
@@ -119,7 +119,7 @@ module mahjong.play.view {
          * 增加一组指定玩家明牌
          */
         public add(uid, index, cardGroup): void {
-            let pos = this.deskController.findPosition(uid);
+            let pos = this.deskController.findPositionByUid(uid);
             let playerUI = this.getUI(uid) as View;
             this.addCardGroup(playerUI, pos, index, cardGroup);
         }

@@ -121,7 +121,7 @@ module mahjong.play.view {
                 return;
             }
 
-            let pos = this.deskController.findPosition(setInfo.uid);
+            let pos = this.deskController.findPositionByUid(setInfo.uid);
             let handcardUI = this.getUI(setInfo.uid, pos) as View;
 
             let hasMo: boolean = mahjong.play.model.PlayerSetInfo.hasMo(setInfo);

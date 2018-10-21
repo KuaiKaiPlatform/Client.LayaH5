@@ -103,7 +103,7 @@ module mahjong.play.view {
         protected show(setInfo): void {
             if(!this.check(setInfo)) return;
             
-            let pos = this.deskController.findPosition(setInfo.uid);
+            let pos = this.deskController.findPositionByUid(setInfo.uid);
             let discardUI = this.getUI(setInfo.uid) as View;
 
             // 遍历并显示每张打出的牌
@@ -119,7 +119,7 @@ module mahjong.play.view {
          * 增加一张指定玩家打出的牌
          */
         public add(uid, index, discard): void {
-            let pos = this.deskController.findPosition(uid);
+            let pos = this.deskController.findPositionByUid(uid);
             let discardUI = this.getUI(uid) as View;
             this.addSingleCard(discardUI, pos, index, discard);
         }
