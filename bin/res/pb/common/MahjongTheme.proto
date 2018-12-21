@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="MahjongThemePB";
+
+package common;
+
+enum MahjongTheme {	// 配色方案
+
+    GREEN = 1;
+    YELLOW = 2;
+    BLUE = 3;
+    
+}

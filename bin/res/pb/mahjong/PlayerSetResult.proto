@@ -1,0 +1,19 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="PlayerSetResultPB";  
+
+package mahjong;
+
+import "mahjong/PlayerSetInfo.proto";
+import "mahjong/ScoreDetail.proto";
+
+message PlayerSetResult {	// 一名玩家一局结算
+
+	required mahjong.PlayerSetInfo playerSetInfo = 1;			// 玩家牌局结算时状态
+	repeated int32 points = 2;									// 本局各项得失分列表
+	repeated mahjong.ScoreDetail scoreDetails = 3;				// 各结算项明细
+	optional bool zimo = 4;										// 是否自摸
+	optional bool jiePao = 5;									// 是否接炮
+	optional bool dianPao = 6;									// 是否点炮
+	optional bool baoTing = 7;									// 是否报听
+
+}

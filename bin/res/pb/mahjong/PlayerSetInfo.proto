@@ -1,0 +1,16 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="PlayerSetInfoPB";  
+
+package mahjong;
+
+import "mahjong/CardGroup.proto";
+
+message PlayerSetInfo {
+
+	required int32 uid = 1;							// 玩家ID
+	required int32 handCardNum = 2;					// 手牌数量
+	repeated int32 handcards = 3;					// 手牌（只有自己收到）
+	repeated int32 discards = 4;					// 打出的牌
+	repeated mahjong.CardGroup cardGroups = 5;		// 吃碰杠的牌
+
+}

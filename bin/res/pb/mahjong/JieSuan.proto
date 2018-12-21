@@ -1,0 +1,61 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="JieSuanPB";  
+
+package mahjong;
+
+enum JieSuan {	// 各结算项
+
+	// 1001-5000 用于通用牌型
+	HUN_YI_SE					= 1001;	// 混一色
+	DAN_DIAO_JIANG				= 1002;	// 单钓将
+	BIAN_ZHANG					= 1003;	// 边张
+	KAN_ZHANG					= 1004;	// 坎张
+	MEN_QIAN_QING				= 1005;	// 门前清
+	QUE_YI_MEN					= 1006;	// 缺一门
+	DUAN_YAO_JIU				= 1007;	// 断幺九
+	JUE_ZHANG					= 1008;	// 绝张
+	QI_XING_BU_KAO				= 1009;	// 七星不靠
+	WU_XING_BU_KAO				= 1010;	// 五星不靠
+	QUAN_QIU_REN				= 1011;	// 全求人
+	YI_SE_YAO_JIU_KE			= 1012;	// 一色幺九刻
+	YI_SE_SAN_LIAN_DUI			= 1013;	// 一色三连对
+	YI_SE_YAO_JIU_KE_SHUANG		= 1014;	// 一色幺九刻（双）
+	YI_SE_SAN_LIAN_DUI_SHUANG	= 1015;	// 一色三连对（双）
+	LIAN_LIU					= 1016;	// 连六
+	SHUANG_LIAN_LIU				= 1017;	// 双连六
+	DA_SAN_YUAN					= 1018;	// 大三元
+	DA_SI_XI					= 1019;	// 大四喜
+	YI_SE_SI_LIAN_KE			= 1020;	// 一色四连刻
+	YI_SE_SAN_LIAN_KE_FU_JIANG	= 1021;	// 一色三连刻附一将
+	YI_SE_SAN_LIAN_KE			= 1022;	// 一色三连刻
+	SI_ZI_KE					= 1023;	// 四字刻
+	SAN_ZI_KE_FU_JIANG			= 1024;	// 三字刻附一将
+	SAN_ZI_KE					= 1025;	// 三字刻
+	HUN_YAO_JIU					= 1026;	// 混幺九（全部由字牌和序数牌一、九组成）
+	SHI_SAN_LUAN_KAO			= 1027;	// 十三乱靠（十三不靠中万条筒可重复，并且牌值之间相差3或3以上均可）
+	QI_XING_LUAN_KAO			= 1028;	// 七星乱靠
+	WU_XING_LUAN_KAO			= 1029;	// 五星乱靠
+	LUAN_ZI						= 1030;	// 乱字
+	ZI_YI_SE					= 1031;	// 字一色
+	WU_ZI						= 1032;	// 无字
+	SHI_SAN_YAO					= 1033;	// 十三幺
+	SHI_SAN_BU_KAO				= 1034;	// 十三不靠
+	ZUI_HAO_QI_DUI				= 1035;	// 最豪华七对
+	CHAO_HAO_QI_DUI				= 1036;	// 超豪华七对
+	HAO_QI_DUI					= 1037;	// 豪华七对
+	QI_DUI						= 1038;	// 七对
+	PENG_PENG_HU				= 1039;	// 碰碰胡
+	YI_TIAO_LONG				= 1040;	// 一条龙
+	BIAO_ZHUN_HU				= 1041;	// 标准胡
+	QING_YI_SE					= 1042;	// 清一色
+	ALMIGHTY_4					= 1043;	// 四万能牌
+	LIAN_DUI					= 1044;	// 连对
+	MING_KE						= 1045;	// 明刻
+	AN_KE						= 1046;	// 暗刻
+	GANG_PAI					= 1047;	// 杠牌
+	ZHI_SHU						= 1048;	// 支数
+	TONG_SHU					= 1049;	// 通数
+	SI_HE						= 1050;	// 四核
+
+    
+}

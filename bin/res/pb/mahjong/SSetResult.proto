@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="SSetResultPB";  
+
+package mahjong;
+
+import "mahjong/PlayerSetResult.proto";
+
+message SSetResult {	// 返回牌局结果
+
+	repeated mahjong.PlayerSetResult playerSetResults = 1;			// 所有玩家牌局结束状态
+
+}

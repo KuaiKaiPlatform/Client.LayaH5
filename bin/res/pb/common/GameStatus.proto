@@ -1,0 +1,13 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="GameStatusPB";  
+
+package common;
+
+enum GameStatus {
+
+    WAITING = 0;    // 等待玩家进入
+    STARTING = 1;   // 开始游戏
+    SET_ENDING = 2; // 一局结束
+    ENDING = 3;     // 整场结束
+    
+}

@@ -1,0 +1,8 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="SQuitDeskPB";  
+
+package hall;
+
+message SQuitDesk {	// 回复玩家退出牌桌
+
+}

@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="UserInfoPB";  
+
+package account;
+
+message UserInfo {
+
+	required int32 uid = 1;			// id
+	required string nkn = 2;		// 昵称
+	optional string head = 3;		// 头像
+	optional int32 sex = 4;			// 性别
+	optional string ip = 5;			// IP地址
+
+}

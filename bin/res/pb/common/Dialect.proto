@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.common.msg.pb";
+option java_outer_classname="DialectPB";  
+
+package common;
+
+enum Dialect {	// 方言
+
+    XIA_PU = 350001;
+
+    YU_LIN = 610001;
+
+}

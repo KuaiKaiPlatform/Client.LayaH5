@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="ScoreDetailPB";
+
+package mahjong;
+
+import "mahjong/JieSuan.proto";
+
+message ScoreDetail {	// 得失分明细
+
+	required mahjong.JieSuan mainType = 1;			// 结算主类
+	repeated mahjong.JieSuan subTypes = 2;			// 结算子类列表
+	optional int32 score = 3;						// 得失分
+
+}

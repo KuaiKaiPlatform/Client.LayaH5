@@ -1,0 +1,11 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="DiscardTingCardsPB";  
+
+package mahjong;
+
+message DiscardTingCards {	// 打出一张牌后的听牌列表
+
+	required int32 discard = 1;						// 打出的牌
+	repeated int32 tingCards = 2;					// 听牌列表
+
+}

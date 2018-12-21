@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";
+option java_outer_classname="SetStagePB";
+
+package mahjong;
+
+// 牌局阶段
+enum SetStage {
+
+    GAMING		= 0;	// 游戏中
+    XIA_ZHU		= 1;	// 下注
+    DING_QUE	= 2;	// 定缺
+    JIE_SUAN	= 3;	// 结算
+    
+}

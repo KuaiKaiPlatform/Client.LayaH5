@@ -1,0 +1,8 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="CPassCardPB";  
+
+package mahjong;
+
+message CPassCard {	// 玩家请求过牌
+
+}

@@ -1,0 +1,16 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="GameSettingPB";  
+
+package common;
+
+message GameSetting {	// 玩法规则设置
+
+	required string json = 1;		// JSON 格式的 setting 内容（客户端相关）
+
+	// 麻将相关
+	optional int32 totalSet = 2;					// 总局数
+	optional int32 totalQuan = 3;					// 总圈数
+	optional int32 totalDi = 4;						// 总底数
+	optional int32 totalPlayer = 5;					// 玩家人数
+
+}

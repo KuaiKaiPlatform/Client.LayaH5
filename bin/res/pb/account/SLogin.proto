@@ -1,0 +1,13 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="SLoginPB";  
+
+package account;
+
+message SLogin {
+	enum ReturnCode
+	{
+		SUCCESS = 0;
+		TOKEN_ERROR = 1;
+	}
+	required ReturnCode returnCode = 1;
+}

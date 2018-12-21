@@ -1,0 +1,18 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="OperTypePB";  
+
+package mahjong;
+
+enum OperType {	// 操作类型
+
+    MO = 10;
+    DA = 20;
+    CHI = 30;
+    PENG = 40;
+    BU_GANG = 50;
+    AN_GANG = 60;
+    DIAN_GANG = 70;
+    TING = 80;
+    HU = 90;
+    
+}

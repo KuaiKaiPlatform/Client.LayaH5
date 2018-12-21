@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="SGameResultPB";  
+
+package mahjong;
+
+import "mahjong/PlayerGameResult.proto";
+
+message SGameResult {	// 返回整场牌局结果
+
+	repeated mahjong.PlayerGameResult playerGameResults = 1;			// 所有玩家整场牌局结算
+	optional int32 finalSet = 2;										// 结束时局数
+	optional int32 endTime = 3;											// 结束时间
+
+}

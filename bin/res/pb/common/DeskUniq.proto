@@ -1,0 +1,11 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="DeskUniqPB";  
+
+package common;
+
+message DeskUniq {	// 牌桌唯一标识
+
+	required int32 deskId = 1;
+	optional int32 clubId = 2;
+
+}
