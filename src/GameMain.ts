@@ -5,6 +5,7 @@ import Login = common.conn.Login;
 import MessageHandler = common.msg.MessageHandler;
 import MessageSender = common.msg.MessageSender;
 import GameEventDispacher = common.event.GameEventDispacher;
+import GlobalSetting = common.data.GlobalSetting;
 
 class GameMain {
     constructor() {
@@ -13,10 +14,14 @@ class GameMain {
         Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
         Laya.stage.scaleMode = "exactfit";
 
-        //mahjong.Module.test();
+        // 日期格式
+        common.utils.DateFormat.init();
 
         MessageHandler.init();
         MessageSender.init();
+
+        // 模式窗口点击边缘，不关闭窗口
+        UIConfig.closeDialogOnSide = false;
 
         // 初始化Protobuf
         Protocol.init().then(() => {

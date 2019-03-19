@@ -30,6 +30,39 @@ var mahjong;
                             return PlayerBasicView.PREVIOUS;
                     }
                 };
+                PlayerBasicView.prototype.showSingle = function (uid) {
+                    _super.prototype.showSingle.call(this, uid);
+                    if (this.deskController.getDeskDetail().getSettingBool("xiaZhu"))
+                        this.showBet(uid);
+                };
+                PlayerBasicView.prototype.showBet = function (uid) {
+                    var playerUI = this.getUI(uid);
+                    var player = this.deskController.getDeskDetail().getPlayer(uid);
+                    if (player.prepared) {
+                        PlayerBasicView.showBet(playerUI, player.bet);
+                    }
+                    else {
+                        PlayerBasicView.hideBet(playerUI);
+                    }
+                };
+                /**
+                 * 在玩家UI内显示下注数
+                 * @param playerUI
+                 */
+                PlayerBasicView.showBet = function (playerUI, bet) {
+                    var paoZiImg = playerUI.getChildByName("paozi");
+                    paoZiImg.visible = true;
+                    var paoZi = paoZiImg.getChildByName("label");
+                    paoZi.changeText(bet + "炮");
+                };
+                /**
+                 * 在玩家UI内隐藏下注数
+                 * @param playerUI
+                 */
+                PlayerBasicView.hideBet = function (playerUI) {
+                    var paoZiImg = playerUI.getChildByName("paozi");
+                    paoZiImg.visible = false;
+                };
                 return PlayerBasicView;
             }(common.play.view.PlayerBasicView));
             PlayerBasicView.SELF = {

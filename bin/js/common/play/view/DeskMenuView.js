@@ -27,7 +27,7 @@ var common;
                 }
                 DeskMenuView.prototype.show = function () {
                     var _this = this;
-                    console.log("DeskMenuView.show");
+                    console.log("common.play.view.DeskMenuView.show");
                     //预加载图集资源
                     Laya.loader.load([
                         "res/atlas/common/desk.atlas"

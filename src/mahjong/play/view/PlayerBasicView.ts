@@ -44,5 +44,44 @@ module mahjong.play.view {
             }
         }
 
+        public showSingle(uid): void {
+            super.showSingle(uid);
+            
+            if(this.deskController.getDeskDetail().getSettingBool("xiaZhu"))
+                this.showBet(uid);
+        }
+
+        public showBet(uid) {
+            let playerUI = this.getUI(uid);
+
+            let player = this.deskController.getDeskDetail().getPlayer(uid);
+            if(player.prepared) {
+                PlayerBasicView.showBet(playerUI, player.bet);
+            } else {
+                PlayerBasicView.hideBet(playerUI);
+            }
+
+        }
+
+        /**
+         * 在玩家UI内显示下注数
+         * @param playerUI 
+         */
+        public static showBet(playerUI, bet) {
+            let paoZiImg = playerUI.getChildByName("paozi") as Laya.Image;
+            paoZiImg.visible = true;
+            let paoZi = paoZiImg.getChildByName("label") as Laya.Label;
+            paoZi.changeText(bet + "炮");
+        }
+
+        /**
+         * 在玩家UI内隐藏下注数
+         * @param playerUI 
+         */
+        public static hideBet(playerUI) {
+            let paoZiImg = playerUI.getChildByName("paozi") as Laya.Image;
+            paoZiImg.visible = false;
+        }
+
     }
 }

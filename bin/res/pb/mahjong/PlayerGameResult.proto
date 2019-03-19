@@ -3,14 +3,12 @@ option java_outer_classname="PlayerGameResultPB";
 
 package mahjong;
 
+import "mahjong/PlayerStat.proto";
+
 message PlayerGameResult {	// 一名玩家整场结算
 
 	required int32 uid = 1;										// 玩家ID
 	repeated int32 points = 2;									// 本场各项或各局总得失分列表
-	optional int32 zimo = 3;									// 自摸次数
-	optional int32 jiePao = 4;									// 接炮次数
-	optional int32 dianPao = 5;									// 点炮次数
-	optional int32 mingGang = 6;								// 明杠次数
-	optional int32 anGang = 7;									// 暗杠次数
+	repeated mahjong.PlayerStat playerStats = 3;				// 玩家统计
 
 }

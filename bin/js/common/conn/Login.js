@@ -12,6 +12,9 @@ var common;
             Login.getUid = function () {
                 return this.userInfo.uid;
             };
+            Login.getServerId = function () {
+                return this.serverInfo.id;
+            };
             /**
              * 检查是否是自己
              */

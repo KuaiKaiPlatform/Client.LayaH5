@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";
+option java_outer_classname="PlayerStatPB";
+
+package mahjong;
+
+import "mahjong/PlayerStatType.proto";
+
+// 玩家统计
+message PlayerStat {
+
+	required mahjong.PlayerStatType statType = 1;		// 统计项
+	optional int32 val = 2;								// 统计值
+    
+}

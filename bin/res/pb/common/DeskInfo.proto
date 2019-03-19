@@ -17,5 +17,6 @@ message DeskInfo {	// 牌桌信息
 	optional common.GameSetting setting = 4;				// 规则设置
 	optional common.GameStatus status = 5;					// 游戏状态
 	optional int32 curSet = 6;								// 当前局数
+	optional int32 bankerId = 7;							// 庄家ID
 
 }

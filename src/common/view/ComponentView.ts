@@ -19,5 +19,9 @@ module common.view {
             Laya.stage.addChild(component);
         }
 
+        public removeComponent(component) {
+            Laya.stage.removeChild(component);
+        }
+
     }
 }

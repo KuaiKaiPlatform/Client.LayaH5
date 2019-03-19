@@ -7,6 +7,12 @@ import "mahjong/PlayerSetResult.proto";
 
 message SSetResult {	// 返回牌局结果
 
-	repeated mahjong.PlayerSetResult playerSetResults = 1;			// 所有玩家牌局结束状态
+	repeated mahjong.PlayerSetResult playerSetResults = 1;		// 所有玩家牌局结算结果
+	required int32 curSet = 2;									// 当前局数
+	required bool huang = 3;									// 是否荒庄
+	required bool over = 4;										// 是否整场结束
+	optional int64 endTime = 5;									// 本局结束时间
+	optional int32 huCard = 6;									// 胡牌
+	optional int32 nextBankerId = 7;							// 下一局庄家ID
 
 }

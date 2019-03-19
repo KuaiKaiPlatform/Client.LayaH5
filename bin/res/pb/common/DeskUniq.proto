@@ -5,7 +5,7 @@ package common;
 
 message DeskUniq {	// 牌桌唯一标识
 
-	required int32 deskId = 1;
+	required int64 deskId = 1;
 	optional int32 clubId = 2;
 
 }

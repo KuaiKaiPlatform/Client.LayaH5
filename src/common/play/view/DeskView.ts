@@ -50,7 +50,7 @@ module common.play.view {
             this.playerReadyView.showAll();
 
             // 显示牌桌基本信息
-            this.gameSummaryView.show();
+            this.gameSummaryView.showAll();
 
             // 显示牌桌菜单按钮
             this.deskMenuView.show();
@@ -59,6 +59,11 @@ module common.play.view {
 
         // 设置背景
         public setBg(): void {
+            // Laya.loader.load([
+            //     "res/sounds/bgm.mp3"
+            // ], Laya.Handler.create(this, () => {
+            //     Laya.SoundManager.playMusic("res/sounds/bgm.mp3");
+            // }));
         }
 
         public onPlayerJoin(player): void {

@@ -9,6 +9,7 @@ var common;
     (function (play) {
         var view;
         (function (view) {
+            var Handler = Laya.Handler;
             var Event = Laya.Event;
             var Component = laya.ui.Component;
             /**
@@ -51,7 +52,7 @@ var common;
                  * 触发准备
                  */
                 PlayerReadyView.prototype.onPrepare = function (e) {
-                    this.removeSingle(Login.getUid());
+                    //this.removeSingle(Login.getUid());
                     var selfPlayer = this.deskController.getDeskDetail().getPlayer(Login.getUid());
                     selfPlayer.prepared = true;
                     this.show(selfPlayer);
@@ -61,37 +62,36 @@ var common;
                  * 显示所有玩家准备状态
                  */
                 PlayerReadyView.prototype.showAll = function () {
-                    console.log("PlayerReadyView.showAll");
+                    var _this = this;
+                    console.log("common.play.view.PlayerReadyView.showAll");
                     //预加载图集资源
-                    // Laya.loader.load([
-                    //     "res/atlas/common/desk.atlas"
-                    // ], Handler.create(this, () => {
-                    //     let players = this.deskController.getDeskDetail().getAllPlayers();
-                    //     for(let key in players) {
-                    //         this.showSingle(players[key]);
-                    //     }
-                    // }));
-                    var players = this.deskController.getDeskDetail().getAllPlayers();
-                    for (var key in players) {
-                        this.show(players[key]);
-                    }
+                    Laya.loader.load([
+                        "res/atlas/common/desk.atlas"
+                    ], Handler.create(this, function () {
+                        var GameStatus = Protocol.getEnum("common.GameStatus");
+                        if (_this.deskController.getDeskDetail().getStatus() == GameStatus.STARTING) {
+                            console.warn("common.play.view.PlayerReadyView.showAll@Game has started.");
+                            return;
+                        }
+                        var players = _this.deskController.getDeskDetail().getAllPlayers();
+                        for (var uid in players) {
+                            _this.showSingle(uid);
+                        }
+                    }));
                 };
                 /**
                  * 显示指定玩家准备状态
                  */
                 PlayerReadyView.prototype.show = function (player) {
-                    this.showSingle(player);
-                    //预加载图集资源
-                    // Laya.loader.load([
-                    //     "res/atlas/common/desk.atlas"
-                    // ], Handler.create(this, () => {
-                    //     this.showSingle(player);
-                    // }));
+                    this.showSingle(player.user.uid);
                 };
                 /**
                  * 显示一名玩家准备状态
                  */
-                PlayerReadyView.prototype.showSingle = function (player) {
+                PlayerReadyView.prototype.showSingle = function (uid) {
+                    // 删除所有
+                    this.removeSingle(uid);
+                    var player = this.deskController.getDeskDetail().getPlayer(uid);
                     // 玩家准备状态显示
                     var sprite = this.getSprite(player);
                     if (!sprite)
@@ -102,13 +102,15 @@ var common;
                 /**
                  * 删除所有玩家准备状态
                  */
-                PlayerReadyView.prototype.removeAll = function () {
-                    //let players = common.play.model.PlayerInfo.getAll();
-                    var players = this.deskController.getDeskDetail().getAllPlayers();
-                    for (var key in players) {
-                        var player = players[key];
-                        this.removeSingle(player.user.uid);
+                PlayerReadyView.prototype.clearAll = function () {
+                    for (var uid in this.preparedSprites) {
+                        this.removeComponent(this.preparedSprites[uid]);
                     }
+                    this.removeComponent(this.prepareSprite);
+                    // let players = this.deskController.getDeskDetail().getAllPlayers();
+                    // for(let uid in players) {
+                    //     this.removeSingle(uid);
+                    // }
                 };
                 /**
                  * 删除一名玩家准备状态
@@ -118,10 +120,10 @@ var common;
                     var preparedSprite = this.preparedSprites[uid];
                     if (preparedSprite) {
                         console.log("common.play.view.PlayerReadyView.removeSingle@preparedSprite found", uid);
-                        Laya.stage.removeChild(preparedSprite);
+                        this.removeComponent(preparedSprite);
                     }
-                    if (Login.isSelf(uid) && this.prepareSprite) {
-                        Laya.stage.removeChild(this.prepareSprite);
+                    if (Login.isSelf(uid)) {
+                        this.removeComponent(this.prepareSprite);
                     }
                 };
                 return PlayerReadyView;

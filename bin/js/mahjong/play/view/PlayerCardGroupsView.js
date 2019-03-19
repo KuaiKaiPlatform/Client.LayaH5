@@ -54,11 +54,9 @@ var mahjong;
                     Laya.loader.load([
                         "res/atlas/mahjong/card.atlas"
                     ], Handler.create(this, function () {
-                        var gameSetInfo = _this.deskController.getGameSetInfo();
-                        var setInfos = gameSetInfo.getPlayerSetInfo().getAll();
-                        for (var key in setInfos) {
-                            var setInfo = setInfos[key];
-                            _this.show(setInfo);
+                        var setInfos = _this.deskController.getGameSetInfo().getPlayerSetInfo().getAll();
+                        for (var uid in setInfos) {
+                            _this.show(uid);
                         }
                     }));
                 };
@@ -76,12 +74,13 @@ var mahjong;
                 /**
                  * 显示一名玩家明牌
                  */
-                PlayerCardGroupsView.prototype.show = function (setInfo) {
+                PlayerCardGroupsView.prototype.show = function (uid) {
                     var _this = this;
+                    var setInfo = this.deskController.getGameSetInfo().getPlayerSetInfo().getByUid(uid);
                     if (!this.check(setInfo))
                         return;
-                    var pos = this.deskController.findPositionByUid(setInfo.uid);
-                    var playerUI = this.getUI(setInfo.uid);
+                    var pos = this.deskController.findPositionByUid(uid);
+                    var playerUI = this.getUI(uid);
                     // 遍历并显示各组明牌
                     setInfo.cardGroups.forEach(function (cardGroup, index) {
                         _this.addCardGroup(playerUI, pos, index, cardGroup);
@@ -158,10 +157,20 @@ var mahjong;
                     groupView.top = 99 * index;
                     playerUI.addChild(groupView);
                 };
+                /**
+                 * 清空所有玩家明牌
+                 */
+                PlayerCardGroupsView.prototype.clearAll = function () {
+                    for (var uid in this.playerUIs) {
+                        var playerUI = this.playerUIs[uid];
+                        playerUI.destroyChildren();
+                        this.removeComponent(playerUI);
+                    }
+                };
                 return PlayerCardGroupsView;
             }(common.view.ComponentView));
             PlayerCardGroupsView.SELF = {
-                centerX: -100,
+                centerX: -140,
                 bottom: 10,
                 width: 780,
                 height: 100
@@ -173,7 +182,7 @@ var mahjong;
                 height: 389
             };
             PlayerCardGroupsView.OPPOSITE = {
-                centerX: 68,
+                centerX: 88,
                 top: 10,
                 width: 495,
                 height: 64

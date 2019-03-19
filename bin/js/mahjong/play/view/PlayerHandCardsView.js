@@ -18,14 +18,18 @@ var mahjong;
                 __extends(PlayerHandCardsView, _super);
                 function PlayerHandCardsView(deskController) {
                     var _this = _super.call(this) || this;
-                    _this.handCardUIs = {};
+                    _this.playerUIs = {};
                     _this.deskController = deskController;
+                    _this.selfHandCardsView = new view.SelfHandCardsView(deskController, _this);
                     return _this;
                 }
+                PlayerHandCardsView.prototype.getSelfHandCardsView = function () {
+                    return this.selfHandCardsView;
+                };
                 PlayerHandCardsView.prototype.getAttrs = function (pos) {
                     switch (pos) {
-                        case mahjong.play.Position.SELF:
-                            return PlayerHandCardsView.SELF;
+                        // case mahjong.play.Position.SELF:
+                        //     return PlayerHandCardsView.SELF;
                         case mahjong.play.Position.NEXT:
                             return PlayerHandCardsView.NEXT;
                         case mahjong.play.Position.OPPOSITE:
@@ -38,12 +42,12 @@ var mahjong;
                  * 返回指定玩家的手牌UI对象
                  */
                 PlayerHandCardsView.prototype.getUI = function (uid, pos) {
-                    var handCardUI = this.handCardUIs[uid.toString()];
-                    if (!handCardUI) {
-                        handCardUI = new View();
+                    var playerUI = this.playerUIs[uid.toString()];
+                    if (!playerUI) {
+                        playerUI = new View();
                         var handcards = new View();
                         handcards.name = "handcards";
-                        handCardUI.addChild(handcards);
+                        playerUI.addChild(handcards);
                         switch (pos) {
                             case mahjong.play.Position.SELF:
                                 handcards.left = 0;
@@ -66,9 +70,9 @@ var mahjong;
                                 handcards.height = 323;
                                 break;
                         }
-                        this.handCardUIs[uid.toString()] = handCardUI;
+                        this.playerUIs[uid.toString()] = playerUI;
                     }
-                    return handCardUI;
+                    return playerUI;
                 };
                 /**
                  * 显示所有玩家手牌
@@ -79,46 +83,62 @@ var mahjong;
                     Laya.loader.load([
                         "res/atlas/mahjong/card.atlas"
                     ], Handler.create(this, function () {
-                        var gameSetInfo = _this.deskController.getGameSetInfo();
-                        var setInfos = gameSetInfo.getPlayerSetInfo().getAll();
-                        for (var key in setInfos) {
-                            var setInfo = setInfos[key];
-                            _this.show(setInfo);
+                        var setInfos = _this.deskController.getGameSetInfo().getPlayerSetInfo().getAll();
+                        for (var uid in setInfos) {
+                            _this.show(uid);
                         }
                     }));
                 };
                 /**
-                 * 显示指定玩家手牌
+                 * 显示指定玩家ID的手牌
+                 * @param uid
                  */
-                PlayerHandCardsView.prototype.show = function (setInfo) {
-                    if (Login.isSelf(setInfo.uid)) {
-                        this.showSelf(setInfo);
+                PlayerHandCardsView.prototype.show = function (uid) {
+                    if (Login.isSelf(uid)) {
+                        this.selfHandCardsView.show();
                         return;
                     }
-                    var pos = this.deskController.findPositionByUid(setInfo.uid);
-                    var handcardUI = this.getUI(setInfo.uid, pos);
-                    var hasMo = mahjong.play.model.PlayerSetInfo.hasMo(setInfo);
+                    var pos = this.deskController.findPositionByUid(uid);
+                    var playerUI = this.getUI(uid, pos);
+                    this.clear(playerUI);
+                    var playerSetInfo = this.deskController.getGameSetInfo().getPlayerSetInfo();
+                    var setInfo = playerSetInfo.getByUid(uid);
+                    var hasMo = playerSetInfo.hasMo(uid);
                     var handCardNum = hasMo ? setInfo.handCardNum - 1 : setInfo.handCardNum;
                     // 遍历并显示每张打出的牌
                     for (var i = 0; i < handCardNum; i++) {
-                        this.addSingleCard(handcardUI, i, pos);
+                        this.addSingleCard(playerUI, i, pos);
                     }
                     if (hasMo) {
-                        this.showMoCard(handcardUI, pos);
+                        this.showMoCard(playerUI, pos);
                     }
                     // 显示
-                    this.showComponent(handcardUI, this.getAttrs(pos));
+                    this.showComponent(playerUI, this.getAttrs(pos));
+                };
+                PlayerHandCardsView.prototype.clear = function (playerUI) {
+                    playerUI.removeChildByName("mo");
+                    var handcards = playerUI.getChildByName("handcards");
+                    handcards.destroyChildren();
+                    this.removeComponent(playerUI);
+                };
+                /**
+                 * 清空所有玩家手牌
+                 */
+                PlayerHandCardsView.prototype.clearAll = function () {
+                    for (var uid in this.playerUIs) {
+                        this.clear(this.playerUIs[uid]);
+                    }
                 };
                 /**
                  * 显示一张其他玩家的手牌
                  */
-                PlayerHandCardsView.prototype.addSingleCard = function (handcardUI, index, pos) {
-                    var GlobalSetting = common.data.GlobalSetting;
-                    var handcards = handcardUI.getChildByName("handcards");
+                PlayerHandCardsView.prototype.addSingleCard = function (playerUI, index, pos) {
+                    //let GlobalSetting = common.data.GlobalSetting;
+                    var handcards = playerUI.getChildByName("handcards");
                     var singleCard;
                     switch (pos) {
                         case mahjong.play.Position.SELF:
-                            break;
+                            return;
                         case mahjong.play.Position.NEXT:
                             singleCard = view.SingleCardFactory.createNextHand(GlobalSetting.get("mahjongTheme"));
                             singleCard.top = 23 * index;
@@ -133,14 +153,22 @@ var mahjong;
                             singleCard.zOrder = 1000 - index;
                             break;
                     }
+                    singleCard.name = index;
                     handcards.addChild(singleCard);
                 };
                 /**
+                 * 去掉一张手牌
+                 */
+                // public removeSingleCard(playerUI: View, index) {
+                //     let handcards = playerUI.getChildByName("handcards") as View;
+                //     handcards.removeChildByName(index);
+                // }
+                /**
                  * 显示其他玩家摸到的手牌
                  */
-                PlayerHandCardsView.prototype.showMoCard = function (handcardUI, pos) {
-                    var GlobalSetting = common.data.GlobalSetting;
-                    var moCard = handcardUI.getChildByName("mo");
+                PlayerHandCardsView.prototype.showMoCard = function (playerUI, pos) {
+                    //let GlobalSetting = common.data.GlobalSetting;
+                    var moCard = playerUI.getChildByName("mo");
                     if (moCard) {
                         moCard.visible = true;
                         return;
@@ -162,60 +190,10 @@ var mahjong;
                             break;
                     }
                     moCard.name = "mo";
-                    handcardUI.addChild(moCard);
-                };
-                /**
-                 * 显示自己的手牌
-                 */
-                PlayerHandCardsView.prototype.showSelf = function (setInfo) {
-                    var _this = this;
-                    var pos = mahjong.play.Position.SELF;
-                    var handcardUI = this.getUI(setInfo.uid, pos);
-                    var handcards = setInfo.handcards;
-                    var hasMo = mahjong.play.model.PlayerSetInfo.hasMo(setInfo);
-                    if (hasMo) {
-                        this.showSelfMo(handcardUI, handcards[handcards.length - 1]);
-                    }
-                    // 复制除了摸牌外的手牌，排序
-                    var showHandcards = hasMo ? handcards.slice(0, handcards.length - 1) : handcards.slice(0);
-                    showHandcards.sort(function (a, b) { return b - a; });
-                    // 遍历并显示每张打出的牌
-                    showHandcards.forEach(function (handcard, index) {
-                        _this.addSelfCard(handcardUI, index, handcard);
-                    });
-                    // 显示
-                    this.showComponent(handcardUI, this.getAttrs(pos));
-                };
-                /**
-                 * 显示自己的摸牌
-                 */
-                PlayerHandCardsView.prototype.showSelfMo = function (handcardUI, moCard) {
-                    var GlobalSetting = common.data.GlobalSetting;
-                    handcardUI.removeChildByName("mo");
-                    var moCardView = view.SingleCardFactory.createSelfHand(GlobalSetting.get("mahjongTheme"), moCard);
-                    moCardView.right = 0;
-                    moCardView.name = "mo";
-                    handcardUI.addChild(moCardView);
-                    console.log("PlayerHandCardsView.showSelfMo@card", moCard);
-                };
-                /**
-                 * 增加一张自己的手牌
-                 */
-                PlayerHandCardsView.prototype.addSelfCard = function (handcardUI, index, card) {
-                    var GlobalSetting = common.data.GlobalSetting;
-                    var handcards = handcardUI.getChildByName("handcards");
-                    var cardView = view.SingleCardFactory.createSelfHand(GlobalSetting.get("mahjongTheme"), card);
-                    cardView.right = 64 * index;
-                    handcards.addChild(cardView);
+                    playerUI.addChild(moCard);
                 };
                 return PlayerHandCardsView;
             }(common.view.ComponentView));
-            PlayerHandCardsView.SELF = {
-                centerX: 0,
-                bottom: 10,
-                width: 916,
-                height: 94
-            };
             PlayerHandCardsView.NEXT = {
                 right: 180,
                 centerY: -50,

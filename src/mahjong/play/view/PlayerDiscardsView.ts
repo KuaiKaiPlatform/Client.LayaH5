@@ -1,6 +1,8 @@
 module mahjong.play.view {
+
     import Handler = Laya.Handler;
     import View = Laya.View;
+    import Component = Laya.Component;
 
     /**
      *  麻将玩家打出的牌显示
@@ -8,7 +10,7 @@ module mahjong.play.view {
     export class PlayerDiscardsView extends common.view.ComponentView {
 
         protected deskController: mahjong.play.controller.DeskController;
-        private discardUIs = {};
+        protected playerUIs = {};
 
         constructor(deskController) {
             super();
@@ -60,12 +62,12 @@ module mahjong.play.view {
          * 返回指定玩家的打出的牌UI对象
          */
         protected getUI(uid): View {
-            let discardUI = this.discardUIs[uid];
-            if(!discardUI) {
-                discardUI = new View();
-                this.discardUIs[uid] = discardUI;
+            let playerUI = this.playerUIs[uid];
+            if(!playerUI) {
+                playerUI = new View();
+                this.playerUIs[uid] = playerUI;
             }
-            return discardUI;
+            return playerUI;
         }
 
         /**
@@ -79,10 +81,20 @@ module mahjong.play.view {
                 let gameSetInfo = this.deskController.getGameSetInfo() as mahjong.play.model.GameSetInfo;
                 let setInfos = gameSetInfo.getPlayerSetInfo().getAll();
                 for(let key in setInfos) {
-                    let setInfo = setInfos[key];
-                    this.show(setInfo);
+                    this.show(key);
                 }
             }));
+        }
+
+        /**
+         * 清空所有玩家打出的牌
+         */
+        public clearAll() {
+            for(let uid in this.playerUIs) {
+                let playerUI = this.playerUIs[uid] as View;
+                playerUI.destroyChildren();
+                this.removeComponent(playerUI);
+            }
         }
 
         /**
@@ -100,98 +112,169 @@ module mahjong.play.view {
         /**
          * 显示一名玩家打出的牌
          */
-        protected show(setInfo): void {
+        public show(uid): void {
+            let setInfo = this.deskController.getGameSetInfo().getPlayerSetInfo().getByUid(uid);
             if(!this.check(setInfo)) return;
             
-            let pos = this.deskController.findPositionByUid(setInfo.uid);
-            let discardUI = this.getUI(setInfo.uid) as View;
+            let pos = this.deskController.findPositionByUid(uid);
+            let playerUI = this.getUI(uid) as View;
 
             // 遍历并显示每张打出的牌
             setInfo.discards.forEach((discard, index) => {
-                this.addSingleCard(discardUI, pos, index, discard);
+                this.addSingleCard(playerUI, pos, index, discard);
             });
 
             // 显示
-            this.showComponent(discardUI, this.getAttrs(pos));
+            this.showComponent(playerUI, this.getAttrs(pos));
+        }
+
+        public removeLast(uid) {
+            let playerUI = this.getUI(uid) as View;
+            let setInfo = this.deskController.getGameSetInfo().getPlayerSetInfo().getByUid(uid);
+            playerUI.removeChildByName(Number(setInfo.discards.length).toString());
+
+            this.removeFocus();
+            console.log("mahjong.view.PlayerDiscardsView.removeLast@removing", JSON.stringify(setInfo));
         }
 
         /**
          * 增加一张指定玩家打出的牌
          */
-        public add(uid, index, discard): void {
+        public add(uid, discard): void {
             let pos = this.deskController.findPositionByUid(uid);
-            let discardUI = this.getUI(uid) as View;
-            this.addSingleCard(discardUI, pos, index, discard);
+            let playerUI = this.getUI(uid) as View;
+            let setInfo = this.deskController.getGameSetInfo().getPlayerSetInfo().getByUid(uid);
+            this.addSingleCard(playerUI, pos, setInfo.discards.length-1, discard);
+
+            this.focus(uid);
+
+            // 显示
+            this.showComponent(playerUI, this.getAttrs(pos));
         }
 
         /**
          * 增加一张指定位置玩家打出的牌
          */
-        protected addSingleCard(discardUI: View, pos, index, discard): void {
+        protected addSingleCard(playerUI: View, pos, index, discard): void {
+            let singleCard;
             switch(pos) {
             case mahjong.play.Position.SELF:
-                this.addSelf(discardUI, index, discard);
+                singleCard = this.addSelf(playerUI, index, discard);
                 break;
             case mahjong.play.Position.NEXT:
-                this.addNext(discardUI, index, discard);
+                singleCard = this.addNext(playerUI, index, discard);
                 break;
             case mahjong.play.Position.OPPOSITE:
-                this.addOpposite(discardUI, index, discard);
+                singleCard = this.addOpposite(playerUI, index, discard);
                 break;
             case mahjong.play.Position.PREVIOUS:
-                this.addPre(discardUI, index, discard);
+                singleCard = this.addPre(playerUI, index, discard);
                 break;
+            }
+            if(singleCard) {
+                singleCard.name = index + "";
             }
         }
 
         /**
          * 增加一张自己打出的牌
          */
-        protected addSelf(discardUI: View, index, discard): void {
+        protected addSelf(playerUI: View, index, discard): View {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addSelf@adding", index, discard);
             let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.get("mahjongTheme"), discard);
             singleCard.x = 39 * (index%9);
             singleCard.y = 45 * Math.floor(index/9);
-            discardUI.addChild(singleCard);
+            playerUI.addChild(singleCard);
+            return singleCard;
         }
         
         /**
          * 增加一张对家打出的牌
          */
-        protected addOpposite(discardUI: View, index, discard): void {
+        protected addOpposite(playerUI: View, index, discard): View {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addOpposite@adding", index, discard);
             let singleCard = SingleCardFactory.createLandscapeDiscard(GlobalSetting.get("mahjongTheme"), discard);
             singleCard.right = 39 * (index%9);
             singleCard.bottom = 45 * Math.floor(index/9);
             singleCard.zOrder = 1000 - index;
-            discardUI.addChild(singleCard);
+            playerUI.addChild(singleCard);
+            return singleCard;
         }
 
         /**
          * 增加一张下家打出的牌
          */
-        protected addNext(discardUI: View, index, discard): void {
+        protected addNext(playerUI: View, index, discard): View {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addNext@adding", index, discard);
             let singleCard = SingleCardFactory.createNextCard(GlobalSetting.get("mahjongTheme"), discard);
             singleCard.left = 45 * Math.floor(index/9);
             singleCard.bottom = 27 * (index%9);
             singleCard.zOrder = 1000-index;
-            discardUI.addChild(singleCard);
+            playerUI.addChild(singleCard);
+            return singleCard;
         }
 
         /**
          * 增加一张上家打出的牌
          */
-        protected addPre(discardUI: View, index, discard): void {
+        protected addPre(playerUI: View, index, discard): View {
             let GlobalSetting = common.data.GlobalSetting;
             console.log("PlayerDiscardsView.addPre@adding", index, discard);
             let singleCard = SingleCardFactory.createPreCard(GlobalSetting.get("mahjongTheme"), discard);
             singleCard.right = 45 * Math.floor(index/9);
             singleCard.top = 27 * (index%9);
-            discardUI.addChild(singleCard);
+            playerUI.addChild(singleCard);
+            return singleCard;
+        }
+
+        /**
+         * focus 在指定玩家打出的最后一张牌上
+         */
+        public focus(uid) {
+            this.removeFocus();
+
+            let focusImg = new Component();
+            focusImg.loadImage("mahjong/card/focus.png");
+            focusImg.name = "current_focus";
+            focusImg.scaleX = 0.5;
+            focusImg.scaleY = 0.5;
+
+            let pos = this.deskController.findPositionByUid(uid);
+            let index = this.deskController.getGameSetInfo().getPlayerSetInfo().getByUid(uid).discards.length-1;
+
+            switch(pos) {
+            case mahjong.play.Position.SELF:
+                focusImg.x = 39 * (index%9) + 9;
+                focusImg.y = 45 * Math.floor(index/9) - 27;
+                break;
+            case mahjong.play.Position.NEXT:
+                focusImg.left = 45 * Math.floor(index/9) + 12;
+                focusImg.bottom = 27 * (index%9) + 38;
+                break;
+            case mahjong.play.Position.OPPOSITE:
+                focusImg.right = 39 * (index%9) + 9;
+                focusImg.bottom = 45 * Math.floor(index/9) + 52;
+                break;
+            case mahjong.play.Position.PREVIOUS:
+                focusImg.right = 45 * Math.floor(index/9) + 12;
+                focusImg.top = 27 * (index%9) - 26;
+                break;
+            }
+
+            let playerUI = this.getUI(uid);
+            playerUI.addChild(focusImg);
+        }
+
+        /**
+         * 删除 focus
+         */
+        public removeFocus() {
+            for(let uid in this.playerUIs) {
+                this.playerUIs[uid].removeChildByName("current_focus");
+            }
         }
 
     }

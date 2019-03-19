@@ -8,7 +8,7 @@ module common.play.view {
     export abstract class PlayerBasicView extends common.view.ComponentView {
 
         protected deskController: common.play.controller.DeskController;
-        private basicInfoUIs = {};
+        private playerUIs = {};
 
         constructor(deskController) {
             super();
@@ -17,67 +17,67 @@ module common.play.view {
 
         // 返回指定玩家的基本信息UI对象
         protected getUI(uid): ui.mahjong.PlayerBasicInfoUI {
-            let basicInfoUI: ui.mahjong.PlayerBasicInfoUI = this.basicInfoUIs[uid];
-            if(!basicInfoUI) {
-                basicInfoUI = new ui.mahjong.PlayerBasicInfoUI();
-                this.basicInfoUIs[uid] = basicInfoUI;
+            let playerUI: ui.mahjong.PlayerBasicInfoUI = this.playerUIs[uid];
+            if(!playerUI) {
+                playerUI = new ui.mahjong.PlayerBasicInfoUI();
+                this.playerUIs[uid] = playerUI;
             }
-            return basicInfoUI;
+            return playerUI;
         }
 
         public showAll() {
-            console.log("PlayerBasicView.showAll");
-            //let players = common.play.model.PlayerInfo.getAll();
-            let players = this.deskController.getDeskDetail().getAllPlayers();
-            for(let key in players) {
-                this.show(players[key]);
-            }
+            console.log("common.play.view.PlayerBasicView.showAll");
+
+            //预加载图集资源
+            Laya.loader.load([
+                "res/atlas/player.atlas"
+            ], Handler.create(this, () => {
+                let players = this.deskController.getDeskDetail().getAllPlayers();
+                for(let uid in players) {
+                    this.showSingle(uid);
+                }
+            }));
         }
 
         public show(player) {
-            //预加载图集资源
-            // Laya.loader.load([
-            //     "res/atlas/player.atlas"
-            // ], Handler.create(this, () => {
-            //     this.showSingle(player);
-            // }));
-            this.showSingle(player);
+            this.showSingle(player.user.uid);
         }
 
-        protected abstract getAttrs(playerInfo);
+        protected abstract getAttrs(player);
 
-        // 显示指定坐标的一名玩家基本信息
-        public showSingle(player): void {
-            let user = player.user;
-            // 玩家基本信息显示
-            let basicInfoUI = this.getUI(user.uid);
+        // 显示指定玩家基本信息
+        public showSingle(uid): void {
+            let deskDetail = this.deskController.getDeskDetail();
+            let player = deskDetail.getPlayer(uid);
+            let playerUI = this.getUI(uid);
 
             // 昵称
-            let labelName = basicInfoUI.getChildByName("label_player_name") as laya.ui.Label;
-            labelName.changeText(user.nkn);
+            let labelName = playerUI.getChildByName("nickname") as laya.ui.Label;
+            labelName.changeText(player.user.nkn);
 
             // 分数
             // let total = 0;
             // basicInfo.points.forEach(point => total += point);
-            let labelPoint = basicInfoUI.getChildByName("label_player_score") as laya.ui.Label;
-            labelPoint.changeText(player.total.toString());
+            let labelPoint = playerUI.getChildByName("score") as laya.ui.Label;
+            labelPoint.changeText(player.total);
 
-            // 隐藏角标
-            let jiaoBiao = basicInfoUI.getChildByName("img_player_jiao") as laya.display.Sprite;
-            jiaoBiao.visible = false;
+            // 庄家
+            let zhuang = playerUI.getChildByName("zhuang") as laya.display.Sprite;
+            zhuang.visible = deskDetail.isBanker(uid);
 
             // 显示
-            this.showComponent(basicInfoUI, this.getAttrs(player));
+            this.showComponent(playerUI, this.getAttrs(player));
         }
 
         // 删除一名玩家基本信息
         public removeSingle(uid): void {
-            console.log("common.view.PlayerBasicView.removeSingle", uid);
-            let basicInfoUI: ui.mahjong.PlayerBasicInfoUI = this.basicInfoUIs[uid];
-            if(basicInfoUI) {
-                console.log("common.view.PlayerBasicView.removeSingle@basicInfoUI found", uid);
-                Laya.stage.removeChild(basicInfoUI);
-            }
+            console.log("common.play.view.PlayerBasicView.removeSingle", uid);
+            let playerUI: ui.mahjong.PlayerBasicInfoUI = this.playerUIs[uid];
+            this.removeComponent(playerUI);
+            // if(basicInfoUI) {
+            //     console.log("common.view.PlayerBasicView.removeSingle@basicInfoUI found", uid);
+            //     Laya.stage.removeChild(basicInfoUI);
+            // }
         }
 
         /**
@@ -85,13 +85,12 @@ module common.play.view {
          * @param bankerId
          */
         public showBanker(bankerId) {
-            console.log("PlayerBasicView.showBanker@id", bankerId);
-            for(let key in this.basicInfoUIs) {
-                console.log("PlayerBasicView.showBanker@processing", key);
-                let basicInfoUI = this.basicInfoUIs[key];
-                let jiaoBiao = basicInfoUI.getChildByName("img_player_jiao") as laya.display.Sprite;
-                jiaoBiao.visible = (bankerId == parseInt(key))?true:false;
-            }
+            let playerUI = this.getUI(bankerId);
+            if(!playerUI) return;
+            let zhuang = playerUI.getChildByName("zhuang") as laya.display.Sprite;
+            zhuang.visible = true;
+
+            console.log("common.play.view.PlayerBasicView.showBanker@id", bankerId);
         }
 
     }

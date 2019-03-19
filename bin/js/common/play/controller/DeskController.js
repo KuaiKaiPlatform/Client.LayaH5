@@ -23,16 +23,17 @@ var common;
                 DeskController.prototype.setDeskDetail = function (deskDetail) {
                     this.deskDetail = deskDetail;
                 };
-                DeskController.prototype.getSelfId = function () {
-                    return this.selfId;
-                };
-                DeskController.prototype.setSelfId = function (selfId) {
-                    this.selfId = selfId;
-                };
-                DeskController.prototype.launch = function (selfId, deskDetail) {
-                    this.setSelfId(Login.getUid());
+                DeskController.prototype.launch = function (deskDetail) {
                     this.setDeskDetail(deskDetail);
                     this.deskView.show();
+                };
+                /**
+                 * 牌局是否结束（是否收到SGameResult）
+                 */
+                DeskController.prototype.isGameEnded = function () {
+                    if (this.deskDetail && this.deskDetail.getGameResult())
+                        return true;
+                    return false;
                 };
                 return DeskController;
             }());

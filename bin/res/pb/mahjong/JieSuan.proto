@@ -6,56 +6,186 @@ package mahjong;
 enum JieSuan {	// 各结算项
 
 	// 1001-5000 用于通用牌型
-	HUN_YI_SE					= 1001;	// 混一色
-	DAN_DIAO_JIANG				= 1002;	// 单钓将
-	BIAN_ZHANG					= 1003;	// 边张
-	KAN_ZHANG					= 1004;	// 坎张
-	MEN_QIAN_QING				= 1005;	// 门前清
-	QUE_YI_MEN					= 1006;	// 缺一门
-	DUAN_YAO_JIU				= 1007;	// 断幺九
-	JUE_ZHANG					= 1008;	// 绝张
-	QI_XING_BU_KAO				= 1009;	// 七星不靠
-	WU_XING_BU_KAO				= 1010;	// 五星不靠
-	QUAN_QIU_REN				= 1011;	// 全求人
-	YI_SE_YAO_JIU_KE			= 1012;	// 一色幺九刻
-	YI_SE_SAN_LIAN_DUI			= 1013;	// 一色三连对
-	YI_SE_YAO_JIU_KE_SHUANG		= 1014;	// 一色幺九刻（双）
-	YI_SE_SAN_LIAN_DUI_SHUANG	= 1015;	// 一色三连对（双）
-	LIAN_LIU					= 1016;	// 连六
-	SHUANG_LIAN_LIU				= 1017;	// 双连六
-	DA_SAN_YUAN					= 1018;	// 大三元
-	DA_SI_XI					= 1019;	// 大四喜
-	YI_SE_SI_LIAN_KE			= 1020;	// 一色四连刻
-	YI_SE_SAN_LIAN_KE_FU_JIANG	= 1021;	// 一色三连刻附一将
-	YI_SE_SAN_LIAN_KE			= 1022;	// 一色三连刻
-	SI_ZI_KE					= 1023;	// 四字刻
-	SAN_ZI_KE_FU_JIANG			= 1024;	// 三字刻附一将
-	SAN_ZI_KE					= 1025;	// 三字刻
-	HUN_YAO_JIU					= 1026;	// 混幺九（全部由字牌和序数牌一、九组成）
-	SHI_SAN_LUAN_KAO			= 1027;	// 十三乱靠（十三不靠中万条筒可重复，并且牌值之间相差3或3以上均可）
-	QI_XING_LUAN_KAO			= 1028;	// 七星乱靠
-	WU_XING_LUAN_KAO			= 1029;	// 五星乱靠
-	LUAN_ZI						= 1030;	// 乱字
-	ZI_YI_SE					= 1031;	// 字一色
-	WU_ZI						= 1032;	// 无字
-	SHI_SAN_YAO					= 1033;	// 十三幺
-	SHI_SAN_BU_KAO				= 1034;	// 十三不靠
-	ZUI_HAO_QI_DUI				= 1035;	// 最豪华七对
-	CHAO_HAO_QI_DUI				= 1036;	// 超豪华七对
-	HAO_QI_DUI					= 1037;	// 豪华七对
-	QI_DUI						= 1038;	// 七对
-	PENG_PENG_HU				= 1039;	// 碰碰胡
-	YI_TIAO_LONG				= 1040;	// 一条龙
-	BIAO_ZHUN_HU				= 1041;	// 标准胡
-	QING_YI_SE					= 1042;	// 清一色
-	ALMIGHTY_4					= 1043;	// 四万能牌
-	LIAN_DUI					= 1044;	// 连对
-	MING_KE						= 1045;	// 明刻
-	AN_KE						= 1046;	// 暗刻
-	GANG_PAI					= 1047;	// 杠牌
-	ZHI_SHU						= 1048;	// 支数
-	TONG_SHU					= 1049;	// 通数
-	SI_HE						= 1050;	// 四核
+	HUN_YI_SE					= 1001;			// 混一色
+	DAN_DIAO_JIANG				= 1002;			// 单钓将
+	BIAN_ZHANG					= 1003;			// 边张
+	KAN_ZHANG					= 1004;			// 坎张
+	MEN_QIAN_QING				= 1005;			// 门前清
+	QUE_YI_MEN					= 1006;			// 缺一门
+	DUAN_YAO_JIU				= 1007;			// 断幺九
+	JUE_ZHANG					= 1008;			// 绝张
+	QI_XING_BU_KAO				= 1009;			// 七星不靠
+	WU_XING_BU_KAO				= 1010;			// 五星不靠
+	QUAN_QIU_REN				= 1011;			// 全求人
+	YI_SE_YAO_JIU_KE			= 1012;			// 一色幺九刻
+	YI_SE_SAN_LIAN_DUI			= 1013;			// 一色三连对
+	YI_SE_YAO_JIU_KE_SHUANG		= 1014;			// 一色幺九刻（双）
+	YI_SE_SAN_LIAN_DUI_SHUANG	= 1015;			// 一色三连对（双）
+	LIAN_LIU					= 1016;			// 连六
+	SHUANG_LIAN_LIU				= 1017;			// 双连六
+	DA_SAN_YUAN					= 1018;			// 大三元
+	DA_SI_XI					= 1019;			// 大四喜
+	YI_SE_SI_LIAN_KE			= 1020;			// 一色四连刻
+	YI_SE_SAN_LIAN_KE_FU_JIANG	= 1021;			// 一色三连刻附一将
+	YI_SE_SAN_LIAN_KE			= 1022;			// 一色三连刻
+	SI_ZI_KE					= 1023;			// 四字刻
+	SAN_ZI_KE_FU_JIANG			= 1024;			// 三字刻附一将
+	SAN_ZI_KE					= 1025;			// 三字刻
+	HUN_YAO_JIU					= 1026;			// 混幺九（全部由字牌和序数牌一、九组成）
+	SHI_SAN_LUAN_KAO			= 1027;			// 十三乱靠（十三不靠中万条筒可重复，并且牌值之间相差3或3以上均可）
+	QI_XING_LUAN_KAO			= 1028;			// 七星乱靠
+	WU_XING_LUAN_KAO			= 1029;			// 五星乱靠
+	LUAN_ZI						= 1030;			// 乱字
+	ZI_YI_SE					= 1031;			// 字一色
+	WU_ZI						= 1032;			// 无字
+	SHI_SAN_YAO					= 1033;			// 十三幺
+	SHI_SAN_BU_KAO				= 1034;			// 十三不靠
+	ZUI_HAO_QI_DUI				= 1035;			// 最豪华七对
+	CHAO_HAO_QI_DUI				= 1036;			// 超豪华七对
+	HAO_QI_DUI					= 1037;			// 豪华七对
+	QI_DUI						= 1038;			// 七对
+	PENG_PENG_HU				= 1039;			// 碰碰胡
+	YI_TIAO_LONG				= 1040;			// 一条龙
+	BIAO_ZHUN_HU				= 1041;			// 标准胡
+	QING_YI_SE					= 1042;			// 清一色
+	ALMIGHTY_4					= 1043;			// 四万能牌
+	LIAN_DUI					= 1044;			// 连对
+	MING_KE						= 1045;			// 明刻
+	AN_KE						= 1046;			// 暗刻
+	GANG_PAI					= 1047;			// 杠牌
+	ZHI_SHU						= 1048;			// 支数
+	TONG_SHU					= 1049;			// 通数
+	SI_HE						= 1050;			// 四核
 
+	// 通用非牌型结算项（5001-9999 ）
+	TIAN_HU						= 5001;			// 天胡
+	DI_HU						= 5002;			// 地胡
+	ZI_MO						= 5003;			// 自摸
+	GANG_SHANG_HUA				= 5004;			// 杠上花
+	QIANG_GANG_HU				= 5005;			// 抢杠胡
+    DI_FEN						= 5006;			// 底分
+    // MING_KE						= 5007;			// 明刻
+    // AN_KE						= 5008;			// 暗刻
+    MING_GANG_					= 5009;			// 明杠
+    AN_GANG_					= 5010;			// 暗杠
+    DIAN_GANG_					= 5011;			// 点杠
+    BU_GANG_					= 5012;			// 补杠
+    SI_GANG						= 5013;			// 四杠
+    SAN_GANG					= 5014;			// 三杠
+    SHUANG_GANG					= 5015;			// 双杠
+    GANG_						= 5016;			// 杠
+    PENG_						= 5017;			// 碰
+    HU_PAI						= 5018;			// 胡牌
+    ZHI_FEN						= 5019;			// 支分
+    QI_SHOU_BAO_TING			= 5020;			// 起手报听
+    HAI_DI_LAO					= 5021;			// 海底捞
+    BET_SCORE					= 5022;			// 下注分
+    GANG_HOU_PAO				= 5023;			// 杠后炮
+    HUANG_ZHUANG_DOUBLE			= 5024;			// 荒庄翻倍
+    GEN_ZHUANG					= 5025;			// 跟庄
+
+
+	// 陕西麻将特殊牌型(六位：61开头，610001起)
+	GEN_HU						= 610001;		// 根胡
+	DA_DUI_ZI					= 610002;		// 大对子（碰碰胡）
+	JIN_GOU_DIAO				= 610003;		// 金钩钓（全求人）
+
+	/*
+	 *  陕西麻将结算(六位：61开头，615001-619999)
+	 */
+    PAO_ZI						= 615001;		// 炮子
+    HUA_SHUI_YU					= 615002;		// 划水抓鱼
+    DIAN_ZI						= 615003;		// 亮六飞一点子
+    
+	// 安徽麻将特殊牌型(六位：34开头，340001-345000)
+	
+	// 芜湖
+	SHUANG_BA_ZHI				= 340001;		// 双八支
+	BA_ZHI						= 340002;		// 八支
+	SHUANG_SI_HE				= 340003;		// 双四核
+	
+	TONG_TIAN					= 340005;		// 通天（一条龙）
+	DUI_DUI_HU					= 340006;		// 对对胡 （碰碰胡）
+	YA_DANG						= 340007;		// 压档
+	
+	// 无为
+	SHUANG_TONG					= 340011;		// 双通
+	QI_TONG						= 340012;		// 七通
+	WU_TONG						= 340013;		// 五通
+	QUAN_LAO					= 340014;		// 全老
+	QUAN_XIAO					= 340015;		// 全小
+	SHI_LAO						= 340016;		// 十老
+	SHI_XIAO					= 340017;		// 十小
+	SHI_YI_ZHI					= 340018;		// 十一支
+	
+	// 和县
+	BA_TONG						= 340020;		// 八通
+
+	/*
+	 *  安徽麻将结算项(六位：34开头，345001-349999)
+	 */
+    
+    // 芜湖麻将
+    JIAO						= 345001;		// 交
+    ZUI							= 345002;		// 嘴
+    JIAO_ZUI					= 345003;		// 一交多嘴
+    WUHU_DI						= 345004;		// 底番
+    WUHU_ZHI					= 345005;		// 支番
+    
+    // 无为麻将
+    ZHUANG_FEN					= 345006;		// 庄分
+    BU_DONG_SHOU				= 345007;		// 不动手
+    GANG_KAI_HU					= 345008;		// 杠开胡
+    GANG_KAI_HU_YA_DANG			= 345009;		// 杠开胡（压档）
+    DI_SI_GE_TOU_KA				= 345010;		// 第四个头卡
+    HONG_ZHONG_MING_GANG		= 345011;		// 红中明杠
+    HONG_ZHONG_AN_GANG			= 345012;		// 红中暗杠
+    
+    // 歙县麻将
+    DA_CAI						= 345013;		// 打财
+    WU_CAI						= 345014;		// 无财
+    PENG_CAI					= 345015;		// 碰财神
+    GANG_CAI					= 345016;		// 杠财神
+    SHUN_FAN_BAO				= 345017;		// 顺反包
+    
+    // 和县麻将
+    LAO_XIAO_DUI				= 345018;		// 老小对（一色幺九刻）
+    BANG_BANG					= 345019;		// 棒棒（一色三连对）
+    QUAN_YAO_DUI_DUI_HU			= 345020;		// 全幺对对胡（混幺九+碰碰胡）
+    SI_DA_KAN					= 345021;		// 四大坎（一色四连刻或四字刻）
+    SAN_DA_KAN					= 345022;		// 三大坎（一色三连刻或三字刻）
+    SHUANG_LIAN_HAO				= 345023;		// 双连号
+    XIAO_LIAN_HAO				= 345024;		// 小连号（连六）
+    KAN_KAN_HU					= 345025;		// 坎坎胡（碰碰胡+门前清）
+    SHUANG_BANG_BANG			= 345026;		// 双棒棒（一色三连对双）
+    ZHONG_FA_BAI_SAN_DA_KAN		= 345027;		// 中发白三大坎（大三元）
+    DA_DIAO_CHE					= 345028;		// 大吊车（全求人+碰碰胡）
+    DA_NA						= 345029;		// 大拿
+    QING_NA						= 345030;		// 清拿
+    PING_NA						= 345031;		// 平拿
+    MO_FEN						= 345032;		// 摸分
+    DU_YA						= 345033;		// 独押（边张或坎张）
+    KU_ZHI_YA					= 345034;		// 枯枝押（边张或坎张+绝张）
+    ZHI							= 345035;		// 支
+    TONG_						= 345036;		// 通
+    KAN_ZI						= 345037;		// 坎子
+    SAN_DA_KAN_DAI_TOU			= 345038;		// 三大坎带头（一色三连刻或三字刻附一将）
+    BAO_PAI						= 345039;		// 包牌
+    MO_ZI						= 345040;		// 摸子
+    LUAN_FENG					= 345041;		// 乱风
+    
+    // 明光麻将
+    DU_YI						= 345042;		// 独一
+    SHUANG_QING					= 345043;		// 双清
+    SI_PEI_ZI					= 345044;		// 四配子
+    PEI_ZI_CHI					= 345045;		// 配子吃
+    PEI_ZI_CHI_PEI_ZI			= 345046;		// 配子吃配子
+    DU_PEI_ZI					= 345047;		// 独配子
+    
+    // 来安麻将老三番
+    KAN_JIANG					= 345048;		// 砍将
+    FENG_JIANG					= 345049;		// 风将
+    YING_QUE					= 345050;		// 硬缺
+    RUAN_QUE					= 345051;		// 软缺
     
 }

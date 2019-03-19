@@ -12,23 +12,10 @@ module common.play.view {
 
         protected deskController: common.play.controller.DeskController;
         protected ruleSprite = new Component();
-        protected modeLabel = new Label();
 
         constructor(deskController) {
             super();
             this.deskController = deskController;
-        }
-
-        public show() {
-            console.log("GameSummaryView.show");
-            //预加载图集资源
-            Laya.loader.load([
-                "res/atlas/common/rule.atlas"
-            ], Handler.create(this, () => {
-                this.showRule();
-            }));
-
-            this.showMode(0);
         }
 
         protected abstract getRuleAttrs();
@@ -45,14 +32,18 @@ module common.play.view {
 
         protected abstract getModeAttrs();
 
+        public showAll() {
+            
+        }
+
         /**
          * 显示牌局模式，如：局 3/8
          */
-        public showMode(curSet): void {
-            //console.log("GameSummaryView.showMode@totalSet", GameSetting.get("totalSet"));
-            this.modeLabel.changeText("局  " + curSet + "/" + this.deskController.getDeskDetail().getSettingValue("totalSet"));
-            this.showComponent(this.modeLabel, this.getModeAttrs());
-        }
+        // public showMode(curSet): void {
+        //     //console.log("GameSummaryView.showMode@totalSet", GameSetting.get("totalSet"));
+        //     this.modeLabel.changeText("局  " + curSet + "/" + this.deskController.getDeskDetail().getSettingValue("totalSet"));
+        //     this.showComponent(this.modeLabel, this.getModeAttrs());
+        // }
 
         /**
          * 牌局开始或重连
@@ -61,7 +52,7 @@ module common.play.view {
             let gameSetInfo = this.deskController.getGameSetInfo();
 
             // 显示局数
-            this.showMode(gameSetInfo.getCurrentSet());
+           // this.showMode(gameSetInfo.getCurrentSet());
         }
 
     }

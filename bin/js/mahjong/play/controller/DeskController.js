@@ -18,16 +18,23 @@ var mahjong;
                     _this.rule2DeskView = {};
                     _this.deskView = new mahjong.play.view.DeskView(_this);
                     _this.messageListener = new mahjong.play.MessageListener(_this);
+                    _this.operationHandler = new controller.OperationHandler(_this);
                     return _this;
                 }
                 DeskController.init = function () {
                     this.instance = new DeskController();
                 };
+                DeskController.prototype.getDeskView = function () {
+                    return this.deskView;
+                };
+                DeskController.prototype.getOperationHandler = function () {
+                    return this.operationHandler;
+                };
                 /**
                  * 找到指定玩家相对位置：mahjong.play.Position
                  */
                 DeskController.prototype.findPosition = function (player) {
-                    var selfPlayer = this.deskDetail.getPlayer(this.selfId);
+                    var selfPlayer = this.deskDetail.getPlayer(Login.getUid());
                     var pos = player.seat - selfPlayer.seat;
                     return pos < 0 ? pos + 4 : pos;
                 };
@@ -42,6 +49,29 @@ var mahjong;
                  */
                 DeskController.prototype.createGameSetInfo = function (setInit) {
                     this.gameSetInfo = new mahjong.play.model.GameSetInfo(setInit);
+                };
+                DeskController.prototype.getGameSetInfo = function () {
+                    return this.gameSetInfo;
+                };
+                /**
+                 * 新建牌局结果对话框
+                 */
+                DeskController.prototype.createSetResultDialog = function (setResult) {
+                    this.setResultDialog = new mahjong.play.view.SetResultDialog(this, setResult);
+                    return this.setResultDialog;
+                };
+                /**
+                 * 新建整场比赛结果对话框
+                 */
+                DeskController.prototype.createGameResultDialog = function (gameResult) {
+                    this.gameResultDialog = mahjong.play.view.ResultDialogFactory.createGameResultDialog(this.deskDetail.getRule(), this, gameResult);
+                    return this.gameResultDialog;
+                };
+                /**
+                 * 新建整场比赛结果对话框
+                 */
+                DeskController.prototype.getGameResultDialog = function () {
+                    return this.gameResultDialog;
                 };
                 return DeskController;
             }(common.play.controller.DeskController));

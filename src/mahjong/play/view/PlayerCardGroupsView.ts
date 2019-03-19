@@ -16,7 +16,7 @@ module mahjong.play.view {
         }
 
         private static SELF = {
-            centerX: -100,
+            centerX: -140,
             bottom: 10,
             width: 780,
             height: 100
@@ -30,7 +30,7 @@ module mahjong.play.view {
         };
 
         private static OPPOSITE = {
-            centerX: 68,
+            centerX: 88,
             top: 10,
             width: 495,
             height: 64
@@ -76,11 +76,9 @@ module mahjong.play.view {
             Laya.loader.load([
                 "res/atlas/mahjong/card.atlas"
             ], Handler.create(this, () => {
-                let gameSetInfo = this.deskController.getGameSetInfo() as mahjong.play.model.GameSetInfo;
-                let setInfos = gameSetInfo.getPlayerSetInfo().getAll();
-                for(let key in setInfos) {
-                    let setInfo = setInfos[key];
-                    this.show(setInfo);
+                let setInfos = this.deskController.getGameSetInfo().getPlayerSetInfo().getAll();
+                for(let uid in setInfos) {
+                    this.show(uid);
                 }
             }));
         }
@@ -100,11 +98,12 @@ module mahjong.play.view {
         /**
          * 显示一名玩家明牌
          */
-        protected show(setInfo): void {
+        public show(uid): void {
+            let setInfo = this.deskController.getGameSetInfo().getPlayerSetInfo().getByUid(uid);
             if(!this.check(setInfo)) return;
             
-            let pos = this.deskController.findPositionByUid(setInfo.uid);
-            let playerUI = this.getUI(setInfo.uid) as View;
+            let pos = this.deskController.findPositionByUid(uid);
+            let playerUI = this.getUI(uid) as View;
 
             // 遍历并显示各组明牌
             setInfo.cardGroups.forEach((cardGroup, index) => {
@@ -188,6 +187,17 @@ module mahjong.play.view {
             let groupView = CardGroupFactory.createPreGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
             groupView.top = 99 * index;
             playerUI.addChild(groupView);
+        }
+
+        /**
+         * 清空所有玩家明牌
+         */
+        public clearAll() {
+            for(let uid in this.playerUIs) {
+                let playerUI = this.playerUIs[uid] as View;
+                playerUI.destroyChildren();
+                this.removeComponent(playerUI);
+            }
         }
 
     }

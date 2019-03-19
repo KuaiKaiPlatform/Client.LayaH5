@@ -1,0 +1,10 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="CBetPB";  
+
+package mahjong;
+
+message CBet {	// 玩家请求下注
+
+	required int32 bet = 1;						// 下注数
+
+}

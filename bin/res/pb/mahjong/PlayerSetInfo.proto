@@ -4,6 +4,8 @@ option java_outer_classname="PlayerSetInfoPB";
 package mahjong;
 
 import "mahjong/CardGroup.proto";
+import "mahjong/Direction.proto";
+import "mahjong/QueMen.proto";
 
 message PlayerSetInfo {
 
@@ -12,5 +14,9 @@ message PlayerSetInfo {
 	repeated int32 handcards = 3;					// 手牌（只有自己收到）
 	repeated int32 discards = 4;					// 打出的牌
 	repeated mahjong.CardGroup cardGroups = 5;		// 吃碰杠的牌
+	repeated int32 points = 6;						// 本场各项总得失分列表
+	optional mahjong.Direction direction = 7;		// 玩家方位（门风）
+	optional int32 bet = 8;							// 本局下注数量
+	optional mahjong.QueMen queMen = 9;				// 本局缺门，0 无效  10 万 20 条 30 筒
 
 }

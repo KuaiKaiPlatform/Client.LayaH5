@@ -13,4 +13,14 @@ message GameSetting {	// 玩法规则设置
 	optional int32 totalDi = 4;						// 总底数
 	optional int32 totalPlayer = 5;					// 玩家人数
 
+	optional int32 chairMode = 6;					// 选座模式
+	
+	optional bool noJiaFanQiDui = 7;				// 七对不加番
+	optional bool noJiaFanQingYiSe = 8;				// 清一色不加番
+	optional bool noJiaFanGangShangHua = 9;			// 杠上花不加番
+	optional bool noJiaFanHaiDiLao = 10;			// 海底捞不加番
+	optional bool noJiaFanQiangGangHu = 11;			// 抢杠胡不加番
+
+	optional bool paoZi = 12;						// 陕西麻将下炮子
+
 }

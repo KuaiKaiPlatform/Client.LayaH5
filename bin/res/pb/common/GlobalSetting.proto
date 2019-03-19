@@ -9,10 +9,9 @@ import "common/MahjongTheme.proto";
 message GlobalSetting {	// 全局设置
 
 	// 通用设置
-	optional int32 valume = 1;						// 音量
-	optional bool mutePlay = 2;						// 关闭打牌音效
-	optional bool muteBg = 3;						// 关闭背景音乐
-	optional common.Dialect dialect = 4;			// 方言
+	optional int32 volumeBg = 1;								// 背景音乐音量
+	optional int32 volumePlay = 2;								// 打牌音效音量
+	optional common.Dialect dialect = 3;						// 方言
 
 	// 麻将相关
 	optional common.MahjongTheme mahjongTheme = 11;				// 麻将配色方案

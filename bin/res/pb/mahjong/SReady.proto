@@ -1,0 +1,10 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="SReadyPB";  
+
+package mahjong;
+
+message SReady {	// 返回玩家准备
+
+	required int32 uid = 1;						// 玩家ID
+
+}

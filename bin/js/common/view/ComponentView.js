@@ -21,6 +21,9 @@ var common;
                 //添加到stage
                 Laya.stage.addChild(component);
             };
+            ComponentView.prototype.removeComponent = function (component) {
+                Laya.stage.removeChild(component);
+            };
             return ComponentView;
         }());
         view.ComponentView = ComponentView;

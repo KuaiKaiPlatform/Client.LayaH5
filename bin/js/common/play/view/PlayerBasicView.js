@@ -9,6 +9,7 @@ var common;
     (function (play) {
         var view;
         (function (view) {
+            var Handler = Laya.Handler;
             /*
              *  玩家基本信息显示
              */
@@ -16,76 +17,75 @@ var common;
                 __extends(PlayerBasicView, _super);
                 function PlayerBasicView(deskController) {
                     var _this = _super.call(this) || this;
-                    _this.basicInfoUIs = {};
+                    _this.playerUIs = {};
                     _this.deskController = deskController;
                     return _this;
                 }
                 // 返回指定玩家的基本信息UI对象
                 PlayerBasicView.prototype.getUI = function (uid) {
-                    var basicInfoUI = this.basicInfoUIs[uid];
-                    if (!basicInfoUI) {
-                        basicInfoUI = new ui.mahjong.PlayerBasicInfoUI();
-                        this.basicInfoUIs[uid] = basicInfoUI;
+                    var playerUI = this.playerUIs[uid];
+                    if (!playerUI) {
+                        playerUI = new ui.mahjong.PlayerBasicInfoUI();
+                        this.playerUIs[uid] = playerUI;
                     }
-                    return basicInfoUI;
+                    return playerUI;
                 };
                 PlayerBasicView.prototype.showAll = function () {
-                    console.log("PlayerBasicView.showAll");
-                    //let players = common.play.model.PlayerInfo.getAll();
-                    var players = this.deskController.getDeskDetail().getAllPlayers();
-                    for (var key in players) {
-                        this.show(players[key]);
-                    }
+                    var _this = this;
+                    console.log("common.play.view.PlayerBasicView.showAll");
+                    //预加载图集资源
+                    Laya.loader.load([
+                        "res/atlas/player.atlas"
+                    ], Handler.create(this, function () {
+                        var players = _this.deskController.getDeskDetail().getAllPlayers();
+                        for (var uid in players) {
+                            _this.showSingle(uid);
+                        }
+                    }));
                 };
                 PlayerBasicView.prototype.show = function (player) {
-                    //预加载图集资源
-                    // Laya.loader.load([
-                    //     "res/atlas/player.atlas"
-                    // ], Handler.create(this, () => {
-                    //     this.showSingle(player);
-                    // }));
-                    this.showSingle(player);
+                    this.showSingle(player.user.uid);
                 };
-                // 显示指定坐标的一名玩家基本信息
-                PlayerBasicView.prototype.showSingle = function (player) {
-                    var user = player.user;
-                    // 玩家基本信息显示
-                    var basicInfoUI = this.getUI(user.uid);
+                // 显示指定玩家基本信息
+                PlayerBasicView.prototype.showSingle = function (uid) {
+                    var deskDetail = this.deskController.getDeskDetail();
+                    var player = deskDetail.getPlayer(uid);
+                    var playerUI = this.getUI(uid);
                     // 昵称
-                    var labelName = basicInfoUI.getChildByName("label_player_name");
-                    labelName.changeText(user.nkn);
+                    var labelName = playerUI.getChildByName("nickname");
+                    labelName.changeText(player.user.nkn);
                     // 分数
                     // let total = 0;
                     // basicInfo.points.forEach(point => total += point);
-                    var labelPoint = basicInfoUI.getChildByName("label_player_score");
-                    labelPoint.changeText(player.total.toString());
-                    // 隐藏角标
-                    var jiaoBiao = basicInfoUI.getChildByName("img_player_jiao");
-                    jiaoBiao.visible = false;
+                    var labelPoint = playerUI.getChildByName("score");
+                    labelPoint.changeText(player.total);
+                    // 庄家
+                    var zhuang = playerUI.getChildByName("zhuang");
+                    zhuang.visible = deskDetail.isBanker(uid);
                     // 显示
-                    this.showComponent(basicInfoUI, this.getAttrs(player));
+                    this.showComponent(playerUI, this.getAttrs(player));
                 };
                 // 删除一名玩家基本信息
                 PlayerBasicView.prototype.removeSingle = function (uid) {
-                    console.log("common.view.PlayerBasicView.removeSingle", uid);
-                    var basicInfoUI = this.basicInfoUIs[uid];
-                    if (basicInfoUI) {
-                        console.log("common.view.PlayerBasicView.removeSingle@basicInfoUI found", uid);
-                        Laya.stage.removeChild(basicInfoUI);
-                    }
+                    console.log("common.play.view.PlayerBasicView.removeSingle", uid);
+                    var playerUI = this.playerUIs[uid];
+                    this.removeComponent(playerUI);
+                    // if(basicInfoUI) {
+                    //     console.log("common.view.PlayerBasicView.removeSingle@basicInfoUI found", uid);
+                    //     Laya.stage.removeChild(basicInfoUI);
+                    // }
                 };
                 /**
                  * 显示指定庄家
                  * @param bankerId
                  */
                 PlayerBasicView.prototype.showBanker = function (bankerId) {
-                    console.log("PlayerBasicView.showBanker@id", bankerId);
-                    for (var key in this.basicInfoUIs) {
-                        console.log("PlayerBasicView.showBanker@processing", key);
-                        var basicInfoUI = this.basicInfoUIs[key];
-                        var jiaoBiao = basicInfoUI.getChildByName("img_player_jiao");
-                        jiaoBiao.visible = (bankerId == parseInt(key)) ? true : false;
-                    }
+                    var playerUI = this.getUI(bankerId);
+                    if (!playerUI)
+                        return;
+                    var zhuang = playerUI.getChildByName("zhuang");
+                    zhuang.visible = true;
+                    console.log("common.play.view.PlayerBasicView.showBanker@id", bankerId);
                 };
                 return PlayerBasicView;
             }(common.view.ComponentView));

@@ -10,8 +10,8 @@ module common.play.view {
     export abstract class PlayerReadyView extends common.view.ComponentView {
 
         protected deskController: common.play.controller.DeskController;
-        private preparedSprites = {};
-        private prepareSprite;
+        protected preparedSprites = {};
+        protected prepareSprite;
 
         constructor(deskController) {
             super();
@@ -21,7 +21,7 @@ module common.play.view {
         /**
          * 返回指定玩家的准备相关UI对象
          */
-        private getSprite(player): Component {
+        protected getSprite(player): Component {
             // 准备状态
             if(player.prepared) {
                 let uid = player.user.uid;
@@ -49,7 +49,7 @@ module common.play.view {
          * 触发准备
          */
         public onPrepare(e: Event): void {
-            this.removeSingle(Login.getUid());
+            //this.removeSingle(Login.getUid());
             let selfPlayer = this.deskController.getDeskDetail().getPlayer(Login.getUid());
             selfPlayer.prepared = true;
             this.show(selfPlayer);
@@ -61,35 +61,31 @@ module common.play.view {
          * 显示所有玩家准备状态
          */
         public showAll() {
-            console.log("PlayerReadyView.showAll");
+            console.log("common.play.view.PlayerReadyView.showAll");
             
             //预加载图集资源
-            // Laya.loader.load([
-            //     "res/atlas/common/desk.atlas"
-            // ], Handler.create(this, () => {
-            //     let players = this.deskController.getDeskDetail().getAllPlayers();
-            //     for(let key in players) {
-            //         this.showSingle(players[key]);
-            //     }
-            // }));
+            Laya.loader.load([
+                "res/atlas/common/desk.atlas"
+            ], Handler.create(this, () => {
+                let GameStatus = Protocol.getEnum("common.GameStatus");
+                if(this.deskController.getDeskDetail().getStatus() == GameStatus.STARTING) {
+                    console.warn("common.play.view.PlayerReadyView.showAll@Game has started.");
+                    return;
+                }
 
-            let players = this.deskController.getDeskDetail().getAllPlayers();
-            for(let key in players) {
-                this.show(players[key]);
-            }
+                let players = this.deskController.getDeskDetail().getAllPlayers();
+                for(let uid in players) {
+                    this.showSingle(uid);
+                }
+            }));
+
         }
 
         /**
          * 显示指定玩家准备状态
          */
         public show(player) {
-            this.showSingle(player);
-            //预加载图集资源
-            // Laya.loader.load([
-            //     "res/atlas/common/desk.atlas"
-            // ], Handler.create(this, () => {
-            //     this.showSingle(player);
-            // }));
+            this.showSingle(player.user.uid);
         }
 
         protected abstract getAttrs(player);
@@ -97,7 +93,11 @@ module common.play.view {
         /**
          * 显示一名玩家准备状态
          */
-        public showSingle(player): void {
+        public showSingle(uid): void {
+            // 删除所有
+            this.removeSingle(uid);
+
+            let player = this.deskController.getDeskDetail().getPlayer(uid);
             // 玩家准备状态显示
             let sprite = this.getSprite(player);
             if(!sprite) return;
@@ -109,13 +109,16 @@ module common.play.view {
         /**
          * 删除所有玩家准备状态
          */
-        public removeAll() {
-            //let players = common.play.model.PlayerInfo.getAll();
-            let players = this.deskController.getDeskDetail().getAllPlayers();
-            for(let key in players) {
-                let player = players[key];
-                this.removeSingle(player.user.uid);
+        public clearAll() {
+            for(let uid in this.preparedSprites) {
+                this.removeComponent(this.preparedSprites[uid]);
             }
+            this.removeComponent(this.prepareSprite);
+            
+            // let players = this.deskController.getDeskDetail().getAllPlayers();
+            // for(let uid in players) {
+            //     this.removeSingle(uid);
+            // }
         }
 
         /**
@@ -126,11 +129,11 @@ module common.play.view {
             let preparedSprite = this.preparedSprites[uid];
             if(preparedSprite) {
                 console.log("common.play.view.PlayerReadyView.removeSingle@preparedSprite found", uid);
-                Laya.stage.removeChild(preparedSprite);
+                this.removeComponent(preparedSprite);
             }
 
-            if(Login.isSelf(uid) && this.prepareSprite) {
-                Laya.stage.removeChild(this.prepareSprite);
+            if(Login.isSelf(uid)) {
+                this.removeComponent(this.prepareSprite);
             }
 
         }

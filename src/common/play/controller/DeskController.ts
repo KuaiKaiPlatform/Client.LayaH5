@@ -3,9 +3,6 @@ module common.play.controller {
     // 牌桌控制器
     export abstract class DeskController {
 
-        // 自身 ID
-        protected selfId;
-
         // 牌桌数据
         protected deskDetail: common.data.DeskDetail;
 
@@ -14,6 +11,12 @@ module common.play.controller {
 
         // 牌桌显示
         protected deskView: common.play.view.DeskView;
+
+        // 牌局结果显示
+        protected setResultDialog: common.play.view.ResultDialog;
+
+        // 整场比赛结果显示
+        protected gameResultDialog: common.play.view.ResultDialog;
 
         // 牌局信息
         protected gameSetInfo: common.play.model.GameSetInfo;
@@ -38,20 +41,23 @@ module common.play.controller {
             this.deskDetail = deskDetail;
         }
 
-        public abstract createGameSetInfo(setInit);
+        public abstract createGameSetInfo(sSetInit);
 
-        public getSelfId() {
-            return this.selfId;
-        }
+        public abstract createSetResultDialog(sSetResult);
 
-        public setSelfId(selfId) {
-            this.selfId = selfId;
-        }
+        public abstract createGameResultDialog(sGameResult);
 
-        public launch(selfId, deskDetail) {
-            this.setSelfId(Login.getUid());
+        public launch(deskDetail) {
             this.setDeskDetail(deskDetail);
             this.deskView.show();
+        }
+
+        /**
+         * 牌局是否结束（是否收到SGameResult）
+         */
+        public isGameEnded() {
+            if(this.deskDetail && this.deskDetail.getGameResult()) return true;
+            return false;
         }
 
     }

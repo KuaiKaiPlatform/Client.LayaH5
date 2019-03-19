@@ -7,9 +7,9 @@ var mahjong;
          * 麻将模块初始化：单例，监听消息等
          */
         Module.init = function () {
-            var GameEventDispacher = common.event.GameEventDispacher;
+            //let GameEventDispacher = common.event.GameEventDispacher;
             var GlobalSetting = common.data.GlobalSetting;
-            var Protocol = common.pb.Protocol;
+            //let Protocol = common.pb.Protocol;
             var DeskController = mahjong.play.controller.DeskController;
             var Theme = Protocol.getEnum("common.MahjongTheme");
             DeskController.init();
@@ -17,21 +17,18 @@ var mahjong;
             // 牌桌，监听消息
             var messageListener = DeskController.instance.getMessageListener();
             GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SSetInit, messageListener, messageListener.onSetInit);
+            GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SOperCard, messageListener, messageListener.onOperCard);
+            GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SCanOper, messageListener, messageListener.onCanOper);
+            GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SSetResult, messageListener, messageListener.onSetResult);
+            GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SGameResult, messageListener, messageListener.onGameResult);
+            GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SReady, messageListener, messageListener.onReady);
+            GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SBet, messageListener, messageListener.onBet);
             // 牌桌设置
             GlobalSetting.init({
                 mahjongTheme: Theme.GREEN
             });
             console.log("mahjong.Module.init@finish");
             return Promise.resolve();
-            //预加载图集资源
-            // return new Promise((resolve, reject) => {
-            // 	Laya.loader.load([
-            //         "res/atlas/mahjong/card.atlas"
-            //     ], Handler.create(this, () => {
-            //         console.log("mahjong.Module.init@finish");
-            // 		resolve();
-            // 	}));
-            // });
         };
         return Module;
     }());

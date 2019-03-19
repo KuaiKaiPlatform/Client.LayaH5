@@ -31,12 +31,17 @@ var common;
                     // 显示玩家准备状态
                     this.playerReadyView.showAll();
                     // 显示牌桌基本信息
-                    this.gameSummaryView.show();
+                    this.gameSummaryView.showAll();
                     // 显示牌桌菜单按钮
                     this.deskMenuView.show();
                 };
                 // 设置背景
                 DeskView.prototype.setBg = function () {
+                    // Laya.loader.load([
+                    //     "res/sounds/bgm.mp3"
+                    // ], Laya.Handler.create(this, () => {
+                    //     Laya.SoundManager.playMusic("res/sounds/bgm.mp3");
+                    // }));
                 };
                 DeskView.prototype.onPlayerJoin = function (player) {
                     this.playerBasicView.show(player);

@@ -21,9 +21,11 @@ var hall;
                 return new Promise(function (resolve, reject) {
                     Laya.loader.load([
                         "res/atlas/player.atlas",
-                        "res/atlas/common/desk.atlas"
+                        "res/atlas/common/desk.atlas",
+                        "res/sounds/bgm.mp3"
                     ], Handler.create(_this, function () {
                         console.log("hall.desk.Module.init@finish");
+                        Laya.SoundManager.playMusic("res/sounds/bgm.mp3");
                         resolve();
                     }));
                 });

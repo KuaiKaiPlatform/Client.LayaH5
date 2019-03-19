@@ -18,7 +18,7 @@ module hall.desk {
             if(deskDetail.hasSelf()) {
                 let deskController = common.play.Module.getDeskControllerByRule(deskDetail.getRule());
                 if(deskController) {
-                    deskController.launch(Login.getUid(), deskDetail);
+                    deskController.launch(deskDetail);
                 }
             }
 

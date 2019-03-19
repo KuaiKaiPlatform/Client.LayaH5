@@ -16,11 +16,24 @@ var mahjong;
                 __extends(GameSetInfo, _super);
                 function GameSetInfo(setInit) {
                     var _this = _super.call(this, setInit) || this;
-                    _this.playerSetInfo = new mahjong.play.model.PlayerSetInfo(setInit.playerSetInfos);
+                    _this.lastOperDetail = setInit.lastOperDetail;
+                    _this.playerSetInfo = new mahjong.play.model.PlayerSetInfo(setInit);
                     return _this;
                 }
                 GameSetInfo.prototype.getRemainCards = function () {
                     return this.setInit.remainCards;
+                };
+                GameSetInfo.prototype.setRemainCards = function (remainCards) {
+                    this.setInit.remainCards = remainCards;
+                };
+                GameSetInfo.prototype.getBankerId = function () {
+                    return this.setInit.bankerId;
+                };
+                GameSetInfo.prototype.getLastOperDetail = function () {
+                    return this.lastOperDetail;
+                };
+                GameSetInfo.prototype.setLastOperDetail = function (lastOperDetail) {
+                    this.lastOperDetail = lastOperDetail;
                 };
                 return GameSetInfo;
             }(common.play.model.GameSetInfo));

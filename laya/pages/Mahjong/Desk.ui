@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":83,
+    "selecteID":84,
     "referenceLines":null,
     "props":{"x":0,"sceneWidth":1334,"sceneHeight":750,"sceneColor":"#000000","sceneBg":"laya/assets/mahjong/desk/bg.png","name":"view_mahjong_desk"},
     "nodeParent":-1,
@@ -213,6 +213,20 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":82,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"UIView",
+            "source":"mahjong/SelfOperations.ui",
+            "props":{"name":"self_operations"},
+            "nodeParent":1,
+            "label":"UIView(self_operations)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":84,
             "child":[
                 ]
         }],

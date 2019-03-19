@@ -1,0 +1,11 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="SBetPB";  
+
+package mahjong;
+
+message SBet {	// 返回玩家下注数
+
+	required int32 uid = 1;						// 玩家ID
+	required int32 bet = 2;						// 下注数
+
+}

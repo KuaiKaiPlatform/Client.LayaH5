@@ -6,6 +6,7 @@
         "res/pb/account/SLogin.proto",
         "res/pb/account/SLogout.proto",
         "res/pb/account/UserInfo.proto",
+        "res/pb/common/ClubOwner.proto",
         "res/pb/common/DeskInfo.proto",
         "res/pb/common/DeskUniq.proto",
         "res/pb/common/Dialect.proto",
@@ -24,11 +25,29 @@
         "res/pb/hall/SPlayerQuit.proto",
         "res/pb/hall/SQuitDesk.proto",
         "res/pb/mahjong/CardGroup.proto",
+        "res/pb/mahjong/CBet.proto",
+        "res/pb/mahjong/CChair.proto",
+        "res/pb/mahjong/COperCard.proto",
+        "res/pb/mahjong/CPassCard.proto",
+        "res/pb/mahjong/CReady.proto",
         "res/pb/mahjong/Direction.proto",
+        "res/pb/mahjong/DiscardTingCards.proto",
+        "res/pb/mahjong/JieSuan.proto",
+        "res/pb/mahjong/OperDetail.proto",
         "res/pb/mahjong/OperType.proto",
+        "res/pb/mahjong/PlayerGameResult.proto",
         "res/pb/mahjong/PlayerSetInfo.proto",
+        "res/pb/mahjong/PlayerSetResult.proto",
+        "res/pb/mahjong/SBet.proto",
+        "res/pb/mahjong/SCanOper.proto",
+        "res/pb/mahjong/SChair.proto",
+        "res/pb/mahjong/ScoreDetail.proto",
         "res/pb/mahjong/SetStage.proto",
-        "res/pb/mahjong/SSetInit.proto"
+        "res/pb/mahjong/SGameResult.proto",
+        "res/pb/mahjong/SOperCard.proto",
+        "res/pb/mahjong/SReady.proto",
+        "res/pb/mahjong/SSetInit.proto",
+        "res/pb/mahjong/SSetResult.proto"
     ],
     "account": {
         "CLogin": 1,
@@ -48,7 +67,19 @@
         "SGlobalSetting": 108
     },
     "mahjong": {
-        "SSetInit": 1001
+        "SSetInit": 1001,
+        "COperCard": 1002,
+        "SOperCard": 1003,
+        "CPassCard": 1004,
+        "SCanOper": 1005,
+        "SSetResult": 1006,
+        "SGameResult": 1007,
+        "CBet": 1008,
+        "SBet": 1009,
+        "CChair": 1010,
+        "SChair": 1011,
+        "CReady": 1012,
+        "SReady": 1013
     }
 
 }

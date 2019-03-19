@@ -1,14 +1,26 @@
 D .
 D common
+P 5837E3E1 loading.png
 D mahjong
 D player
 P 00763683 banker.png
 P DF8E3A11 icon.png
 P 18E2F848 icon_bg.png
+P 34F7D52A jiao_pao_zi.png
+P 76D1AAAF jiao_ting.png
 R 90B1997D PlayerBasicInfo.prefab
 D common/desk
 P 8C6AFE3D battery.png
 P CFD72578 battery_fill.png
+P E703C1BA btn_cancel.png
+P 5D585E32 btn_confirm.png
+P 19D59AD6 btn_continue.png
+P 71201913 btn_dismiss.png
+P 44D94316 btn_green.png
+P 2F11A0F0 btn_leave.png
+P 28680B4E btn_red.png
+P 783CE18D btn_retun_hall.png
+P B282C5F1 btn_share.png
 P 2EA88037 exit.png
 P 506CB6CC invite.png
 P AD675BE3 message.png
@@ -25,7 +37,31 @@ P 83B756F9 voice.png
 D common/rule
 P 33EA081B 61001.png
 P 7228F792 61007.png
+D common/score
+P 9A5D5A3B fail_score_0.png
+P 9E7DDBB5 fail_score_1.png
+P CE00B8AE fail_score_2.png
+P E6710FFF fail_score_3.png
+P E1E843B4 fail_score_4.png
+P 24374800 fail_score_5.png
+P 481DD96B fail_score_6.png
+P 446DCC2D fail_score_7.png
+P F2814EFA fail_score_8.png
+P 919FFBDF fail_score_9.png
+P 3D835B34 fail_sign.png
+P C09AAD88 win_score_0.png
+P 84B47F75 win_score_1.png
+P 4191FD07 win_score_2.png
+P 8C9A71D4 win_score_3.png
+P CF52D38A win_score_4.png
+P 9F4F652D win_score_5.png
+P 402F4123 win_score_6.png
+P 969B92F3 win_score_7.png
+P BB61E28F win_score_8.png
+P 0C94030B win_score_9.png
+P 2410E893 win_sign.png
 D mahjong/card
+P B6F6364D focus.png
 P 35CD0039 horizon_disabled.png
 P 9B16041E horizon_plate_green.png
 P 2518E5FD horizon_ting.png
@@ -183,13 +219,19 @@ P A2D105F5 self_hand_46.png
 P E01F236F self_hand_47.png
 P 6100F4FF self_hand_plate_green.png
 D mahjong/desk
-P AAA4A9B8 bei.png
 R C937A484 bg.png
-P 545193A8 direction_bg.png
-P 0620595D direction_focus.png
-P 60995566 dong.png
-P 5A5238D8 nan.png
-P A1C1F12F xi.png
+P AAA4A9B8 dir_bei.png
+P 545193A8 dir_bg.png
+P 60995566 dir_dong.png
+P 0620595D dir_focus.png
+P 5A5238D8 dir_nan.png
+P A1C1F12F dir_xi.png
+P 7ED9EB10 oper_chi.png
+P 896A1E30 oper_gang.png
+P CE4C539E oper_guo.png
+P A8BD9392 oper_hu.png
+P FE12C603 oper_peng.png
+P 276178EB oper_ting.png
 D mahjong/model
 P 672739CE 564.png
 P 300FAFFB aoi.png
@@ -202,3 +244,17 @@ P F4FA1AA4 yi.png
 P 54DA422D 背面.png
 P 1A1BAB85 背面副本.png
 P 5EDD5F75 麻将_0035_底.png
+D mahjong/result
+R 4B822D3A bg.png
+R 1D28CE3B bg_player_0.png
+P 9C0C61DC bg_player_1.png
+P 1682ACDC big_winner.png
+P 27491BE7 close.png
+P 88A58497 dian_pao.png
+P D6F8CBEA dian_pao_1.png
+P D2362BC6 hu_pai.png
+P 68B4A23B huang_zhuang.png
+P 1EC62623 jie_suan.png
+P 38F24D67 set_end.png
+P 0E56A3F1 zi_mo.png
+P EEE2FDD6 zi_mo_1.png

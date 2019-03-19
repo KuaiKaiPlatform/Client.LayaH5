@@ -27,11 +27,27 @@ var common;
              * 开局或重连后返回牌局消息
              */
             MessageListener.prototype.onSetInit = function (setInit) {
-                //GameData.setInit = setInit;
+                // 创建本局数据对象
                 this.deskController.createGameSetInfo(setInit);
-                this.deskView.getPlayerReadyView().removeAll();
+                var deskDetail = this.deskController.getDeskDetail();
+                // 游戏开始
+                var GameStatus = Protocol.getEnum("common.GameStatus");
+                deskDetail.setStatus(GameStatus.STARTING);
+                // 设置庄家
+                deskDetail.setBankerId(setInit.bankerId);
+                // 当前局数
+                deskDetail.setCurrentSet(setInit.curSet);
+                // 清理准备状态
+                deskDetail.clearPrepared();
+                // 隐藏准备相关操作
+                this.deskView.getPlayerReadyView().clearAll();
                 // 显示牌局基本信息
                 this.deskView.getGameSummaryView().onSetInit();
+            };
+            /**
+             * 一局结束返回牌局结算结果，SSetResult
+             */
+            MessageListener.prototype.onSetResult = function (sSetResult) {
             };
             return MessageListener;
         }());

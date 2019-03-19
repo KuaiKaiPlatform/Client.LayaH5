@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset='utf-8' />
-	<title>www.layabox.com</title>
+	<title>快开竞技场</title>
 	<meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'
 	/>
 	<meta name="renderer" content="webkit"/>
@@ -50,14 +50,22 @@
 	<!--删除标签，ide不会自动添加js文件，请谨慎操作-->
 	<!--jsfile--startTag-->
 	<script src="js/mahjong/play/view/SingleCardFactory.js"></script>
+	<script src="js/mahjong/play/view/ResultDialogFactory.js"></script>
 	<script src="js/mahjong/play/view/CardGroupFactory.js"></script>
+	<script src="js/mahjong/play/model/SelfOperations.js"></script>
+	<script src="js/mahjong/play/model/SelfHandcards.js"></script>
+	<script src="js/mahjong/play/controller/OperationHandler.js"></script>
 	<script src="js/mahjong/play/Constants.js"></script>
 	<script src="js/mahjong/Module.js"></script>
+	<script src="js/mahjong/data/JieSuan.js"></script>
+	<script src="js/mahjong/data/DeskInfo.js"></script>
 	<script src="js/hall/desk/Module.js"></script>
 	<script src="js/hall/desk/MessageListener.js"></script>
 	<script src="js/GameConfig.js"></script>
 	<script src="js/common/utils/Random.js"></script>
 	<script src="js/common/utils/GameRule.js"></script>
+	<script src="js/common/utils/DateFormat.js"></script>
+	<script src="js/common/play/view/ResultDialog.js"></script>
 	<script src="js/common/play/view/DeskView.js"></script>
 	<script src="js/common/play/Module.js"></script>
 	<script src="js/common/play/model/PlayerSetInfo.js"></script>
@@ -87,12 +95,18 @@
 	<script src="js/mahjong/play/view/DeskMenuView.js"></script>
 	<script src="js/mahjong/play/view/DeskView.js"></script>
 	<script src="js/mahjong/play/view/DirectionView.js"></script>
+	<script src="js/mahjong/play/view/GameResultDialog.js"></script>
 	<script src="js/mahjong/play/view/GameSummaryView.js"></script>
 	<script src="js/mahjong/play/view/PlayerBasicView.js"></script>
 	<script src="js/mahjong/play/view/PlayerCardGroupsView.js"></script>
 	<script src="js/mahjong/play/view/PlayerDiscardsView.js"></script>
 	<script src="js/mahjong/play/view/PlayerHandCardsView.js"></script>
 	<script src="js/mahjong/play/view/PlayerReadyView.js"></script>
+	<script src="js/mahjong/play/view/SelfBetView.js"></script>
+	<script src="js/mahjong/play/view/SelfCanOperView.js"></script>
+	<script src="js/mahjong/play/view/SelfHandCardsView.js"></script>
+	<script src="js/mahjong/play/view/SetResultDialog.js"></script>
+	<script src="js/mahjong/play/view/shaanxi/SXMJGameResultDialog.js"></script>
 	<!--jsfile--endTag-->
 
 	<!--启动类添加到这里-->

@@ -24,6 +24,10 @@ module common.conn {
             return this.userInfo.uid;
         }
 
+        public static getServerId() {
+            return this.serverInfo.id;
+        }
+
         /**
          * 检查是否是自己
          */

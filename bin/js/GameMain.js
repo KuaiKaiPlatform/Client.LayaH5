@@ -4,15 +4,19 @@ var Login = common.conn.Login;
 var MessageHandler = common.msg.MessageHandler;
 var MessageSender = common.msg.MessageSender;
 var GameEventDispacher = common.event.GameEventDispacher;
+var GlobalSetting = common.data.GlobalSetting;
 var GameMain = (function () {
     function GameMain() {
         var _this = this;
         Laya.init(1334, 750, Laya.WebGL);
         Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
         Laya.stage.scaleMode = "exactfit";
-        //mahjong.Module.test();
+        // 日期格式
+        common.utils.DateFormat.init();
         MessageHandler.init();
         MessageSender.init();
+        // 模式窗口点击边缘，不关闭窗口
+        UIConfig.closeDialogOnSide = false;
         // 初始化Protobuf
         Protocol.init().then(function () {
             // 初始化各模块

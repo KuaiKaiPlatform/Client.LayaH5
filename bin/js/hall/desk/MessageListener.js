@@ -20,7 +20,7 @@ var hall;
                 if (deskDetail.hasSelf()) {
                     var deskController = common.play.Module.getDeskControllerByRule(deskDetail.getRule());
                     if (deskController) {
-                        deskController.launch(Login.getUid(), deskDetail);
+                        deskController.launch(deskDetail);
                     }
                 }
                 console.log("hall.desk.MessageListener.onDeskInfo@done", deskKey);

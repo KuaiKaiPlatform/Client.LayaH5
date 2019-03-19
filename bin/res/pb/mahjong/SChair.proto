@@ -1,0 +1,11 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="SChairPB";  
+
+package mahjong;
+
+message SChair {	// 返回玩家选座
+
+	required int32 uid = 1;						// 玩家ID
+	required int32 seat = 2;					// 座位
+
+}

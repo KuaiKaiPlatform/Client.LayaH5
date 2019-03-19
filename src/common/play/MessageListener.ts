@@ -32,13 +32,37 @@ module common.play {
          * 开局或重连后返回牌局消息
          */
         public onSetInit(setInit): void {
-            //GameData.setInit = setInit;
+            // 创建本局数据对象
             this.deskController.createGameSetInfo(setInit);
-            this.deskView.getPlayerReadyView().removeAll();
+
+            let deskDetail = this.deskController.getDeskDetail();
+
+            // 游戏开始
+            let GameStatus = Protocol.getEnum("common.GameStatus");
+            deskDetail.setStatus(GameStatus.STARTING);
+
+            // 设置庄家
+            deskDetail.setBankerId(setInit.bankerId);
+
+            // 当前局数
+            deskDetail.setCurrentSet(setInit.curSet);
+
+            // 清理准备状态
+            deskDetail.clearPrepared();
+
+            // 隐藏准备相关操作
+            this.deskView.getPlayerReadyView().clearAll();
 
             // 显示牌局基本信息
             this.deskView.getGameSummaryView().onSetInit();
         }
 
+        /**
+         * 一局结束返回牌局结算结果，SSetResult
+         */
+        public onSetResult(sSetResult): void {
+            
+        }
+        
     }
 }

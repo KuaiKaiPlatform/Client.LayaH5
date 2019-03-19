@@ -12,5 +12,6 @@ message PlayerInfo {
 	optional bool prepared = 3;								// 是否准备
 	optional bool offline = 4;								// 是否离线
 	repeated int32 points = 5;								// 本场各项分数
+	optional int32 bet = 6;									// 下注数量
 
 }

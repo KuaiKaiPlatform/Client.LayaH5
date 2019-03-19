@@ -33,7 +33,7 @@ var common;
                     console.error("MessageSender.send@fail to encode message", msgId, result, properties);
                     return;
                 }
-                console.log("MessageSender.send@message", serverId, msgId, Protocol.getMsgType(msgId), properties);
+                console.log("MessageSender.send@message", serverId, msgId, Protocol.getMsgType(msgId), JSON.stringify(properties));
                 this.byte.clear();
                 msg.MessageParser.format(this.byte, msgId, result);
                 var gameSocket = this.getGameSocket(serverId);
