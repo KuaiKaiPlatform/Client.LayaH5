@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":4,
+    "selecteID":10,
     "props":{"width":86,"sceneColor":"#000000","height":122},
     "nodeParent":-1,
     "label":"View",
@@ -79,7 +79,8 @@
             "hasChild":false,
             "compId":6,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -101,14 +102,13 @@
             "props":{"visible":false,"top":-5,"skin":"player/jiao_pao_zi.png","right":-5,"name":"paozi"},
             "nodeParent":1,
             "label":"Image(paozi)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":8,
             "child":[
                 {
-                    "x":30,
                     "type":"Label",
                     "props":{"top":15,"text":"0炮","name":"label","left":10,"color":"#8e0112"},
                     "nodeParent":8,
@@ -120,6 +120,20 @@
                     "child":[
                         ]
                 }],
+            "$HIDDEN":true
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "props":{"visible":false,"top":60,"text":"离线","right":0,"name":"offline","fontSize":12,"color":"#FFFFFF","bold":true,"bgColor":"#000000"},
+            "nodeParent":1,
+            "label":"Label(offline)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":10,
+            "child":[
+                ],
             "$HIDDEN":true
         }],
     "animations":[

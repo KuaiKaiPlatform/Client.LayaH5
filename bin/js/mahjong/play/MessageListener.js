@@ -13,6 +13,9 @@ var mahjong;
             function MessageListener(deskController) {
                 return _super.call(this, deskController) || this;
             }
+            MessageListener.prototype.getDeskController = function () {
+                return this.deskController;
+            };
             MessageListener.prototype.getDeskView = function () {
                 return this.deskView;
             };
@@ -33,6 +36,8 @@ var mahjong;
                 // 显示各玩家方位
                 //deskView.getDirectionView().showAll();
                 deskView.getDirectionView().onSetInit(setInit);
+                // 显示开始游戏特效
+                deskView.getStartEffect().show();
             };
             /**
              * 玩家出牌后返回出牌消息和可执行操作，SOperCard
@@ -40,6 +45,7 @@ var mahjong;
             MessageListener.prototype.onOperCard = function (sOperCard) {
                 var deskController = this.deskController;
                 var gameSetInfo = deskController.getGameSetInfo();
+                var playerSetInfo = gameSetInfo.getPlayerSetInfo();
                 var deskView = this.getDeskView();
                 // 刚完成的操作
                 sOperCard.operDetails.forEach(function (operDetail, index) {
@@ -53,6 +59,10 @@ var mahjong;
                 });
                 // 可执行的操作
                 this.handleCanOperDetails(sOperCard.canOperDetails);
+                // 打听列表
+                playerSetInfo.getSelfHandcards().setDiscardTingCards(sOperCard.discardTingCards);
+                // 启动倒计时读秒
+                deskView.getDirectionView().launchCountDown();
             };
             MessageListener.prototype.handleCanOperDetails = function (canOperDetails) {
                 // 记录可执行的操作
@@ -79,8 +89,12 @@ var mahjong;
                 deskDetail.addSetResult(sSetResult);
                 // 修改下一局庄家
                 deskDetail.setBankerId(sSetResult.nextBankerId);
+                // 清空报听状态
+                this.getDeskController().getGameSetInfo().getPlayerSetInfo().clearBaoTing();
                 // 显示本局比赛结果
-                this.deskController.createSetResultDialog(sSetResult).show();
+                var setResultDialog = this.deskController.createSetResultDialog(sSetResult);
+                if (!this.getDeskController().getOperationHandler().isHuEffect())
+                    setResultDialog.show();
             };
             /**
              * 整场结束返回牌局结算结果，SGameResult

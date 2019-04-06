@@ -8,13 +8,15 @@ import "common/MahjongTheme.proto";
 
 message GlobalSetting {	// 全局设置
 
+	required string json = 1;									// JSON 格式的 setting 内容
+
 	// 通用设置
-	optional int32 volumeBg = 1;								// 背景音乐音量
-	optional int32 volumePlay = 2;								// 打牌音效音量
-	optional common.Dialect dialect = 3;						// 方言
+	optional int32 volumeBg = 2;								// 背景音乐音量
+	optional int32 volumePlay = 3;								// 打牌音效音量
+	optional common.Dialect dialect = 4;						// 方言
 
 	// 麻将相关
-	optional common.MahjongTheme mahjongTheme = 11;				// 麻将配色方案
+	optional common.MahjongTheme mahjongTheme = 5;				// 麻将配色方案
 	
 
 }

@@ -25,6 +25,9 @@ var common;
             DeskDetail.prototype.getRule = function () {
                 return this.desk.rule;
             };
+            DeskDetail.prototype.getSetting = function () {
+                return this.desk.setting;
+            };
             DeskDetail.prototype.getSettingValue = function (key) {
                 var setting = this.desk.settings;
                 return setting ? setting[key] : null;
@@ -66,6 +69,15 @@ var common;
                 return this.players[uid];
             };
             /**
+             * 返回指定uid的玩家性别
+             */
+            DeskDetail.prototype.getPlayerSex = function (uid) {
+                var player = this.getPlayer(uid);
+                if (!player)
+                    return 0;
+                return player.user.sex === 1 ? 1 : 0; // 只有等于1是男性，其他都默认女性
+            };
+            /**
              * 是否为自己加入的牌桌
              */
             DeskDetail.prototype.hasSelf = function () {
@@ -89,6 +101,24 @@ var common;
             DeskDetail.prototype.incrCurrentSet = function () {
                 this.desk.curSet++;
             };
+            // public getCurrentDi() {
+            //     return Math.max(this.desk.curDi, 1); // 从第一底开始
+            // }
+            // public setCurrentDi(curDi) {
+            //     this.desk.curDi = curDi;
+            // }
+            // public incrCurrentDi() {
+            //     this.desk.curDi++;
+            // }
+            // public getCurrentQuan() {
+            //     return Math.max(this.desk.curQuan, 1); // 从第一圈开始
+            // }
+            // public setCurrentQuan(curQuan) {
+            //     this.desk.curQuan = curQuan;
+            // }
+            // public incrCurrentQuan() {
+            //     this.desk.curQuan++;
+            // }
             DeskDetail.prototype.setStatus = function (status) {
                 this.desk.status = status;
             };

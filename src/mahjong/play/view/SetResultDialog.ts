@@ -21,6 +21,7 @@ module mahjong.play.view {
 
         protected initDialog() {
             this.dialog = new ui.mahjong.SetResultUI();
+            this.dialog.zOrder = 1100;
             this.dialog.closeHandler = Handler.create(this, name => {
                 console.log("mahjong.view.SetResultDialog@closeHandler", name);
                 this.closeSetResult();
@@ -44,6 +45,8 @@ module mahjong.play.view {
          * 关闭本局结算，发送准备进入下一局，若有下注操作，显示下注界面。
          */
         protected closeSetResult() {
+            this.getDeskController().clearSetResultDialog();
+
             let curSetResult = this.deskController.getDeskDetail().getCurSetResult(); 
             //if(this.deskController.isGameEnded()) {
             if(curSetResult && curSetResult.over) {
@@ -89,11 +92,11 @@ module mahjong.play.view {
 
         protected showLabels() {
             this.labelDesc.changeText(this.getDescription());
-            this.labelTime.changeText(new Date(this.result.endTime)["format"]("yyyy-MM-dd HH:mm:ss"));
+            this.labelTime.changeText(common.utils.DateFormat.format(this.result.endTime));
         }
 
         protected getDescription() {
-            return common.utils.GameRule.getRuleName(this.deskController.getDeskDetail().getRule()) + "     "
+            return common.data.GameRule.getRuleName(this.deskController.getDeskDetail().getRule()) + "     "
                 + this.getMode();
         }
 
@@ -147,6 +150,10 @@ module mahjong.play.view {
                 playerSetResult.setPoint += point;
             });
 
+            // 是否听牌
+            let ting = basicInfo.getChildByName("ting") as View;
+            ting.visible = playerSetResult.playerSetInfo.baoTing;
+
             // 总得分
             //player.total += playerSetResult.setPoint;
             player.total = 0;
@@ -170,9 +177,10 @@ module mahjong.play.view {
 
             // 手牌
             let focusShown = false;
-            playerSetResult.playerSetInfo.handcards.sort((a, b) => a-b);
+            mahjong.play.model.SelfHandcards.sort(playerSetResult.playerSetInfo.handcards,
+                this.getDeskController().getGameSetInfo().getAlmighty()).reverse();
             playerSetResult.playerSetInfo.handcards.forEach((card, index) => {
-                let cardView = SingleCardFactory.createSelfHand(GlobalSetting.get("mahjongTheme"), card);
+                let cardView = this.getDeskController().createSelfHandcard(card);
                 cardView.left = index*64;
                 
                 if(card == this.result.huCard 
@@ -189,7 +197,7 @@ module mahjong.play.view {
             // 明牌
             let handCardNum = playerSetResult.playerSetInfo.handCardNum;
             playerSetResult.playerSetInfo.cardGroups.forEach((cardGroup, index) => {
-                let groupView = CardGroupFactory.createSelfGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
+                let groupView = CardGroupFactory.createSelfGroup(cardGroup);
                 groupView.left = handCardNum*64 + index*190 + 16;
                 playerCards.addChild(groupView);
             });

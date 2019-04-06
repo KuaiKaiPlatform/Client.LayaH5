@@ -17,6 +17,12 @@ var common;
                 GameSetInfo.prototype.getCurrentSet = function () {
                     return this.setInit.curSet;
                 };
+                GameSetInfo.prototype.getCurrentDi = function () {
+                    return this.setInit.curDi;
+                };
+                GameSetInfo.prototype.getCurrentQuan = function () {
+                    return this.setInit.curQuan;
+                };
                 return GameSetInfo;
             }());
             model.GameSetInfo = GameSetInfo;

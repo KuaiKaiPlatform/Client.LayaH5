@@ -62,6 +62,9 @@ var common;
                     // 庄家
                     var zhuang = playerUI.getChildByName("zhuang");
                     zhuang.visible = deskDetail.isBanker(uid);
+                    // 离线状态
+                    var offline = playerUI.getChildByName("offline");
+                    offline.visible = player.offline;
                     // 显示
                     this.showComponent(playerUI, this.getAttrs(player));
                 };
@@ -70,10 +73,18 @@ var common;
                     console.log("common.play.view.PlayerBasicView.removeSingle", uid);
                     var playerUI = this.playerUIs[uid];
                     this.removeComponent(playerUI);
-                    // if(basicInfoUI) {
-                    //     console.log("common.view.PlayerBasicView.removeSingle@basicInfoUI found", uid);
-                    //     Laya.stage.removeChild(basicInfoUI);
-                    // }
+                };
+                /**
+                 * 更新离线状态
+                 *
+                 * @param uid
+                 */
+                PlayerBasicView.prototype.showOffline = function (uid, offline) {
+                    var playerUI = this.getUI(uid);
+                    if (!playerUI)
+                        return;
+                    var label = playerUI.getChildByName("offline");
+                    label.visible = offline;
                 };
                 /**
                  * 显示指定庄家

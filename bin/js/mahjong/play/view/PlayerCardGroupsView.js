@@ -121,7 +121,7 @@ var mahjong;
                 PlayerCardGroupsView.prototype.addSelf = function (playerUI, index, cardGroup) {
                     var GlobalSetting = common.data.GlobalSetting;
                     console.log("PlayerCardGroupsView.addSelf@adding", index, JSON.stringify(cardGroup));
-                    var groupView = view.CardGroupFactory.createSelfGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
+                    var groupView = view.CardGroupFactory.createSelfGroup(cardGroup);
                     groupView.left = 200 * index;
                     groupView.bottom = 0;
                     playerUI.addChild(groupView);
@@ -132,7 +132,7 @@ var mahjong;
                 PlayerCardGroupsView.prototype.addOpposite = function (playerUI, index, cardGroup) {
                     var GlobalSetting = common.data.GlobalSetting;
                     console.log("PlayerCardGroupsView.addOpposite@adding", index, JSON.stringify(cardGroup));
-                    var groupView = view.CardGroupFactory.createOppositeGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
+                    var groupView = view.CardGroupFactory.createOppositeGroup(cardGroup);
                     groupView.right = 127 * index;
                     groupView.bottom = 0;
                     playerUI.addChild(groupView);
@@ -143,7 +143,7 @@ var mahjong;
                 PlayerCardGroupsView.prototype.addNext = function (playerUI, index, cardGroup) {
                     var GlobalSetting = common.data.GlobalSetting;
                     console.log("PlayerCardGroupsView.addNext@adding", index, JSON.stringify(cardGroup));
-                    var groupView = view.CardGroupFactory.createNextGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
+                    var groupView = view.CardGroupFactory.createNextGroup(cardGroup);
                     groupView.bottom = 99 * index;
                     playerUI.addChild(groupView);
                 };
@@ -153,7 +153,7 @@ var mahjong;
                 PlayerCardGroupsView.prototype.addPre = function (playerUI, index, cardGroup) {
                     var GlobalSetting = common.data.GlobalSetting;
                     console.log("PlayerCardGroupsView.addPre@adding", index, JSON.stringify(cardGroup));
-                    var groupView = view.CardGroupFactory.createPreGroup(GlobalSetting.get("mahjongTheme"), cardGroup);
+                    var groupView = view.CardGroupFactory.createPreGroup(cardGroup);
                     groupView.top = 99 * index;
                     playerUI.addChild(groupView);
                 };

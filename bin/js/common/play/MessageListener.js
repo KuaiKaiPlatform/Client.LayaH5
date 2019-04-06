@@ -11,18 +11,18 @@ var common;
             /**
              * 有人加入牌桌返回消息
              */
-            MessageListener.prototype.onPlayerJoin = function (sPlayerJoin) {
-                //common.play.model.PlayerInfo.add(sPlayerJoin.player);
-                this.deskView.onPlayerJoin(sPlayerJoin);
-                console.log("common.play.MessageListener.onPlayerJoin@done", JSON.stringify(sPlayerJoin));
-            };
+            // public onPlayerJoin(sPlayerJoin): void {
+            //     //common.play.model.PlayerInfo.add(sPlayerJoin.player);
+            //     this.deskView.onPlayerJoin(sPlayerJoin);
+            //     console.log("common.play.MessageListener.onPlayerJoin@done", JSON.stringify(sPlayerJoin));
+            // }
             /**
              * 有人离开牌桌返回消息
              */
-            MessageListener.prototype.onPlayerQuit = function (exitRes) {
-                this.deskView.onPlayerExit(exitRes.uid);
-                //common.play.model.PlayerInfo.removeByUid(exitRes.uid);
-            };
+            // public onPlayerQuit(exitRes): void {
+            //     this.deskView.onPlayerExit(exitRes.uid);
+            //     //common.play.model.PlayerInfo.removeByUid(exitRes.uid);
+            // }
             /**
              * 开局或重连后返回牌局消息
              */

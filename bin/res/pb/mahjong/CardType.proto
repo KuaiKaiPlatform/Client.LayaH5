@@ -1,0 +1,16 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="CardTypePB";  
+
+package mahjong;
+
+// 麻将牌类型
+enum CardType {
+
+    NA			= 0;
+    WAN			= 10;
+    TIAO		= 20;
+    TONG		= 30;
+    ZI			= 40;
+    HUA			= 50;
+    ALMIGHTY	= 100;
+}

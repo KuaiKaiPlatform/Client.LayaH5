@@ -1,6 +1,7 @@
 D .
 D common
 P 5837E3E1 loading.png
+P 2A95A357 loading2.png
 D mahjong
 D player
 P 00763683 banker.png
@@ -19,8 +20,6 @@ P 71201913 btn_dismiss.png
 P 44D94316 btn_green.png
 P 2F11A0F0 btn_leave.png
 P 28680B4E btn_red.png
-P 783CE18D btn_retun_hall.png
-P B282C5F1 btn_share.png
 P 2EA88037 exit.png
 P 506CB6CC invite.png
 P AD675BE3 message.png
@@ -33,7 +32,11 @@ P 11C51BEA shaizi_3.png
 P 1D8DC28F shaizi_4.png
 P 872E33C2 shaizi_5.png
 P 282A2205 shaizi_6.png
+P CB0CFB6E start.png
 P 83B756F9 voice.png
+D common/info
+P 56817B99 bg.png
+P 39AC9014 btn_leave.png
 D common/rule
 P 33EA081B 61001.png
 P 7228F792 61007.png
@@ -60,6 +63,19 @@ P 969B92F3 win_score_7.png
 P BB61E28F win_score_8.png
 P 0C94030B win_score_9.png
 P 2410E893 win_sign.png
+D common/setting
+R EB1FA97F bg.png
+P 85CC774A check_bg.png
+P 0B0B0F71 checked.png
+P 495CB212 close.png
+P 4DE51F17 dialect.png
+P C7A06E86 dismiss.png
+P ED77EB36 item_bg.png
+P 44BAF25E music.png
+P E2785F98 sound.png
+P 885B028D title.png
+P BD38BB83 volume.png
+P 06DD0FDE volume_bg.png
 D mahjong/card
 P B6F6364D focus.png
 P 35CD0039 horizon_disabled.png
@@ -220,6 +236,20 @@ P E01F236F self_hand_47.png
 P 6100F4FF self_hand_plate_green.png
 D mahjong/desk
 R C937A484 bg.png
+R BA77DFF9 bg_ting.png
+R 50B2EA43 bg_ting0.png
+R 7631735E bg_ting2.png
+R 119CA909 bg_ting3.png
+P 3FA423D8 count_0.png
+P 5FA7CB9A count_1.png
+P E8C612F0 count_2.png
+P 20B1599C count_3.png
+P 6192A5BA count_4.png
+P 783E8E42 count_5.png
+P 6EE0983E count_6.png
+P 05F9FF85 count_7.png
+P 261DE6F2 count_8.png
+P AFE4BA08 count_9.png
 P AAA4A9B8 dir_bei.png
 P 545193A8 dir_bg.png
 P 60995566 dir_dong.png

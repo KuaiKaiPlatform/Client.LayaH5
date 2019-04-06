@@ -10,6 +10,6 @@ message SOperCard {	// 返回玩家操作
 
 	repeated mahjong.OperDetail operDetails = 1;				// 操作列表，可以有多个顺序操作，如：先打后摸，先杠后摸等。所有人都收到
 	repeated mahjong.OperDetail canOperDetails = 2;				// 本人可执行的操作（可胡、可听、可杠、可碰、可吃和可打等）
-	repeated mahjong.DiscardTingCards discardTingCards = 3;		// 打牌后的听牌列表
+	repeated mahjong.DiscardTingCards discardTingCards = 3;		// 本人打牌后的听牌列表
 
 }

@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="CRuleDialectsPB";  
+
+package hall;
+
+import "common/GameRule.proto";
+
+message CRuleDialects {	// 玩法使用的方言
+
+	required common.GameRule rule = 1;						// 玩法编号
+
+}

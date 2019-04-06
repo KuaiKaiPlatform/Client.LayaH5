@@ -7,6 +7,10 @@ module mahjong.play {
             super(deskController);
         }
 
+        protected getDeskController(): mahjong.play.controller.DeskController {
+            return this.deskController as mahjong.play.controller.DeskController;
+        }
+
         protected getDeskView(): mahjong.play.view.DeskView {
             return this.deskView as mahjong.play.view.DeskView;
         }
@@ -34,6 +38,10 @@ module mahjong.play {
             // 显示各玩家方位
             //deskView.getDirectionView().showAll();
             deskView.getDirectionView().onSetInit(setInit);
+
+            // 显示开始游戏特效
+            deskView.getStartEffect().show();
+
         }
 
         /**
@@ -42,6 +50,7 @@ module mahjong.play {
         public onOperCard(sOperCard): void {
             let deskController = this.deskController as mahjong.play.controller.DeskController;
             let gameSetInfo = deskController.getGameSetInfo() as mahjong.play.model.GameSetInfo;
+            let playerSetInfo = gameSetInfo.getPlayerSetInfo() as mahjong.play.model.PlayerSetInfo;
             let deskView = this.getDeskView();
 
             // 刚完成的操作
@@ -59,7 +68,12 @@ module mahjong.play {
 
             // 可执行的操作
             this.handleCanOperDetails(sOperCard.canOperDetails);
-            
+
+            // 打听列表
+            playerSetInfo.getSelfHandcards().setDiscardTingCards(sOperCard.discardTingCards);
+
+            // 启动倒计时读秒
+            deskView.getDirectionView().launchCountDown();
         }
 
         protected handleCanOperDetails(canOperDetails) {
@@ -93,9 +107,15 @@ module mahjong.play {
 
             // 修改下一局庄家
             deskDetail.setBankerId(sSetResult.nextBankerId);
+
+            // 清空报听状态
+            this.getDeskController().getGameSetInfo().getPlayerSetInfo().clearBaoTing();
             
             // 显示本局比赛结果
-            this.deskController.createSetResultDialog(sSetResult).show();
+            let setResultDialog = this.deskController.createSetResultDialog(sSetResult);
+            
+            if(!this.getDeskController().getOperationHandler().isHuEffect())
+                setResultDialog.show();
         }
 
         /**
@@ -113,7 +133,7 @@ module mahjong.play {
             deskDetail.setGameResult(sGameResult);
 
             // 创建整场比赛结果对话框，关闭最后一局结果后显示出来
-            this.deskController.createGameResultDialog(sGameResult)//.show();
+            this.deskController.createGameResultDialog(sGameResult);//.show();
         }
 
         /**

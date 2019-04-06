@@ -19,5 +19,10 @@ message SSetInit {	// 开局或重连后返回牌局当前状态
 	optional mahjong.OperDetail lastOperDetail = 6;				// 最近的操作信息
 	repeated mahjong.OperDetail canOperDetails = 7;				// 本人可做的操作（可胡、可听、可杠、可碰、可吃和可打等）
 
-	repeated mahjong.DiscardTingCards discardTingCards = 8;		// 打牌后的听牌列表
+	repeated mahjong.DiscardTingCards discardTingCards = 8;		// 本人打牌后的听牌列表
+	optional int32 almighty = 9;								// 万能牌值
+	
+	optional int32 curDi = 10;									// 当前底数
+	optional int32 curQuan = 11;								// 当前圈数
+
 }

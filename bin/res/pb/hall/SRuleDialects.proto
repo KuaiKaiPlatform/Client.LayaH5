@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="SRuleDialectsPB";  
+
+package hall;
+
+import "common/GameRule.proto";
+import "common/Dialect.proto";
+
+message SRuleDialects {	// 玩法使用的方言
+
+	required common.GameRule rule = 1;						// 玩法编号
+	repeated common.Dialect dialects = 2;					// 方言列表
+
+}

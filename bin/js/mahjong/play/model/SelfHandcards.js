@@ -8,8 +8,10 @@ var mahjong;
              *   自身手牌信息
              */
             var SelfHandcards = (function () {
-                function SelfHandcards(setInfo) {
+                function SelfHandcards(setInfo, gameSetInfo) {
                     this.selectedIndex = -1; // 已选择的将要打出的牌：-1表示未选择，100表示摸牌
+                    this.discard2TingCards = {}; // 打牌对应的听牌列表
+                    this.gameSetInfo = gameSetInfo;
                     // 复制除了摸牌外的手牌，排序
                     if (model.PlayerSetInfo.hasMo(setInfo)) {
                         this.handcards = setInfo.handcards.slice(0, setInfo.handcards.length - 1);
@@ -19,9 +21,40 @@ var mahjong;
                         this.handcards = setInfo.handcards;
                     }
                     this.sort();
+                    // 打听列表
+                    this.setDiscardTingCards(this.gameSetInfo.getDiscardTingCards());
                 }
                 /**
-                 * 删除一张牌并排序手牌（打牌和补杠时调用）
+                 * 将打听列表数组转为 map
+                 *
+                 * @param discardTingCards
+                 */
+                SelfHandcards.prototype.setDiscardTingCards = function (discardTingCards) {
+                    var _this = this;
+                    this.discard2TingCards = {};
+                    if (!discardTingCards)
+                        return;
+                    discardTingCards.forEach(function (element) {
+                        _this.discard2TingCards[element.discard] = element.tingCards;
+                    });
+                };
+                /**
+                 * 根据打牌返回听牌列表
+                 *
+                 * @param discard
+                 */
+                SelfHandcards.prototype.getTingCards = function (discard) {
+                    return this.discard2TingCards[discard];
+                };
+                /**
+                 * 检查指定index的手牌，是不是打听牌
+                 * @param index
+                 */
+                SelfHandcards.prototype.isDiscardTing = function (index) {
+                    return this.discard2TingCards[this.getHandcard(index)] ? true : false;
+                };
+                /**
+                 * 删除一张牌并排序手牌，优先删除摸牌（打牌和补杠时调用）
                  */
                 SelfHandcards.prototype.removeCard = function (card) {
                     if (card == this.moCard) {
@@ -33,12 +66,12 @@ var mahjong;
                         console.error("mahjong.play.model.SelfHandcards.discard@card not found", card);
                         return;
                     }
-                    this.discardByIndex(cardIndex);
+                    this.removeCardByIndex(cardIndex);
                 };
                 /**
-                 * 打出一张牌（指定位置）
+                 * 删除一张牌（指定位置）
                  */
-                SelfHandcards.prototype.discardByIndex = function (cardIndex) {
+                SelfHandcards.prototype.removeCardByIndex = function (cardIndex) {
                     if (this.moCard > 0) {
                         this.handcards.splice(cardIndex, 1, this.moCard);
                         this.moCard = 0;
@@ -62,7 +95,16 @@ var mahjong;
                  * 手牌排序
                  */
                 SelfHandcards.prototype.sort = function () {
-                    this.handcards.sort(function (a, b) { return b - a; });
+                    SelfHandcards.sort(this.handcards, this.gameSetInfo.getAlmighty());
+                };
+                SelfHandcards.sort = function (handcards, almighty) {
+                    return handcards.sort(function (a, b) {
+                        if (a == almighty)
+                            return 1; // 万能牌排在开头
+                        if (b == almighty)
+                            return -1; // 万能牌排在开头
+                        return b - a;
+                    });
                 };
                 /**
                  * 返回摸牌
@@ -120,12 +162,19 @@ var mahjong;
                     this.selectedIndex = -1;
                 };
                 /**
-                 * 删除指定数量和牌值的手牌
+                 * 删除指定数量和牌值的手牌，优先删除摸牌
                  *
                  * @param card
                  * @param num
                  */
-                SelfHandcards.prototype.removeHandcards = function (card, num) {
+                SelfHandcards.prototype.removeCards = function (card, num) {
+                    if (this.moCard == card) {
+                        this.clearMoCard();
+                        if (num > 1) {
+                            return this.removeCards(card, num - 1);
+                        }
+                        return true;
+                    }
                     var cardIndex = this.findHandcardIndex(card);
                     if (cardIndex < 0) {
                         console.error("mahjong.play.model.SelfHandcards.removeHandcards@card not found", card);

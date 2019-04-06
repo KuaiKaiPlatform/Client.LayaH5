@@ -7,7 +7,7 @@ var hall;
             function Module() {
             }
             /**
-             * 大厅牌桌模块初始化：监听消息
+             * 大厅模块初始化：监听消息
              */
             Module.init = function () {
                 var _this = this;
@@ -15,13 +15,17 @@ var hall;
                 GameEventDispacher.instance.onMsg(Protocol.meta.hall.SDeskInfo, desk.MessageListener, desk.MessageListener.onDeskInfo);
                 // 有玩家加入
                 GameEventDispacher.instance.onMsg(Protocol.meta.hall.SPlayerJoin, desk.MessageListener, desk.MessageListener.onPlayerJoin);
-                // console.log("hall.desk.Module.init@finish");
-                // return Promise.resolve();
+                // 离线状态切换
+                GameEventDispacher.instance.onMsg(Protocol.meta.hall.SOffline, desk.MessageListener, desk.MessageListener.onOffline);
+                // 全局设置
+                GameEventDispacher.instance.onMsg(Protocol.meta.hall.SGlobalSetting, desk.MessageListener, desk.MessageListener.onGlobalSetting);
                 //预加载图集资源
                 return new Promise(function (resolve, reject) {
                     Laya.loader.load([
                         "res/atlas/player.atlas",
+                        "res/atlas/common.atlas",
                         "res/atlas/common/desk.atlas",
+                        "res/atlas/common/info.atlas",
                         "res/sounds/bgm.mp3"
                     ], Handler.create(_this, function () {
                         console.log("hall.desk.Module.init@finish");

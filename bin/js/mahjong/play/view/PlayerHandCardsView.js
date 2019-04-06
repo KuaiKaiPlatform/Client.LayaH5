@@ -128,6 +128,7 @@ var mahjong;
                     for (var uid in this.playerUIs) {
                         this.clear(this.playerUIs[uid]);
                     }
+                    this.selfHandCardsView.clear();
                 };
                 /**
                  * 显示一张其他玩家的手牌
@@ -140,15 +141,15 @@ var mahjong;
                         case mahjong.play.Position.SELF:
                             return;
                         case mahjong.play.Position.NEXT:
-                            singleCard = view.SingleCardFactory.createNextHand(GlobalSetting.get("mahjongTheme"));
+                            singleCard = view.SingleCardFactory.createNextHand();
                             singleCard.top = 23 * index;
                             break;
                         case mahjong.play.Position.OPPOSITE:
-                            singleCard = view.SingleCardFactory.createOppositeHand(GlobalSetting.get("mahjongTheme"));
+                            singleCard = view.SingleCardFactory.createOppositeHand();
                             singleCard.left = 40 * index;
                             break;
                         case mahjong.play.Position.PREVIOUS:
-                            singleCard = view.SingleCardFactory.createPreHand(GlobalSetting.get("mahjongTheme"));
+                            singleCard = view.SingleCardFactory.createPreHand();
                             singleCard.bottom = 23 * index;
                             singleCard.zOrder = 1000 - index;
                             break;
@@ -177,15 +178,15 @@ var mahjong;
                         case mahjong.play.Position.SELF:
                             break;
                         case mahjong.play.Position.NEXT:
-                            moCard = view.SingleCardFactory.createNextHand(GlobalSetting.get("mahjongTheme"));
+                            moCard = view.SingleCardFactory.createNextHand();
                             moCard.top = 0;
                             break;
                         case mahjong.play.Position.OPPOSITE:
-                            moCard = view.SingleCardFactory.createOppositeHand(GlobalSetting.get("mahjongTheme"));
+                            moCard = view.SingleCardFactory.createOppositeHand();
                             moCard.left = 0;
                             break;
                         case mahjong.play.Position.PREVIOUS:
-                            moCard = view.SingleCardFactory.createPreHand(GlobalSetting.get("mahjongTheme"));
+                            moCard = view.SingleCardFactory.createPreHand();
                             moCard.bottom = 0;
                             break;
                     }

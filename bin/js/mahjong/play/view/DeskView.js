@@ -43,6 +43,9 @@ var mahjong;
                 DeskView.prototype.getGameSummaryView = function () {
                     return this.gameSummaryView;
                 };
+                DeskView.prototype.getPlayerBasicView = function () {
+                    return this.playerBasicView;
+                };
                 DeskView.prototype.getDirectionView = function () {
                     return this.directionView;
                 };
@@ -68,10 +71,6 @@ var mahjong;
                     this.discardsView.clearAll();
                     this.handCardsView.clearAll();
                     this.cardGroupsView.clearAll();
-                    // 显示下一局庄家
-                    // let curSetResult = this.deskController.getDeskDetail().getCurSetResult();
-                    // let bankerId = 0;
-                    // if(curSetResult) bankerId = curSetResult.nextBankerId;
                     // 更新总分，显示下一局庄家
                     this.playerBasicView.showAll();
                     // 增加局数，隐藏余牌张数

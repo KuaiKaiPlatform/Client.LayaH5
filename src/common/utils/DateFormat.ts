@@ -31,6 +31,13 @@ module common.utils {
 			}
 		}
 
+		/**
+		 * 格式化时间戳
+		 */
+		public static format(timestamp) {
+			return new Date(timestamp)["format"]("yyyy-MM-dd HH:mm:ss");
+		}
+
 	}
 
 }

@@ -65,6 +65,10 @@ module common.play.view {
             let zhuang = playerUI.getChildByName("zhuang") as laya.display.Sprite;
             zhuang.visible = deskDetail.isBanker(uid);
 
+            // 离线状态
+            let offline = playerUI.getChildByName("offline") as laya.ui.Label;
+            offline.visible  = player.offline;
+
             // 显示
             this.showComponent(playerUI, this.getAttrs(player));
         }
@@ -74,10 +78,19 @@ module common.play.view {
             console.log("common.play.view.PlayerBasicView.removeSingle", uid);
             let playerUI: ui.mahjong.PlayerBasicInfoUI = this.playerUIs[uid];
             this.removeComponent(playerUI);
-            // if(basicInfoUI) {
-            //     console.log("common.view.PlayerBasicView.removeSingle@basicInfoUI found", uid);
-            //     Laya.stage.removeChild(basicInfoUI);
-            // }
+        }
+
+        /**
+         * 更新离线状态
+         * 
+         * @param uid
+         */
+        public showOffline(uid, offline) {
+            let playerUI = this.getUI(uid);
+            if(!playerUI) return;
+
+            let label = playerUI.getChildByName("offline") as laya.ui.Label;
+            label.visible = offline;
         }
 
         /**

@@ -4,11 +4,14 @@ module mahjong.play.model {
      */
     export class SelfHandcards {
 
+        protected gameSetInfo: GameSetInfo;
         protected moCard;               // 刚摸到的牌
         protected handcards;            // 当前手牌（已排序），不包含摸牌
         protected selectedIndex = -1;   // 已选择的将要打出的牌：-1表示未选择，100表示摸牌
+        protected discard2TingCards = {}// 打牌对应的听牌列表
 
-        constructor(setInfo) {
+        constructor(setInfo, gameSetInfo) {
+            this.gameSetInfo = gameSetInfo;
             // 复制除了摸牌外的手牌，排序
             if(PlayerSetInfo.hasMo(setInfo)) {
                 this.handcards = setInfo.handcards.slice(0, setInfo.handcards.length-1);
@@ -17,10 +20,43 @@ module mahjong.play.model {
                 this.handcards = setInfo.handcards;
             }
             this.sort();
+
+            // 打听列表
+            this.setDiscardTingCards(this.gameSetInfo.getDiscardTingCards());
         }
 
         /**
-         * 删除一张牌并排序手牌（打牌和补杠时调用）
+         * 将打听列表数组转为 map
+         * 
+         * @param discardTingCards 
+         */
+        public setDiscardTingCards(discardTingCards) {
+            this.discard2TingCards = {};
+            if(!discardTingCards) return;
+            discardTingCards.forEach(element => {
+                this.discard2TingCards[element.discard] = element.tingCards;
+            });
+        }
+
+        /**
+         * 根据打牌返回听牌列表
+         * 
+         * @param discard 
+         */
+        public getTingCards(discard) {
+            return this.discard2TingCards[discard];
+        }
+
+        /**
+         * 检查指定index的手牌，是不是打听牌
+         * @param index
+         */
+        public isDiscardTing(index) {
+            return this.discard2TingCards[this.getHandcard(index)]?true:false;
+        }
+
+        /**
+         * 删除一张牌并排序手牌，优先删除摸牌（打牌和补杠时调用）
          */
         public removeCard(card) {
             if(card == this.moCard) {
@@ -34,13 +70,13 @@ module mahjong.play.model {
                 return;
             }
 
-            this.discardByIndex(cardIndex);
+            this.removeCardByIndex(cardIndex);
         }
 
         /**
-         * 打出一张牌（指定位置）
+         * 删除一张牌（指定位置）
          */
-        public discardByIndex(cardIndex) {
+        public removeCardByIndex(cardIndex) {
             if(this.moCard > 0) {
                 this.handcards.splice(cardIndex, 1, this.moCard);
                 this.moCard = 0;
@@ -65,7 +101,15 @@ module mahjong.play.model {
          * 手牌排序
          */
         public sort() {
-            this.handcards.sort((a, b) => b-a);
+            SelfHandcards.sort(this.handcards, this.gameSetInfo.getAlmighty());
+        }
+
+        public static sort(handcards, almighty) {
+            return handcards.sort((a, b) => {
+                if(a == almighty) return 1;   // 万能牌排在开头
+                if(b == almighty) return -1;   // 万能牌排在开头
+                return b-a;
+            });
         }
 
         /**
@@ -133,12 +177,20 @@ module mahjong.play.model {
         }
 
         /**
-         * 删除指定数量和牌值的手牌
+         * 删除指定数量和牌值的手牌，优先删除摸牌
          * 
          * @param card 
          * @param num 
          */
-        public removeHandcards(card, num): boolean {
+        public removeCards(card, num): boolean {
+            if(this.moCard == card) {
+                this.clearMoCard();
+                if(num > 1) {
+                    return this.removeCards(card, num-1);
+                }
+                return true;
+            }
+
             let cardIndex = this.findHandcardIndex(card);
             if(cardIndex < 0) {
                 console.error("mahjong.play.model.SelfHandcards.removeHandcards@card not found", card);

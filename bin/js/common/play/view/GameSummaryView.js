@@ -10,6 +10,7 @@ var common;
         var view;
         (function (view) {
             var Component = laya.ui.Component;
+            var Label = laya.ui.Label;
             /**
              * 牌桌基本信息显示
              */
@@ -18,34 +19,23 @@ var common;
                 function GameSummaryView(deskController) {
                     var _this = _super.call(this) || this;
                     _this.ruleSprite = new Component();
+                    _this.ruleLabel = new Label();
                     _this.deskController = deskController;
                     return _this;
                 }
                 /**
-                 * 显示游戏名称
+                 * 显示游戏名称图标
                  */
-                GameSummaryView.prototype.showRule = function () {
-                    //console.log("GameSummaryView.showRule", GameSetting.rule);
+                GameSummaryView.prototype.showRuleSprite = function () {
                     this.ruleSprite.loadImage("common/rule/" + this.deskController.getDeskDetail().getRule() + ".png");
                     this.showComponent(this.ruleSprite, this.getRuleAttrs());
                 };
-                GameSummaryView.prototype.showAll = function () {
-                };
                 /**
-                 * 显示牌局模式，如：局 3/8
+                 * 显示游戏名称
                  */
-                // public showMode(curSet): void {
-                //     //console.log("GameSummaryView.showMode@totalSet", GameSetting.get("totalSet"));
-                //     this.modeLabel.changeText("局  " + curSet + "/" + this.deskController.getDeskDetail().getSettingValue("totalSet"));
-                //     this.showComponent(this.modeLabel, this.getModeAttrs());
-                // }
-                /**
-                 * 牌局开始或重连
-                 */
-                GameSummaryView.prototype.onSetInit = function () {
-                    var gameSetInfo = this.deskController.getGameSetInfo();
-                    // 显示局数
-                    // this.showMode(gameSetInfo.getCurrentSet());
+                GameSummaryView.prototype.showRuleLabel = function () {
+                    this.ruleLabel.changeText(common.data.GameRule.getRuleName(this.deskController.getDeskDetail().getRule()));
+                    this.showComponent(this.ruleLabel, this.getRuleAttrs());
                 };
                 return GameSummaryView;
             }(common.view.ComponentView));

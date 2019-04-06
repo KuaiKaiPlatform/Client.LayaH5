@@ -18,7 +18,9 @@ module mahjong.play.view {
         public getRuleAttrs() {
             return {
                 left: 10,
-                top: 100
+                top: 100,
+                color: "#47c03d",
+                fontSize: 28
             }
         }
 
@@ -46,7 +48,8 @@ module mahjong.play.view {
             Laya.loader.load([
                 "res/atlas/common/rule.atlas"
             ], Handler.create(this, () => {
-                this.showRule();
+                //this.showRuleSprite();
+                this.showRuleLabel();
                 this.showMode();
             }));
 
@@ -56,7 +59,6 @@ module mahjong.play.view {
          * 牌局开始或重连
          */
         public onSetInit() {
-            super.onSetInit();
 
             // 显示剩余牌数
             this.showRemain();

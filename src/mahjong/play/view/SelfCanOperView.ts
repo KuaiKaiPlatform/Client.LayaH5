@@ -53,7 +53,16 @@ module mahjong.play.view {
          * 显示可执行的操作列表
          */
         public showAll(): void {
-            if(!this.canOperDetails || this.canOperDetails.length == 0) return;
+            this.hideAll();
+
+            // 报听不做操作
+            if(this.deskController.getGameSetInfo().getPlayerSetInfo().isBaoTing(Login.getUid())) {
+                return;
+            }
+
+            if(!this.canOperDetails || this.canOperDetails.length == 0) {
+                return;
+            }
 
             let showGuo = false;
             let OperType = Protocol.getEnum("mahjong.OperType");
@@ -89,8 +98,6 @@ module mahjong.play.view {
                 let i = index + 1;
                 let operView = this.operViews[i];
                 operView.skin = imgPath;
-                //operView.loadImage(imgPath);
-                //operView.visible = true;
                 operView["operType"] = canOperDetail.operType;
                 operView.on(Laya.Event.CLICK, this, this.clickHandler);
 
@@ -107,8 +114,7 @@ module mahjong.play.view {
                 // 有可执行操作，显示过牌
                 let operView = this.operViews[0];
                 operView.loadImage(SelfCanOperView.IMG_PATH_GUO);
-                //operView.visible = true;
-                operView["operType"] = 0;
+                operView["operType"] = SelfCanOperView.OPER_TYPE_GUO;
                 operView.on(Laya.Event.CLICK, this, this.clickHandler);
 
                 this.showComponent(operView, {
@@ -122,7 +128,6 @@ module mahjong.play.view {
         public hideAll() {
             this.operViews.forEach((operView, index) => {
                 this.removeComponent(operView);
-                //operView.visible = false;
             });
         }
 
@@ -136,14 +141,15 @@ module mahjong.play.view {
 
             let cOperCard = {};
             let OperType = Protocol.getEnum("mahjong.OperType");
+
             switch(operType) {
             case SelfCanOperView.OPER_TYPE_GUO:
                 MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.CPassCard, {});
-                return;
+                break;
             case OperType.CHI:
                 break;
             case OperType.PENG:
-            case OperType.BU_GANG:         
+            case OperType.BU_GANG:
             case OperType.DIAN_GANG:
             case OperType.AN_GANG:
             case OperType.HU:
@@ -151,16 +157,15 @@ module mahjong.play.view {
                     operType: operType,
                     target: canOperDetail.target
                 }
+                MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, cOperCard);
                 break;
             case OperType.TING:
+                this.deskController.getDeskView().getHandCardsView().getSelfHandCardsView().onTingClicked();
                 break;
             default:
                 console.warn("mahjong.view.SelfCanOperView.clickHandler@operation not shown", operType);
-                return;
+                break;
             }
-
-            MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, cOperCard);
-
         }
 
     }

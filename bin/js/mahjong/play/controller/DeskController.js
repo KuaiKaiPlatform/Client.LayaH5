@@ -61,6 +61,15 @@ var mahjong;
                     return this.setResultDialog;
                 };
                 /**
+                 * 返回牌局结果对话框
+                 */
+                DeskController.prototype.getSetResultDialog = function () {
+                    return this.setResultDialog;
+                };
+                DeskController.prototype.clearSetResultDialog = function () {
+                    this.setResultDialog = null;
+                };
+                /**
                  * 新建整场比赛结果对话框
                  */
                 DeskController.prototype.createGameResultDialog = function (gameResult) {
@@ -68,10 +77,34 @@ var mahjong;
                     return this.gameResultDialog;
                 };
                 /**
-                 * 新建整场比赛结果对话框
+                 * 返回整场比赛结果对话框
                  */
                 DeskController.prototype.getGameResultDialog = function () {
                     return this.gameResultDialog;
+                };
+                /**
+                 * 新建指定牌值的玩家手牌
+                 */
+                DeskController.prototype.createSelfHandcard = function (card) {
+                    var params = {
+                        card: card
+                    };
+                    if (card == this.getGameSetInfo().getAlmighty()) {
+                        params["jiaoRightTopSkin"] = mahjong.data.DeskInfo.getAlmightyJiaoImage(this.getDeskDetail());
+                    }
+                    return mahjong.play.view.SingleCardFactory.createSelfHand(params);
+                };
+                /**
+                 * 新建指定牌值的竖向牌（打牌或听牌）
+                 */
+                DeskController.prototype.createLandscapeCard = function (card) {
+                    var params = {
+                        card: card
+                    };
+                    if (card == this.getGameSetInfo().getAlmighty()) {
+                        params["jiaoRightTopSkin"] = mahjong.data.DeskInfo.getAlmightyJiaoImage(this.getDeskDetail());
+                    }
+                    return mahjong.play.view.SingleCardFactory.createLandscapeCard(params);
                 };
                 return DeskController;
             }(common.play.controller.DeskController));

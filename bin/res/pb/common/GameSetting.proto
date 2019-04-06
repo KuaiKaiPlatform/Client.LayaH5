@@ -5,7 +5,7 @@ package common;
 
 message GameSetting {	// 玩法规则设置
 
-	required string json = 1;		// JSON 格式的 setting 内容（客户端相关）
+	required string json = 1;						// JSON 格式的 setting 内容（客户端相关）
 
 	// 麻将相关
 	optional int32 totalSet = 2;					// 总局数
@@ -22,5 +22,6 @@ message GameSetting {	// 玩法规则设置
 	optional bool noJiaFanQiangGangHu = 11;			// 抢杠胡不加番
 
 	optional bool paoZi = 12;						// 陕西麻将下炮子
+	optional int32 operDelaySeconds = 13;			// 自动出牌秒数
 
 }

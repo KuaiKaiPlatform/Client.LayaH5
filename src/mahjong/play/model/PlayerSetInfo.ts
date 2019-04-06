@@ -5,15 +5,17 @@ module mahjong.play.model {
      */
     export class PlayerSetInfo extends common.play.model.PlayerSetInfo {
 
+        protected gameSetInfo: GameSetInfo;         // 麻将牌局信息
         protected selfHandcards: SelfHandcards;     // 自身手牌及其状态管理
         protected selfOperations: SelfOperations;   // 自身可执行的操作
 
-        constructor(setInit) {
+        constructor(setInit, gameSetInfo) {
             super(setInit.playerSetInfos);
+            this.gameSetInfo = gameSetInfo;
             this.initForBanker(setInit);
 
             let setInfo = this.getSelf();
-            this.selfHandcards = new SelfHandcards(setInfo);
+            this.selfHandcards = new SelfHandcards(setInfo, gameSetInfo);
             this.selfOperations = new SelfOperations(setInit.canOperDetails);
         }
 
@@ -45,6 +47,33 @@ module mahjong.play.model {
         public setHasMo(uid, hasMo) {
             let setInfo = this.getByUid(uid);
             setInfo.hasMo = hasMo;
+        }
+
+        /**
+         * 设置是否报听
+         * 
+         * @param uid 
+         */
+        public setBaoTing(uid, baoTing) {
+            let setInfo = this.getByUid(uid);
+            setInfo.baoTing = baoTing;
+        }
+
+        /**
+         * 是否报听
+         * 
+         * @param uid 
+         */
+        public isBaoTing(uid) {
+            let setInfo = this.getByUid(uid);
+            return setInfo.baoTing;
+        }
+
+        public clearBaoTing() {
+            let setInfos = this.getAll();
+            for(let uid in setInfos) {
+                setInfos[uid].baoTing = false;
+            }
         }
 
         /**

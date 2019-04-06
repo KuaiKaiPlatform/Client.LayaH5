@@ -30,6 +30,17 @@ var mahjong;
                     return false;
                 };
                 /**
+                 * 是否有可听的操作
+                 */
+                SelfOperations.prototype.hasTingOperation = function () {
+                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    for (var i = 0; i < this.canOperDetails.length; i++) {
+                        if (this.canOperDetails[i].operType === OperType.TING)
+                            return true;
+                    }
+                    return false;
+                };
+                /**
                  * 设置可执行的操作
                  */
                 SelfOperations.prototype.setCanOperDetails = function (canOperDetails) {

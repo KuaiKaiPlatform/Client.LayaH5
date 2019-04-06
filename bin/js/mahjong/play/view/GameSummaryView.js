@@ -25,7 +25,9 @@ var mahjong;
                 GameSummaryView.prototype.getRuleAttrs = function () {
                     return {
                         left: 10,
-                        top: 100
+                        top: 100,
+                        color: "#47c03d",
+                        fontSize: 28
                     };
                 };
                 GameSummaryView.prototype.getModeAttrs = function () {
@@ -51,7 +53,8 @@ var mahjong;
                     Laya.loader.load([
                         "res/atlas/common/rule.atlas"
                     ], Handler.create(this, function () {
-                        _this.showRule();
+                        //this.showRuleSprite();
+                        _this.showRuleLabel();
                         _this.showMode();
                     }));
                 };
@@ -59,7 +62,6 @@ var mahjong;
                  * 牌局开始或重连
                  */
                 GameSummaryView.prototype.onSetInit = function () {
-                    _super.prototype.onSetInit.call(this);
                     // 显示剩余牌数
                     this.showRemain();
                     // 显示牌局模式

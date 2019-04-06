@@ -54,7 +54,7 @@ module common.play.view {
             selfPlayer.prepared = true;
             this.show(selfPlayer);
 
-            // 发送准备消息
+            // 不发送准备消息，首局自动准备，此后继续下一局时发送准备
         }
 
         /**

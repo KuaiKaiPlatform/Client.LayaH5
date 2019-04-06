@@ -47,8 +47,14 @@ var mahjong;
                  */
                 SelfCanOperView.prototype.showAll = function () {
                     var _this = this;
-                    if (!this.canOperDetails || this.canOperDetails.length == 0)
+                    this.hideAll();
+                    // 报听不做操作
+                    if (this.deskController.getGameSetInfo().getPlayerSetInfo().isBaoTing(Login.getUid())) {
                         return;
+                    }
+                    if (!this.canOperDetails || this.canOperDetails.length == 0) {
+                        return;
+                    }
                     var showGuo = false;
                     var OperType = Protocol.getEnum("mahjong.OperType");
                     this.canOperDetails.reverse().forEach(function (canOperDetail, index) {
@@ -81,8 +87,6 @@ var mahjong;
                         var i = index + 1;
                         var operView = _this.operViews[i];
                         operView.skin = imgPath;
-                        //operView.loadImage(imgPath);
-                        //operView.visible = true;
                         operView["operType"] = canOperDetail.operType;
                         operView.on(Laya.Event.CLICK, _this, _this.clickHandler);
                         _this.showComponent(operView, {
@@ -96,8 +100,7 @@ var mahjong;
                         // 有可执行操作，显示过牌
                         var operView = this.operViews[0];
                         operView.loadImage(SelfCanOperView.IMG_PATH_GUO);
-                        //operView.visible = true;
-                        operView["operType"] = 0;
+                        operView["operType"] = SelfCanOperView.OPER_TYPE_GUO;
                         operView.on(Laya.Event.CLICK, this, this.clickHandler);
                         this.showComponent(operView, {
                             bottom: 110,
@@ -109,7 +112,6 @@ var mahjong;
                     var _this = this;
                     this.operViews.forEach(function (operView, index) {
                         _this.removeComponent(operView);
-                        //operView.visible = false;
                     });
                 };
                 /**
@@ -124,7 +126,7 @@ var mahjong;
                     switch (operType) {
                         case SelfCanOperView.OPER_TYPE_GUO:
                             MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.CPassCard, {});
-                            return;
+                            break;
                         case OperType.CHI:
                             break;
                         case OperType.PENG:
@@ -136,14 +138,15 @@ var mahjong;
                                 operType: operType,
                                 target: canOperDetail.target
                             };
+                            MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, cOperCard);
                             break;
                         case OperType.TING:
+                            this.deskController.getDeskView().getHandCardsView().getSelfHandCardsView().onTingClicked();
                             break;
                         default:
                             console.warn("mahjong.view.SelfCanOperView.clickHandler@operation not shown", operType);
-                            return;
+                            break;
                     }
-                    MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, cOperCard);
                 };
                 return SelfCanOperView;
             }(common.view.ComponentView));

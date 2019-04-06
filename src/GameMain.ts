@@ -12,7 +12,12 @@ class GameMain {
 
         Laya.init(1334, 750, Laya.WebGL);
         Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
-        Laya.stage.scaleMode = "exactfit";
+        Laya.stage.scaleMode = Laya.Stage.SCALE_EXACTFIT;
+
+        // if(Laya.Render.isConchApp) {
+        //     console.log("laya native");
+        //     Laya.Browser.window.showAlertOnJsException(false);
+        // }
 
         // 日期格式
         common.utils.DateFormat.init();
@@ -39,8 +44,8 @@ class GameMain {
      */
     private initModules() {
         let promises = new Array();
-        promises.push(common.play.Module.init());
-        promises.push(hall.desk.Module.init());
+        promises.push(common.Module.init());
+        promises.push(hall.Module.init());
         promises.push(mahjong.Module.init());
         return Promise.all(promises);
     }

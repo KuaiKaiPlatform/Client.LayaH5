@@ -5,7 +5,7 @@ package mahjong;
 
 import "mahjong/CardGroup.proto";
 import "mahjong/Direction.proto";
-import "mahjong/QueMen.proto";
+import "mahjong/CardType.proto";
 
 message PlayerSetInfo {
 
@@ -17,6 +17,8 @@ message PlayerSetInfo {
 	repeated int32 points = 6;						// 本场各项总得失分列表
 	optional mahjong.Direction direction = 7;		// 玩家方位（门风）
 	optional int32 bet = 8;							// 本局下注数量
-	optional mahjong.QueMen queMen = 9;				// 本局缺门，0 无效  10 万 20 条 30 筒
+	optional mahjong.CardType queMen = 9;			// 本局缺门，0 无效  10 万 20 条 30 筒
+	optional bool baoTing = 10;						// 是否报听
+	optional int32 tingDiscardIndex = 11;			// 报听时打出的牌位置
 
 }

@@ -10,6 +10,7 @@ var mahjong;
         var view;
         (function (view) {
             var Handler = Laya.Handler;
+            var Image = Laya.Image;
             /**
              * 麻将牌桌中心方位显示 ui.mahjong.DeskCenterUI
              */
@@ -28,6 +29,10 @@ var mahjong;
                         "res/atlas/mahjong/desk.atlas"
                     ], Handler.create(this, function () {
                         _this.show(posFocus);
+                        // 有 focus 在最近一次操作者上，启动倒计时读秒
+                        if (posFocus >= mahjong.play.Position.SELF) {
+                            _this.launchCountDown();
+                        }
                     }));
                 };
                 DirectionView.prototype.onSetInit = function (setInit) {
@@ -163,12 +168,80 @@ var mahjong;
                             break;
                     }
                 };
+                /**
+                 * 启动倒计时读秒
+                 *
+                 */
+                DirectionView.prototype.launchCountDown = function () {
+                    var count = this.deskController.getDeskDetail().getSetting().operDelaySeconds;
+                    if (!count)
+                        return;
+                    if (count <= 2)
+                        return;
+                    this.startCountDown(count - 2); // 延迟2秒
+                };
+                /**
+                 * 启动倒计时读秒
+                 *
+                 */
+                DirectionView.prototype.startCountDown = function (count) {
+                    Laya.timer.clearAll(this);
+                    this.showCountDown(count);
+                    if (count > 0)
+                        Laya.timer.once(1000, this, this.startCountDown, [count - 1]);
+                };
+                /**
+                 * 显示倒计时指定秒数
+                 */
+                DirectionView.prototype.showCountDown = function (count) {
+                    this.hideCountDown();
+                    var countFirst;
+                    var countSecond;
+                    if (count < 10) {
+                        countFirst = new Image("mahjong/desk/count_" + count + ".png");
+                    }
+                    else {
+                        countFirst = new Image("mahjong/desk/count_" + Math.floor(count / 10) + ".png");
+                        countSecond = new Image("mahjong/desk/count_" + count % 10 + ".png");
+                    }
+                    if (countFirst) {
+                        if (countSecond) {
+                            countFirst.centerX = count == 11 ? -7 : -10;
+                            countFirst.centerY = 0;
+                        }
+                        else {
+                            countFirst.centerX = 0;
+                            countFirst.centerY = 0;
+                        }
+                        countFirst.scaleX = 0.9;
+                        countFirst.scaleY = 0.9;
+                        countFirst.name = DirectionView.COUNT_FIRST;
+                        this.deskCenterUI.addChild(countFirst);
+                    }
+                    if (countSecond) {
+                        countSecond.centerX = count == 11 ? 7 : 5;
+                        countSecond.centerY = 0;
+                        countSecond.scaleX = 0.9;
+                        countSecond.scaleY = 0.9;
+                        countSecond.name = DirectionView.COUNT_SECOND;
+                        this.deskCenterUI.addChild(countSecond);
+                    }
+                };
+                /**
+                 * 隐藏倒计时读秒
+                 */
+                DirectionView.prototype.hideCountDown = function () {
+                    this.deskCenterUI.removeChildByName(DirectionView.COUNT_FIRST);
+                    this.deskCenterUI.removeChildByName(DirectionView.COUNT_SECOND);
+                };
                 return DirectionView;
             }(common.view.ComponentView));
             DirectionView.IMG_PATH_DONG = "mahjong/desk/dir_dong.png";
             DirectionView.IMG_PATH_NAN = "mahjong/desk/dir_nan.png";
             DirectionView.IMG_PATH_XI = "mahjong/desk/dir_xi.png";
             DirectionView.IMG_PATH_BEI = "mahjong/desk/dir_bei.png";
+            DirectionView.COUNT_FIRST = "count_first";
+            DirectionView.COUNT_SECOND = "count_second";
             view.DirectionView = DirectionView;
         })(view = play.view || (play.view = {}));
     })(play = mahjong.play || (mahjong.play = {}));

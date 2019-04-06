@@ -10,6 +10,7 @@ var common;
             var DeskView = (function () {
                 function DeskView(deskController) {
                     this.deskController = deskController;
+                    this.startEffect = new common.play.effect.StartEffect(deskController);
                 }
                 DeskView.prototype.getPlayerBasicView = function () {
                     return this.playerBasicView;
@@ -22,6 +23,9 @@ var common;
                 };
                 DeskView.prototype.getDeskMenuView = function () {
                     return this.deskMenuView;
+                };
+                DeskView.prototype.getStartEffect = function () {
+                    return this.startEffect;
                 };
                 DeskView.prototype.show = function () {
                     // 设置背景

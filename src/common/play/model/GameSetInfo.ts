@@ -19,5 +19,13 @@ module common.play.model {
             return this.setInit.curSet;
         }
 
+        public getCurrentDi() {
+            return this.setInit.curDi;
+        }
+
+        public getCurrentQuan() {
+            return this.setInit.curQuan;
+        }
+
     }
 }

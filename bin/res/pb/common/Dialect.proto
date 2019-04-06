@@ -5,8 +5,11 @@ package common;
 
 enum Dialect {	// 方言
 
-    XIA_PU = 350001;
+	PU_TONG			= 0;
+	
+    XIA_PU			= 350001;
 
-    YU_LIN = 610001;
+    YU_LIN			= 610001;
+    YAN_AN			= 610002;
 
 }

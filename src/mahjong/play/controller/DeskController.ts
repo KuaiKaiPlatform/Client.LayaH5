@@ -8,7 +8,7 @@ module mahjong.play.controller {
 
         private operationHandler: OperationHandler;
 
-        public static instance;
+        public static instance: mahjong.play.controller.DeskController;
 
         public static init() {
             this.instance = new DeskController();
@@ -65,6 +65,17 @@ module mahjong.play.controller {
         }
 
         /**
+         * 返回牌局结果对话框
+         */
+        public getSetResultDialog() {
+            return this.setResultDialog;
+        }
+
+        public clearSetResultDialog() {
+            this.setResultDialog = null;
+        }
+
+        /**
          * 新建整场比赛结果对话框
          */
         public createGameResultDialog(gameResult) {
@@ -73,10 +84,38 @@ module mahjong.play.controller {
         }
 
         /**
-         * 新建整场比赛结果对话框
+         * 返回整场比赛结果对话框
          */
         public getGameResultDialog() {
             return this.gameResultDialog;
+        }
+
+        /**
+         * 新建指定牌值的玩家手牌
+         */
+        public createSelfHandcard(card) {
+            let params = {
+                card: card
+            };
+            if(card == this.getGameSetInfo().getAlmighty()) {
+                params["jiaoRightTopSkin"] = mahjong.data.DeskInfo.getAlmightyJiaoImage(this.getDeskDetail());
+            }
+
+            return mahjong.play.view.SingleCardFactory.createSelfHand(params);
+        }
+
+        /**
+         * 新建指定牌值的竖向牌（打牌或听牌）
+         */
+        public createLandscapeCard(card) {
+            let params = {
+                card: card
+            };
+            if(card == this.getGameSetInfo().getAlmighty()) {
+                params["jiaoRightTopSkin"] = mahjong.data.DeskInfo.getAlmightyJiaoImage(this.getDeskDetail());
+            }
+
+            return mahjong.play.view.SingleCardFactory.createLandscapeCard(params);
         }
 
     }

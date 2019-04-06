@@ -32,8 +32,26 @@ var mahjong;
                 };
                 PlayerBasicView.prototype.showSingle = function (uid) {
                     _super.prototype.showSingle.call(this, uid);
+                    this.showTing(uid);
                     if (this.deskController.getDeskDetail().getSettingBool("xiaZhu"))
                         this.showBet(uid);
+                };
+                /**
+                 * 显示隐藏听牌角标
+                 * @param uid
+                 */
+                PlayerBasicView.prototype.showTing = function (uid) {
+                    var playerUI = this.getUI(uid);
+                    if (!playerUI)
+                        return;
+                    var ting = playerUI.getChildByName("ting");
+                    var playerSetInfo = null;
+                    var gameSetInfo = this.deskController.getGameSetInfo();
+                    if (gameSetInfo) {
+                        playerSetInfo = gameSetInfo.getPlayerSetInfo();
+                    }
+                    ting.visible = playerSetInfo && playerSetInfo.isBaoTing(uid);
+                    console.log("mahjong.play.view.PlayerBasicView.showTing", uid, ting.visible);
                 };
                 PlayerBasicView.prototype.showBet = function (uid) {
                     var playerUI = this.getUI(uid);

@@ -14,11 +14,12 @@ var mahjong;
              */
             var PlayerSetInfo = (function (_super) {
                 __extends(PlayerSetInfo, _super);
-                function PlayerSetInfo(setInit) {
+                function PlayerSetInfo(setInit, gameSetInfo) {
                     var _this = _super.call(this, setInit.playerSetInfos) || this;
+                    _this.gameSetInfo = gameSetInfo;
                     _this.initForBanker(setInit);
                     var setInfo = _this.getSelf();
-                    _this.selfHandcards = new model.SelfHandcards(setInfo);
+                    _this.selfHandcards = new model.SelfHandcards(setInfo, gameSetInfo);
                     _this.selfOperations = new model.SelfOperations(setInit.canOperDetails);
                     return _this;
                 }
@@ -47,6 +48,30 @@ var mahjong;
                 PlayerSetInfo.prototype.setHasMo = function (uid, hasMo) {
                     var setInfo = this.getByUid(uid);
                     setInfo.hasMo = hasMo;
+                };
+                /**
+                 * 设置是否报听
+                 *
+                 * @param uid
+                 */
+                PlayerSetInfo.prototype.setBaoTing = function (uid, baoTing) {
+                    var setInfo = this.getByUid(uid);
+                    setInfo.baoTing = baoTing;
+                };
+                /**
+                 * 是否报听
+                 *
+                 * @param uid
+                 */
+                PlayerSetInfo.prototype.isBaoTing = function (uid) {
+                    var setInfo = this.getByUid(uid);
+                    return setInfo.baoTing;
+                };
+                PlayerSetInfo.prototype.clearBaoTing = function () {
+                    var setInfos = this.getAll();
+                    for (var uid in setInfos) {
+                        setInfos[uid].baoTing = false;
+                    }
                 };
                 /**
                  * 返回自身手牌对象

@@ -29,6 +29,17 @@ module mahjong.play.model {
         }
 
         /**
+         * 是否有可听的操作
+         */
+        public hasTingOperation(): boolean {
+            let OperType = Protocol.getEnum("mahjong.OperType");
+            for(let i=0; i<this.canOperDetails.length; i++) {
+                if(this.canOperDetails[i].operType === OperType.TING) return true;
+            }
+            return false;
+        }
+
+        /**
          * 设置可执行的操作
          */
          public setCanOperDetails(canOperDetails): void {

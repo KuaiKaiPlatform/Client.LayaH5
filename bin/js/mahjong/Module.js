@@ -7,11 +7,7 @@ var mahjong;
          * 麻将模块初始化：单例，监听消息等
          */
         Module.init = function () {
-            //let GameEventDispacher = common.event.GameEventDispacher;
-            var GlobalSetting = common.data.GlobalSetting;
-            //let Protocol = common.pb.Protocol;
             var DeskController = mahjong.play.controller.DeskController;
-            var Theme = Protocol.getEnum("common.MahjongTheme");
             DeskController.init();
             mahjong.play.view.SingleCardFactory.init();
             // 牌桌，监听消息
@@ -23,10 +19,6 @@ var mahjong;
             GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SGameResult, messageListener, messageListener.onGameResult);
             GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SReady, messageListener, messageListener.onReady);
             GameEventDispacher.instance.onMsg(Protocol.meta.mahjong.SBet, messageListener, messageListener.onBet);
-            // 牌桌设置
-            GlobalSetting.init({
-                mahjongTheme: Theme.GREEN
-            });
             console.log("mahjong.Module.init@finish");
             return Promise.resolve();
         };

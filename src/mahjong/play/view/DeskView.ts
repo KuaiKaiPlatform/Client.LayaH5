@@ -55,6 +55,10 @@ module mahjong.play.view {
             return this.gameSummaryView as mahjong.play.view.GameSummaryView;
         }
 
+        public getPlayerBasicView() {
+            return this.playerBasicView as mahjong.play.view.PlayerBasicView;
+        }
+
         public getDirectionView() {
             return this.directionView;
         }
@@ -85,11 +89,6 @@ module mahjong.play.view {
             this.discardsView.clearAll();
             this.handCardsView.clearAll();
             this.cardGroupsView.clearAll();
-
-            // 显示下一局庄家
-            // let curSetResult = this.deskController.getDeskDetail().getCurSetResult();
-            // let bankerId = 0;
-            // if(curSetResult) bankerId = curSetResult.nextBankerId;
 
             // 更新总分，显示下一局庄家
             this.playerBasicView.showAll();

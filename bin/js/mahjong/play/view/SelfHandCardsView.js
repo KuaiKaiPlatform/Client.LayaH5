@@ -17,6 +17,8 @@ var mahjong;
                 function SelfHandCardsView(deskController, playerHandCardsView) {
                     var _this = _super.call(this) || this;
                     _this.cardViews = {};
+                    _this.discard2TingCardsViews = {}; // 打听牌显示
+                    _this.tingOngoing = false; // 正在进行听牌操作（选择一张打听牌打出）
                     _this.deskController = deskController;
                     _this.playerHandCardsView = playerHandCardsView;
                     return _this;
@@ -32,6 +34,7 @@ var mahjong;
                     var pos = mahjong.play.Position.SELF;
                     var handcardUI = this.playerHandCardsView.getUI(Login.getUid(), pos);
                     this.playerHandCardsView.clear(handcardUI);
+                    this.cardViews = {};
                     var playerSetInfo = this.deskController.getGameSetInfo().getPlayerSetInfo();
                     // 刚摸的牌
                     var moCard = playerSetInfo.getSelfHandcards().getMoCard();
@@ -42,6 +45,13 @@ var mahjong;
                     playerSetInfo.getSelfHandcards().getHandcards().forEach(function (handcard, index) {
                         _this.addSelfCard(handcardUI, index, handcard);
                     });
+                    // 报听状态，所有手牌变灰
+                    if (playerSetInfo.isBaoTing(Login.getUid())) {
+                        for (var index in this.cardViews) {
+                            var cardView = this.cardViews[index];
+                            cardView.getChildByName("grey").visible = true;
+                        }
+                    }
                     // 显示
                     this.showComponent(handcardUI, SelfHandCardsView.SELF);
                 };
@@ -51,7 +61,7 @@ var mahjong;
                 SelfHandCardsView.prototype.showSelfMo = function (handcardUI, moCard) {
                     var GlobalSetting = common.data.GlobalSetting;
                     handcardUI.removeChildByName("mo");
-                    var moCardView = view.SingleCardFactory.createSelfHand(GlobalSetting.get("mahjongTheme"), moCard);
+                    var moCardView = this.deskController.createSelfHandcard(moCard);
                     moCardView.right = 0;
                     moCardView.name = "mo";
                     handcardUI.addChild(moCardView);
@@ -66,7 +76,7 @@ var mahjong;
                 SelfHandCardsView.prototype.addSelfCard = function (handcardUI, index, card) {
                     var GlobalSetting = common.data.GlobalSetting;
                     var handcards = handcardUI.getChildByName("handcards");
-                    var cardView = view.SingleCardFactory.createSelfHand(GlobalSetting.get("mahjongTheme"), card);
+                    var cardView = this.deskController.createSelfHandcard(card);
                     cardView.right = 64 * index;
                     handcards.addChild(cardView);
                     cardView["cardIndex"] = index;
@@ -80,24 +90,64 @@ var mahjong;
                     var cardIndex = e.target["cardIndex"];
                     var playerSetInfo = this.deskController.getGameSetInfo().getPlayerSetInfo();
                     var selfHandcards = playerSetInfo.getSelfHandcards();
-                    if (!playerSetInfo.getSelfOperations().hasDaOperation()) {
-                        console.log("mahjong.view.SelfHandCardsView.clickHandler@DA operation not found");
+                    var target = selfHandcards.getHandcard(cardIndex);
+                    // 报听状态，不能操作手牌
+                    if (playerSetInfo.isBaoTing(Login.getUid())) {
+                        console.log("mahjong.view.SelfHandCardsView.clickHandler@BaoTing");
                         return;
                     }
+                    var canOperTing = playerSetInfo.getSelfOperations().hasTingOperation();
+                    if (!playerSetInfo.getSelfOperations().hasDaOperation() && !canOperTing) {
+                        // 即无听牌，也无打牌可操作
+                        console.log("mahjong.view.SelfHandCardsView.clickHandler@DA or TING operation not found");
+                        return;
+                    }
+                    // 有听牌操作
+                    if (canOperTing) {
+                        if (!this.tingOngoing) {
+                            // 还未点击听
+                            console.log("mahjong.play.view.SelfHandCardsView.clickHandler@ting is not ongoing", target);
+                            return;
+                        }
+                        if (!selfHandcards.isDiscardTing(cardIndex)) {
+                            // 不是打听牌
+                            console.log("mahjong.play.view.SelfHandCardsView.clickHandler@tingOngoing and not discard ting", target);
+                            return;
+                        }
+                    }
                     Laya.SoundManager.playSound("res/sounds/play/click_card.mp3");
-                    var target = selfHandcards.getHandcard(cardIndex);
                     // 二次点击，打出
                     if (selfHandcards.isSelected(cardIndex)) {
                         console.log("mahjong.view.SelfHandCardsView.clickHandler@click2|index, target", cardIndex, target);
                         Laya.SoundManager.playSound("res/sounds/play/discard.mp3");
-                        // 发送打牌
-                        var OperType = Protocol.getEnum("mahjong.OperType");
-                        MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, {
-                            operDetail: {
-                                operType: OperType.DA,
-                                target: target
-                            }
-                        });
+                        if (this.tingOngoing) {
+                            // 发送听牌
+                            var OperType = Protocol.getEnum("mahjong.OperType");
+                            MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, {
+                                operDetail: {
+                                    operType: OperType.TING,
+                                    target: target
+                                }
+                            });
+                            this.tingOngoing = false;
+                        }
+                        else {
+                            // 发送打牌
+                            var OperType = Protocol.getEnum("mahjong.OperType");
+                            MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, {
+                                operDetail: {
+                                    operType: OperType.DA,
+                                    target: target
+                                }
+                            });
+                        }
+                        // 隐藏听牌列表，显示听字，可随时查看听牌列表
+                        if (this.tingCardsView) {
+                            this.tingCardsView.hide();
+                            this.tingCardsView.showTing(true);
+                        }
+                        // 清空打听列表
+                        this.clearDiscard2TingCardsViews();
                         // 清空选中的手牌位置
                         selfHandcards.clearSelected();
                         return;
@@ -111,6 +161,59 @@ var mahjong;
                     // 突起新选中的手牌
                     selfHandcards.setSelected(cardIndex);
                     e.target["bottom"] = 20;
+                    this.refreshTingCardsView(target, false);
+                };
+                SelfHandCardsView.prototype.refreshTingCardsView = function (target, showTingOnly) {
+                    // 隐藏当前听牌列表
+                    if (this.tingCardsView) {
+                        this.tingCardsView.hide();
+                    }
+                    var playerSetInfo = this.deskController.getGameSetInfo().getPlayerSetInfo();
+                    var selfHandcards = playerSetInfo.getSelfHandcards();
+                    var tingCards = selfHandcards.getTingCards(target);
+                    if (tingCards) {
+                        this.tingCardsView = this.getTingCardsView(target, tingCards);
+                        if (showTingOnly) {
+                            this.tingCardsView.showTing(true);
+                        }
+                        else {
+                            this.tingCardsView.show();
+                        }
+                    }
+                    else {
+                        this.tingCardsView = null;
+                    }
+                };
+                SelfHandCardsView.prototype.getTingCardsView = function (discard, tingCards) {
+                    var tingCardsView = this.discard2TingCardsViews[discard];
+                    if (tingCardsView)
+                        return tingCardsView;
+                    tingCardsView = new view.TingCardsView(this.deskController, tingCards);
+                    this.discard2TingCardsViews[discard] = tingCardsView;
+                    return tingCardsView;
+                };
+                SelfHandCardsView.prototype.clearDiscard2TingCardsViews = function () {
+                    this.discard2TingCardsViews = {};
+                };
+                /**
+                 * 点击听后：只可选中打听的牌之后打出，其他牌置灰。
+                 */
+                SelfHandCardsView.prototype.onTingClicked = function () {
+                    this.tingOngoing = true;
+                    var selfHandcards = this.deskController.getGameSetInfo().getPlayerSetInfo().getSelfHandcards();
+                    for (var index in this.cardViews) {
+                        var cardView = this.cardViews[index];
+                        cardView.getChildByName("grey").visible = !selfHandcards.isDiscardTing(index);
+                    }
+                };
+                SelfHandCardsView.prototype.clear = function () {
+                    // 隐藏当前听牌列表
+                    if (this.tingCardsView) {
+                        this.tingCardsView.hide();
+                        this.tingCardsView = null;
+                    }
+                    this.cardViews = {};
+                    this.clearDiscard2TingCardsViews();
                 };
                 return SelfHandCardsView;
             }(common.view.ComponentView));

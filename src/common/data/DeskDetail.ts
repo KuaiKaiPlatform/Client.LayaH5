@@ -29,6 +29,10 @@ module common.data {
             return this.desk.rule;
         }
 
+        public getSetting() {
+            return this.desk.setting;
+        }
+
         public getSettingValue(key) {
             let setting = this.desk.settings;
             return setting?setting[key]:null;
@@ -75,6 +79,15 @@ module common.data {
         }
 
         /**
+         * 返回指定uid的玩家性别
+         */
+        public getPlayerSex(uid) {
+            let player = this.getPlayer(uid);
+            if(!player) return 0;
+            return player.user.sex === 1?1:0;   // 只有等于1是男性，其他都默认女性
+        }
+
+        /**
          * 是否为自己加入的牌桌
          */
         public hasSelf() {
@@ -104,6 +117,30 @@ module common.data {
         public incrCurrentSet() {
             this.desk.curSet++;
         }
+
+        // public getCurrentDi() {
+        //     return Math.max(this.desk.curDi, 1); // 从第一底开始
+        // }
+
+        // public setCurrentDi(curDi) {
+        //     this.desk.curDi = curDi;
+        // }
+
+        // public incrCurrentDi() {
+        //     this.desk.curDi++;
+        // }
+
+        // public getCurrentQuan() {
+        //     return Math.max(this.desk.curQuan, 1); // 从第一圈开始
+        // }
+
+        // public setCurrentQuan(curQuan) {
+        //     this.desk.curQuan = curQuan;
+        // }
+
+        // public incrCurrentQuan() {
+        //     this.desk.curQuan++;
+        // }
 
         public setStatus(status) {
             this.desk.status = status;

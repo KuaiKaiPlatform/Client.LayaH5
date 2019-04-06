@@ -35,6 +35,12 @@ var common;
                     return fmt;
                 };
             };
+            /**
+             * 格式化时间戳
+             */
+            DateFormat.format = function (timestamp) {
+                return new Date(timestamp)["format"]("yyyy-MM-dd HH:mm:ss");
+            };
             return DateFormat;
         }());
         utils.DateFormat = DateFormat;

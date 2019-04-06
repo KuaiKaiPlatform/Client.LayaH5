@@ -2,6 +2,7 @@ module mahjong.play.view {
     import Handler = Laya.Handler;
     import Sprite = Laya.Sprite;
     import Component = laya.ui.Component;
+    import Image = Laya.Image;
 
     /**
      * 麻将牌桌中心方位显示 ui.mahjong.DeskCenterUI
@@ -16,6 +17,9 @@ module mahjong.play.view {
         protected static IMG_PATH_XI       = "mahjong/desk/dir_xi.png";
         protected static IMG_PATH_BEI      = "mahjong/desk/dir_bei.png";
 
+        protected static COUNT_FIRST      = "count_first";
+        protected static COUNT_SECOND     = "count_second";
+
         constructor(deskController) {
             super();
             this.deskController = deskController;
@@ -28,6 +32,11 @@ module mahjong.play.view {
                 "res/atlas/mahjong/desk.atlas"
             ], Handler.create(this, () => {
                 this.show(posFocus);
+
+                // 有 focus 在最近一次操作者上，启动倒计时读秒
+                if(posFocus >= mahjong.play.Position.SELF) {
+                    this.launchCountDown();
+                }
             }));
         }
 
@@ -182,6 +191,78 @@ module mahjong.play.view {
                 dirImg.skin = (DirectionView.IMG_PATH_BEI);
                 break;
             }
+        }
+
+        /**
+         * 启动倒计时读秒
+         * 
+         */
+        public launchCountDown() {
+            let count = this.deskController.getDeskDetail().getSetting().operDelaySeconds;
+            if(!count) return;
+            if(count <= 2) return;
+
+            this.startCountDown(count-2);   // 延迟2秒
+        }
+
+        /**
+         * 启动倒计时读秒
+         * 
+         */
+        public startCountDown(count) {
+            Laya.timer.clearAll(this);
+            this.showCountDown(count);
+            if(count > 0)
+                Laya.timer.once(1000, this, this.startCountDown, [count-1]);
+        }
+
+        /**
+         * 显示倒计时指定秒数
+         */
+        public showCountDown(count) {
+            this.hideCountDown();
+
+            let countFirst;
+            let countSecond;
+            if(count < 10) {
+                countFirst = new Image("mahjong/desk/count_" + count + ".png");
+            } else {
+                countFirst = new Image("mahjong/desk/count_" + Math.floor(count/10) + ".png");
+                countSecond = new Image("mahjong/desk/count_" + count%10 + ".png");
+            }
+
+            if(countFirst) {
+                if(countSecond) {
+                    countFirst.centerX = count==11?-7:-10;
+                    countFirst.centerY = 0;
+                } else {
+                    countFirst.centerX = 0;
+                    countFirst.centerY = 0;
+                }
+
+                countFirst.scaleX = 0.9;
+                countFirst.scaleY = 0.9;
+                countFirst.name = DirectionView.COUNT_FIRST;
+                this.deskCenterUI.addChild(countFirst);
+            }
+
+            if(countSecond) {
+                countSecond.centerX = count==11?7:5;
+                countSecond.centerY = 0;
+                countSecond.scaleX = 0.9;
+                countSecond.scaleY = 0.9;
+
+                countSecond.name = DirectionView.COUNT_SECOND;
+                this.deskCenterUI.addChild(countSecond);
+            }
+        }
+
+        /**
+         * 隐藏倒计时读秒
+         */
+        public hideCountDown() {
+            this.deskCenterUI.removeChildByName(DirectionView.COUNT_FIRST);
+            this.deskCenterUI.removeChildByName(DirectionView.COUNT_SECOND);
         }
 
     }

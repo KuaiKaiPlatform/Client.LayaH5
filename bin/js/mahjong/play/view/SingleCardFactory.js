@@ -17,9 +17,9 @@ var mahjong;
                 /**
                  *   新建一张自己的指定手牌
                  */
-                SingleCardFactory.createSelfHand = function (theme, card) {
+                SingleCardFactory.createSelfHand = function (params) {
                     var singleCard;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
                             break;
@@ -34,16 +34,21 @@ var mahjong;
                             break;
                     }
                     var cardImage = singleCard.getChildByName("card");
-                    cardImage.skin = "mahjong/card/self_hand_" + card + ".png";
+                    cardImage.skin = "mahjong/card/self_hand_" + params.card + ".png";
                     cardImage.visible = true;
+                    if (params.jiaoRightTopSkin) {
+                        var jiaoRightTop = singleCard.getChildByName("jiao_right_top");
+                        jiaoRightTop.skin = params.jiaoRightTopSkin;
+                        jiaoRightTop.visible = true;
+                    }
                     return singleCard;
                 };
                 /**
                  *   新建一张自己的指定明牌（吃、碰、杠）
                  */
-                SingleCardFactory.createSelfGroupCard = function (theme, card) {
+                SingleCardFactory.createSelfGroupCard = function (card) {
                     var singleCard;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
                             break;
@@ -65,9 +70,9 @@ var mahjong;
                 /**
                  *   新建一张自己明牌中隐藏麻将Image
                  */
-                SingleCardFactory.createSelfGroupHidden = function (theme) {
+                SingleCardFactory.createSelfGroupHidden = function () {
                     var path;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             path = "mahjong/card/self_group_hidden_green.png";
                             break;
@@ -89,9 +94,9 @@ var mahjong;
                 /**
                  *   新建一张竖向指定麻将牌
                  */
-                SingleCardFactory.createLandscapeDiscard = function (theme, card) {
+                SingleCardFactory.createLandscapeCard = function (params) {
                     var singleCard;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             singleCard = new ui.mahjong.SingleCardLandscapeGreenUI();
                             break;
@@ -106,17 +111,21 @@ var mahjong;
                             break;
                     }
                     var cardImage = singleCard.getChildByName("card");
-                    //cardImage.skin = "mahjong/card/landscape_" + card + ".png";
-                    cardImage.skin = "mahjong/card/self_group_" + card + ".png";
+                    cardImage.skin = "mahjong/card/self_group_" + params.card + ".png";
                     cardImage.visible = true;
+                    if (params.jiaoRightTopSkin) {
+                        var jiaoRightTop = singleCard.getChildByName("jiao_right_top");
+                        jiaoRightTop.skin = params.jiaoRightTopSkin;
+                        jiaoRightTop.visible = true;
+                    }
                     return singleCard;
                 };
                 /**
                  *   新建一张对家手牌麻将Image
                  */
-                SingleCardFactory.createOppositeHand = function (theme) {
+                SingleCardFactory.createOppositeHand = function () {
                     var path;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             path = "mahjong/card/landscape_hand_green.png";
                             break;
@@ -135,9 +144,9 @@ var mahjong;
                 /**
                  *   新建一张对家明牌中的隐藏麻将Image
                  */
-                SingleCardFactory.createOppositeHidden = function (theme) {
+                SingleCardFactory.createOppositeHidden = function () {
                     var path;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             path = "mahjong/card/self_group_hidden_green.png";
                             break;
@@ -159,9 +168,9 @@ var mahjong;
                 /**
                  *   新建一张下家指定麻将牌
                  */
-                SingleCardFactory.createNextCard = function (theme, card) {
+                SingleCardFactory.createNextCard = function (card) {
                     var singleCard;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             singleCard = new ui.mahjong.SingleCardNextGreenUI();
                             break;
@@ -183,9 +192,9 @@ var mahjong;
                 /**
                  *   新建一张下家手牌麻将Image
                  */
-                SingleCardFactory.createNextHand = function (theme) {
+                SingleCardFactory.createNextHand = function () {
                     var path;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             path = "mahjong/card/next_hand_green.png";
                             break;
@@ -204,9 +213,9 @@ var mahjong;
                 /**
                  *   新建一张下家隐藏麻将Image
                  */
-                SingleCardFactory.createNextHidden = function (theme) {
+                SingleCardFactory.createNextHidden = function () {
                     var path;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             path = "mahjong/card/next_hidden_green.png";
                             break;
@@ -228,9 +237,9 @@ var mahjong;
                 /**
                  *   新建一张上家指定麻将牌
                  */
-                SingleCardFactory.createPreCard = function (theme, card) {
+                SingleCardFactory.createPreCard = function (card) {
                     var singleCard;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             singleCard = new ui.mahjong.SingleCardPreGreenUI();
                             break;
@@ -252,9 +261,9 @@ var mahjong;
                 /**
                  *   新建一张上家手牌麻将Image
                  */
-                SingleCardFactory.createPreHand = function (theme) {
+                SingleCardFactory.createPreHand = function () {
                     var path;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             path = "mahjong/card/pre_hand_green.png";
                             break;
@@ -273,9 +282,9 @@ var mahjong;
                 /**
                  *   新建一张上家隐藏麻将Image
                  */
-                SingleCardFactory.createPreHidden = function (theme) {
+                SingleCardFactory.createPreHidden = function () {
                     var path;
-                    switch (theme) {
+                    switch (GlobalSetting.get("mahjongTheme")) {
                         case this.Theme.GREEN:
                             path = "mahjong/card/pre_hidden_green.png";
                             break;

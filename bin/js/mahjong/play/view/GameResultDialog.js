@@ -10,6 +10,7 @@ var mahjong;
         var view;
         (function (view) {
             var Handler = Laya.Handler;
+            var Label = Laya.Label;
             /**
              * 麻将整场牌局结果显示
              */
@@ -66,10 +67,10 @@ var mahjong;
                 };
                 GameResultDialog.prototype.showLabels = function () {
                     this.labelDesc.changeText(this.getDescription());
-                    this.labelTime.changeText(new Date(this.result.endTime)["format"]("yyyy-MM-dd HH:mm:ss"));
+                    this.labelTime.changeText(common.utils.DateFormat.format(this.result.endTime));
                 };
                 GameResultDialog.prototype.getDescription = function () {
-                    return common.utils.GameRule.getRuleName(this.deskController.getDeskDetail().getRule()) + "     "
+                    return common.data.GameRule.getRuleName(this.deskController.getDeskDetail().getRule()) + "     "
                         + this.getMode();
                 };
                 GameResultDialog.prototype.getMode = function () {
@@ -77,8 +78,21 @@ var mahjong;
                 };
                 GameResultDialog.prototype.showPlayers = function () {
                     var _this = this;
+                    var bigWinners = [];
+                    var score = 0;
                     this.result.playerGameResults.forEach(function (playerGameResult, index) {
-                        _this.showPlayer(playerGameResult, index);
+                        var playerUI = _this.showPlayer(playerGameResult, index);
+                        if (playerGameResult.total > score) {
+                            score = playerGameResult.total;
+                            bigWinners = [playerUI];
+                        }
+                        else if (playerGameResult.total == score) {
+                            bigWinners.push(playerUI);
+                        }
+                    });
+                    // 显示大赢家
+                    bigWinners.forEach(function (playerUI) {
+                        playerUI.getChildByName("big_winner").visible = true;
                     });
                 };
                 GameResultDialog.prototype.showPlayer = function (playerGameResult, index) {
@@ -129,6 +143,7 @@ var mahjong;
                         }
                     }
                     this.dialog.addChild(playerUI);
+                    return playerUI;
                 };
                 GameResultDialog.prototype.mapPlayerStats = function (playerGameResult) {
                     playerGameResult.stats = {};
@@ -140,9 +155,16 @@ var mahjong;
                     var uid = playerGameResult.uid;
                     // 昵称
                     var player = this.getDeskController().getDeskDetail().getPlayer(uid);
-                    var labelNkn = playerUI.getChildByName("nickname");
+                    playerUI.removeChildByName("nickname");
+                    //let labelNkn = playerUI.getChildByName("nickname") as Label;
+                    var labelNkn = new Label();
                     labelNkn.changeText(player.user.nkn);
                     labelNkn.centerX = 0;
+                    labelNkn.y = 115;
+                    labelNkn.color = "#000000";
+                    labelNkn.bold = true;
+                    labelNkn.fontSize = 20;
+                    playerUI.addChild(labelNkn);
                     // ID
                     var labelUid = playerUI.getChildByName("uid");
                     labelUid.changeText("ID：" + uid);
@@ -152,15 +174,26 @@ var mahjong;
                     playerGameResult.points.forEach(function (point) {
                         playerGameResult.total += point;
                     });
-                    var labelScore = playerGameResult.total < 0 ? playerUI.getChildByName("game_score_lose") : playerUI.getChildByName("game_score_win");
+                    var labelScore = new Label();
+                    //let labelScore = playerGameResult.total<0?playerUI.getChildByName("game_score_lose"):playerUI.getChildByName("game_score_win") as Label;
                     if (playerGameResult.total > 0) {
                         labelScore.changeText("+" + playerGameResult.total);
+                        labelScore.color = "#c02406";
+                    }
+                    else if (playerGameResult.total == 0) {
+                        labelScore.changeText(playerGameResult.total);
+                        labelScore.color = "#c02406";
                     }
                     else {
                         labelScore.changeText(playerGameResult.total);
+                        labelScore.color = "#84827d";
                     }
-                    labelScore.visible = true;
+                    //labelScore.visible = true;
                     labelScore.centerX = 0;
+                    labelScore.bottom = 50;
+                    labelScore.bold = true;
+                    labelScore.fontSize = 80;
+                    playerUI.addChild(labelScore);
                 };
                 GameResultDialog.prototype.showPlayerStats = function (playerGameResult, playerUI) {
                     var _this = this;

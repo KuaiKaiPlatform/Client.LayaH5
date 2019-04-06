@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="SOfflinePB";  
+
+package hall;
+
+import "common/DeskUniq.proto";
+
+message SOffline {	// 返回玩家离线状态
+
+	required common.DeskUniq uniq = 1;			// 牌桌唯一标识
+	required int32 uid = 2;						// 玩家ID
+	required bool offline = 3;					// 是否离线
+
+}

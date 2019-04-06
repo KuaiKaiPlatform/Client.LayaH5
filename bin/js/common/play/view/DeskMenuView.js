@@ -38,9 +38,38 @@ var common;
                         _this.showVoice();
                     }));
                 };
+                DeskMenuView.prototype.getSettingView = function () {
+                    if (this.settingView)
+                        return this.settingView;
+                    this.settingView = new common.view.SettingView();
+                    return this.settingView;
+                };
+                /**
+                 * 点击设置按钮
+                 */
+                DeskMenuView.prototype.onSettingClick = function (e) {
+                    // 显示设置界面
+                    var settingView = this.getSettingView();
+                    // 请求玩法相关语言
+                    var rule = this.deskController.getDeskDetail().getRule();
+                    var dialects = common.data.GameRule.getDialects(rule);
+                    if (!dialects) {
+                        // 监听 SRuleDialects
+                        GameEventDispacher.instance.onMsg(Protocol.meta.hall.SRuleDialects, settingView, settingView.onRuleDialects);
+                        // 发送 CRuleDialects
+                        MessageSender.send(Login.getServerId(), Protocol.meta.hall.CRuleDialects, {
+                            rule: rule
+                        });
+                    }
+                    settingView.showAll({
+                        rule: this.deskController.getDeskDetail().getRule()
+                    });
+                };
                 // 显示设置按钮
                 DeskMenuView.prototype.showSetting = function () {
                     this.showSprite(this.settingSprite, "common/desk/setting.png", this.getSettingAttrs());
+                    this.settingSprite.offAll();
+                    this.settingSprite.on(Laya.Event.CLICK, this, this.onSettingClick);
                 };
                 // 显示退出按钮
                 DeskMenuView.prototype.showExit = function () {

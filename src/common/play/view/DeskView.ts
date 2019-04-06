@@ -19,8 +19,12 @@ module common.play.view {
         // 牌桌菜单按钮显示
         protected deskMenuView: common.play.view.DeskMenuView;
 
+        // 开始游戏特效显示
+        protected startEffect: common.play.effect.StartEffect;
+
         constructor(deskController) {
             this.deskController = deskController;
+            this.startEffect = new common.play.effect.StartEffect(deskController);
         }
 
         public getPlayerBasicView() {
@@ -37,6 +41,10 @@ module common.play.view {
 
         public getDeskMenuView() {
             return this.deskMenuView;
+        }
+
+        public getStartEffect() {
+            return this.startEffect;
         }
 
         public show(): void {

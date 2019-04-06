@@ -13,5 +13,6 @@ message PlayerInfo {
 	optional bool offline = 4;								// 是否离线
 	repeated int32 points = 5;								// 本场各项分数
 	optional int32 bet = 6;									// 下注数量
+	optional string ip = 7;									// IP地址
 
 }

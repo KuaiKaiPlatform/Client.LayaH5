@@ -46,9 +46,29 @@ module mahjong.play.view {
 
         public showSingle(uid): void {
             super.showSingle(uid);
-            
+            this.showTing(uid);
+
             if(this.deskController.getDeskDetail().getSettingBool("xiaZhu"))
                 this.showBet(uid);
+        }
+
+        /**
+         * 显示隐藏听牌角标
+         * @param uid
+         */
+        public showTing(uid) {
+            let playerUI = this.getUI(uid);
+            if(!playerUI) return;
+
+            let ting = playerUI.getChildByName("ting") as laya.display.Sprite;
+            let playerSetInfo = null;
+            let gameSetInfo = this.deskController.getGameSetInfo();
+            if(gameSetInfo) {
+                playerSetInfo = gameSetInfo.getPlayerSetInfo();
+            }
+            ting.visible = playerSetInfo && playerSetInfo.isBaoTing(uid);
+
+            console.log("mahjong.play.view.PlayerBasicView.showTing", uid, ting.visible);
         }
 
         public showBet(uid) {
@@ -60,7 +80,6 @@ module mahjong.play.view {
             } else {
                 PlayerBasicView.hideBet(playerUI);
             }
-
         }
 
         /**

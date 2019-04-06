@@ -56,7 +56,7 @@ var common;
                     var selfPlayer = this.deskController.getDeskDetail().getPlayer(Login.getUid());
                     selfPlayer.prepared = true;
                     this.show(selfPlayer);
-                    // 发送准备消息
+                    // 不发送准备消息，首局自动准备，此后继续下一局时发送准备
                 };
                 /**
                  * 显示所有玩家准备状态

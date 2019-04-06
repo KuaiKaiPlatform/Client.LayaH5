@@ -76,11 +76,11 @@ module mahjong.play.view {
 
         protected showLabels() {
             this.labelDesc.changeText(this.getDescription());
-            this.labelTime.changeText(new Date(this.result.endTime)["format"]("yyyy-MM-dd HH:mm:ss"));
+            this.labelTime.changeText(common.utils.DateFormat.format(this.result.endTime));
         }
 
         protected getDescription() {
-            return common.utils.GameRule.getRuleName(this.deskController.getDeskDetail().getRule()) + "     "
+            return common.data.GameRule.getRuleName(this.deskController.getDeskDetail().getRule()) + "     "
                 + this.getMode();
         }
 
@@ -89,8 +89,22 @@ module mahjong.play.view {
         }
 
         protected showPlayers() {
+            let bigWinners = [];
+            let score = 0;
+
             this.result.playerGameResults.forEach((playerGameResult, index) => {
-                this.showPlayer(playerGameResult, index);
+                let playerUI = this.showPlayer(playerGameResult, index);
+                if(playerGameResult.total > score) {
+                    score = playerGameResult.total;
+                    bigWinners = [playerUI];
+                } else if(playerGameResult.total == score) {
+                    bigWinners.push(playerUI);
+                }
+            });
+
+            // 显示大赢家
+            bigWinners.forEach(playerUI => {
+                playerUI.getChildByName("big_winner").visible = true;
             });
         }
 
@@ -143,6 +157,8 @@ module mahjong.play.view {
             } 
 
             this.dialog.addChild(playerUI);
+
+            return playerUI;
         }
 
         protected mapPlayerStats(playerGameResult) {
@@ -157,9 +173,16 @@ module mahjong.play.view {
 
             // 昵称
             let player = this.getDeskController().getDeskDetail().getPlayer(uid);
-            let labelNkn = playerUI.getChildByName("nickname") as Label;
+            playerUI.removeChildByName("nickname");
+            //let labelNkn = playerUI.getChildByName("nickname") as Label;
+            let labelNkn = new Label();
             labelNkn.changeText(player.user.nkn);
             labelNkn.centerX = 0;
+            labelNkn.y = 115;
+            labelNkn.color = "#000000";
+            labelNkn.bold = true;
+            labelNkn.fontSize = 20;
+            playerUI.addChild(labelNkn);
 
             // ID
             let labelUid = playerUI.getChildByName("uid") as Label;
@@ -171,14 +194,25 @@ module mahjong.play.view {
             playerGameResult.points.forEach(point => {
                 playerGameResult.total += point;
             });
-            let labelScore = playerGameResult.total<0?playerUI.getChildByName("game_score_lose"):playerUI.getChildByName("game_score_win") as Label;
+            let labelScore = new Label();
+            //let labelScore = playerGameResult.total<0?playerUI.getChildByName("game_score_lose"):playerUI.getChildByName("game_score_win") as Label;
             if(playerGameResult.total > 0) {
                 labelScore.changeText("+" + playerGameResult.total);
+                labelScore.color = "#c02406";
+            } else if(playerGameResult.total == 0) {
+                labelScore.changeText(playerGameResult.total);
+                labelScore.color = "#c02406";
             } else {
                 labelScore.changeText(playerGameResult.total);
+                labelScore.color = "#84827d";
             }
-            labelScore.visible = true;
+            //labelScore.visible = true;
             labelScore.centerX = 0;
+            labelScore.bottom = 50;
+            labelScore.bold = true;
+            labelScore.fontSize = 80;
+
+            playerUI.addChild(labelScore);
         }
 
         protected showPlayerStats(playerGameResult, playerUI) {

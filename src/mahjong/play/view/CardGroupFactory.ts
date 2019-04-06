@@ -11,7 +11,7 @@ module mahjong.play.view {
         /**
          *   新建一组自己的明牌
          */
-        public static createSelfGroup(theme, cardGroup) {
+        public static createSelfGroup(cardGroup) {
             let result = new View();
             result.width = 180;
             result.height = 100;
@@ -20,14 +20,16 @@ module mahjong.play.view {
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
-                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createSelfGroupHidden(theme):SingleCardFactory.createSelfGroupCard(theme, card);
+                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createSelfGroupHidden():
+                    SingleCardFactory.createSelfGroupCard(card);
                 singleCard.left = 60 * index;
                 singleCard.bottom = 0;
                 result.addChild(singleCard);
             });
 
             // 目标牌
-            let singleCard = (cardGroup.operType == OperType.BU_GANG)?SingleCardFactory.createSelfGroupHidden(theme):SingleCardFactory.createSelfGroupCard(theme, cardGroup.target);
+            let singleCard = (cardGroup.operType == OperType.BU_GANG)?SingleCardFactory.createSelfGroupHidden():
+                SingleCardFactory.createSelfGroupCard(cardGroup.target);
             switch(cardGroup.operType) {
             case OperType.CHI:
             case OperType.PENG:
@@ -49,7 +51,7 @@ module mahjong.play.view {
         /**
          *   新建一组对家的明牌
          */
-        public static createOppositeGroup(theme, cardGroup) {
+        public static createOppositeGroup(cardGroup) {
             let result = new View();
             result.width = 114;
             result.height = 64;
@@ -58,7 +60,8 @@ module mahjong.play.view {
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
-                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createOppositeHidden(theme):SingleCardFactory.createLandscapeDiscard(theme, card);
+                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createOppositeHidden():
+                    mahjong.play.controller.DeskController.instance.createLandscapeCard(card);
                 singleCard.left = 38 * index;
                 singleCard.bottom = 0;
                 result.addChild(singleCard);
@@ -66,7 +69,7 @@ module mahjong.play.view {
 
             // 目标牌
             let singleCard = (cardGroup.operType == OperType.BU_GANG || cardGroup.operType == OperType.AN_GANG)?
-            SingleCardFactory.createOppositeHidden(theme):SingleCardFactory.createLandscapeDiscard(theme, cardGroup.target);
+            SingleCardFactory.createOppositeHidden():mahjong.play.controller.DeskController.instance.createLandscapeCard(cardGroup.target);
             switch(cardGroup.operType) {
             case OperType.CHI:
             case OperType.PENG:
@@ -88,7 +91,7 @@ module mahjong.play.view {
         /**
          *   新建一组下家的明牌
          */
-        public static createNextGroup(theme, cardGroup) {
+        public static createNextGroup(cardGroup) {
             let result = new View();
             result.width = 45;
             result.height = 92;
@@ -97,14 +100,15 @@ module mahjong.play.view {
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
-                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createNextHidden(theme):SingleCardFactory.createNextCard(theme, card);
+                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createNextHidden():
+                    SingleCardFactory.createNextCard(card);
                 singleCard.top = 27 * index;
                 result.addChild(singleCard);
             });
 
             // 目标牌
             let singleCard = (cardGroup.operType == OperType.BU_GANG || cardGroup.operType == OperType.AN_GANG)?
-            SingleCardFactory.createNextHidden(theme):SingleCardFactory.createNextCard(theme, cardGroup.target);
+            SingleCardFactory.createNextHidden():SingleCardFactory.createNextCard(cardGroup.target);
             switch(cardGroup.operType) {
             case OperType.CHI:
             case OperType.PENG:
@@ -125,7 +129,7 @@ module mahjong.play.view {
         /**
          *   新建一组上家的明牌
          */
-        public static createPreGroup(theme, cardGroup) {
+        public static createPreGroup(cardGroup) {
             let result = new View();
             result.width = 45;
             result.height = 92;
@@ -134,14 +138,15 @@ module mahjong.play.view {
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
-                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createPreHidden(theme):SingleCardFactory.createPreCard(theme, card);
+                let singleCard = (cardGroup.operType == OperType.AN_GANG)?SingleCardFactory.createPreHidden():
+                    SingleCardFactory.createPreCard(card);
                 singleCard.top = 27 * index;
                 result.addChild(singleCard);
             });
 
             // 目标牌
             let singleCard = (cardGroup.operType == OperType.BU_GANG || cardGroup.operType == OperType.AN_GANG)?
-            SingleCardFactory.createPreHidden(theme):SingleCardFactory.createPreCard(theme, cardGroup.target);
+            SingleCardFactory.createPreHidden():SingleCardFactory.createPreCard(cardGroup.target);
             switch(cardGroup.operType) {
             case OperType.CHI:
             case OperType.PENG:

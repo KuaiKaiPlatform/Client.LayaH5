@@ -155,6 +155,7 @@ module mahjong.play.view {
             for(let uid in this.playerUIs) {
                 this.clear(this.playerUIs[uid]);
             }
+            this.selfHandCardsView.clear();
         }
 
         /**
@@ -169,15 +170,15 @@ module mahjong.play.view {
             case mahjong.play.Position.SELF:
                 return;
             case mahjong.play.Position.NEXT:
-                singleCard = SingleCardFactory.createNextHand(GlobalSetting.get("mahjongTheme"));
+                singleCard = SingleCardFactory.createNextHand();
                 singleCard.top = 23 * index;
                 break;
             case mahjong.play.Position.OPPOSITE:
-                singleCard = SingleCardFactory.createOppositeHand(GlobalSetting.get("mahjongTheme"));
+                singleCard = SingleCardFactory.createOppositeHand();
                 singleCard.left = 40 * index;
                 break;
             case mahjong.play.Position.PREVIOUS:
-                singleCard = SingleCardFactory.createPreHand(GlobalSetting.get("mahjongTheme"));
+                singleCard = SingleCardFactory.createPreHand();
                 singleCard.bottom = 23 * index;
                 singleCard.zOrder = 1000 - index;
                 break;
@@ -210,15 +211,15 @@ module mahjong.play.view {
             case mahjong.play.Position.SELF:
                 break;
             case mahjong.play.Position.NEXT:
-                moCard = SingleCardFactory.createNextHand(GlobalSetting.get("mahjongTheme"));
+                moCard = SingleCardFactory.createNextHand();
                 moCard.top = 0;
                 break;
             case mahjong.play.Position.OPPOSITE:
-                moCard = SingleCardFactory.createOppositeHand(GlobalSetting.get("mahjongTheme"));
+                moCard = SingleCardFactory.createOppositeHand();
                 moCard.left = 0;
                 break;
             case mahjong.play.Position.PREVIOUS:
-                moCard = SingleCardFactory.createPreHand(GlobalSetting.get("mahjongTheme"));
+                moCard = SingleCardFactory.createPreHand();
                 moCard.bottom = 0;
                 break;
             }

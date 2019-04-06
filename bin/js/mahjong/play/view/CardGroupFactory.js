@@ -14,20 +14,22 @@ var mahjong;
                 /**
                  *   新建一组自己的明牌
                  */
-                CardGroupFactory.createSelfGroup = function (theme, cardGroup) {
+                CardGroupFactory.createSelfGroup = function (cardGroup) {
                     var result = new View();
                     result.width = 180;
                     result.height = 100;
                     var OperType = Protocol.getEnum("mahjong.OperType");
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
-                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createSelfGroupHidden(theme) : view.SingleCardFactory.createSelfGroupCard(theme, card);
+                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createSelfGroupHidden() :
+                            view.SingleCardFactory.createSelfGroupCard(card);
                         singleCard.left = 60 * index;
                         singleCard.bottom = 0;
                         result.addChild(singleCard);
                     });
                     // 目标牌
-                    var singleCard = (cardGroup.operType == OperType.BU_GANG) ? view.SingleCardFactory.createSelfGroupHidden(theme) : view.SingleCardFactory.createSelfGroupCard(theme, cardGroup.target);
+                    var singleCard = (cardGroup.operType == OperType.BU_GANG) ? view.SingleCardFactory.createSelfGroupHidden() :
+                        view.SingleCardFactory.createSelfGroupCard(cardGroup.target);
                     switch (cardGroup.operType) {
                         case OperType.CHI:
                         case OperType.PENG:
@@ -47,21 +49,22 @@ var mahjong;
                 /**
                  *   新建一组对家的明牌
                  */
-                CardGroupFactory.createOppositeGroup = function (theme, cardGroup) {
+                CardGroupFactory.createOppositeGroup = function (cardGroup) {
                     var result = new View();
                     result.width = 114;
                     result.height = 64;
                     var OperType = Protocol.getEnum("mahjong.OperType");
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
-                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createOppositeHidden(theme) : view.SingleCardFactory.createLandscapeDiscard(theme, card);
+                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createOppositeHidden() :
+                            mahjong.play.controller.DeskController.instance.createLandscapeCard(card);
                         singleCard.left = 38 * index;
                         singleCard.bottom = 0;
                         result.addChild(singleCard);
                     });
                     // 目标牌
                     var singleCard = (cardGroup.operType == OperType.BU_GANG || cardGroup.operType == OperType.AN_GANG) ?
-                        view.SingleCardFactory.createOppositeHidden(theme) : view.SingleCardFactory.createLandscapeDiscard(theme, cardGroup.target);
+                        view.SingleCardFactory.createOppositeHidden() : mahjong.play.controller.DeskController.instance.createLandscapeCard(cardGroup.target);
                     switch (cardGroup.operType) {
                         case OperType.CHI:
                         case OperType.PENG:
@@ -81,20 +84,21 @@ var mahjong;
                 /**
                  *   新建一组下家的明牌
                  */
-                CardGroupFactory.createNextGroup = function (theme, cardGroup) {
+                CardGroupFactory.createNextGroup = function (cardGroup) {
                     var result = new View();
                     result.width = 45;
                     result.height = 92;
                     var OperType = Protocol.getEnum("mahjong.OperType");
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
-                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createNextHidden(theme) : view.SingleCardFactory.createNextCard(theme, card);
+                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createNextHidden() :
+                            view.SingleCardFactory.createNextCard(card);
                         singleCard.top = 27 * index;
                         result.addChild(singleCard);
                     });
                     // 目标牌
                     var singleCard = (cardGroup.operType == OperType.BU_GANG || cardGroup.operType == OperType.AN_GANG) ?
-                        view.SingleCardFactory.createNextHidden(theme) : view.SingleCardFactory.createNextCard(theme, cardGroup.target);
+                        view.SingleCardFactory.createNextHidden() : view.SingleCardFactory.createNextCard(cardGroup.target);
                     switch (cardGroup.operType) {
                         case OperType.CHI:
                         case OperType.PENG:
@@ -113,20 +117,21 @@ var mahjong;
                 /**
                  *   新建一组上家的明牌
                  */
-                CardGroupFactory.createPreGroup = function (theme, cardGroup) {
+                CardGroupFactory.createPreGroup = function (cardGroup) {
                     var result = new View();
                     result.width = 45;
                     result.height = 92;
                     var OperType = Protocol.getEnum("mahjong.OperType");
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
-                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createPreHidden(theme) : view.SingleCardFactory.createPreCard(theme, card);
+                        var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createPreHidden() :
+                            view.SingleCardFactory.createPreCard(card);
                         singleCard.top = 27 * index;
                         result.addChild(singleCard);
                     });
                     // 目标牌
                     var singleCard = (cardGroup.operType == OperType.BU_GANG || cardGroup.operType == OperType.AN_GANG) ?
-                        view.SingleCardFactory.createPreHidden(theme) : view.SingleCardFactory.createPreCard(theme, cardGroup.target);
+                        view.SingleCardFactory.createPreHidden() : view.SingleCardFactory.createPreCard(cardGroup.target);
                     switch (cardGroup.operType) {
                         case OperType.CHI:
                         case OperType.PENG:
