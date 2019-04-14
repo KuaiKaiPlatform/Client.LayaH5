@@ -1,0 +1,28 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="SSetInitPB";  
+
+package mahjong;
+
+import "mahjong/PlayerSetInfo.proto";
+import "mahjong/SetStage.proto";
+import "mahjong/OperDetail.proto";
+import "mahjong/DiscardTingCards.proto";
+
+message SSetInit {	// 开局或重连后返回牌局当前状态
+
+	repeated mahjong.PlayerSetInfo playerSetInfos = 1;			// 所有玩家牌局当前状态
+	required int32 curSet = 2;									// 当前局数
+	required int32 remainCards = 3;								// 剩余牌数
+	required int32 bankerId = 4;								// 庄家ID
+	required mahjong.SetStage stage = 5;						// 牌局阶段
+
+	optional mahjong.OperDetail lastOperDetail = 6;				// 最近的操作信息
+	repeated mahjong.OperDetail canOperDetails = 7;				// 本人可做的操作（可胡、可听、可杠、可碰、可吃和可打等）
+
+	repeated mahjong.DiscardTingCards discardTingCards = 8;		// 本人打牌后的听牌列表
+	optional int32 almighty = 9;								// 万能牌值
+	
+	optional int32 curDi = 10;									// 当前底数
+	optional int32 curQuan = 11;								// 当前圈数
+
+}

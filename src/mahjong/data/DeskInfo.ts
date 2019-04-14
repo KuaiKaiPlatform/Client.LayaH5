@@ -33,9 +33,9 @@ module mahjong.data {
          * 根据玩法返回万能牌角标路径
          */
         public static getAlmightyJiaoImage(deskDetail: common.data.DeskDetail) {
-            let GameRule = Protocol.getEnum("common.GameRule");
+            //let GameRule = Protocol.getEnum("common.GameRule");
             switch(deskDetail.getRule()) {
-            case GameRule.SXMJ:
+            case Laya.Browser.window.common.GameRule.SXMJ:
                 return "mahjong/card/jiao_bao1.png";    // 陕西麻将显示宝
             }
             return "mahjong/card/jiao_bao1.png";

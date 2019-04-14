@@ -1,0 +1,9 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="CLoginPB";  
+
+package account;
+
+message CLogin {
+	required int32 uid = 1;//玩家id
+	required string token = 2;//token
+}

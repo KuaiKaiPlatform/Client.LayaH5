@@ -8,11 +8,11 @@ module common.data {
         private static defaultSetting = {};     // 默认设置
 
         public static init() {
-            let MahjongTheme = Protocol.getEnum("common.MahjongTheme");
+            //let MahjongTheme = Protocol.getEnum("common.MahjongTheme");
             // let Dialect = Protocol.getEnum("common.Dialect");
             // let dialect = common.utils.Random.getInt(0, 2) === 0?Dialect.YU_LIN:Dialect.PU_TONG;
             GlobalSetting.defaultSetting = {
-                mahjongTheme: MahjongTheme.GREEN,
+                mahjongTheme: Laya.Browser.window.common.MahjongTheme.GREEN,
                 volumeBg: 1,
                 volumePlay: 1//,
                 //"rule.dialect.61002" : dialect
@@ -34,8 +34,8 @@ module common.data {
 
         public static getDialect(rule) {
             let dialect = GlobalSetting.get("rule.dialect." + rule);
-            let Dialect = Protocol.getEnum("common.Dialect");
-            return dialect?dialect:Dialect.PU_TONG;
+            //let Dialect = Protocol.getEnum("common.Dialect");
+            return dialect?dialect:Laya.Browser.window.common.Dialect.PU_TONG;
         }
 
         public static setDialect(rule, dialect) {

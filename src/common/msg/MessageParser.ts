@@ -1,7 +1,7 @@
 module common.msg {
 
     import Byte = Laya.Byte;
-    import Browser = Laya.Browser;
+    //import Browser = Laya.Browser;
 
     /**
      * 消息错误代码
@@ -20,7 +20,7 @@ module common.msg {
      */
     export class MessageParser {
 
-        private ProtoBuf:any = Browser.window.protobuf;
+        //private ProtoBuf:any = Browser.window.protobuf;
 
         public static parse(byte: Byte) {
             //console.log("MessageParser.parse@byte length:", byte.length);

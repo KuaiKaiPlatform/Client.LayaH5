@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="QueMenPB";  
+
+package mahjong;
+
+// 缺门
+enum QueMen {
+
+    NA		= 0;
+    WAN		= 10;
+    TIAO	= 20;
+    TONG	= 30;
+    
+}

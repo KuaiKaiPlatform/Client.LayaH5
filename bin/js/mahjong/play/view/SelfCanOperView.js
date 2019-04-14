@@ -56,7 +56,8 @@ var mahjong;
                         return;
                     }
                     var showGuo = false;
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
+                    var OperType = Laya.Browser.window.mahjong.OperType;
                     this.canOperDetails.reverse().forEach(function (canOperDetail, index) {
                         var imgPath;
                         switch (canOperDetail.operType) {
@@ -122,7 +123,8 @@ var mahjong;
                     var operType = e.target["operType"];
                     var canOperDetail = this.operType2Details[operType];
                     var cOperCard = {};
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
+                    var OperType = Laya.Browser.window.mahjong.OperType;
                     switch (operType) {
                         case SelfCanOperView.OPER_TYPE_GUO:
                             MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.CPassCard, {});

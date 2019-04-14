@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="CardGroupPB";  
+
+package mahjong;
+
+import "mahjong/OperType.proto";
+
+message CardGroup {	// 明牌
+
+	required mahjong.OperType operType = 1;			// 明牌类型：吃、碰、点杠、补杠或暗杠
+	repeated int32 cards = 2;						// 用于操作的牌
+	required int32 target = 3;						// 被吃、碰或杠的牌
+
+}

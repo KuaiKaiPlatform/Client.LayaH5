@@ -18,7 +18,8 @@ var mahjong;
                     var result = new View();
                     result.width = 180;
                     result.height = 100;
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
+                    var OperType = Laya.Browser.window.mahjong.OperType;
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
                         var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createSelfGroupHidden() :
@@ -53,7 +54,8 @@ var mahjong;
                     var result = new View();
                     result.width = 114;
                     result.height = 64;
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
+                    var OperType = Laya.Browser.window.mahjong.OperType;
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
                         var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createOppositeHidden() :
@@ -88,7 +90,8 @@ var mahjong;
                     var result = new View();
                     result.width = 45;
                     result.height = 92;
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
+                    var OperType = Laya.Browser.window.mahjong.OperType;
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
                         var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createNextHidden() :
@@ -121,7 +124,8 @@ var mahjong;
                     var result = new View();
                     result.width = 45;
                     result.height = 92;
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
+                    var OperType = Laya.Browser.window.mahjong.OperType;
                     // 用于操作的牌
                     cardGroup.cards.forEach(function (card, index) {
                         var singleCard = (cardGroup.operType == OperType.AN_GANG) ? view.SingleCardFactory.createPreHidden() :

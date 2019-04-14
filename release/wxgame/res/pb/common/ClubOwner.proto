@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="ClubOwnerPB";  
+
+package common;
+
+enum ClubOwner {
+
+    PUB = 0;    // 大众
+    MINE = 1;   // 自己
+    OTHER = 2; // 他人
+    
+}

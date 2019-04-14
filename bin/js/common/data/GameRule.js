@@ -22,7 +22,8 @@ var common;
              * @param rule
              */
             GameRule.getRuleName = function (rule) {
-                var GameRule = Protocol.getEnum("common.GameRule");
+                //let GameRule = Protocol.getEnum("common.GameRule");
+                var GameRule = Laya.Browser.window.common.GameRule;
                 switch (rule) {
                     case GameRule.LIANG:
                         return "亮六飞一";

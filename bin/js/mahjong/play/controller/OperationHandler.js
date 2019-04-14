@@ -14,7 +14,8 @@ var mahjong;
                  * 处理一项出牌操作
                  */
                 OperationHandler.prototype.handleOperDetail = function (operDetail) {
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
+                    var OperType = Laya.Browser.window.mahjong.OperType;
                     switch (operDetail.operType) {
                         case OperType.DA:
                             this.handleDa(operDetail);
@@ -100,14 +101,14 @@ var mahjong;
                  */
                 OperationHandler.prototype.handlePeng = function (operDetail) {
                     play.Sound.playOper(this.deskController.getDeskDetail().getPlayerSex(operDetail.uid), "peng", this.deskController.getDeskDetail().getRule());
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
                     var gameSetInfo = this.deskController.getGameSetInfo();
                     var playerSetInfo = gameSetInfo.getPlayerSetInfo();
                     var deskView = this.deskController.getDeskView();
                     var uid = operDetail.uid;
                     // 修改数据：减少手牌数量，增加碰牌
                     playerSetInfo.decrHandcardNum(uid, 2);
-                    playerSetInfo.addCardGroup(uid, OperType.PENG, operDetail.target);
+                    playerSetInfo.addCardGroup(uid, Laya.Browser.window.mahjong.OperType.PENG, operDetail.target);
                     // 删除最后打出的牌
                     if (!playerSetInfo.removeLastDiscard(gameSetInfo.getLastOperDetail())) {
                         console.error("mahjong.play.controller.OperationHandler.handlePeng@last discard not removed.", JSON.stringify(operDetail));
@@ -167,16 +168,15 @@ var mahjong;
                  * 处理点杠
                  */
                 OperationHandler.prototype.handleDianGang = function (operDetail) {
-                    //SoundManager.playSound("res/sounds/mahjong/putong/female/gang.mp3");
                     play.Sound.playOper(this.deskController.getDeskDetail().getPlayerSex(operDetail.uid), "gang", this.deskController.getDeskDetail().getRule());
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
                     var gameSetInfo = this.deskController.getGameSetInfo();
                     var playerSetInfo = gameSetInfo.getPlayerSetInfo();
                     var deskView = this.deskController.getDeskView();
                     var uid = operDetail.uid;
                     // 修改数据：减少手牌数量，增加杠牌
                     playerSetInfo.decrHandcardNum(uid, 3);
-                    playerSetInfo.addCardGroup(uid, OperType.DIAN_GANG, operDetail.target);
+                    playerSetInfo.addCardGroup(uid, Laya.Browser.window.mahjong.OperType.DIAN_GANG, operDetail.target);
                     // 删除最后打出的牌
                     if (!playerSetInfo.removeLastDiscard(gameSetInfo.getLastOperDetail())) {
                         console.error("mahjong.play.controller.OperationHandler.handleDianGang@last discard not removed.", JSON.stringify(operDetail));
@@ -202,9 +202,8 @@ var mahjong;
                  * 处理补杠
                  */
                 OperationHandler.prototype.handleBuGang = function (operDetail) {
-                    //SoundManager.playSound("res/sounds/mahjong/putong/female/gang.mp3");
                     play.Sound.playOper(this.deskController.getDeskDetail().getPlayerSex(operDetail.uid), "gang", this.deskController.getDeskDetail().getRule());
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
                     var gameSetInfo = this.deskController.getGameSetInfo();
                     var playerSetInfo = gameSetInfo.getPlayerSetInfo();
                     var deskView = this.deskController.getDeskView();
@@ -212,8 +211,8 @@ var mahjong;
                     // 修改数据：减少手牌数量，删除碰牌，增加杠牌
                     playerSetInfo.decrHandcardNum(uid, 1);
                     playerSetInfo.setHasMo(uid, false);
-                    playerSetInfo.removeCardGroup(uid, OperType.PENG, operDetail.target);
-                    playerSetInfo.addCardGroup(uid, OperType.BU_GANG, operDetail.target);
+                    playerSetInfo.removeCardGroup(uid, Laya.Browser.window.mahjong.OperType.PENG, operDetail.target);
+                    playerSetInfo.addCardGroup(uid, Laya.Browser.window.mahjong.OperType.BU_GANG, operDetail.target);
                     var pos = this.deskController.findPositionByUid(uid);
                     if (pos == mahjong.play.Position.SELF) {
                         // 删除手牌
@@ -233,14 +232,14 @@ var mahjong;
                  */
                 OperationHandler.prototype.handleAnGang = function (operDetail) {
                     play.Sound.playOper(this.deskController.getDeskDetail().getPlayerSex(operDetail.uid), "an_gang", this.deskController.getDeskDetail().getRule());
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
                     var gameSetInfo = this.deskController.getGameSetInfo();
                     var playerSetInfo = gameSetInfo.getPlayerSetInfo();
                     var deskView = this.deskController.getDeskView();
                     var uid = operDetail.uid;
                     // 修改数据：减少手牌数量，增加杠牌
                     playerSetInfo.decrHandcardNum(uid, 4);
-                    playerSetInfo.addCardGroup(uid, OperType.AN_GANG, operDetail.target);
+                    playerSetInfo.addCardGroup(uid, Laya.Browser.window.mahjong.OperType.AN_GANG, operDetail.target);
                     var pos = this.deskController.findPositionByUid(uid);
                     if (pos == mahjong.play.Position.SELF) {
                         // 删除4张手牌
@@ -305,11 +304,9 @@ var mahjong;
                 OperationHandler.prototype.handleHu = function (operDetail) {
                     var ziMo = this.deskController.getGameSetInfo().getLastOperDetail().uid == operDetail.uid;
                     if (ziMo) {
-                        //SoundManager.playSound("res/sounds/mahjong/putong/female/zi_mo.mp3");
                         play.Sound.playOper(this.deskController.getDeskDetail().getPlayerSex(operDetail.uid), "zi_mo", this.deskController.getDeskDetail().getRule());
                     }
                     else {
-                        //SoundManager.playSound("res/sounds/mahjong/putong/female/hu.mp3");
                         play.Sound.playOper(this.deskController.getDeskDetail().getPlayerSex(operDetail.uid), "hu", this.deskController.getDeskDetail().getRule());
                     }
                     var playerSetInfo = this.deskController.getGameSetInfo().getPlayerSetInfo();

@@ -23,7 +23,8 @@ module common.data {
 		 * @param rule 
 		 */
         public static getRuleName(rule) {
-            let GameRule = Protocol.getEnum("common.GameRule");
+            //let GameRule = Protocol.getEnum("common.GameRule");
+            let GameRule = Laya.Browser.window.common.GameRule;
 
             switch(rule) {
             case GameRule.LIANG: 

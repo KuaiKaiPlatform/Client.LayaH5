@@ -9,16 +9,16 @@ module mahjong.play {
          * 播放打牌音效
          */
         public static playCard(sex, target, rule) {
-            let dialect = GlobalSetting.getDialect(rule);
-            Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + target + ".mp3");
+            let dialect = common.data.GlobalSetting.getDialect(rule);
+            Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + target + ".wav");
         }
 
         /**
          * 播放操作音效
          */
         public static playOper(sex, oper, rule) {
-            let dialect = GlobalSetting.getDialect(rule);
-            Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + oper + ".mp3");
+            let dialect = common.data.GlobalSetting.getDialect(rule);
+            Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + oper + ".wav");
         }
 
     }

@@ -1,0 +1,27 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="GameSettingPB";  
+
+package common;
+
+message GameSetting {	// 玩法规则设置
+
+	required string json = 1;						// JSON 格式的 setting 内容（客户端相关）
+
+	// 麻将相关
+	optional int32 totalSet = 2;					// 总局数
+	optional int32 totalQuan = 3;					// 总圈数
+	optional int32 totalDi = 4;						// 总底数
+	optional int32 totalPlayer = 5;					// 玩家人数
+
+	optional int32 chairMode = 6;					// 选座模式
+	
+	optional bool noJiaFanQiDui = 7;				// 七对不加番
+	optional bool noJiaFanQingYiSe = 8;				// 清一色不加番
+	optional bool noJiaFanGangShangHua = 9;			// 杠上花不加番
+	optional bool noJiaFanHaiDiLao = 10;			// 海底捞不加番
+	optional bool noJiaFanQiangGangHu = 11;			// 抢杠胡不加番
+
+	optional bool paoZi = 12;						// 陕西麻将下炮子
+	optional int32 operDelaySeconds = 13;			// 自动出牌秒数
+
+}

@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="PlayerGameResultPB";  
+
+package mahjong;
+
+import "mahjong/PlayerStat.proto";
+
+message PlayerGameResult {	// 一名玩家整场结算
+
+	required int32 uid = 1;										// 玩家ID
+	repeated int32 points = 2;									// 本场各项或各局总得失分列表
+	repeated mahjong.PlayerStat playerStats = 3;				// 玩家统计
+
+}

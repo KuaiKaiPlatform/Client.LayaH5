@@ -1,0 +1,15 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";
+option java_outer_classname="PlayerStatTypePB";
+
+package mahjong;
+
+// 玩家统计项
+enum PlayerStatType {
+
+    ZI_MO		= 1;	// 自摸次数
+    JIE_PAO		= 2;	// 接炮次数
+    DIAN_PAO	= 3;	// 点炮次数
+    MING_GANG	= 4;	// 明杠次数
+    AN_GANG		= 5;	// 暗杠次数
+    
+}

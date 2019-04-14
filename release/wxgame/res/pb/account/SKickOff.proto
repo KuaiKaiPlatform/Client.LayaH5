@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.common.msg.pb";
+option java_outer_classname="SKickOffPB";
+
+package account;
+
+message SKickOff {
+	enum Reason
+	{
+		LOGIN_IN_OTHER_PLACE = 1;
+	}
+	required Reason code = 1;//踢下原因
+}

@@ -21,9 +21,9 @@ module mahjong.play.model {
          * 是否有可打的操作
          */
         public hasDaOperation(): boolean {
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
             for(let i=0; i<this.canOperDetails.length; i++) {
-                if(this.canOperDetails[i].operType === OperType.DA) return true;
+                if(this.canOperDetails[i].operType === Laya.Browser.window.mahjong.OperType.DA) return true;
             }
             return false;
         }
@@ -32,9 +32,9 @@ module mahjong.play.model {
          * 是否有可听的操作
          */
         public hasTingOperation(): boolean {
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
             for(let i=0; i<this.canOperDetails.length; i++) {
-                if(this.canOperDetails[i].operType === OperType.TING) return true;
+                if(this.canOperDetails[i].operType === Laya.Browser.window.mahjong.OperType.TING) return true;
             }
             return false;
         }

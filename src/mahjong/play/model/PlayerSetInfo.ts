@@ -142,7 +142,8 @@ module mahjong.play.model {
                 cards: [],
                 target: target
             };
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            let OperType = Laya.Browser.window.mahjong.OperType;
             switch(operType) {
             case OperType.PENG:
                 cardGroup.cards = [target, target];
@@ -187,8 +188,8 @@ module mahjong.play.model {
          * 删除最近一张打出的牌
          */
         public removeLastDiscard(lastOperDetail): boolean {
-            let OperType = Protocol.getEnum("mahjong.OperType");
-            if(!lastOperDetail || lastOperDetail.operType != OperType.DA) {
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            if(!lastOperDetail || lastOperDetail.operType != Laya.Browser.window.mahjong.OperType.DA) {
                 console.error("mahjong.model.PlayerSetInfo.removeLastDiscard@last discard not found", JSON.stringify(lastOperDetail));
                 return false;
             }

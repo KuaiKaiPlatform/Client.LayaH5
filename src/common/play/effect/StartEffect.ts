@@ -25,7 +25,7 @@ module common.play.effect {
                 "res/atlas/common/desk.atlas"
             ], Handler.create(this, () => {
                 this.showEffect("common/desk/start.png");
-                Laya.SoundManager.playSound("res/sounds/play/start.mp3");
+                Laya.SoundManager.playSound("res/sounds/play/start.wav");
             }));
         }
 

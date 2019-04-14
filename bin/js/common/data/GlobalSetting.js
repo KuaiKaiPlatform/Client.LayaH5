@@ -9,11 +9,11 @@ var common;
             function GlobalSetting() {
             }
             GlobalSetting.init = function () {
-                var MahjongTheme = Protocol.getEnum("common.MahjongTheme");
+                //let MahjongTheme = Protocol.getEnum("common.MahjongTheme");
                 // let Dialect = Protocol.getEnum("common.Dialect");
                 // let dialect = common.utils.Random.getInt(0, 2) === 0?Dialect.YU_LIN:Dialect.PU_TONG;
                 GlobalSetting.defaultSetting = {
-                    mahjongTheme: MahjongTheme.GREEN,
+                    mahjongTheme: Laya.Browser.window.common.MahjongTheme.GREEN,
                     volumeBg: 1,
                     volumePlay: 1 //,
                 };
@@ -30,8 +30,8 @@ var common;
             };
             GlobalSetting.getDialect = function (rule) {
                 var dialect = GlobalSetting.get("rule.dialect." + rule);
-                var Dialect = Protocol.getEnum("common.Dialect");
-                return dialect ? dialect : Dialect.PU_TONG;
+                //let Dialect = Protocol.getEnum("common.Dialect");
+                return dialect ? dialect : Laya.Browser.window.common.Dialect.PU_TONG;
             };
             GlobalSetting.setDialect = function (rule, dialect) {
                 console.log("common.data.GlobalSetting.setDialect", rule, dialect);

@@ -1,0 +1,8 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="CLogoutPB";  
+
+package account;
+
+message CLogout {
+	required int32 reason = 1;//原因 1 切换账号  2 主动退出登录
+}

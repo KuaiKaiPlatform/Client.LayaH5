@@ -1,0 +1,14 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="SPlayerJoinPB";  
+
+package hall;
+
+import "common/PlayerInfo.proto";
+import "common/DeskUniq.proto";
+
+message SPlayerJoin {	// 有玩家加入牌桌
+
+	required common.PlayerInfo player = 1;				// 玩家信息
+	required common.DeskUniq uniq = 2;					// 牌桌唯一标识
+
+}

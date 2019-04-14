@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="SCanOperPB";  
+
+package mahjong;
+
+import "mahjong/OperDetail.proto";
+
+message SCanOper {	// 有人过牌后如果有更多可执行的操作，发送给操作者
+
+	repeated mahjong.OperDetail canOperDetails = 1;				// 本人可执行的操作（可胡、可听、可杠、可碰、可吃和可打等）
+
+}

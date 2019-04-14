@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.common.msg.pb";
+option java_outer_classname="ChairModePB";  
+
+package common;
+
+enum ChairMode {	// 选座模式
+
+    SEQUENCE = 0;	// 按顺序入座（默认）
+    PLAYER = 1;		// 玩家选座
+    RANDOM = 2;		// 随机入座
+
+}

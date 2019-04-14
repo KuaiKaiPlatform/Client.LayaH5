@@ -1,0 +1,12 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="SGlobalSettingPB";  
+
+package hall;
+
+import "common/GlobalSetting.proto";
+
+message SGlobalSetting {	// 全局设置
+
+	required common.GlobalSetting setting = 1;						// 全局设置
+
+}

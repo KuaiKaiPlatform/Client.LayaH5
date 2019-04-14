@@ -159,10 +159,10 @@ module common.view {
             // 设置音量
             if(index == 0) {
                 Laya.SoundManager.setMusicVolume(volume);
-                GlobalSetting.set("volumeBg", volume);
+                common.data.GlobalSetting.set("volumeBg", volume);
             } else {
                 Laya.SoundManager.setSoundVolume(volume);
-                GlobalSetting.set("volumePlay", volume);
+                common.data.GlobalSetting.set("volumePlay", volume);
             }
         }
 
@@ -192,7 +192,7 @@ module common.view {
 
             // 当前玩家设置
             let Dialect = Protocol.getEnum("common.Dialect");
-            let selected = GlobalSetting.getDialect(rule);
+            let selected = common.data.GlobalSetting.getDialect(rule);
             selected = selected?selected:Dialect.PU_TONG;
 
             console.info("common.view.SettingView.showDialects@showing", rule, JSON.stringify(dialects), selected);
@@ -221,13 +221,13 @@ module common.view {
          */
         protected selectDialect(e: Event) {
             let dialect = e.target["dialect"];
-            let selected = GlobalSetting.getDialect(this.currentRule);
+            let selected = common.data.GlobalSetting.getDialect(this.currentRule);
             if(dialect != selected) {
                 MessageSender.send(Login.getServerId(), Protocol.meta.hall.CGlobalSetting, {
                     key: "rule.dialect." + this.currentRule,
                     val: new String(dialect)
                 });
-                GlobalSetting.setDialect(this.currentRule, dialect);
+                common.data.GlobalSetting.setDialect(this.currentRule, dialect);
             }
 
             // 选中状态
@@ -253,8 +253,8 @@ module common.view {
 
         protected showDialog(rule) {
             let dialog = this.getDialog();
-            this.showVolume(GlobalSetting.get("volumeBg"), 0);
-            this.showVolume(GlobalSetting.get("volumePlay"), 1);
+            this.showVolume(common.data.GlobalSetting.get("volumeBg"), 0);
+            this.showVolume(common.data.GlobalSetting.get("volumePlay"), 1);
             this.showDialects(rule);
 
             this.showComponent(dialog, {

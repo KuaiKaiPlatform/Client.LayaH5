@@ -67,8 +67,8 @@ module common.play.view {
             Laya.loader.load([
                 "res/atlas/common/desk.atlas"
             ], Handler.create(this, () => {
-                let GameStatus = Protocol.getEnum("common.GameStatus");
-                if(this.deskController.getDeskDetail().getStatus() == GameStatus.STARTING) {
+                //let GameStatus = Protocol.getEnum("common.GameStatus");
+                if(this.deskController.getDeskDetail().getStatus() == Laya.Browser.window.common.GameStatus.STARTING) {
                     console.warn("common.play.view.PlayerReadyView.showAll@Game has started.");
                     return;
                 }

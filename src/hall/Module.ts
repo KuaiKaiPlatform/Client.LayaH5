@@ -32,7 +32,7 @@ module hall {
                     "res/atlas/common/info.atlas",
                     "res/sounds/bgm.mp3"
                 ], Handler.create(this, () => {
-                    console.log("hall.desk.Module.init@finish");
+                    console.log("hall.Module.init@finish");
                     Laya.SoundManager.playMusic("res/sounds/bgm.mp3");
 					resolve();
 				}));

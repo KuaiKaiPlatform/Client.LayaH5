@@ -22,9 +22,9 @@ var mahjong;
                  * 是否有可打的操作
                  */
                 SelfOperations.prototype.hasDaOperation = function () {
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
                     for (var i = 0; i < this.canOperDetails.length; i++) {
-                        if (this.canOperDetails[i].operType === OperType.DA)
+                        if (this.canOperDetails[i].operType === Laya.Browser.window.mahjong.OperType.DA)
                             return true;
                     }
                     return false;
@@ -33,9 +33,9 @@ var mahjong;
                  * 是否有可听的操作
                  */
                 SelfOperations.prototype.hasTingOperation = function () {
-                    var OperType = Protocol.getEnum("mahjong.OperType");
+                    //let OperType = Protocol.getEnum("mahjong.OperType");
                     for (var i = 0; i < this.canOperDetails.length; i++) {
-                        if (this.canOperDetails[i].operType === OperType.TING)
+                        if (this.canOperDetails[i].operType === Laya.Browser.window.mahjong.OperType.TING)
                             return true;
                     }
                     return false;

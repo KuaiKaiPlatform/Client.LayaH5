@@ -65,7 +65,8 @@ module mahjong.play.view {
             }
 
             let showGuo = false;
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            let OperType = Laya.Browser.window.mahjong.OperType;
             this.canOperDetails.reverse().forEach((canOperDetail, index) => {
                 let imgPath;
                 switch(canOperDetail.operType) {
@@ -140,7 +141,8 @@ module mahjong.play.view {
             let canOperDetail = this.operType2Details[operType];
 
             let cOperCard = {};
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            let OperType = Laya.Browser.window.mahjong.OperType;
 
             switch(operType) {
             case SelfCanOperView.OPER_TYPE_GUO:

@@ -1,0 +1,10 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="COfflinePB";  
+
+package hall;
+
+message COffline {	// 玩家离线状态切换
+
+	required bool offline = 1;						// 是否离线
+
+}

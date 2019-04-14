@@ -34,9 +34,9 @@ var mahjong;
              * 根据玩法返回万能牌角标路径
              */
             DeskInfo.getAlmightyJiaoImage = function (deskDetail) {
-                var GameRule = Protocol.getEnum("common.GameRule");
+                //let GameRule = Protocol.getEnum("common.GameRule");
                 switch (deskDetail.getRule()) {
-                    case GameRule.SXMJ:
+                    case Laya.Browser.window.common.GameRule.SXMJ:
                         return "mahjong/card/jiao_bao1.png"; // 陕西麻将显示宝
                 }
                 return "mahjong/card/jiao_bao1.png";

@@ -138,11 +138,11 @@ var common;
                 // 设置音量
                 if (index == 0) {
                     Laya.SoundManager.setMusicVolume(volume);
-                    GlobalSetting.set("volumeBg", volume);
+                    common.data.GlobalSetting.set("volumeBg", volume);
                 }
                 else {
                     Laya.SoundManager.setSoundVolume(volume);
-                    GlobalSetting.set("volumePlay", volume);
+                    common.data.GlobalSetting.set("volumePlay", volume);
                 }
             };
             /**
@@ -170,7 +170,7 @@ var common;
                 }
                 // 当前玩家设置
                 var Dialect = Protocol.getEnum("common.Dialect");
-                var selected = GlobalSetting.getDialect(rule);
+                var selected = common.data.GlobalSetting.getDialect(rule);
                 selected = selected ? selected : Dialect.PU_TONG;
                 console.info("common.view.SettingView.showDialects@showing", rule, JSON.stringify(dialects), selected);
                 this.resetDialects();
@@ -194,13 +194,13 @@ var common;
              */
             SettingView.prototype.selectDialect = function (e) {
                 var dialect = e.target["dialect"];
-                var selected = GlobalSetting.getDialect(this.currentRule);
+                var selected = common.data.GlobalSetting.getDialect(this.currentRule);
                 if (dialect != selected) {
                     MessageSender.send(Login.getServerId(), Protocol.meta.hall.CGlobalSetting, {
                         key: "rule.dialect." + this.currentRule,
                         val: new String(dialect)
                     });
-                    GlobalSetting.setDialect(this.currentRule, dialect);
+                    common.data.GlobalSetting.setDialect(this.currentRule, dialect);
                 }
                 // 选中状态
                 for (var i = 0; i < 3; i++) {
@@ -223,8 +223,8 @@ var common;
             };
             SettingView.prototype.showDialog = function (rule) {
                 var dialog = this.getDialog();
-                this.showVolume(GlobalSetting.get("volumeBg"), 0);
-                this.showVolume(GlobalSetting.get("volumePlay"), 1);
+                this.showVolume(common.data.GlobalSetting.get("volumeBg"), 0);
+                this.showVolume(common.data.GlobalSetting.get("volumePlay"), 1);
                 this.showDialects(rule);
                 this.showComponent(dialog, {
                     centerX: 0,

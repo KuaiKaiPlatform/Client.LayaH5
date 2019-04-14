@@ -7,10 +7,10 @@ module mahjong.play.view {
      */
     export class SingleCardFactory {
 
-        private static Theme;
+        private static MahjongTheme;
 
         public static init() {
-            this.Theme = Protocol.getEnum("common.MahjongTheme");
+            this.MahjongTheme = Protocol.getEnum("common.MahjongTheme");
         }
 
         /**
@@ -18,14 +18,14 @@ module mahjong.play.view {
          */
         public static createSelfHand(params) {
             let singleCard: View;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
                 break;
             default:
@@ -50,14 +50,14 @@ module mahjong.play.view {
          */
         public static createSelfGroupCard(card) {
             let singleCard: View;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
                 break;
             default:
@@ -75,14 +75,14 @@ module mahjong.play.view {
          */
         public static createSelfGroupHidden() {
             let path: string;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 path = "mahjong/card/self_group_hidden_green.png";
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 path = "mahjong/card/self_group_hidden_yellow.png";
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 path = "mahjong/card/self_group_hidden_blue.png";
                 break;
             default:
@@ -100,14 +100,14 @@ module mahjong.play.view {
          */
         public static createLandscapeCard(params) {
             let singleCard: View;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 singleCard = new ui.mahjong.SingleCardLandscapeGreenUI();
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 singleCard = new ui.mahjong.SingleCardLandscapeGreenUI();
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 singleCard = new ui.mahjong.SingleCardLandscapeGreenUI();
                 break;
             default:
@@ -132,14 +132,14 @@ module mahjong.play.view {
          */
         public static createOppositeHand() {
             let path: string;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 path = "mahjong/card/landscape_hand_green.png";
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 path = "mahjong/card/landscape_hand_yellow.png";
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 path = "mahjong/card/landscape_hand_blue.png";
                 break;
             default:
@@ -154,14 +154,14 @@ module mahjong.play.view {
          */
         public static createOppositeHidden() {
             let path: string;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 path = "mahjong/card/self_group_hidden_green.png";
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 path = "mahjong/card/self_group_hidden_yellow.png";
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 path = "mahjong/card/self_group_hidden_blue.png";
                 break;
             default:
@@ -179,14 +179,14 @@ module mahjong.play.view {
          */
         public static createNextCard(card) {
             let singleCard: View;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 singleCard = new ui.mahjong.SingleCardNextGreenUI();
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 singleCard = new ui.mahjong.SingleCardNextGreenUI();
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 singleCard = new ui.mahjong.SingleCardNextGreenUI();
                 break;
             default:
@@ -204,14 +204,14 @@ module mahjong.play.view {
          */
         public static createNextHand() {
             let path: string;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 path = "mahjong/card/next_hand_green.png";
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 path = "mahjong/card/next_hand_yellow.png";
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 path = "mahjong/card/next_hand_blue.png";
                 break;
             default:
@@ -226,14 +226,14 @@ module mahjong.play.view {
          */
         public static createNextHidden() {
             let path: string;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 path = "mahjong/card/next_hidden_green.png";
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 path = "mahjong/card/next_hidden_yellow.png";
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 path = "mahjong/card/next_hidden_blue.png";
                 break;
             default:
@@ -251,14 +251,14 @@ module mahjong.play.view {
          */
         public static createPreCard(card) {
             let singleCard: View;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 singleCard = new ui.mahjong.SingleCardPreGreenUI();
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 singleCard = new ui.mahjong.SingleCardPreGreenUI();
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 singleCard = new ui.mahjong.SingleCardPreGreenUI();
                 break;
             default:
@@ -276,14 +276,14 @@ module mahjong.play.view {
          */
         public static createPreHand() {
             let path: string;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 path = "mahjong/card/pre_hand_green.png";
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 path = "mahjong/card/pre_hand_yellow.png";
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 path = "mahjong/card/pre_hand_blue.png";
                 break;
             default:
@@ -298,14 +298,14 @@ module mahjong.play.view {
          */
         public static createPreHidden() {
             let path: string;
-            switch(GlobalSetting.get("mahjongTheme")) {
-            case this.Theme.GREEN:
+            switch(common.data.GlobalSetting.get("mahjongTheme")) {
+            case this.MahjongTheme.GREEN:
                 path = "mahjong/card/pre_hidden_green.png";
                 break;
-            case this.Theme.YELLOW:
+            case this.MahjongTheme.YELLOW:
                 path = "mahjong/card/pre_hidden_yellow.png";
                 break;
-            case this.Theme.BLUE:
+            case this.MahjongTheme.BLUE:
                 path = "mahjong/card/pre_hidden_blue.png";
                 break;
             default:

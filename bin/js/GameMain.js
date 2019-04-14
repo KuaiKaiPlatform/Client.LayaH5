@@ -4,18 +4,16 @@ var Login = common.conn.Login;
 var MessageHandler = common.msg.MessageHandler;
 var MessageSender = common.msg.MessageSender;
 var GameEventDispacher = common.event.GameEventDispacher;
-var GlobalSetting = common.data.GlobalSetting;
+//import GlobalSetting = common.data.GlobalSetting;
 var GameMain = (function () {
     function GameMain() {
         var _this = this;
-        Laya.init(1334, 750, Laya.WebGL);
         Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
         Laya.stage.scaleMode = Laya.Stage.SCALE_EXACTFIT;
-        //Laya.stage.scaleMode = Laya.Stage.SCALE_FIXED_AUTO;
-        if (Laya.Render.isConchApp) {
-            console.log("laya native");
-            Laya.Browser.window.showAlertOnJsException(false);
-        }
+        // if(Laya.Render.isConchApp) {
+        //     console.log("laya native");
+        //     Laya.Browser.window.showAlertOnJsException(false);
+        // }
         // 日期格式
         common.utils.DateFormat.init();
         MessageHandler.init();
@@ -44,5 +42,7 @@ var GameMain = (function () {
     };
     return GameMain;
 }());
+Laya.MiniAdpter.init();
+Laya.init(1334, 750, Laya.WebGL);
 new GameMain();
 //# sourceMappingURL=GameMain.js.map

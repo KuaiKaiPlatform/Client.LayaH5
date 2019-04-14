@@ -5,12 +5,11 @@ import Login = common.conn.Login;
 import MessageHandler = common.msg.MessageHandler;
 import MessageSender = common.msg.MessageSender;
 import GameEventDispacher = common.event.GameEventDispacher;
-import GlobalSetting = common.data.GlobalSetting;
+//import GlobalSetting = common.data.GlobalSetting;
 
 class GameMain {
     constructor() {
 
-        Laya.init(1334, 750, Laya.WebGL);
         Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
         Laya.stage.scaleMode = Laya.Stage.SCALE_EXACTFIT;
 
@@ -51,4 +50,9 @@ class GameMain {
     }
 
 }
+
+Laya.MiniAdpter.init();
+Laya.init(1334, 750, Laya.WebGL);
+
 new GameMain();
+

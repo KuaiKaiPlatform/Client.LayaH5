@@ -31,7 +31,7 @@ var common;
                         "res/atlas/common/desk.atlas"
                     ], Handler.create(this, function () {
                         _this.showEffect("common/desk/start.png");
-                        Laya.SoundManager.playSound("res/sounds/play/start.mp3");
+                        Laya.SoundManager.playSound("res/sounds/play/start.wav");
                     }));
                 };
                 // 显示开始游戏特效

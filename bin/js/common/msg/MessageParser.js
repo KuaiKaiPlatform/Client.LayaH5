@@ -2,7 +2,7 @@ var common;
 (function (common) {
     var msg;
     (function (msg) {
-        var Browser = Laya.Browser;
+        //import Browser = Laya.Browser;
         /**
          * 消息错误代码
          */
@@ -20,8 +20,8 @@ var common;
          */
         var MessageParser = (function () {
             function MessageParser() {
-                this.ProtoBuf = Browser.window.protobuf;
             }
+            //private ProtoBuf:any = Browser.window.protobuf;
             MessageParser.parse = function (byte) {
                 //console.log("MessageParser.parse@byte length:", byte.length);
                 var result = {

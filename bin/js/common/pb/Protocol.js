@@ -5,17 +5,17 @@ var common;
 (function (common) {
     var pb;
     (function (pb) {
-        var Browser = Laya.Browser;
         var Protocol = (function () {
             function Protocol() {
             }
+            //private static root;
             Protocol.init = function () {
                 var _this = this;
+                console.log("Protocol.init", Laya.Browser.window.mahjong.CBet);
                 return this.loadMeta().then(function () {
-                    return _this.loadAll();
-                }).then(function () {
                     return _this.process("", _this.meta);
                 }).then(function () {
+                    _this.initPbMessages();
                     console.log("Protocol.init@finish");
                     return Promise.resolve();
                 });
@@ -28,44 +28,6 @@ var common;
                         console.log("Protocol.loadMeta@finish");
                         resolve();
                     }), null, Laya.Loader.JSON);
-                });
-            };
-            Protocol.loadAll = function () {
-                var _this = this;
-                return new Promise(function (resolve, reject) {
-                    // 浏览器加载时，保证import路径正确
-                    // Search include paths when resolving imports
-                    // https://github.com/dcodeIO/protobuf.js/blob/master/src/root.js#L54
-                    // https://github.com/dcodeIO/protobuf.js/issues/368
-                    var PbRoot = new _this.ProtoBuf.Root();
-                    PbRoot.resolvePath = function (origin, target) {
-                        //console.log("Protocol.loadAll", origin, "-", target);
-                        return target.indexOf("res/pb/") > -1 ? target : "res/pb/" + target;
-                    };
-                    console.log("Protocol.loadAll@start");
-                    PbRoot.load(_this.meta.fileNames, function (err, root) {
-                        if (err) {
-                            console.error("Protocol.loadAll@err", err);
-                            reject();
-                            return;
-                        }
-                        Protocol.root = root;
-                        resolve();
-                        // try {
-                        // 	const GameRule = root.lookupEnum("common.GameRule");
-                        // 	console.log("Protocol.loadAll@GameRule", GameRule);
-                        // 	for(let key in GameRule) {
-                        // 		//console.log("Protocol.init@GameRule", key, GameRule[key]);
-                        // 	}
-                        // 	const SJoinDesk = root.lookupType("mahjong.SJoinDesk");
-                        // 	console.log("Protocol.init@SJoinDesk", SJoinDesk);
-                        // 	console.log("Protocol.init@SJoinDesk", SJoinDesk.get("setting"));
-                        // } catch(e) {
-                        // 	console.error("Protocol.init@lookup GameRule", e);
-                        // 	reject();
-                        // 	return;
-                        // }
-                    });
                 });
             };
             Protocol.process = function (pkgName, obj) {
@@ -85,8 +47,8 @@ var common;
             Protocol.processProto = function (pkgName, msgName, msgId) {
                 var msgType = (pkgName == "") ? msgName : pkgName + "." + msgName;
                 try {
-                    var pbMsg = this.root.lookupType(msgType);
-                    this.pbMessaages[msgId] = pbMsg;
+                    //const pbMsg = this.root.lookupType(msgType);
+                    //this.pbMessaages[msgId] = pbMsg;
                     this.msgTypes[msgId] = msgType;
                     console.log("Protocol.processProto@finish", msgType, msgId);
                 }
@@ -94,11 +56,71 @@ var common;
                     console.error("Protocol.processProto@lookupType", msgType, msgId, e);
                 }
             };
+            Protocol.initPbMessages = function () {
+                this.pbMessaages = {
+                    1: Laya.Browser.window.account.CLogin,
+                    2: Laya.Browser.window.account.SLogin,
+                    3: Laya.Browser.window.account.SKickOff,
+                    4: Laya.Browser.window.account.CLogout,
+                    5: Laya.Browser.window.account.SLogout,
+                    101: Laya.Browser.window.hall.CJoinDesk,
+                    102: Laya.Browser.window.hall.SJoinDesk,
+                    103: Laya.Browser.window.hall.SDeskInfo,
+                    104: Laya.Browser.window.hall.CQuitDesk,
+                    105: Laya.Browser.window.hall.SQuitDesk,
+                    106: Laya.Browser.window.hall.SPlayerJoin,
+                    107: Laya.Browser.window.hall.SPlayerQuit,
+                    111: Laya.Browser.window.hall.CGlobalSetting,
+                    112: Laya.Browser.window.hall.SGlobalSetting,
+                    113: Laya.Browser.window.hall.CRuleDialects,
+                    114: Laya.Browser.window.hall.SRuleDialects,
+                    115: Laya.Browser.window.hall.COffline,
+                    116: Laya.Browser.window.hall.SOffline,
+                    1001: Laya.Browser.window.mahjong.SSetInit,
+                    1002: Laya.Browser.window.mahjong.COperCard,
+                    1003: Laya.Browser.window.mahjong.SOperCard,
+                    1004: Laya.Browser.window.mahjong.CPassCard,
+                    1005: Laya.Browser.window.mahjong.SCanOper,
+                    1006: Laya.Browser.window.mahjong.SSetResult,
+                    1007: Laya.Browser.window.mahjong.SGameResult,
+                    1008: Laya.Browser.window.mahjong.CBet,
+                    1009: Laya.Browser.window.mahjong.SBet,
+                    1010: Laya.Browser.window.mahjong.CChair,
+                    1011: Laya.Browser.window.mahjong.SChair,
+                    1012: Laya.Browser.window.mahjong.CReady,
+                    1013: Laya.Browser.window.mahjong.SReady
+                };
+            };
             Protocol.getMsgType = function (msgId) {
                 return this.msgTypes[msgId];
             };
             Protocol.getEnum = function (enumName) {
-                return this.root.lookupEnum(enumName);
+                switch (enumName) {
+                    case "common.ChairMode":
+                        return Laya.Browser.window.common.ChairMode;
+                    case "common.ClubOwner":
+                        return Laya.Browser.window.common.ClubOwner;
+                    case "common.Dialect":
+                        return Laya.Browser.window.common.Dialect;
+                    case "common.GameRule":
+                        return Laya.Browser.window.common.GameRule;
+                    case "common.GameStatus":
+                        return Laya.Browser.window.common.GameStatus;
+                    case "common.MahjongTheme":
+                        return Laya.Browser.window.common.MahjongTheme;
+                    case "mahjong.Direction":
+                        return Laya.Browser.window.mahjong.Direction;
+                    case "mahjong.JieSuan":
+                        return Laya.Browser.window.mahjong.JieSuan;
+                    case "mahjong.OperType":
+                        return Laya.Browser.window.mahjong.OperType;
+                    case "mahjong.PlayerStatType":
+                        return Laya.Browser.window.mahjong.PlayerStatType;
+                    case "mahjong.SetStage":
+                        return Laya.Browser.window.mahjong.SetStage;
+                }
+                //return this.root.lookupEnum(enumName);
+                return null;
             };
             /**
              * 将 JS 消息对象用 Protobuf 编码
@@ -141,7 +163,7 @@ var common;
                     return PbMessage.decode(content);
                 }
                 catch (e) {
-                    if (e instanceof this.ProtoBuf.util.ProtocolError) {
+                    if (e instanceof Laya.Browser.window.protobuf.util.ProtocolError) {
                         // e.instance holds the so far decoded message with missing required fields
                         console.error("Protocol.decodeMessage@invalid message content, missing required fields", e.instance);
                     }
@@ -154,7 +176,6 @@ var common;
             };
             return Protocol;
         }());
-        Protocol.ProtoBuf = Browser.window.protobuf;
         Protocol.pbMessaages = {}; // 根据 msgId 找到 ProtoBuf Message 类型
         Protocol.msgTypes = {}; // 根据 msgId 找到 Message 类型全名
         pb.Protocol = Protocol;

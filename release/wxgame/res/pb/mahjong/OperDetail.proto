@@ -1,0 +1,16 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="OperDetailPB";  
+
+package mahjong;
+
+import "mahjong/OperType.proto";
+
+message OperDetail {	// 操作信息
+
+	required mahjong.OperType operType = 1;			// 操作类型
+	optional int32 uid = 2;							// 操作者
+	repeated int32 cards = 3;						// 用于操作的牌
+	optional int32 target = 4;						// 目标牌
+	optional int32 remainCards = 5;					// 剩余牌数
+
+}

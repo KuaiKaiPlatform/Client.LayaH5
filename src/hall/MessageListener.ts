@@ -88,15 +88,15 @@ module hall {
             console.log("hall.desk.MessageListener.onGlobalSetting", sGlobalSetting);
 
             //let GlobalSetting = common.data.GlobalSetting;
-            GlobalSetting.initSetting(JSON.parse(sGlobalSetting.setting.json));
+            common.data.GlobalSetting.initSetting(JSON.parse(sGlobalSetting.setting.json));
 
             // 设置音量
-            Laya.SoundManager.setMusicVolume(GlobalSetting.get("volumeBg"));
-            Laya.SoundManager.setSoundVolume(GlobalSetting.get("volumePlay"));
+            Laya.SoundManager.setMusicVolume(common.data.GlobalSetting.get("volumeBg"));
+            Laya.SoundManager.setSoundVolume(common.data.GlobalSetting.get("volumePlay"));
             
             console.log("hall.desk.MessageListener.onGlobalSetting@volume set",
-                GlobalSetting.get("volumeBg"),
-                GlobalSetting.get("volumePlay"));
+                common.data.GlobalSetting.get("volumeBg"),
+                common.data.GlobalSetting.get("volumePlay"));
                 
         }
 

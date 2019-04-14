@@ -12,15 +12,15 @@ var mahjong;
              * 播放打牌音效
              */
             Sound.playCard = function (sex, target, rule) {
-                var dialect = GlobalSetting.getDialect(rule);
-                //Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + target + ".mp3");
+                var dialect = common.data.GlobalSetting.getDialect(rule);
+                Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + target + ".wav");
             };
             /**
              * 播放操作音效
              */
             Sound.playOper = function (sex, oper, rule) {
-                var dialect = GlobalSetting.getDialect(rule);
-                //Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + oper + ".mp3");
+                var dialect = common.data.GlobalSetting.getDialect(rule);
+                Laya.SoundManager.playSound("res/sounds/mahjong/" + dialect + "/" + sex + "/" + oper + ".wav");
             };
             return Sound;
         }());

@@ -115,17 +115,17 @@ var mahjong;
                             return;
                         }
                     }
-                    Laya.SoundManager.playSound("res/sounds/play/click_card.mp3");
+                    Laya.SoundManager.playSound("res/sounds/play/click_card.wav");
                     // 二次点击，打出
                     if (selfHandcards.isSelected(cardIndex)) {
                         console.log("mahjong.view.SelfHandCardsView.clickHandler@click2|index, target", cardIndex, target);
-                        Laya.SoundManager.playSound("res/sounds/play/discard.mp3");
+                        Laya.SoundManager.playSound("res/sounds/play/discard.wav");
                         if (this.tingOngoing) {
                             // 发送听牌
-                            var OperType = Protocol.getEnum("mahjong.OperType");
+                            //let OperType = Protocol.getEnum("mahjong.OperType");
                             MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, {
                                 operDetail: {
-                                    operType: OperType.TING,
+                                    operType: Laya.Browser.window.mahjong.OperType.TING,
                                     target: target
                                 }
                             });
@@ -133,10 +133,10 @@ var mahjong;
                         }
                         else {
                             // 发送打牌
-                            var OperType = Protocol.getEnum("mahjong.OperType");
+                            //let OperType = Protocol.getEnum("mahjong.OperType");
                             MessageSender.send(Login.getServerId(), Protocol.meta.mahjong.COperCard, {
                                 operDetail: {
-                                    operType: OperType.DA,
+                                    operType: Laya.Browser.window.mahjong.OperType.DA,
                                     target: target
                                 }
                             });

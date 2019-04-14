@@ -1,0 +1,39 @@
+option java_package = "com.kuaikai.game.common.msg.pb";  
+option java_outer_classname="GameRulePB";  
+
+package common;
+
+enum GameRule {
+
+	// 扑克玩法：99开头
+    JIN_HUA					= 99001;
+    NIU_NIU					= 99002;
+    BI_JI					= 99003;
+    WA_KENG					= 99004;
+    TUI_DUI_ZI				= 99005;
+    ZHUO_LAO_MA_ZI			= 99006;
+    SAN_DAI					= 99007;
+    GAN_DENG_YAN			= 99008;
+    DOU_DI_ZHU				= 99009;
+    
+    // 陕西麻将：61开头
+    LIANG                   = 61001;
+    SXMJ                    = 61002;
+    HUA_SHUI                = 61003;
+    WEI_NAN                 = 61004;
+    BAO_JI                  = 61005;
+    ONE_FIVE_NINE           = 61006;
+    GUO_ZI                  = 61007;
+    HAN_ZHONG               = 61008;
+    
+    // 安徽麻将：34开头
+    WU_HU                   = 34001;
+    WU_WEI                  = 34002;
+    SHE_XIAN                = 34003;
+    HE_XIAN                 = 34004;
+    FU_YANG                 = 34005;
+    MING_GUANG              = 34006;
+    LAI_AN_TUI_DAO_HU       = 34007;
+    LAI_AN_LAO_SAN_FAN      = 34008;
+    
+}

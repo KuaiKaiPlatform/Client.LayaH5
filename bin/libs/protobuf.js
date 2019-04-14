@@ -21,6 +21,9 @@
     // Expose globally
     var protobuf = global.protobuf = $require(entries[0]);
 
+    // Be nice to WX mini game
+    window.protobuf = protobuf;
+
     // Be nice to AMD
     if (typeof define === "function" && define.amd)
         define(["long"], function(Long) {

@@ -79,7 +79,7 @@ var common;
             "id": "1",
             "name": "CardLogicServer1",
             //"ip": "127.0.0.1",
-            "ip": "192.168.43.65",
+            "ip": "192.168.1.26",
             "webPort": 10012
         };
         Login.userInfo = {

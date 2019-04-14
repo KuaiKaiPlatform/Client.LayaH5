@@ -1,0 +1,10 @@
+option java_package = "com.kuaikai.game.mahjong.msg.pb";  
+option java_outer_classname="CChairPB";  
+
+package mahjong;
+
+message CChair {	// 玩家选座
+
+	required int32 seat = 1;						// 座位
+
+}

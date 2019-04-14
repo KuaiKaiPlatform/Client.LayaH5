@@ -1,0 +1,11 @@
+option java_package = "com.kuaikai.game.hall.msg.pb";  
+option java_outer_classname="CGlobalSettingPB";  
+
+package hall;
+
+message CGlobalSetting {	// 玩家修改一项全局设置
+
+	required string key = 1;						// 设置项
+	required string val = 2;						// 设置值
+
+}

@@ -16,7 +16,8 @@ module mahjong.play.view {
             result.width = 180;
             result.height = 100;
 
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            let OperType = Laya.Browser.window.mahjong.OperType;
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
@@ -56,7 +57,8 @@ module mahjong.play.view {
             result.width = 114;
             result.height = 64;
 
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            let OperType = Laya.Browser.window.mahjong.OperType;
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
@@ -96,7 +98,8 @@ module mahjong.play.view {
             result.width = 45;
             result.height = 92;
 
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            let OperType = Laya.Browser.window.mahjong.OperType;
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {
@@ -134,7 +137,8 @@ module mahjong.play.view {
             result.width = 45;
             result.height = 92;
 
-            let OperType = Protocol.getEnum("mahjong.OperType");
+            //let OperType = Protocol.getEnum("mahjong.OperType");
+            let OperType = Laya.Browser.window.mahjong.OperType;
 
             // 用于操作的牌
             cardGroup.cards.forEach((card, index) => {

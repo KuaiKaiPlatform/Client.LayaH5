@@ -152,7 +152,8 @@ var mahjong;
                     return dirImg;
                 };
                 DirectionView.prototype.changeSkinForDirection = function (dirImg, direction) {
-                    var Direction = Protocol.getEnum("mahjong.Direction");
+                    //let Direction = Protocol.getEnum("mahjong.Direction");
+                    var Direction = Laya.Browser.window.mahjong.Direction;
                     switch (direction) {
                         case Direction.DONG:
                             dirImg.skin = (DirectionView.IMG_PATH_DONG);

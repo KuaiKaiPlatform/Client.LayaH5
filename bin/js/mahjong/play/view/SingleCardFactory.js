@@ -12,21 +12,21 @@ var mahjong;
                 function SingleCardFactory() {
                 }
                 SingleCardFactory.init = function () {
-                    this.Theme = Protocol.getEnum("common.MahjongTheme");
+                    this.MahjongTheme = Protocol.getEnum("common.MahjongTheme");
                 };
                 /**
                  *   新建一张自己的指定手牌
                  */
                 SingleCardFactory.createSelfHand = function (params) {
                     var singleCard;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             singleCard = new ui.mahjong.SingleCardSelfHandGreenUI();
                             break;
                         default:
@@ -48,14 +48,14 @@ var mahjong;
                  */
                 SingleCardFactory.createSelfGroupCard = function (card) {
                     var singleCard;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             singleCard = new ui.mahjong.SingleCardSelfGroupGreenUI();
                             break;
                         default:
@@ -72,14 +72,14 @@ var mahjong;
                  */
                 SingleCardFactory.createSelfGroupHidden = function () {
                     var path;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             path = "mahjong/card/self_group_hidden_green.png";
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             path = "mahjong/card/self_group_hidden_yellow.png";
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             path = "mahjong/card/self_group_hidden_blue.png";
                             break;
                         default:
@@ -96,14 +96,14 @@ var mahjong;
                  */
                 SingleCardFactory.createLandscapeCard = function (params) {
                     var singleCard;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             singleCard = new ui.mahjong.SingleCardLandscapeGreenUI();
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             singleCard = new ui.mahjong.SingleCardLandscapeGreenUI();
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             singleCard = new ui.mahjong.SingleCardLandscapeGreenUI();
                             break;
                         default:
@@ -125,14 +125,14 @@ var mahjong;
                  */
                 SingleCardFactory.createOppositeHand = function () {
                     var path;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             path = "mahjong/card/landscape_hand_green.png";
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             path = "mahjong/card/landscape_hand_yellow.png";
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             path = "mahjong/card/landscape_hand_blue.png";
                             break;
                         default:
@@ -146,14 +146,14 @@ var mahjong;
                  */
                 SingleCardFactory.createOppositeHidden = function () {
                     var path;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             path = "mahjong/card/self_group_hidden_green.png";
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             path = "mahjong/card/self_group_hidden_yellow.png";
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             path = "mahjong/card/self_group_hidden_blue.png";
                             break;
                         default:
@@ -170,14 +170,14 @@ var mahjong;
                  */
                 SingleCardFactory.createNextCard = function (card) {
                     var singleCard;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             singleCard = new ui.mahjong.SingleCardNextGreenUI();
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             singleCard = new ui.mahjong.SingleCardNextGreenUI();
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             singleCard = new ui.mahjong.SingleCardNextGreenUI();
                             break;
                         default:
@@ -194,14 +194,14 @@ var mahjong;
                  */
                 SingleCardFactory.createNextHand = function () {
                     var path;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             path = "mahjong/card/next_hand_green.png";
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             path = "mahjong/card/next_hand_yellow.png";
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             path = "mahjong/card/next_hand_blue.png";
                             break;
                         default:
@@ -215,14 +215,14 @@ var mahjong;
                  */
                 SingleCardFactory.createNextHidden = function () {
                     var path;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             path = "mahjong/card/next_hidden_green.png";
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             path = "mahjong/card/next_hidden_yellow.png";
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             path = "mahjong/card/next_hidden_blue.png";
                             break;
                         default:
@@ -239,14 +239,14 @@ var mahjong;
                  */
                 SingleCardFactory.createPreCard = function (card) {
                     var singleCard;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             singleCard = new ui.mahjong.SingleCardPreGreenUI();
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             singleCard = new ui.mahjong.SingleCardPreGreenUI();
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             singleCard = new ui.mahjong.SingleCardPreGreenUI();
                             break;
                         default:
@@ -263,14 +263,14 @@ var mahjong;
                  */
                 SingleCardFactory.createPreHand = function () {
                     var path;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             path = "mahjong/card/pre_hand_green.png";
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             path = "mahjong/card/pre_hand_yellow.png";
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             path = "mahjong/card/pre_hand_blue.png";
                             break;
                         default:
@@ -284,14 +284,14 @@ var mahjong;
                  */
                 SingleCardFactory.createPreHidden = function () {
                     var path;
-                    switch (GlobalSetting.get("mahjongTheme")) {
-                        case this.Theme.GREEN:
+                    switch (common.data.GlobalSetting.get("mahjongTheme")) {
+                        case this.MahjongTheme.GREEN:
                             path = "mahjong/card/pre_hidden_green.png";
                             break;
-                        case this.Theme.YELLOW:
+                        case this.MahjongTheme.YELLOW:
                             path = "mahjong/card/pre_hidden_yellow.png";
                             break;
-                        case this.Theme.BLUE:
+                        case this.MahjongTheme.BLUE:
                             path = "mahjong/card/pre_hidden_blue.png";
                             break;
                         default:
